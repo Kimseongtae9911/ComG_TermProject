@@ -25,6 +25,18 @@
     <Filter Include="소스 파일\03 Manager\00 GameManager">
       <UniqueIdentifier>{a9623811-819c-483f-8d69-694d9913e810}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\04 Shader">
+      <UniqueIdentifier>{21fc4893-5b18-4b13-a5ff-738a2435b219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04 Shader\00 CMesh">
+      <UniqueIdentifier>{187667c1-bf31-4578-a762-c780396151e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04 Shader\00 CMesh\CCube">
+      <UniqueIdentifier>{b3ad3ab6-92c8-4c86-aa61-794038e5a443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04 Shader\00 CMesh\CSphere">
+      <UniqueIdentifier>{280e848a-7649-4c2f-87b1-fdad023f273c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +50,15 @@
     </ClCompile>
     <ClCompile Include="CGameManager.cpp">
       <Filter>소스 파일\03 Manager\00 GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CMesh.cpp">
+      <Filter>소스 파일\04 Shader\00 CMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CCube.cpp">
+      <Filter>소스 파일\04 Shader\00 CMesh\CCube</Filter>
+    </ClCompile>
+    <ClCompile Include="CSphere.cpp">
+      <Filter>소스 파일\04 Shader\00 CMesh\CSphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="CGameManager.h">
       <Filter>소스 파일\03 Manager\00 GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CMesh.h">
+      <Filter>소스 파일\04 Shader\00 CMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CCube.h">
+      <Filter>소스 파일\04 Shader\00 CMesh\CCube</Filter>
+    </ClInclude>
+    <ClInclude Include="CSphere.h">
+      <Filter>소스 파일\04 Shader\00 CMesh\CSphere</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

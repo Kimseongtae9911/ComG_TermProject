@@ -139,15 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CCube.cpp" />
     <ClCompile Include="CGameManager.cpp" />
+    <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="Cobj.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCube.h" />
     <ClInclude Include="CGameManager.h" />
+    <ClInclude Include="CMesh.h" />
     <ClInclude Include="Cobj.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSphere.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

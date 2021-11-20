@@ -5,14 +5,16 @@ class CMesh
 public:
 	CMesh();
 	~CMesh();
+
 public:
 	HRESULT Initialize(string path, glm::vec3 vCol);
 	GLvoid Render();
+	
 
-private:
+protected:
 	HRESULT Load_Mesh(string path);
 
-private:
+protected:
 	vector<glm::vec3> m_vecVertex;
 	vector<glm::vec2> m_vecUVS;
 	vector<glm::vec3> m_vecNormal;

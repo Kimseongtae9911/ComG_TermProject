@@ -13,5 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\01 Obj">
+      <UniqueIdentifier>{05f8041c-f9ce-41a2-954a-749c593a9725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02 Scene">
+      <UniqueIdentifier>{a8747ef3-f74d-4010-a917-2b0909e684ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03 Manager">
+      <UniqueIdentifier>{6ceb0e91-3a9c-481b-ab0b-60ef1c4e6e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03 Manager\00 GameManager">
+      <UniqueIdentifier>{a9623811-819c-483f-8d69-694d9913e810}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Cobj.cpp">
+      <Filter>소스 파일\01 Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>소스 파일\02 Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameManager.cpp">
+      <Filter>소스 파일\03 Manager\00 GameManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cobj.h">
+      <Filter>소스 파일\01 Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>소스 파일\02 Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameManager.h">
+      <Filter>소스 파일\03 Manager\00 GameManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

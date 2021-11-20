@@ -6,10 +6,20 @@ CMesh::CMesh()
 
 CMesh::~CMesh()
 {
+	Release();
 }
 
-HRESULT CMesh::Initialize(string path)
+HRESULT CMesh::Initialize(string path, glm::vec3 vCol)
 {
+	if (path == "")
+		return E_FAIL;
+	if(FAILED(Load_Mesh(path)))
+		return E_FAIL;
+	m_iCnt = m_vecVertex.size();
+	m_iCnt = m_vecNormal.size();
+
+
+
 
 	return E_NOTIMPL;
 }
@@ -106,14 +116,19 @@ HRESULT CMesh::Load_Mesh(string path)
 
 GLvoid CMesh::Release()
 {
+	m_vecVertex.clear();
+	m_vecUVS.clear();
+	m_vecNormal.clear();
+	m_vecColor.clear();
+
 	return GLvoid();
 }
 
-CMesh* CMesh::Create(string path)
+CMesh* CMesh::Create(string path, glm::vec3 vCol)
 {
 	CMesh* pInstance = new CMesh;
 
-	if (FAILED(pInstance->Initialize(path)))
+	if (FAILED(pInstance->Initialize(path, vCol)))
 	{
 		SafeDelete(pInstance);
 		return nullptr;

@@ -41,3 +41,4 @@ void SafeDelete_Array(T& ptr)
 		ptr = nullptr;
 	}
 }
+

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+#include "CShader.h"
 class CMesh
 {
 public:
@@ -10,6 +10,9 @@ public:
 	HRESULT Initialize(string path, glm::vec3 vCol);
 	GLvoid Render();
 	
+public:
+	HRESULT SetVertexColor(glm::vec3 vCol);
+
 
 protected:
 	HRESULT Load_Mesh(string path);
@@ -24,12 +27,15 @@ protected:
 	vector<glm::vec3> m_vecColor;
 
 private:
-	GLuint Vao;
-	GLuint Vbo[3];
+	GLuint m_Vao;
+	GLuint m_Vbo[3];
 
 private:
 	GLuint m_iCnt;
 	GLuint m_iCnt2;
+
+private:
+	
 
 
 public:

@@ -60,6 +60,9 @@
     <ClCompile Include="CSphere.cpp">
       <Filter>소스 파일\04 Shader\00 CMesh\CSphere</Filter>
     </ClCompile>
+    <ClCompile Include="CShader.cpp">
+      <Filter>소스 파일\04 Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="CSphere.h">
       <Filter>소스 파일\04 Shader\00 CMesh\CSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="CShader.h">
+      <Filter>소스 파일\04 Shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

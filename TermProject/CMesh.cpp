@@ -15,8 +15,28 @@ HRESULT CMesh::Initialize(string path, glm::vec3 vCol)
 		return E_FAIL;
 	if(FAILED(Load_Mesh(path)))
 		return E_FAIL;
-	m_iCnt = m_vecVertex.size();
-	m_iCnt = m_vecNormal.size();
+	//m_iCnt = m_vecVertex.size();
+	//m_iCnt2 = m_vecNormal.size();
+
+	glGenVertexArrays(1, &m_Vao); //--- VAO 를 지정하고 할당하기
+	glGenBuffers(3, m_Vbo); //--- 2개의 VBO를 지정하고 할당하기
+
+	glBindVertexArray(m_Vao); //--- VAO를 바인드하기
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * m_vecVertex.size(), &m_vecVertex.front(), GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * m_vecNormal.size(), &m_vecNormal.front(), GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo[2]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * m_vecColor.size(), &m_vecColor.front(), GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(2);
 
 
 
@@ -26,6 +46,7 @@ HRESULT CMesh::Initialize(string path, glm::vec3 vCol)
 
 GLvoid CMesh::Render()
 {
+
 	return GLvoid();
 }
 
@@ -110,6 +131,16 @@ HRESULT CMesh::Load_Mesh(string path)
 		glm::vec3 normal = temp_normals[normalIndex - 1];
 		m_vecNormal.push_back(normal);
 	}
+
+	return NOERROR;
+}
+
+HRESULT CMesh::SetVertexColor(glm::vec3 vCol)
+{
+	m_vecColor.clear();
+
+	for (GLuint i = 0; i < m_vecVertex.size(); ++i)
+		m_vecColor.emplace_back(vCol);
 
 	return NOERROR;
 }

@@ -15,6 +15,9 @@ protected:
 	HRESULT Load_Mesh(string path);
 
 protected:
+	GLvoid Release();
+
+protected:
 	vector<glm::vec3> m_vecVertex;
 	vector<glm::vec2> m_vecUVS;
 	vector<glm::vec3> m_vecNormal;
@@ -28,8 +31,6 @@ private:
 	GLuint m_iCnt;
 	GLuint m_iCnt2;
 
-private:
-	GLvoid Release();
 
 public:
 	static CMesh* Create(string path, glm::vec3 vCol);

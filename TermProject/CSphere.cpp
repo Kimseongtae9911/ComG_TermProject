@@ -31,9 +31,10 @@ CSphere* CSphere::Initialize(string path)
 	}
 }
 
-GLvoid CSphere::Release()
-{
-	m_vecVertex.clear();
-	m_vecUVS.clear();
-	m_vecNormal.clear();
-}
+//GLvoid CSphere::Release()
+//{
+//	m_vecVertex.clear();
+//	m_vecUVS.clear();
+//	m_vecNormal.clear();
+//	m_vecColor.clear();
+//}

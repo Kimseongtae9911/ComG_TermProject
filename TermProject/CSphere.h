@@ -6,8 +6,10 @@ class CSphere : public CMesh
 public:
 	CSphere();
 	~CSphere();
+
+public:
 	CSphere* Initialize(string path);
-	GLvoid Release();
+	//GLvoid Release();
 
 private:
 	static CSphere* m_prefab;

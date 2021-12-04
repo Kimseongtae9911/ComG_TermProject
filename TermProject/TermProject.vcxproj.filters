@@ -40,12 +40,18 @@
     <Filter Include="소스 파일\03 Manager\01 KeyManager">
       <UniqueIdentifier>{98e384fa-23d7-4d1f-8ce7-02d141798bc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03 Manager\02 SceneManager">
+      <UniqueIdentifier>{0219118f-eb52-400a-b8de-15e50d89cac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03 Manager\03 RenderManager">
+      <UniqueIdentifier>{863815bc-32a5-45c4-b454-ffd8f670a56c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Cobj.cpp">
+    <ClCompile Include="CObj.cpp">
       <Filter>소스 파일\01 Obj</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
@@ -72,6 +78,12 @@
     <ClCompile Include="CKeyManager.cpp">
       <Filter>소스 파일\03 Manager\01 KeyManager</Filter>
     </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>소스 파일\03 Manager\02 SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderManager.cpp">
+      <Filter>소스 파일\03 Manager\03 RenderManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -80,7 +92,7 @@
     <ClInclude Include="main.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Cobj.h">
+    <ClInclude Include="CObj.h">
       <Filter>소스 파일\01 Obj</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
@@ -103,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="CKeyManager.h">
       <Filter>소스 파일\03 Manager\01 KeyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>소스 파일\03 Manager\02 SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderManager.h">
+      <Filter>소스 파일\03 Manager\03 RenderManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

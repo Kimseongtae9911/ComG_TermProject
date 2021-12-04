@@ -143,9 +143,11 @@
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CMesh.cpp" />
-    <ClCompile Include="Cobj.cpp" />
+    <ClCompile Include="CObj.cpp" />
     <ClCompile Include="COV.cpp" />
+    <ClCompile Include="CRenderManager.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="main.cpp" />
@@ -155,10 +157,13 @@
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CMesh.h" />
-    <ClInclude Include="Cobj.h" />
+    <ClInclude Include="CObj.h" />
+    <ClInclude Include="CRenderManager.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CSphere.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

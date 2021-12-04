@@ -18,7 +18,14 @@
 #include <math.h>
 #include <random>
 
+
+// Include
+#include "Enum.h"
+
 using namespace std;
+
+
+
 
 
 #define WINCX 1280

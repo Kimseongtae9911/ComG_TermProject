@@ -40,6 +40,9 @@
     <Filter Include="소스 파일\03 Manager\01 KeyManager">
       <UniqueIdentifier>{98e384fa-23d7-4d1f-8ce7-02d141798bc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLSLFile">
+      <UniqueIdentifier>{ba6ca100-ed70-425a-90d2-c72a8b5cc33a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,5 +107,13 @@
     <ClInclude Include="CKeyManager.h">
       <Filter>소스 파일\03 Manager\01 KeyManager</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vertex.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="fragment.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
   </ItemGroup>
 </Project>

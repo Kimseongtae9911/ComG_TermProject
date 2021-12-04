@@ -21,6 +21,9 @@
 using namespace std;
 
 
+#define WINCX 1280
+#define WINCY 720
+#define MAX_VKEY 0xff
 
 template <typename T>
 void SafeDelete(T& ptr)
@@ -41,4 +44,34 @@ void SafeDelete_Array(T& ptr)
 		ptr = nullptr;
 	}
 }
+
+#define NO_COPY(ClassName)						\
+private:										\
+	ClassName(const ClassName& Obj);			\
+	ClassName& operator=(const ClassName& Obj);
+
+#define DECLARE_SINGLETON(ClassName)		\
+		NO_COPY(ClassName)					\
+public:										\
+	static ClassName* GetInstance()			\
+	{										\
+		if(nullptr == m_pInstance)			\
+		{									\
+			m_pInstance = new ClassName;	\
+		}									\
+		return m_pInstance;					\
+	}										\
+	void DestroyInstance()					\
+	{										\
+		if(m_pInstance)						\
+		{									\
+			delete m_pInstance;				\
+			m_pInstance = nullptr;			\
+		}									\
+	}										\
+private:									\
+	static ClassName*	m_pInstance;
+
+#define IMPLEMENT_SINGLETON(ClassName)		\
+ClassName* ClassName::m_pInstance = nullptr;
 

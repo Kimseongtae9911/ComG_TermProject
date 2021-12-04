@@ -11,7 +11,7 @@ public:
 	GLvoid Render();
 	
 public:
-	HRESULT SetVertexColor(glm::vec3 vCol);
+	HRESULT SetVertexColor(glm::vec4 vCol);
 
 
 protected:
@@ -24,11 +24,11 @@ protected:
 	vector<glm::vec3> m_vecVertex;
 	vector<glm::vec2> m_vecUVS;
 	vector<glm::vec3> m_vecNormal;
-	vector<glm::vec3> m_vecColor;
+	vector<glm::vec4> m_vecColor;
 
 private:
 	GLuint m_Vao;
-	GLuint m_Vbo[3];
+	GLuint m_Vbo[4];
 
 private:
 	GLuint m_iCnt;
@@ -39,6 +39,6 @@ private:
 
 
 public:
-	static CMesh* Create(string path, glm::vec3 vCol);
+	static CMesh* Create(string path, glm::vec4 vCol);
 
 };

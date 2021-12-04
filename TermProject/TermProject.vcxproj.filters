@@ -46,6 +46,9 @@
     <Filter Include="소스 파일\03 Manager\03 RenderManager">
       <UniqueIdentifier>{863815bc-32a5-45c4-b454-ffd8f670a56c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLSLFile">
+      <UniqueIdentifier>{ba6ca100-ed70-425a-90d2-c72a8b5cc33a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,5 +128,13 @@
     <ClInclude Include="CRenderManager.h">
       <Filter>소스 파일\03 Manager\03 RenderManager</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vertex.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="fragment.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ HRESULT Player::Initialize()
 
 GLint Player::Update(const GLfloat fTimeDelta)
 {
-	if (m_bPlayer) { // 2D플레이어
+	if (m_bView) { // 2D플레이어
 		if (m_pKeyMgr->KeyDown(KEY_LEFT) && !m_pKeyMgr->KeyDown(KEY_SPACE)) {
 
 		}
@@ -34,7 +34,7 @@ GLint Player::Update(const GLfloat fTimeDelta)
 
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_F)) {
-
+			m_bView = !m_bView;
 		}
 		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
 
@@ -60,7 +60,8 @@ GLint Player::Update(const GLfloat fTimeDelta)
 
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_F)) {
-
+			m_bView = !m_bView;
+			
 		}
 	}
 

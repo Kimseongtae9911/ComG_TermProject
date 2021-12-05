@@ -96,6 +96,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\01 Obj</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>소스 파일\01 Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>소스 파일\01 Obj</Filter>
+    </ClCompile>
     <ClCompile Include="CTexture.cpp">
       <Filter>소스 파일\04 Element\01 Texture</Filter>
     </ClCompile>
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>소스 파일\01 Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>소스 파일\01 Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

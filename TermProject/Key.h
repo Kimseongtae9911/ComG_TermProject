@@ -1,15 +1,15 @@
+#include "stdafx.h"
 #include "CObj.h"
 #include "CMesh.h"
 
-class Player : public CObj
-{
+class Key : public CObj {
 public:
-	Player();
-	~Player();
+	Key();
+	~Key();
 
 public:
 	virtual HRESULT Initialize();
-    virtual GLint Update(const GLfloat fTimeDelta);
+	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
 private:
@@ -19,5 +19,5 @@ private:
 private:
 	GLfloat m_fAlpha;
 	bool m_bView{ true }; // true ->2D, false ->3D
-};
 
+};

@@ -34,5 +34,6 @@ HRESULT CRenderManager::Add_RenderObj(RENDER_ID eID, CObj* pObj)
 
 GLvoid CRenderManager::Clear_Renderer()
 {
-	return GLvoid();
+	for (int i = 0; i < RENDER_END; ++i)
+		m_lstRenderObj[i].clear();
 }

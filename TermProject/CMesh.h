@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "CShader.h"
 class CMesh
 {
@@ -11,14 +10,17 @@ public:
 	GLvoid Render();
 	
 public:
-	HRESULT SetVertexColor(glm::vec4 vCol);
+	HRESULT SetVertexColor(vector<glm::vec3> vertex, vector<glm::vec4> color, glm::vec4 vCol);
 
 
-protected:
-	HRESULT Load_Mesh(string path);
+private:
+	HRESULT Load_Mesh(string strPath);
+	HRESULT Load_Material(string strPath);
 
-protected:
-	GLvoid Release();
+private:
+	MATERIAL* Get_Material(char* chMatName);
+
+
 
 protected:
 	vector<glm::vec3> m_vecVertex;
@@ -40,8 +42,19 @@ private:
 	GLuint m_iCnt2;
 
 private:
+	vector<glm::vec3> m_vecVertices;
+	vector<glm::vec2> m_vecTexcoords;
+	vector<glm::vec3> m_vecNormals;
+
+private:
+	vector<SUBMESH*> m_vecSubMesh;
+	vector<MATERIAL*> m_vecMaterials;
+
+private:
 	glm::mat4 GetMatrix();
 
+protected:
+	GLvoid Release();
 
 public:
 	static CMesh* Create(string path, glm::vec4 vCol);

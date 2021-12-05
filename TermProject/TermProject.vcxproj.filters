@@ -43,13 +43,16 @@
     <Filter Include="소스 파일\04 Element">
       <UniqueIdentifier>{21fc4893-5b18-4b13-a5ff-738a2435b219}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04 Element\00 CMesh">
+    <Filter Include="소스 파일\04 Element\01 Texture">
+      <UniqueIdentifier>{8bcea2a9-ad44-40f8-8a54-04139f7eff2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04 Element\00 Mesh">
       <UniqueIdentifier>{187667c1-bf31-4578-a762-c780396151e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04 Element\00 CMesh\CCube">
+    <Filter Include="소스 파일\04 Element\00 Mesh\CCube">
       <UniqueIdentifier>{b3ad3ab6-92c8-4c86-aa61-794038e5a443}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04 Element\00 CMesh\CSphere">
+    <Filter Include="소스 파일\04 Element\00 Mesh\CSphere">
       <UniqueIdentifier>{280e848a-7649-4c2f-87b1-fdad023f273c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -67,13 +70,13 @@
       <Filter>소스 파일\03 Manager\00 GameManager</Filter>
     </ClCompile>
     <ClCompile Include="CMesh.cpp">
-      <Filter>소스 파일\04 Element\00 CMesh</Filter>
+      <Filter>소스 파일\04 Element\00 Mesh</Filter>
     </ClCompile>
     <ClCompile Include="CCube.cpp">
-      <Filter>소스 파일\04 Element\00 CMesh\CCube</Filter>
+      <Filter>소스 파일\04 Element\00 Mesh\CCube</Filter>
     </ClCompile>
     <ClCompile Include="CSphere.cpp">
-      <Filter>소스 파일\04 Element\00 CMesh\CSphere</Filter>
+      <Filter>소스 파일\04 Element\00 Mesh\CSphere</Filter>
     </ClCompile>
     <ClCompile Include="COV.cpp">
       <Filter>소스 파일</Filter>
@@ -99,6 +102,9 @@
     <ClCompile Include="Key.cpp">
       <Filter>소스 파일\01 Obj</Filter>
     </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>소스 파일\04 Element\01 Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -117,13 +123,13 @@
       <Filter>소스 파일\03 Manager\00 GameManager</Filter>
     </ClInclude>
     <ClInclude Include="CMesh.h">
-      <Filter>소스 파일\04 Element\00 CMesh</Filter>
+      <Filter>소스 파일\04 Element\00 Mesh</Filter>
     </ClInclude>
     <ClInclude Include="CCube.h">
-      <Filter>소스 파일\04 Element\00 CMesh\CCube</Filter>
+      <Filter>소스 파일\04 Element\00 Mesh\CCube</Filter>
     </ClInclude>
     <ClInclude Include="CSphere.h">
-      <Filter>소스 파일\04 Element\00 CMesh\CSphere</Filter>
+      <Filter>소스 파일\04 Element\00 Mesh\CSphere</Filter>
     </ClInclude>
     <ClInclude Include="CKeyManager.h">
       <Filter>소스 파일\03 Manager\01 KeyManager</Filter>
@@ -145,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01 Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>소스 파일\04 Element\01 Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>소스 파일\01 Obj</Filter>

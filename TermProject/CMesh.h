@@ -7,7 +7,7 @@ public:
 	~CMesh();
 
 public:
-	HRESULT Initialize(string path, glm::vec3 vCol);
+	HRESULT Initialize(string path, glm::vec4 vCol);
 	GLvoid Render();
 	
 public:

@@ -34,7 +34,7 @@ private:
 	HRESULT Create_FragmentShader(string strfragmentShader);
 
 public:
-	GLuint s_program;
+	GLuint s_program;	
 	GLchar* vertexsource, * fragmentsource; // 소스코드 저장 변수
 	GLuint vertexshader, fragmentshader; // 세이더 객체
 

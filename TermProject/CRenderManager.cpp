@@ -14,7 +14,7 @@ GLvoid CRenderManager::Render_Object()
 	for (int i = 0; i < RENDER_END; ++i)
 	{
 		// Render 할것에 따라 GL_DEPTH_TEST
-		for (auto pObj : m_lstRenderObj[i])
+		for (auto& pObj : m_lstRenderObj[i])
 			pObj->Render();
 
 	}

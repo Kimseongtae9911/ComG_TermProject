@@ -9,7 +9,7 @@ CMesh::~CMesh()
 	Release();
 }
 
-HRESULT CMesh::Initialize(string path, glm::vec3 vCol)
+HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 {
 	if (path == "")
 		return E_FAIL;

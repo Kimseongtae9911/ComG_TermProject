@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CMesh.h"
+#include "CTexture.h"
 
 CMesh::CMesh()
 {
@@ -83,7 +84,7 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 		if (pMesh->material)
 		{
 			MATERIAL* pMat = pMesh->material;
-			//pMat->texture = CTexture::Create("", pMat->map_Kd); 
+			pMat->texture = CTexture::Create("", pMat->map_Kd);
 		}
 	}
 

@@ -150,6 +150,7 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSphere.cpp" />
+    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
@@ -164,10 +165,12 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CSphere.h" />
+    <ClInclude Include="CTexture.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
   </ItemGroup>

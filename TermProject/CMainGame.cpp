@@ -14,8 +14,8 @@ CMainGame::~CMainGame()
 
 HRESULT CMainGame::Initialize()
 {
-	if (FAILED(Initialize_Manager()))
-		return E_FAIL;
+	/*if (FAILED(Initialize_Manager()))
+		return E_FAIL;*/
 	if (FAILED(Initialize_Shader()))
 		return E_FAIL;
 
@@ -52,7 +52,7 @@ HRESULT CMainGame::Initialize_Shader()
 {
 	if (FAILED(CShader::GetInstance()->Add_Shader("Default", "vertex.glsl", "fragment.glsl")))
 		return E_FAIL;
-	return E_NOTIMPL;
+	return NOERROR;
 }
 
 GLvoid CMainGame::Release()

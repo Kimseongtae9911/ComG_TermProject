@@ -1,5 +1,6 @@
 #include"stdafx.h"
 #include "CGameManager.h"
+#include "CObj.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -11,7 +12,7 @@ CGameManager::~CGameManager()
 {
 }
 
-HRESULT CGameManager::Add_GameObj(OBJID eID, CGameObj* pObj)
+HRESULT CGameManager::Add_GameObj(OBJID eID, CObj* pObj)
 {
 	if (!pObj)
 		return E_FAIL;
@@ -28,7 +29,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 
 HRESULT CGameManager::Clear_ObjList()
 {
-	for (int i = 0; i < END; ++i)
+	for (int i = 0; i < OBJ_END; ++i)
 		Clear_Obj((OBJID)i);
 	//
 

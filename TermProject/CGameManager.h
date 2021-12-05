@@ -1,6 +1,6 @@
 #pragma once
 
-class CGameObj;
+class CObj;
 
 class CGameManager
 {
@@ -11,14 +11,14 @@ private:
 	~CGameManager();
 
 public:
-	HRESULT Add_GameObj(OBJID eID, CGameObj* pObj);
+	HRESULT Add_GameObj(OBJID eID, CObj* pObj);
 	GLvoid Update(const GLfloat fTimeDelta);
 	HRESULT Clear_ObjList();
 	HRESULT Clear_Obj(OBJID eID);
 
 
 private:
-	list<CGameObj*> m_ObjLst[OBJ_END];
+	list<CObj*> m_ObjLst[OBJ_END];
 
 
 };

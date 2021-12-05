@@ -1,8 +1,7 @@
 #pragma once
 #include "CShader.h"
-#include"CGameManager.h"
-#include"CSceneManager.h"
-#include "CKeyManager.h"
+#include "Manager.h"
+
 
 class CScene
 {
@@ -19,6 +18,9 @@ protected:
 	CKeyManager* m_pKeyMgr = nullptr;
 	CGameManager* m_pGameMgr = nullptr;
 	CShader* m_pShader = nullptr;
+	CSceneManager* m_pScenceMgr = nullptr;
+	CFrameManager* m_pFrameMgr = nullptr;
+	CRenderManager* m_pRenderMgr = nullptr;
 
 protected:
 	GLvoid Release();

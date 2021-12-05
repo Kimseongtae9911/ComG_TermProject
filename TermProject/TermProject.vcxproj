@@ -154,6 +154,7 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSphere.cpp" />
+    <ClCompile Include="CStage1.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CSphere.h" />
+    <ClInclude Include="CStage1.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Key.h" />

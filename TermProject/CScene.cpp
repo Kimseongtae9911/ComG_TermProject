@@ -13,6 +13,9 @@ HRESULT CScene::Initialize()
 	m_pGameMgr = CGameManager::GetInstance();
 	m_pKeyMgr = CKeyManager::GetInstance();
 	m_pShader = CShader::GetInstance();
+	m_pScenceMgr = CSceneManager::GetInstance();
+	m_pFrameMgr = CFrameManager::GetInstance();
+	m_pRenderMgr = CRenderManager::GetInstance();
 
 	return NOERROR;
 }

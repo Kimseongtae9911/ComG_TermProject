@@ -82,14 +82,14 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 		if (pMesh->material)
 		{
 			MATERIAL* pMat = pMesh->material;
-			pMat->texture = CTexture::Create("", pMat->map_Kd);
+			pMat->texture = CTexture::Create("", pMat->map_Kd); // 이건 상대주소로 조금 고쳐야함
 		}
 	}
 
 
 
 
-	return E_NOTIMPL;
+	return NOERROR;
 }
 
 GLvoid CMesh::Render()

@@ -70,6 +70,9 @@
     <Filter Include="소스 파일\00 MainGame">
       <UniqueIdentifier>{b0c786fd-fff0-4c26-bc19-4cb95e74b937}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02 Scene\Stage1">
+      <UniqueIdentifier>{55417be8-9d60-4e62-b04f-b68586091ce9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="CMainGame.cpp">
       <Filter>소스 파일\00 MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage1.cpp">
+      <Filter>소스 파일\02 Scene\Stage1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="CMainGame.h">
       <Filter>소스 파일\00 MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage1.h">
+      <Filter>소스 파일\02 Scene\Stage1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	}
 	else cout << "GLEW Initialized\n";
 
-	g_pMainGame = CMainGame::Create();
+ 	g_pMainGame = CMainGame::Create();
 	if (!g_pMainGame)
 	{
 		cerr << "¡°Unable to initialize MainGame" << endl;
@@ -41,6 +41,7 @@ int main(int argc, char** argv)
 
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(drawScene);
+	glutIdleFunc(drawScene);
 
 	glutMouseFunc(Input_Mouse);
 	glutMotionFunc(Input_MouseMotion);
@@ -56,7 +57,7 @@ GLvoid drawScene(GLvoid)
 {
 	if (CFrameManager::GetInstance()->FrameLimit(60.f))
 	{
-		glClearColor(0, 0, 1, 1);
+		glClearColor(1, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		CFrameManager::GetInstance()->UpdateTime();

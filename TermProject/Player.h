@@ -19,5 +19,8 @@ private:
 private:
 	GLfloat m_fAlpha;
 	bool m_bView{ true }; // true ->2D, false ->3D
+
+public:
+	static Player* Create();
 };
 

@@ -1,5 +1,6 @@
 #include "CSceneManager.h"
 #include "CScene.h"
+#include "CStage1.h"
 
 
 
@@ -27,7 +28,7 @@ HRESULT CSceneManager::SceneChange(SCENE_ID eID)
 			//m_pScene = CScene_Logo::Create();
 			break;
 		case SCENE_STAGE1:
-			//m_pScene = CScene_Stage1::Create();
+			m_pScene = CStage1::Create();
 			break;
 		case SCENE_STAGE2:
 			//m_pScene = CScene_Stage2::Create();

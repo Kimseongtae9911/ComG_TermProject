@@ -1,8 +1,10 @@
 #pragma once
-#include "stdafx.h"
+
 
 class CShader
 {
+	DECLARE_SINGLETON(CShader)
+
 public:
 	static CShader* GetInstance()
 	{

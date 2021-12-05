@@ -165,6 +165,7 @@
     <ClInclude Include="CSphere.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

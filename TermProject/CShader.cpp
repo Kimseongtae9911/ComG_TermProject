@@ -1,5 +1,7 @@
+#include "stdafx.h"
 #include "CShader.h"
 
+IMPLEMENT_SINGLETON(CShader)
 
 HRESULT CShader::Initialize_Shader(string strVertex, string strFragment)
 {

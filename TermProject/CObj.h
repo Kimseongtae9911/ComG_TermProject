@@ -1,4 +1,6 @@
-#pragma once
+#include "stdafx.h"
+#include "Manager.h"
+
 class CObj
 {
 public:

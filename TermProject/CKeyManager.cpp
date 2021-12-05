@@ -25,6 +25,12 @@ void CKeyManager::UpdateKey()
 		m_dwCurKey |= KEY_LEFT;
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		m_dwCurKey |= KEY_RIGHT;
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		m_dwCurKey |= KEY_SPACE;
+	if (GetAsyncKeyState(0x41) & 0x8000)
+		m_dwCurKey |= KEY_A;
+	if (GetAsyncKeyState(0x46) & 0x8000)
+		m_dwCurKey |= KEY_F;
 }
 
 bool CKeyManager::KeyDown(DWORD dwCurKey)

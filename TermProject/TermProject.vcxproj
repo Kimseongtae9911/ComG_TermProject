@@ -151,6 +151,7 @@
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCube.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Enum.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

@@ -90,6 +90,9 @@
     <ClCompile Include="CShader.cpp">
       <Filter>소스 파일\03 Manager\04 Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\01 Obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="CShader.h">
       <Filter>소스 파일\03 Manager\04 Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\01 Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

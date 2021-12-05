@@ -127,7 +127,7 @@ GLvoid CMesh::Render()
 
 		glDrawArrays(GL_TRIANGLES, 0, pMesh->vertex.size());
 
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 4; ++i)
 			glDisableVertexAttribArray(i);
 	}
 	return GLvoid();

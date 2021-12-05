@@ -55,11 +55,23 @@
     <Filter Include="소스 파일\04 Element\00 Mesh\CSphere">
       <UniqueIdentifier>{280e848a-7649-4c2f-87b1-fdad023f273c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01 Obj\00 Player">
+      <UniqueIdentifier>{9b6331d4-382d-4179-8ed3-ba7f20843577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01 Obj\01 Monster">
+      <UniqueIdentifier>{78daa87d-5564-4b2d-8f7c-ef9d4d19a627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01 Obj\02 Object">
+      <UniqueIdentifier>{d485d875-eee7-4966-b20c-e235bdd4356e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03 Manager\05 FrameManager">
+      <UniqueIdentifier>{340a36ec-065e-4009-bc07-f6aee8c8530e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00 MainGame">
+      <UniqueIdentifier>{b0c786fd-fff0-4c26-bc19-4cb95e74b937}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CObj.cpp">
       <Filter>소스 파일\01 Obj</Filter>
     </ClCompile>
@@ -93,24 +105,27 @@
     <ClCompile Include="CShader.cpp">
       <Filter>소스 파일\03 Manager\04 Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>소스 파일\01 Obj</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>소스 파일\01 Obj</Filter>
-    </ClCompile>
-    <ClCompile Include="Key.cpp">
-      <Filter>소스 파일\01 Obj</Filter>
-    </ClCompile>
     <ClCompile Include="CTexture.cpp">
       <Filter>소스 파일\04 Element\01 Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\01 Obj\00 Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>소스 파일\01 Obj\01 Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>소스 파일\01 Obj\02 Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrameManager.cpp">
+      <Filter>소스 파일\03 Manager\05 FrameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainGame.cpp">
+      <Filter>소스 파일\00 MainGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="CObj.h">
@@ -149,9 +164,6 @@
     <ClInclude Include="CShader.h">
       <Filter>소스 파일\03 Manager\04 Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>소스 파일\01 Obj</Filter>
-    </ClInclude>
     <ClInclude Include="Struct.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -161,11 +173,20 @@
     <ClInclude Include="stb_image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\01 Obj\00 Player</Filter>
+    </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>소스 파일\01 Obj</Filter>
+      <Filter>소스 파일\01 Obj\01 Monster</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
-      <Filter>소스 파일\01 Obj</Filter>
+      <Filter>소스 파일\01 Obj\02 Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CFrameManager.h">
+      <Filter>소스 파일\03 Manager\05 FrameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainGame.h">
+      <Filter>소스 파일\00 MainGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

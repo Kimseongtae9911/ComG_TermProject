@@ -5,3 +5,4 @@
 #include "CRenderManager.h"
 #include "CSceneManager.h"
 #include "CShader.h"
+#include "CFrameManager.h"

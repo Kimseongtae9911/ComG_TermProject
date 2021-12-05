@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include "main.h"
+#include "Manager.h"
+#include "CMainGame.h"
 
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
@@ -9,6 +10,9 @@ GLvoid Input_MouseMotion(int x, int y);
 GLvoid SpecialKeyboard(int key, int x, int y);
 GLvoid DoTimer(int value);
 
+CMainGame* g_pMainGame;
+CKeyManager* g_pKeyMgr;
+CFrameManager* g_pFrameMgr;
 
 int main(int argc, char** argv)
 {
@@ -24,6 +28,15 @@ int main(int argc, char** argv)
 	}
 	else cout << "GLEW Initialized\n";
 
+	g_pMainGame = CMainGame::Create();
+	if (!g_pMainGame)
+	{
+		cerr << "¡°Unable to initialize MainGame" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	g_pKeyMgr = CKeyManager::GetInstance();
+	g_pFrameMgr = CFrameManager::GetInstance();
 
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(drawScene);
@@ -40,6 +53,7 @@ int main(int argc, char** argv)
 
 GLvoid drawScene(GLvoid)
 {
+
 	return GLvoid();
 }
 

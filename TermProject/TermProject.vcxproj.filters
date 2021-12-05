@@ -140,6 +140,9 @@
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01 Obj</Filter>
     </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl">

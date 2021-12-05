@@ -25,6 +25,10 @@ GLvoid CRenderManager::Render_Object()
 
 HRESULT CRenderManager::Add_RenderObj(RENDER_ID eID, CObj* pObj)
 {
+	if (!pObj)
+		return E_FAIL;
+
+	m_lstRenderObj[eID].emplace_back(pObj);
 	return E_NOTIMPL;
 }
 

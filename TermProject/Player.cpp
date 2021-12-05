@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Player.h"
 
 Player::Player()
@@ -62,6 +63,9 @@ GLint Player::Update(const GLfloat fTimeDelta)
 
 		}
 	}
+
+
+	m_pRender-> Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
 

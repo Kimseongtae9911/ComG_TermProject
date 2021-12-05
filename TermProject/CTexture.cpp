@@ -1,8 +1,6 @@
-#include "stdafx.h"
-#include "CTexture.h"
-#include "Manager.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "CTexture.h"
+#include"stb_image.h"
 
 CTexture::CTexture()
 {
@@ -27,7 +25,8 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	unsigned char* data = stbi_load(strPath.c_str(), &m_iWidth, &m_iHeight, &m_iChannels, 0);
+	unsigned char* data
+	= stbi_load(strPath.c_str(), &m_iWidth, &m_iHeight, &m_iChannels, 0);
 
 	if (data == nullptr)
 	{

@@ -1,5 +1,7 @@
 #include "CCube.h"
 
+CCube* CCube::m_prefab = nullptr;
+
 CCube::CCube()
 {
 }

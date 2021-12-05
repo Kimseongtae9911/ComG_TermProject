@@ -1,5 +1,5 @@
+#pragma once
 #include "CMesh.h"
-#include "stdafx.h"
 
 class CSphere : public CMesh
 {	
@@ -14,3 +14,5 @@ public:
 private:
 	static CSphere* m_prefab;
 };
+
+CSphere* CSphere::m_prefab = nullptr;

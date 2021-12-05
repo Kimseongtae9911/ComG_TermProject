@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include "CMesh.h"
-#include "CTexture.h"
 
 CMesh::CMesh()
 {

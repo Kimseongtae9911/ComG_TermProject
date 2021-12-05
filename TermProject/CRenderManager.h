@@ -1,11 +1,12 @@
 #pragma once
+#include "stdafx.h"
 
 class CObj;
 class CRenderManager
 {
 	DECLARE_SINGLETON(CRenderManager)
 
-private:
+public:
 	CRenderManager();
 	~CRenderManager();
 
@@ -19,4 +20,3 @@ public:
 private:
 	list<CObj*> m_lstRenderObj[RENDER_END];
 };
-

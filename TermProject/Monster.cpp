@@ -6,7 +6,7 @@ Monster::Monster()
 
 Monster::~Monster()
 {
-	CObj::Release;
+	CObj::Release();
 }
 
 HRESULT Monster::Initialize()

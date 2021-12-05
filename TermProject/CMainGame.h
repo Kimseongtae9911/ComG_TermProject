@@ -1,5 +1,7 @@
 #pragma once
-#include "Manager.h"
+#include "CKeyManager.h"
+#include"CFrameManager.h"
+
 
 class CMainGame
 {
@@ -15,14 +17,6 @@ public:
 private:
 	HRESULT Initialize_Manager();
 	HRESULT Initialize_Shader();
-
-private:
-	CRenderManager* m_pRenderMgr = nullptr;
-	CKeyManager* m_pKeyMgr = nullptr;
-	CGameManager* m_pGameMgr = nullptr;
-	CSceneManager* m_pSceneMgr = nullptr;
-	CShader* m_pShaderLoader = nullptr;
-	CFrameManager* m_pFrameMgr = nullptr;
 
 private:
 	GLvoid Release();

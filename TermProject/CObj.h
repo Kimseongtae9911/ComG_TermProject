@@ -1,5 +1,5 @@
-#include "stdafx.h"
-#include "Manager.h"
+#pragma once
+#include"Manager.h"
 
 class CObj
 {

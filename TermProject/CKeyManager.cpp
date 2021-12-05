@@ -1,5 +1,11 @@
-#include "stdafx.h"
 #include "CKeyManager.h"
+
+IMPLEMENT_SINGLETON(CKeyManager)
+
+CKeyManager::CKeyManager()
+{
+
+}
 
 CKeyManager::~CKeyManager()
 {

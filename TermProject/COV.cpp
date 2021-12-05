@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#include "Manager.h"
 #include "CMainGame.h"
 
 GLvoid drawScene(GLvoid);
@@ -13,9 +11,6 @@ GLvoid DoTimer(int value);
 GLvoid Check_Frame();
 
 CMainGame* g_pMainGame;
-CKeyManager* g_pKeyMgr;
-CFrameManager* g_pFrameMgr;
-
 
 GLuint g_iRenderCall = 0;
 float g_fwTimerAcc = 0.f;
@@ -43,9 +38,6 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 
-	g_pKeyMgr = CKeyManager::GetInstance();
-	g_pFrameMgr = CFrameManager::GetInstance();
-	
 
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(drawScene);
@@ -62,14 +54,14 @@ int main(int argc, char** argv)
 
 GLvoid drawScene(GLvoid)
 {
-	if (g_pFrameMgr->FrameLimit(60.f))
+	if (CFrameManager::GetInstance()->FrameLimit(60.f))
 	{
 		glClearColor(0, 0, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		g_pFrameMgr->UpdateTime();
-		fTimeDelta = g_pFrameMgr->GetDelta();
-		g_pKeyMgr->UpdateKey();
+		CFrameManager::GetInstance()->UpdateTime();
+		fTimeDelta = CFrameManager::GetInstance()->GetDelta();
+		CKeyManager::GetInstance()->UpdateKey();
 		g_pMainGame->Update(fTimeDelta);
 		g_pMainGame->Render();
 
@@ -113,7 +105,7 @@ GLvoid DoTimer(int value)
 GLvoid Check_Frame()
 {
 
-	g_fwTimerAcc += g_pFrameMgr->GetDelta();
+	g_fwTimerAcc += CFrameManager::GetInstance()->GetDelta();
 	++g_iRenderCall;
 
 	if (g_fwTimerAcc >= 1.0)

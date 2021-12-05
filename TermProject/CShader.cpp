@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "CShader.h"
 
 IMPLEMENT_SINGLETON(CShader)

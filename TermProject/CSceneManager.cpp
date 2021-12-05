@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "CSceneManager.h"
 #include "CScene.h"
 

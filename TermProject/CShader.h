@@ -1,5 +1,5 @@
 #pragma once
-
+#include "stdafx.h"
 
 class CShader
 {
@@ -12,10 +12,7 @@ public:
 	HRESULT Add_Shader(string strTag, string strVertex, string strPixel);
 	GLuint Use_Shader(string strTag);
 	GLuint Get_CurrProgram();
-
-private:
-	static CShader* m_pInstance;
-
+	
 
 private:
 	GLuint m_iCurrProgram = -1;

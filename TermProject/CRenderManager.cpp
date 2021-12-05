@@ -1,9 +1,12 @@
-#include "stdafx.h"
 #include "CRenderManager.h"
-
 #include"CObj.h"
 
 IMPLEMENT_SINGLETON(CRenderManager)
+
+CRenderManager::CRenderManager()
+{
+
+}
 
 CRenderManager::~CRenderManager()
 {

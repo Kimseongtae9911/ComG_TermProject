@@ -1,6 +1,7 @@
 #pragma once
+#include"CShader.h"
 
-class CTexture 
+class CTexture
 {
 public:
 	CTexture();

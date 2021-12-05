@@ -1,4 +1,5 @@
-#include "CShader.h"
+#include "CTexture.h"
+
 class CMesh
 {
 public:
@@ -13,7 +14,7 @@ public:
 	HRESULT SetVertexColor(vector<glm::vec3> vertex, vector<glm::vec4> color, glm::vec4 vCol);
 
 
-private:
+protected:
 	HRESULT Load_Mesh(string strPath);
 	HRESULT Load_Material(string strPath);
 

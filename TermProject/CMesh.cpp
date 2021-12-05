@@ -55,7 +55,7 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 
 	for (auto pMesh : m_vecSubMesh)
 	{
-		glGenBuffers(5, pMesh->vbo);
+		glGenBuffers(4, pMesh->vbo);
 
 		// 인덱스에 해당하는 정점 할당
 		for (int i = 0; i < pMesh->indices[0].size(); ++i)
@@ -96,7 +96,40 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 
 GLvoid CMesh::Render()
 {
+	for (auto pMesh : m_vecSubMesh)
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			glEnableVertexAttribArray(i);
+			glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo[i]);
+			//glVertexAttribPointer(i, i == 1 ? 2 : 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+			switch (i)
+			{
+			case 0:
+				glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+				break;
+			case 1:
+				glVertexAttribPointer(i, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+				break;
+			case 2:
+				glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+				break;
+			case 3:
+				glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
+				break;
+			default:
+				break;
+			}
+		}
 
+		if (pMesh->material && pMesh->material->texture)
+			pMesh->material->texture->Render();
+
+		glDrawArrays(GL_TRIANGLES, 0, pMesh->vertex.size());
+
+		for (int i = 0; i < 5; ++i)
+			glDisableVertexAttribArray(i);
+	}
 	return GLvoid();
 }
 

@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#include "Manager.h"
 #include "CObj.h"
 
 CObj::CObj()

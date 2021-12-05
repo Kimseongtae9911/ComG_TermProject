@@ -150,6 +150,27 @@ HRESULT CMesh::SetVertexColor(glm::vec4 vCol)
 	return NOERROR;
 }
 
+glm::mat4 CMesh::GetMatrix()
+{
+	glm::mat4 result(1.0f);
+	if (m_Parent) {
+		result = m_Parent->GetMatrix() * result;
+	}
+
+	result = glm::rotate(result, glm::radians(m_vec3PRotate.y), glm::vec3(0.0, 1.0, 0.0));
+
+	result = glm::translate(result, m_vec3Translate);
+
+	result = glm::rotate(result, glm::radians(m_vec3Rotate.x), glm::vec3(1.0, 0.0, 0.0));
+	result = glm::rotate(result, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));
+	result = glm::rotate(result, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
+
+
+	result = glm::scale(result, m_vec3Scale);
+
+	return result;
+}
+
 GLvoid CMesh::Release()
 {
 	m_vecVertex.clear();

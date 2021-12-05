@@ -11,8 +11,8 @@ Player::~Player()
 
 HRESULT Player::Initialize()
 {
-	m_player_2D = m_player_2D->Create("Player_2D", { 1.0, 1.0, 1.0, 1.0 });
-	m_player_3D = m_player_3D->Create("Player_3D", { 1.0, 1.0, 1.0, 1.0 });
+	m_player_2D = CMesh::Create("Player_2D", { 1.0, 1.0, 1.0, m_fAlpha });
+	m_player_3D = CMesh::Create("Player_3D", { 1.0, 1.0, 1.0, m_fAlpha });
 
 	return NOERROR;
 }

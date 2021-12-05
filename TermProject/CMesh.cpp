@@ -55,7 +55,7 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 
 	for (auto pMesh : m_vecSubMesh)
 	{
-		glGenBuffers(5, pMesh->vbo);
+		glGenBuffers(4, pMesh->vbo);
 
 		// 인덱스에 해당하는 정점 할당
 		for (int i = 0; i < pMesh->indices[0].size(); ++i)

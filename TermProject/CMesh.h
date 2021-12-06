@@ -30,7 +30,7 @@ protected:
 	glm::vec3 m_vec3PRotate; // 이동전에 적용하는 회전(공전)
 	glm::vec3 m_vec3Translate;
 	glm::vec3 m_vec3Rotate; // 이동후에 적용하는 회전(자전)
-	glm::vec3 m_vec3Scale;
+	glm::vec3 m_vec3Scale{ 1.0, 1.0, 1.0 };
 
 private:
 	GLuint m_Vao;
@@ -52,9 +52,10 @@ private:
 	vector<MATERIAL*> m_vecMaterials;
 
 public:
-	glm::mat4 GetMatrix();
+	glm::mat4 Get_Matrix();
 	glm::vec3 GetPos() { return m_vec3Translate; }
-
+	GLvoid Move(glm::vec3 move) { m_vec3Translate += move; }
+	
 protected:
 	GLvoid Release();
 

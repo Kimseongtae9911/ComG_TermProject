@@ -6,7 +6,7 @@ in vec2 TexCoord;
 
 out vec4 FragColor;
 
-uniform vec3 lightPos = vec3(0,0,5.0f);
+uniform vec3 lightPos = vec3(10.0, 20.0, 0.0);
 uniform vec3 viewPos;
 
 uniform vec3 lightColor = vec3(1.f); 

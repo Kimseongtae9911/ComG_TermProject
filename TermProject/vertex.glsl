@@ -4,7 +4,8 @@ layout(location = 1) in vec3 vNormal;
 layout(location = 2) in vec2 vTexCoord;
 layout(location = 3) in vec4 in_Color;
 
-uniform mat4 modelTransform = mat4(1.f);
+//uniform mat4 modelTransform = mat4(1.f);
+uniform mat4 modelTransform;
 uniform mat4 viewTransform;
 uniform mat4 projectionTransform;
 

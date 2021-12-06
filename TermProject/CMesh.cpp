@@ -68,7 +68,12 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 
 GLvoid CMesh::Render()
 {
-	GLuint iLocation = CShader::GetInstance()->Use_Shader("Default"); //일단
+	GLuint program = CShader::GetInstance()->Use_Shader("Default"); //일단
+
+	GLuint iLocation = glGetUniformLocation(program, "modelTransform");
+	glUniformMatrix4fv(iLocation, 1, GL_FALSE, value_ptr(Get_Matrix()));
+
+
 	for (auto pMesh : m_vecSubMesh)
 	{
 		for (int i = 0; i < 4; ++i)
@@ -309,14 +314,16 @@ HRESULT CMesh::SetVertexColor(vector<glm::vec3> vertex, vector<glm::vec4> &color
 	return NOERROR;
 }
 
-glm::mat4 CMesh::GetMatrix()
+glm::mat4 CMesh::Get_Matrix()
 {
 	glm::mat4 result(1.0f);
 	if (m_Parent) {
-		result = m_Parent->GetMatrix() * result;
+		result = m_Parent->Get_Matrix() * result;
 	}
 
+	result = glm::rotate(result, glm::radians(m_vec3PRotate.x), glm::vec3(1.0, 0.0, 0.0));
 	result = glm::rotate(result, glm::radians(m_vec3PRotate.y), glm::vec3(0.0, 1.0, 0.0));
+	result = glm::rotate(result, glm::radians(m_vec3PRotate.z), glm::vec3(0.0, 0.0, 1.0));
 
 	result = glm::translate(result, m_vec3Translate);
 

@@ -36,7 +36,7 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
 
-	//glActiveTexture(GL_TEXTURE0); // �ؽ�ó�� ���ε��ϱ� ���� ���� �ؽ�ó ������ Ȱ��ȭ
+	//glActiveTexture(GL_TEXTURE0); //
 
 
 	return NOERROR;

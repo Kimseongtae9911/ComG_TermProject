@@ -1,4 +1,4 @@
-#define STB_IMAGE_IMPLEMENTATION
+ï»¿#define STB_IMAGE_IMPLEMENTATION
 #include "CTexture.h"
 #include"stb_image.h"
 
@@ -36,7 +36,7 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
 
-	//glActiveTexture(GL_TEXTURE0); // ÅØ½ºÃ³¸¦ ¹ÙÀÎµùÇÏ±â Àü¿¡ ¸ÕÀú ÅØ½ºÃ³ À¯´ÖÀ» È°¼ºÈ­
+	//glActiveTexture(GL_TEXTURE0); // ï¿½Ø½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Ã³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
 
 
 	return NOERROR;

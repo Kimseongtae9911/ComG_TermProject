@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Player.h"
 
 Player::Player()
@@ -22,7 +22,7 @@ HRESULT Player::Initialize()
 
 GLint Player::Update(const GLfloat fTimeDelta)
 {
-	if (m_bView) { // 2DÇÃ·¹ÀÌ¾î
+	if (m_bView) { // 2Dï¿½Ã·ï¿½ï¿½Ì¾ï¿½
 		if (m_pKeyMgr->KeyDown(KEY_LEFT) && !m_pKeyMgr->KeyDown(KEY_SPACE)) {
 
 		}
@@ -45,7 +45,7 @@ GLint Player::Update(const GLfloat fTimeDelta)
 
 		}
 	}
-	else { // 3DÇÃ·¹ÀÌ¾î
+	else { // 3Dï¿½Ã·ï¿½ï¿½Ì¾ï¿½
 		if (m_pKeyMgr->KeyDown(KEY_LEFT)) {
 
 		}

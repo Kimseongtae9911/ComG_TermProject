@@ -20,6 +20,9 @@ GLvoid CRenderManager::Render_Object()
 		for (auto& pObj : m_lstRenderObj[i])
 			pObj->Render();
 
+		glEnable(GL_DEPTH_TEST);
+
+
 	}
 
 	Clear_Renderer();

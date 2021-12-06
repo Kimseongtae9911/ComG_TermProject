@@ -6,12 +6,12 @@ in vec2 TexCoord;
 
 out vec4 FragColor;
 
-uniform vec3 lightPos;
-uniform vec3 viewPos;
+uniform vec3 lightPos = vec3(0,0,5.0f);
+uniform vec3 viewPos= vec3(5.0f,0,0);
 
-uniform vec3 lightColor; 
-uniform int light_on;
-uniform float light_intensity;
+uniform vec3 lightColor = vec3(1.f); 
+uniform int light_on = 1;
+uniform float light_intensity = 0.3;
 uniform sampler2D outTexture;
 
 void main()

@@ -98,6 +98,7 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 
 GLvoid CMesh::Render()
 {
+	GLuint iLocation = CShader::GetInstance()->Use_Shader("Default"); //¿œ¥‹
 	for (auto pMesh : m_vecSubMesh)
 	{
 		for (int i = 0; i < 4; ++i)
@@ -198,17 +199,20 @@ HRESULT CMesh::Load_Mesh(string path)
 				pCurrPart->indices[2].push_back(temp[i][2] - 1);
 			}
 		}
-		else if (strcmp(chLineHeader, "g") == 0)
+		//else if (strcmp(chLineHeader, "g") == 0)
+		//{
+		//	if (pCurrPart != nullptr)
+		//		m_vecSubMesh.push_back(pCurrPart);
+		//	pCurrPart = new SUBMESH;
+		//	fscanf_s(file, "%s", pCurrPart->name, 256);
+		//}
+		else if (strcmp(chLineHeader, "usemtl") == 0)
 		{
+			/*if (!pCurrPart)
+				pCurrPart = new SUBMESH;*/
 			if (pCurrPart != nullptr)
 				m_vecSubMesh.push_back(pCurrPart);
 			pCurrPart = new SUBMESH;
-			fscanf_s(file, "%s", pCurrPart->name, 256);
-		}
-		else if (strcmp(chLineHeader, "usemtl") == 0)
-		{
-			if (!pCurrPart)
-				pCurrPart = new SUBMESH;
 			fscanf_s(file, "%s", pCurrPart->matname, 256);
 		}
 		else if (strcmp(chLineHeader, "mtllib") == 0)

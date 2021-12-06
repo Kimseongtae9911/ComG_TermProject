@@ -49,6 +49,8 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 	if (FAILED(Load_Mesh(path)))
 		return E_FAIL;
 
+	path.replace(path.end() - 3, path.end(), "");
+	int index = path.rfind('/');
 
 
 	for (auto pMesh : m_vecSubMesh)
@@ -82,7 +84,9 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 		if (pMesh->material)
 		{
 			MATERIAL* pMat = pMesh->material;
-			pMat->texture = CTexture::Create("", pMat->map_Kd); // 이건 상대주소로 조금 고쳐야함
+			string strNewPath = path;
+			strNewPath = strNewPath.replace(strNewPath.end() - (strNewPath.size() - index - 1), strNewPath.end(), pMat->map_Kd);
+			pMat->texture = CTexture::Create("", strNewPath); 
 		}
 	}
 

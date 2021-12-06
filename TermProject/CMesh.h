@@ -12,6 +12,7 @@ public:
 	
 public:
 	HRESULT SetVertexColor(vector<glm::vec3> vertex, vector<glm::vec4> color, glm::vec4 vCol);
+	string& Get_Path() { return strPath; };
 
 
 protected:
@@ -46,6 +47,7 @@ private:
 	vector<glm::vec3> m_vecVertices;
 	vector<glm::vec2> m_vecTexcoords;
 	vector<glm::vec3> m_vecNormals;
+	string strPath = "";
 
 private:
 	vector<SUBMESH*> m_vecSubMesh;

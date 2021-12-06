@@ -65,6 +65,18 @@ HRESULT CGameManager::Clear_Obj(OBJID eID)
 	return NOERROR;
 }
 
+HRESULT CGameManager::Add_Camera(CCamera* pCamera)
+{
+	if (!pCamera)
+		return E_FAIL;
+
+	if (m_pCamera)
+		SafeDelete(m_pCamera);
+	m_pCamera = pCamera;
+
+	return NOERROR;
+}
+
 GLvoid CGameManager::Render_Camera()
 {
 	if (m_pCamera)

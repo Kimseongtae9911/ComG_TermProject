@@ -35,7 +35,7 @@ GLvoid CCamera::Render()
 	int viewLoc = glGetUniformLocation(program, "viewTransform");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_matView));
 
-	m_matProj = perspective(radians(m_fFovY), (float)WINCX / (float)WINCY, m_fNear, m_fFar);
+	m_matProj = glm::perspective(glm::radians(m_fFovY), (float)WINCX / (float)WINCY, m_fNear, m_fFar);
 	int ProjLoc = glGetUniformLocation(program, "projectionTransform");
 	glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_matProj));
 

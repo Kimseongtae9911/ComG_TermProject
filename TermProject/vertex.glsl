@@ -5,8 +5,8 @@ layout(location = 2) in vec2 vTexCoord;
 layout(location = 3) in vec4 in_Color;
 
 uniform mat4 modelTransform = mat4(1.f);
-uniform mat4 viewTransform = mat4(1.f);
-uniform mat4 projectionTransform = mat4(1.f);
+uniform mat4 viewTransform;
+uniform mat4 projectionTransform;
 
 out vec3 FragPos;
 out vec3 Normal;

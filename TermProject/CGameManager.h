@@ -19,6 +19,7 @@ public:
 	HRESULT Clear_Obj(OBJID eID);
 
 public:
+	HRESULT Add_Camera(CCamera* pCamera);
 	GLvoid Render_Camera();
 	CCamera* Get_Camera() { return m_pCamera; }
 

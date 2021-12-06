@@ -2,6 +2,7 @@
 #include"stdafx.h"
 
 class CObj;
+class CCamera;
 
 class CGameManager
 {
@@ -17,8 +18,12 @@ public:
 	HRESULT Clear_ObjList();
 	HRESULT Clear_Obj(OBJID eID);
 
+public:
+	GLvoid Render_Camera();
+	CCamera* Get_Camera() { return m_pCamera; }
 
 private:
+	CCamera* m_pCamera;
 	list<CObj*> m_ObjLst[OBJ_END];
 
 

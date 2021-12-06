@@ -73,6 +73,8 @@ GLint Player::Update(const GLfloat fTimeDelta)
 
 GLvoid Player::Render()
 {
+	m_pShaderLoader->Use_Shader("Default");
+	m_pGameMgr->Render_Camera();
 	m_player_2D->Render();
 	return GLvoid();
 }

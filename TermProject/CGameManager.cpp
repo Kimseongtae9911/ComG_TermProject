@@ -1,5 +1,6 @@
 #include "CGameManager.h"
 #include "CObj.h"
+#include "CCamera.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -40,6 +41,9 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				++iter_begin;
 		}
 	}
+
+	if (m_pCamera)
+		m_pCamera->Update(fTimeDelta);
 	return GLvoid();
 }
 
@@ -59,4 +63,11 @@ HRESULT CGameManager::Clear_Obj(OBJID eID)
 	m_ObjLst[eID].clear();
 
 	return NOERROR;
+}
+
+GLvoid CGameManager::Render_Camera()
+{
+	if (m_pCamera)
+		m_pCamera->Render();
+	return GLvoid();
 }

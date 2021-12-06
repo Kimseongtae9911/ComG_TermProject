@@ -11,7 +11,7 @@ public:
 	GLvoid Render();
 	
 public:
-	HRESULT SetVertexColor(vector<glm::vec3> vertex, vector<glm::vec4> color, glm::vec4 vCol);
+	HRESULT SetVertexColor(vector<glm::vec3> vertex, vector<glm::vec4> &color, glm::vec4 vCol);
 	string& Get_Path() { return strPath; };
 
 
@@ -19,16 +19,13 @@ protected:
 	HRESULT Load_Mesh(string strPath);
 	HRESULT Load_Material(string strPath);
 
+
 private:
 	MATERIAL* Get_Material(char* chMatName);
-
+	
 
 
 protected:
-	vector<glm::vec3> m_vecVertex;
-	vector<glm::vec2> m_vecUVS;
-	vector<glm::vec3> m_vecNormal;
-	vector<glm::vec4> m_vecColor;
 	CMesh* m_Parent = nullptr;
 	glm::vec3 m_vec3PRotate; // 이동전에 적용하는 회전(공전)
 	glm::vec3 m_vec3Translate;
@@ -43,18 +40,20 @@ private:
 	GLuint m_iCnt;
 	GLuint m_iCnt2;
 
-private:
+protected:
 	vector<glm::vec3> m_vecVertices;
 	vector<glm::vec2> m_vecTexcoords;
 	vector<glm::vec3> m_vecNormals;
+	vector<glm::vec4> m_vecColor;
 	string strPath = "";
 
 private:
 	vector<SUBMESH*> m_vecSubMesh;
 	vector<MATERIAL*> m_vecMaterials;
 
-private:
+public:
 	glm::mat4 GetMatrix();
+	glm::vec3 GetPos() { return m_vec3Translate; }
 
 protected:
 	GLvoid Release();

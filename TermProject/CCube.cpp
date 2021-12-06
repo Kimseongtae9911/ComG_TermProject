@@ -17,17 +17,17 @@ CCube* CCube::Initialize(string path)
 		m_prefab = new CCube;
 		m_prefab->Load_Mesh(path);
 		CCube* temp = new CCube;
-		temp->m_vecVertex = m_prefab->m_vecVertex;
-		temp->m_vecUVS = m_prefab->m_vecUVS;
-		temp->m_vecNormal = m_prefab->m_vecNormal;
+		temp->m_vecVertices = m_prefab->m_vecVertices;
+		temp->m_vecTexcoords = m_prefab->m_vecTexcoords;
+		temp->m_vecNormals = m_prefab->m_vecNormals;
 
 		return temp;
 	}
 	else {
 		CCube* temp = new CCube;
-		temp->m_vecVertex = m_prefab->m_vecVertex;
-		temp->m_vecUVS = m_prefab->m_vecUVS;
-		temp->m_vecNormal = m_prefab->m_vecNormal;
+		temp->m_vecVertices = m_prefab->m_vecVertices;
+		temp->m_vecTexcoords = m_prefab->m_vecTexcoords;
+		temp->m_vecNormals = m_prefab->m_vecNormals;
 
 		return temp;
 	}

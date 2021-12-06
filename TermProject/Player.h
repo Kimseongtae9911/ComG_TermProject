@@ -17,7 +17,7 @@ private:
 	CMesh* m_player_3D;
 
 private:
-	GLfloat m_fAlpha;
+	GLfloat m_fAlpha{ 1.0f };
 	bool m_bView{ true }; // true ->2D, false ->3D
 
 public:

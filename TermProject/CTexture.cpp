@@ -25,30 +25,18 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	unsigned char* data
-	= stbi_load(strPath.c_str(), &m_iWidth, &m_iHeight, &m_iChannels, 0);
+	unsigned char* data = stbi_load(strPath.c_str(), &m_iWidth, &m_iHeight, &m_iChannels, 0);
 
 	if (data == nullptr)
 	{
 		cout << "ERROR : Failed to load texture" << endl;
 		return E_FAIL;
 	}
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_iWidth, m_iHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_iWidth, m_iHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	//if (bAlpha)
-	//{
-	//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_iWidth, m_iHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	//	glGenerateMipmap(GL_TEXTURE_2D);
-	//}
-	//else
-	//{
-	//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_iWidth, m_iHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	//	glGenerateMipmap(GL_TEXTURE_2D);
-	//}
-
 	stbi_image_free(data);
 
-	glActiveTexture(GL_TEXTURE0); // 텍스처를 바인딩하기 전에 먼저 텍스처 유닛을 활성화
+	//glActiveTexture(GL_TEXTURE0); // 텍스처를 바인딩하기 전에 먼저 텍스처 유닛을 활성화
 
 
 	return NOERROR;
@@ -57,9 +45,9 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 GLvoid CTexture::Render()
 {
 	GLuint iLocation = glGetUniformLocation(CShader::GetInstance()->Get_CurrProgram(), "outTexture");  
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_iID);
 	glUniform1i(iLocation, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_iID);	
 
 	return GLvoid();
 }

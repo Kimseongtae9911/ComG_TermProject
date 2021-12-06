@@ -13,7 +13,8 @@ Player::~Player()
 HRESULT Player::Initialize()
 {
 	CObj::Initialize();
-	m_player_2D = CMesh::Create("../Resource/Ghost/ghost.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	//m_player_2D = CMesh::Create("../Resource/Ghost/ghost.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	m_player_2D = CMesh::Create("../Resource/cube.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_player_3D = CMesh::Create("Player_3D", { 1.0, 1.0, 1.0, m_fAlpha });
 
 	return NOERROR;
@@ -64,8 +65,7 @@ GLint Player::Update(const GLfloat fTimeDelta)
 			m_bView = !m_bView;
 			
 		}
-	}
-
+	}	
 
 	m_pRender-> Add_RenderObj(REDER_NONAL, this);
 	return GLint();

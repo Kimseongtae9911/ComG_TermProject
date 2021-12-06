@@ -15,17 +15,17 @@ CSphere* CSphere::Initialize(string path)
 		m_prefab = new CSphere;
 		m_prefab->Load_Mesh(path);
 		CSphere* temp = new CSphere;
-		temp->m_vecVertex = m_prefab->m_vecVertex;
-		temp->m_vecUVS = m_prefab->m_vecUVS;
-		temp->m_vecNormal = m_prefab->m_vecNormal;
+		temp->m_vecVertices = m_prefab->m_vecVertices;
+		temp->m_vecTexcoords = m_prefab->m_vecTexcoords;
+		temp->m_vecNormals = m_prefab->m_vecNormals;
 
 		return temp;
 	}
 	else {
 		CSphere* temp = new CSphere;
-		temp->m_vecVertex = m_prefab->m_vecVertex;
-		temp->m_vecUVS = m_prefab->m_vecUVS;
-		temp->m_vecNormal = m_prefab->m_vecNormal;
+		temp->m_vecVertices = m_prefab->m_vecVertices;
+		temp->m_vecTexcoords = m_prefab->m_vecTexcoords;
+		temp->m_vecNormals = m_prefab->m_vecNormals;
 
 		return temp;
 	}

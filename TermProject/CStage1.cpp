@@ -49,6 +49,4 @@ CStage1* CStage1::Create()
 	}
 
 	return pInstance;
-
-	return nullptr;
 }

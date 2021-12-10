@@ -82,7 +82,7 @@ GLvoid CCamera::Render()
 glm::mat4 CCamera::Get_Ortho()
 {
 	glm::mat4 proj = glm::mat4(1.0f);
-	proj = glm::ortho(-20.0f, 20.0f, -10.0f, 10.0f, 1.0f, m_fFar);
+	proj = glm::ortho(-16.0f, 16.0f, -8.0f, 8.0f, 1.0f, m_fFar);
 	proj = glm::translate(proj, m_vec3Translate);
 	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
 	return proj;

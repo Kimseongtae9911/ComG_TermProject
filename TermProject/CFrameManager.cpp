@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CFrameManager.h"
 
 IMPLEMENT_SINGLETON(CFrameManager)

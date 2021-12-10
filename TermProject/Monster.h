@@ -1,4 +1,3 @@
-#include "CMesh.h"
 #include "CObj.h"
 
 class Monster : public CObj

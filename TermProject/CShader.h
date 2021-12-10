@@ -1,9 +1,9 @@
 #pragma once
-#include "stdafx.h"
 
 class CShader
 {
 	DECLARE_SINGLETON(CShader)
+
 private:
 	CShader();
 	~CShader();

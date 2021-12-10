@@ -1,12 +1,11 @@
 #pragma once
-#include "stdafx.h"
 
 class CObj;
 class CRenderManager
 {
 	DECLARE_SINGLETON(CRenderManager)
 
-public:
+private:
 	CRenderManager();
 	~CRenderManager();
 

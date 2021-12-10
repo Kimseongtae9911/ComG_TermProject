@@ -1,4 +1,7 @@
+#include "stdafx.h"
 #include "Monster.h"
+#include "CKeyManager.h"
+#include "CRenderManager.h"
 
 Monster::Monster()
 {

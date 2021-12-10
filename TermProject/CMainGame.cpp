@@ -1,8 +1,12 @@
+#include "stdafx.h"
 #include "CMainGame.h"
+
 #include "CShader.h"
 #include "CGameManager.h"
 #include "CRenderManager.h"
 #include "CSceneManager.h"
+#include "CKeyManager.h"
+#include"CFrameManager.h"
 
 CMainGame::CMainGame()
 {

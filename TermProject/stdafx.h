@@ -1,14 +1,10 @@
 #pragma once
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-#include <gl/glew.h>
-#include <gl/freeglut.h>
-#include <gl/freeglut_ext.h>
 
-#include <gl/glm/glm.hpp>
-#include <gl/glm/ext.hpp>
-#include <gl/glm/gtc/matrix_transform.hpp>
+using namespace std;
 
 #include <list>
 #include <map>
@@ -18,72 +14,17 @@
 #include <math.h>
 #include <random>
 
+#include <gl/glew.h>
+#include <gl/freeglut.h>
+#include <gl/freeglut_ext.h>
 
-// Include
-#include "Enum.h"
-
-using namespace std;
-
-
-
-
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
 
 #define WINCX 1280
 #define WINCY 720
 #define MAX_VKEY 0xff
-
-
-typedef struct tagShader
-{
-public:
-	tagShader() { memset(this, 0, sizeof(tagShader)); }
-	GLuint program;
-	GLchar* vertexsource;
-	GLchar* fragmentsource;
-	GLuint vertexshader;
-	GLuint fragmentshader;
-}SHADER;
-
-typedef struct tagTexture
-{
-public:
-	tagTexture() { memset(this, 0, sizeof(tagTexture)); }
-	GLuint id;
-	GLint width;
-	GLint height;
-	GLint nrChannels;
-}TEXTURE;
-
-class CTexture;
-typedef struct tagMaterial
-{
-	GLchar name[256] = "";
-	GLint illum;
-	string map_Kd = "";
-	GLfloat Ns;
-	GLfloat Ni;
-	GLfloat d;
-	GLfloat Ka[3];
-	GLfloat Kd[3];
-	GLfloat Ks[3];
-	GLfloat Tf[3];
-	CTexture* texture;
-}MATERIAL;
-
-typedef struct tagSubMesh
-{
-	GLchar name[256] = "";
-	GLchar matname[256] = "";
-	GLuint vao = 0;
-	GLuint vbo[4] = {};
-	vector<GLint> indices[4];
-	vector<glm::vec3> vertex;
-	vector<glm::vec2> texcoord;
-	vector<glm::vec3> normal;
-	vector<glm::vec4> color;
-	MATERIAL* material;
-}SUBMESH;
-
 
 template <typename T>
 void SafeDelete(T& ptr)
@@ -136,3 +77,6 @@ private:									\
 ClassName* ClassName::m_pInstance = nullptr;
 
 
+// Include
+#include "Enum.h"
+#include "Struct.h"

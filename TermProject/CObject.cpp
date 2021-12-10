@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "CObject.h"
 #include "CMesh.h"
+#include "CRenderManager.h"
+#include "CShader.h"
+#include "CGameManager.h"
 
 CObject::CObject()
 {

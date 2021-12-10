@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "CObj.h"
 
 class CCamera : public CObj
@@ -36,7 +35,6 @@ private:
 
 private:
 	GLfloat m_fAngle = 0.f;
-
 
 private:
 	GLvoid Release();

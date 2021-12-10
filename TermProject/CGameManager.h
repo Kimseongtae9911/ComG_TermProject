@@ -1,6 +1,4 @@
 #pragma once
-#include"stdafx.h"
-
 class CObj;
 class CCamera;
 
@@ -24,7 +22,7 @@ public:
 	CCamera* Get_Camera() { return m_pCamera; }
 
 private:
-	CCamera* m_pCamera;
+	CCamera* m_pCamera = nullptr;
 	list<CObj*> m_ObjLst[OBJ_END];
 
 

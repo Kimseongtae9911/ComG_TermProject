@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CRenderManager.h"
 #include"CObj.h"
 

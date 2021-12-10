@@ -1,6 +1,10 @@
 #pragma once
-#include"Manager.h"
 
+class CRenderManager;
+class CKeyManager;
+class CGameManager;
+class CSceneManager;
+class CShader;
 class CObj
 {
 public:

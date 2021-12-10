@@ -1,6 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
-
+#include "stdafx.h"
 #include "CMesh.h"
+#include "CTexture.h"
+#include "CShader.h"
 
 CMesh::CMesh()
 {

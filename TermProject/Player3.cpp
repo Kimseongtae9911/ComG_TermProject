@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Player3.h"
 #include "CMesh.h"
+#include "CKeyManager.h"
+#include "CRenderManager.h"
+#include "CShader.h"
+#include "CGameManager.h"
 
 Player3::Player3()
 {

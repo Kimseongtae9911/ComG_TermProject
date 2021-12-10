@@ -1,5 +1,10 @@
 #pragma once
 #include "CScene.h"
+//#include "Player3.h"
+//#include "Player.h"
+//#include "CObject.h"
+//#include "CCamera.h"
+//
 class CStage1 : public CScene
 {
 public:

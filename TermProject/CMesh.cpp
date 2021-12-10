@@ -94,6 +94,8 @@ GLvoid CMesh::Render()
 				glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 				break;
 			case 3:
+				glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo[3]);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec4) * pMesh->color.size(), &pMesh->color.front(), GL_STATIC_DRAW);
 				glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
 				break;
 			default:

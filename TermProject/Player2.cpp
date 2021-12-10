@@ -19,17 +19,21 @@ HRESULT Player2::Initialize()
 {
 	CObj::Initialize();
 	//m_player = CMesh::Create("../Resource/Ghost/ghost.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	//m_player = CMesh::Create("../Resource/blinky/blinky.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	//m_player->GetScale() = glm::vec3(3, 3, 3);
-	//m_player = CMesh::Create("../Resource/test/test.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	//m_player_3D = CMesh::Create("Player_3D", { 1.0, 1.0, 1.0, m_fAlpha });
+	//m_player = CMesh::Create("../Resource/Blinky/blinky.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	m_player = CMesh::Create("../Resource/Player2D/Player2D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
+	m_player->Move(glm::vec3(0.0, 0.5, 0.0));
 	return NOERROR;
 }
 
 GLint Player2::Update(const GLfloat fTimeDelta)
 {
 	if (m_pGameMgr->Get_View()) { // 2DPlayer
+		for (auto i : m_player->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 1.0;
+			}
+		}
 		if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 			m_player->Move(glm::vec3(-0.1, 0.0, 0.0));
 		}
@@ -49,7 +53,13 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 
 		}
 	}
-	
+	else {
+		for (auto i : m_player->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 0.1;
+			}
+		}
+	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory
 		exit(0);

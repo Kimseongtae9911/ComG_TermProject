@@ -21,7 +21,6 @@ HRESULT Player3::Initialize()
 	m_player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	m_player->Move(glm::vec3(0.0, 0.5, 0.0));
-	//m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	
 	return NOERROR;
 }
@@ -30,6 +29,11 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 {
 	
 	if (!m_pGameMgr->Get_View()) { // 3DPlayer
+		for (auto i : m_player->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 1.0;
+			}
+		}
 		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
 			m_player->Move(glm::vec3(-0.1, 0.0, 0.0));
 		}
@@ -46,7 +50,13 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 			//interaction
 		}
 	}
-
+	else {
+		for (auto i : m_player->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 0.1;
+			}
+		}
+	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory
 		exit(0);

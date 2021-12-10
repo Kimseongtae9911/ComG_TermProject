@@ -2,11 +2,11 @@
 #include "CObj.h"
 #include "CMesh.h"
 
-class Player : public CObj
+class Player2 : public CObj
 {
 public:
-	Player();
-	~Player();
+	Player2();
+	~Player2();
 
 public:
 	virtual HRESULT Initialize();
@@ -18,9 +18,9 @@ private:
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
-	bool m_bView{ true };
+	//bool m_bView{ true };
 
 public:
-	static Player* Create();
+	static Player2* Create();
 };
 

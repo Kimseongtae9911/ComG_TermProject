@@ -19,7 +19,7 @@ private:
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
-	bool m_bView{ false };
+	//bool m_bView{ false };
 
 public:
 	static Player3* Create();

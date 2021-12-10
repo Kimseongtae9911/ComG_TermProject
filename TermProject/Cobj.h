@@ -20,6 +20,9 @@ protected:
 	CShader* m_pShaderLoader = nullptr;
 
 protected:
+	bool m_bView{ true };
+
+protected:
 	GLvoid Release();
 };
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "CObj.h"
 #include "CMesh.h"
 

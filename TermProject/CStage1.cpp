@@ -1,5 +1,6 @@
 #include "CStage1.h"
 #include "Player.h"
+#include "CObject.h"
 #include "CCamera.h"
 
 CStage1::CStage1()
@@ -17,6 +18,9 @@ HRESULT CStage1::Initialize()
 	CObj* pObj = nullptr;
 	pObj = Player::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/MapCube/Cube.obj", glm::vec3(0.0f, 0.f, 20.f), { 1.0, 1.0, 1.0, 1.0 });
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 	return NOERROR;
 }

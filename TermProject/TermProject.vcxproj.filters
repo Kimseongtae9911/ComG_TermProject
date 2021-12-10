@@ -120,9 +120,6 @@
     <ClCompile Include="Monster.cpp">
       <Filter>소스 파일\01 Obj\01 Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Key.cpp">
-      <Filter>소스 파일\01 Obj\02 Object</Filter>
-    </ClCompile>
     <ClCompile Include="CFrameManager.cpp">
       <Filter>소스 파일\03 Manager\05 FrameManager</Filter>
     </ClCompile>
@@ -134,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>소스 파일\01 Obj\99 Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cpp">
+      <Filter>소스 파일\01 Obj\02 Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +191,6 @@
     <ClInclude Include="Monster.h">
       <Filter>소스 파일\01 Obj\01 Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Key.h">
-      <Filter>소스 파일\01 Obj\02 Object</Filter>
-    </ClInclude>
     <ClInclude Include="CFrameManager.h">
       <Filter>소스 파일\03 Manager\05 FrameManager</Filter>
     </ClInclude>
@@ -205,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="CCamera.h">
       <Filter>소스 파일\01 Obj\99 Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.h">
+      <Filter>소스 파일\01 Obj\02 Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

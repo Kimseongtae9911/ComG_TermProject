@@ -333,6 +333,7 @@ glm::mat4 CMesh::Get_Matrix()
 
 
 	result = glm::scale(result, m_vec3Scale);
+	//result = glm::mat4(1.0f);
 
 	return result;
 }

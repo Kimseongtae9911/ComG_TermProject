@@ -23,13 +23,12 @@ HRESULT Player2::Initialize()
 	m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_player = CMesh::Create("../Resource/test/test.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_player_3D = CMesh::Create("Player_3D", { 1.0, 1.0, 1.0, m_fAlpha });
-	m_bView = true;
 	return NOERROR;
 }
 
 GLint Player2::Update(const GLfloat fTimeDelta)
 {
-	if (m_bView) { // 2DPlayer
+	if (m_pGameMgr->Get_View()) { // 2DPlayer
 		if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 			m_player->Move(glm::vec3(-0.1, 0.0, 0.0));
 		}
@@ -48,9 +47,6 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
 
 		}
-	}
-	if (m_pKeyMgr->KeyDown(KEY_F)) {
-		m_bView = !m_bView;
 	}
 	
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {

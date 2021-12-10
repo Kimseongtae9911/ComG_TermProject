@@ -59,6 +59,12 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
 
 		}
+		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
+			cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+		}
+		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
+
+		}
 	}
 	else {
 		for (auto i : m_Player->GetSMESH()) {

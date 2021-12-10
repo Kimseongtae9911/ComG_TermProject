@@ -12,6 +12,9 @@ public:
 	glm::mat4 Get_Proj() { return m_matProj; }
 
 public:
+	GLvoid RotateForObj(glm::vec3 vAxis, float fAngle);
+
+public:
 	virtual HRESULT Initialize(glm::vec3 vEye, glm::vec3 vAt, glm::vec3 vUp);
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
@@ -39,6 +42,8 @@ private:
 
 private:
 	GLfloat m_fAngle = 0.f;
+	bool bMovingCamera = false;
+	int iCount = 0;
 
 private:
 	GLvoid Release();

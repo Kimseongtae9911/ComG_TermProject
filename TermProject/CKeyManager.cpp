@@ -97,9 +97,9 @@ bool CKeyManager::KeyPressing(DWORD dwCurKey)
 }
 
 
-bool CKeyManager::KeyCombined(DWORD dwFistKey, DWORD dwSecondKey)
+bool CKeyManager::KeyCombined(DWORD dwFirstKey, DWORD dwSecondKey)
 {
-	if (KeyDown(dwSecondKey) && KeyPressing(dwFistKey))
+	if (KeyDown(dwSecondKey) && KeyPressing(dwFirstKey))
 		return true;
 
 	return false;

@@ -32,7 +32,18 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 				i->color[j][3] = 1.0;
 			}
 		}
-		if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
+		if (m_pKeyMgr->KeyCombined(KEY_RIGHT, KEY_SPACE)) {
+			if (!Player2::m_bJump) {
+				Player2::m_bJump = true;
+				Player2::m_iJumpdir = 1;
+				Player2::m_fJumpStart = m_Player->GetPos().y;
+			}
+			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+		}
+		if (m_pKeyMgr->KeyCombined(KEY_LEFT, KEY_SPACE)) {
+			cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+		}
+		else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
@@ -46,12 +57,6 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			}
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
-
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
-			cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
 
 		}
 	}

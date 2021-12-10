@@ -1,16 +1,17 @@
 #pragma once
 #include "CObj.h"
-#include "CMesh.h"
 
-class Player : public CObj
+
+class CMesh;
+class Player3 : public CObj
 {
 public:
-	Player();
-	~Player();
+	Player3();
+	~Player3();
 
 public:
 	virtual HRESULT Initialize();
-    virtual GLint Update(const GLfloat fTimeDelta);
+	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
 private:
@@ -18,9 +19,9 @@ private:
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
-	bool m_bView{ true };
+	bool m_bView{ false };
 
 public:
-	static Player* Create();
+	static Player3* Create();
 };
 

@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
-# File Created: 10.12.2021 15:27:28
+# File Created: 10.12.2021 15:28:58
 
 newmtl wire_153228153
 	Ns 32
@@ -10,3 +10,4 @@ newmtl wire_153228153
 	Ka 0.6000 0.8941 0.6000
 	Kd 0.6000 0.8941 0.6000
 	Ks 0.3500 0.3500 0.3500
+	map_Kd cubeuv.png

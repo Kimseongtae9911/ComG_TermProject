@@ -53,7 +53,8 @@ private:
 
 public:
 	glm::mat4 Get_Matrix();
-	glm::vec3 GetPos() { return m_vec3Translate; }
+	glm::vec3& GetPos() { return m_vec3Translate; }
+	glm::vec3& GetScale() { return m_vec3Scale; }
 	GLvoid Move(glm::vec3 move) { m_vec3Translate += move; }
 	
 protected:

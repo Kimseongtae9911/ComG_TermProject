@@ -33,6 +33,8 @@ void CKeyManager::UpdateKey()
 		m_dwCurKey |= KEY_RIGHT;
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 		m_dwCurKey |= KEY_SPACE;
+	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+		m_dwCurKey |= KEY_ESCAPE;
 	if (GetAsyncKeyState(0x41) & 0x8000)
 		m_dwCurKey |= KEY_A;
 	if (GetAsyncKeyState(0x46) & 0x8000)

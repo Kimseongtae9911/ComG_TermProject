@@ -6,8 +6,9 @@ constexpr DWORD KEY_DOWN = 0x00000002;
 constexpr DWORD KEY_LEFT = 0x00000004;
 constexpr DWORD KEY_RIGHT = 0x00000008;
 constexpr DWORD KEY_SPACE = 0x00000010;
-constexpr DWORD KEY_A = 0x00000020;
-constexpr DWORD KEY_F = 0x00000040;
+constexpr DWORD KEY_ESCAPE = 0x00000020;
+constexpr DWORD KEY_A = 0x00000040;
+constexpr DWORD KEY_F = 0x00000080;
 
 
 class CKeyManager

@@ -26,32 +26,44 @@ HRESULT Player2::Initialize()
 
 GLint Player2::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View()) { // 2DPlayer
-		for (auto i : m_Player->GetSMESH()) {
+	if (m_pGameMgr->Get_View()) 
+	{ // 2DPlayer
+		for (auto i : m_Player->GetSMESH()) 
+		{
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
 			}
 		}
-		if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
+		if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) 
+		{
 			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
 		}
-		else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
+		if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) 
+		{
 			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
 		}
-		else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
+		if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) 
+		{
+			cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+		}
+		//else if (m_pKeyMgr->KeyPressing(KEY_LEFT))
+		//{
+		//	if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
+		//		cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+		//}
+		if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) 
+		{
 			if (!Player2::m_bJump) {
 				Player2::m_bJump = true;
 				Player2::m_iJumpdir = 1;
 				Player2::m_fJumpStart = m_Player->GetPos().y;
 			}
 		}
-		else if (m_pKeyMgr->KeyDown(KEY_A)) {
+		if (m_pKeyMgr->KeyDown(KEY_A)) 
+		{
 
 		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
-			cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
+		if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
 
 		}
 	}

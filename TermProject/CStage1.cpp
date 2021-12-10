@@ -20,7 +20,7 @@ CStage1::~CStage1()
 HRESULT CStage1::Initialize()
 {
 	CScene::Initialize();
-	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 7.5f, 30.f), glm::vec3(0.f, 7.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
+	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 7.5f, 30.f), glm::vec3(0.f, 7.0f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
 	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))

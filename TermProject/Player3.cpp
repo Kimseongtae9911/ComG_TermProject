@@ -20,7 +20,7 @@ HRESULT Player3::Initialize()
 	CObj::Initialize();
 	m_Player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
-	m_Player->Move(glm::vec3(12.0, 0.5, 0.0));
+	m_Player->Move(glm::vec3(12.0, 0.0, 0.0));
 	
 	return NOERROR;
 }

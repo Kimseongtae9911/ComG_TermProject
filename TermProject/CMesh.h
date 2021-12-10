@@ -1,4 +1,4 @@
-#include "CTexture.h"
+ï»¿#include "CTexture.h"
 
 class CMesh
 {
@@ -27,9 +27,9 @@ private:
 
 protected:
 	CMesh* m_Parent = nullptr;
-	glm::vec3 m_vec3PRotate; // ÀÌµ¿Àü¿¡ Àû¿ëÇÏ´Â È¸Àü(°øÀü)
+	glm::vec3 m_vec3PRotate; // ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	glm::vec3 m_vec3Translate;
-	glm::vec3 m_vec3Rotate; // ÀÌµ¿ÈÄ¿¡ Àû¿ëÇÏ´Â È¸Àü(ÀÚÀü)
+	glm::vec3 m_vec3Rotate; // ï¿½Ìµï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	glm::vec3 m_vec3Scale{ 1.0, 1.0, 1.0 };
 
 private:

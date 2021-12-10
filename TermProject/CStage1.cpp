@@ -1,7 +1,7 @@
 #include "CStage1.h"
 #include "Player3.h"
 #include "Player.h"
-
+#include "CObject.h"
 #include "CCamera.h"
 
 CStage1::CStage1()

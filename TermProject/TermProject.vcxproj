@@ -149,6 +149,7 @@
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CObj.cpp" />
+    <ClCompile Include="CObject.cpp" />
     <ClCompile Include="COV.cpp" />
     <ClCompile Include="CRenderManager.cpp" />
     <ClCompile Include="CScene.cpp" />
@@ -157,7 +158,6 @@
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="CStage1.cpp" />
     <ClCompile Include="CTexture.cpp" />
-    <ClCompile Include="Key.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player3.cpp" />
@@ -171,6 +171,7 @@
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CObj.h" />
+    <ClInclude Include="CObject.h" />
     <ClInclude Include="CRenderManager.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
@@ -179,7 +180,6 @@
     <ClInclude Include="CStage1.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="Enum.h" />
-    <ClInclude Include="Key.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />

@@ -36,6 +36,7 @@ private:
 	glm::mat4 m_matView = glm::mat4(1.f);
 	glm::mat4 m_matProj = glm::mat4(1.f);
 
+
 private:
 	GLfloat m_fAngle = 0.f;
 

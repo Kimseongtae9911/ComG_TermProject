@@ -1,5 +1,6 @@
 #include"stdafx.h"
 #include "CGameManager.h"
+#include "CKeyManager.h"
 #include "CObj.h"
 #include "CCamera.h"
 #include "CKeyManager.h"
@@ -42,6 +43,10 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			else
 				++iter_begin;
 		}
+	}
+	
+	if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
+		m_bView = !m_bView;
 	}
 
 	if (m_pCamera)

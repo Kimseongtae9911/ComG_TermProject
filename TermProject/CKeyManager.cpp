@@ -59,7 +59,6 @@ bool CKeyManager::KeyDown(DWORD dwCurKey)
 	else if ((m_dwKeyDown & dwCurKey) && !(m_dwCurKey & dwCurKey))
 	{
 		m_dwKeyDown ^= dwCurKey;
-		//cout << "Key Down false " << dwCurKey << endl;
 		return false;
 	}
 

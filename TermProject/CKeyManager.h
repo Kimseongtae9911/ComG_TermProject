@@ -26,6 +26,7 @@ public:
 	bool KeyUp(DWORD dwCurKey);
 	bool KeyPressing(DWORD dwCurKey);
 	bool KeyCombined(DWORD dwFistKey, DWORD dwSecondKey);
+	DWORD& Get_Key() { return m_dwKeyDown; }
 
 private:
 	DWORD m_dwCurKey = 0;

@@ -21,6 +21,7 @@ HRESULT Player2::Initialize()
 	//m_player = CMesh::Create("../Resource/Ghost/ghost.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_player = CMesh::Create("../Resource/blinky/blinky.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	//m_player->GetScale() = glm::vec3(3, 3, 3);
 	//m_player = CMesh::Create("../Resource/test/test.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_player_3D = CMesh::Create("Player_3D", { 1.0, 1.0, 1.0, m_fAlpha });
 	return NOERROR;

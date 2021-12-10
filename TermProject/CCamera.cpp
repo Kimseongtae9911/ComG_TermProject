@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CCamera.h"
 #include "CShader.h"
+#include "CGameManager.h"
 
 CCamera::CCamera()
 {
@@ -38,10 +39,14 @@ GLvoid CCamera::Render()
 	int viewLoc = glGetUniformLocation(program, "viewTransform");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_matView));
 
-	m_matProj = glm::perspective(glm::radians(m_fFovY), (float)WINCX / (float)WINCY, m_fNear, m_fFar);
-	int ProjLoc = glGetUniformLocation(program, "projectionTransform");
-	glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_matProj));
-
+	if (m_pGameMgr->Get_View()) {
+		int ProjLoc = glGetUniformLocation(program, "projectionTransform");
+		glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(Get_Ortho()));
+	}
+	else {
+		int ProjLoc = glGetUniformLocation(program, "projectionTransform");
+		glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(Get_Perspective()));
+	}
 	int PosLoc = glGetUniformLocation(program, "viewPos");
 	glUniform3fv(PosLoc, 1, value_ptr(m_vEye));
 
@@ -50,6 +55,23 @@ GLvoid CCamera::Render()
 	return GLvoid();
 }
 
+glm::mat4 CCamera::Get_Ortho()
+{
+	glm::mat4 proj = glm::mat4(1.0f);
+	proj = glm::ortho(-20.0f, 20.0f, -10.0f, 10.0f, 1.0f, m_fFar);
+	proj = glm::translate(proj, m_vec3Translate);
+	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
+	return proj;
+}
+
+glm::mat4 CCamera::Get_Perspective()
+{
+	glm::mat4 proj = glm::perspective(glm::radians(m_fFovY), (float)WINCX / (float)WINCY, m_fNear, m_fFar);
+	proj = glm::translate(proj, m_vec3Translate);
+	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));
+	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
+	return proj;
+}
 
 GLvoid CCamera::Release()
 {

@@ -23,7 +23,7 @@ using namespace std;
 #include <gl/glm/gtc/matrix_transform.hpp>
 
 #define WINCX 1280
-#define WINCY 720
+#define WINCY 640
 #define MAX_VKEY 0xff
 
 template <typename T>

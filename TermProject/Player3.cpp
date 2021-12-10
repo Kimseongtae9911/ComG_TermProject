@@ -19,7 +19,8 @@ HRESULT Player3::Initialize()
 {
 	CObj::Initialize();
 	m_player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	//m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
+	m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
+	m_player->Move(glm::vec3(0.0, 0.5, 0.0));
 	//m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	
 	return NOERROR;

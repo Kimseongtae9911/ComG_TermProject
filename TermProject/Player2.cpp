@@ -52,7 +52,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 	if (m_pKeyMgr->KeyDown(KEY_F)) {
 		m_bView = !m_bView;
 	}
-	
+
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory
 		exit(0);

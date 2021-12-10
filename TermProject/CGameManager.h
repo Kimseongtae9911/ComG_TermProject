@@ -24,7 +24,5 @@ public:
 private:
 	CCamera* m_pCamera = nullptr;
 	list<CObj*> m_ObjLst[OBJ_END];
-
-
 };
 

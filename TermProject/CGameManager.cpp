@@ -2,6 +2,7 @@
 #include "CGameManager.h"
 #include "CObj.h"
 #include "CCamera.h"
+#include "CKeyManager.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -45,6 +46,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
+
 	return GLvoid();
 }
 

@@ -27,9 +27,9 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
-	cout << m_player->GetPos().x << endl;
-	cout << m_player->GetPos().y << endl;
-	cout << m_player->GetPos().z << endl;
+	//cout << m_player->GetPos().x << endl;
+	//cout << m_player->GetPos().y << endl;
+	//cout << m_player->GetPos().z << endl;
 	if (!m_bView) { // 3DPlayer
 		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
 			m_player->Move(glm::vec3(-0.1, 0.0, 0.0));

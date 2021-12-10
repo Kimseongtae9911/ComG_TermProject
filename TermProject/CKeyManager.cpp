@@ -40,6 +40,8 @@ void CKeyManager::UpdateKey()
 		m_dwCurKey |= KEY_A;
 	if (GetAsyncKeyState(0x46) & 0x8000)
 		m_dwCurKey |= KEY_F;
+
+
 }
 
 bool CKeyManager::KeyDown(DWORD dwCurKey)
@@ -48,16 +50,18 @@ bool CKeyManager::KeyDown(DWORD dwCurKey)
 	if (!(m_dwKeyDown & dwCurKey) && (m_dwCurKey & dwCurKey))
 	{
 		m_dwKeyDown |= dwCurKey;
+		cout << "Key Down true " << dwCurKey << endl;
 		return true;
 	}
 
 	// m_dwKeyDown을 원복
 	// 전에 누른적 있고 현재 누르지 않았을 때
-	//else if ((m_dwKeyDown & dwCurKey) && !(m_dwCurKey & dwCurKey))
-	//{
-	//	m_dwKeyDown ^= dwCurKey;
-	//	return false;
-	//}
+	else if ((m_dwKeyDown & dwCurKey) && !(m_dwCurKey & dwCurKey))
+	{
+		m_dwKeyDown ^= dwCurKey;
+		//cout << "Key Down false " << dwCurKey << endl;
+		return false;
+	}
 
 	return false;
 }
@@ -85,7 +89,10 @@ bool CKeyManager::KeyUp(DWORD dwCurKey)
 bool CKeyManager::KeyPressing(DWORD dwCurKey)
 {
 	if (m_dwCurKey & dwCurKey)
+	{
+		cout << "KeyDown true " << dwCurKey << endl;
 		return true;
+	}
 
 	return false;
 }

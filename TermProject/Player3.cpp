@@ -19,7 +19,7 @@ HRESULT Player3::Initialize()
 {
 	CObj::Initialize();
 	m_player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
+	//m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	//m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	
 	return NOERROR;
@@ -27,6 +27,9 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
+	cout << m_player->GetPos().x << endl;
+	cout << m_player->GetPos().y << endl;
+	cout << m_player->GetPos().z << endl;
 	if (!m_bView) { // 3DPlayer
 		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
 			m_player->Move(glm::vec3(-0.1, 0.0, 0.0));

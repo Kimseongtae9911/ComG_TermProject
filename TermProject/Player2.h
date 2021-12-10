@@ -4,7 +4,7 @@
 //#include "CObject.h"
 
 class CMesh;
-class Player : public CObj
+class Player2 : public CObj
 {
 public:
 	Player2();

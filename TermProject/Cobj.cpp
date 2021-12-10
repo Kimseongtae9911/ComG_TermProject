@@ -1,4 +1,12 @@
+#include "stdafx.h"
 #include "CObj.h"
+
+#include "CGameManager.h"
+#include "CKeyManager.h"
+#include "CRenderManager.h"
+#include "CSceneManager.h"
+#include "CShader.h"
+#include "CFrameManager.h"
 
 CObj::CObj()
 {

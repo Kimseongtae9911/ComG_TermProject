@@ -28,9 +28,9 @@ private:
 
 protected:
 	CMesh* m_Parent = nullptr;
-	glm::vec3 m_vec3PRotate; // �̵����� �����ϴ� ȸ��(����)
-	glm::vec3 m_vec3Translate;
-	glm::vec3 m_vec3Rotate; // �̵��Ŀ� �����ϴ� ȸ��(����)
+	glm::vec3 m_vec3PRotate{0.0, 0.0, 0.0};
+	glm::vec3 m_vec3Translate{ 0.0, 0.0, 0.0 };
+	glm::vec3 m_vec3Rotate{ 0.0, 0.0, 0.0 };
 	glm::vec3 m_vec3Scale{ 1.0, 1.0, 1.0 };
 
 private:
@@ -56,6 +56,7 @@ public:
 	glm::mat4 Get_Matrix();
 	glm::vec3& GetPos() { return m_vec3Translate; }
 	glm::vec3& GetScale() { return m_vec3Scale; }
+	glm::vec3& GetTrans() { return m_vec3Translate; }
 	GLvoid Move(glm::vec3 move) { m_vec3Translate += move; }
 	
 protected:

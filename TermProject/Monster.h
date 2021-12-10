@@ -1,6 +1,3 @@
-#pragma once
-#include "stdafx.h"
-#include "CMesh.h"
 #include "CObj.h"
 
 class Monster : public CObj

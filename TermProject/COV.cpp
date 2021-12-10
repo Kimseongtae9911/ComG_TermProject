@@ -1,4 +1,7 @@
+#include "stdafx.h"
 #include "CMainGame.h"
+#include "CKeyManager.h"
+#include "CFrameManager.h"
 
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);

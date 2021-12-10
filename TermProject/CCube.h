@@ -9,7 +9,7 @@ public:
 	
 public:
 	CCube* Initialize(string path);
-	//GLvoid Release();
+	GLvoid Release();
 
 private:
 	static CCube* m_prefab;

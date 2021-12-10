@@ -1,8 +1,11 @@
 #pragma once
-#include "CShader.h"
-#include "Manager.h"
 
-
+class CKeyManager;
+class CGameManager;
+class CShader;
+class CSceneManager;
+class CFrameManager;
+class CRenderManager;
 class CScene
 {
 public:

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CCube.h"
 
 CCube* CCube::m_prefab = nullptr;
@@ -33,10 +34,6 @@ CCube* CCube::Initialize(string path)
 	}
 }
 
-//GLvoid CCube::Release()
-//{
-//	m_vecVertex.clear();
-//	m_vecUVS.clear();
-//	m_vecNormal.clear();
-//	m_vecColor.clear();
-//}
+GLvoid CCube::Release()
+{
+}

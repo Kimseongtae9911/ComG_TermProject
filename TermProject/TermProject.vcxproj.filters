@@ -28,9 +28,6 @@
     <Filter Include="소스 파일\03 Manager\01 KeyManager">
       <UniqueIdentifier>{98e384fa-23d7-4d1f-8ce7-02d141798bc2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\03 Manager\02 SceneManager">
-      <UniqueIdentifier>{0219118f-eb52-400a-b8de-15e50d89cac8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\03 Manager\03 RenderManager">
       <UniqueIdentifier>{863815bc-32a5-45c4-b454-ffd8f670a56c}</UniqueIdentifier>
     </Filter>
@@ -75,6 +72,9 @@
     </Filter>
     <Filter Include="소스 파일\01 Obj\99 Camera">
       <UniqueIdentifier>{1debddf3-3a2f-4fdc-8e9f-22274e6e5649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03 Manager\02 SceneManager">
+      <UniqueIdentifier>{0219118f-eb52-400a-b8de-15e50d89cac8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

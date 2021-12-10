@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 constexpr DWORD KEY_UP = 0x00000001;
 constexpr DWORD KEY_DOWN = 0x00000002;
@@ -15,7 +14,7 @@ class CKeyManager
 {
 	DECLARE_SINGLETON(CKeyManager)
 
-public:
+private:
 	CKeyManager();
 	~CKeyManager();
 

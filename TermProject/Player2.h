@@ -1,8 +1,10 @@
 #pragma once
 #include "CObj.h"
-#include "CMesh.h"
+//#include "CMesh.h"
+//#include "CObject.h"
 
-class Player2 : public CObj
+class CMesh;
+class Player : public CObj
 {
 public:
 	Player2();

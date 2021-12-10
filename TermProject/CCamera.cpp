@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "CCamera.h"
+#include "CShader.h"
 
 CCamera::CCamera()
 {
@@ -6,6 +8,7 @@ CCamera::CCamera()
 
 CCamera::~CCamera()
 {
+	Release();
 }
 
 HRESULT CCamera::Initialize(glm::vec3 vEye, glm::vec3 vAt, glm::vec3 vUp)

@@ -1,8 +1,7 @@
 #pragma once
 #include "CObj.h"
-//#include "CMesh.h"
-class CMesh;
 
+class CMesh;
 class CObject : public CObj
 {
 public:

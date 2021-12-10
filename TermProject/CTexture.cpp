@@ -1,5 +1,8 @@
-﻿#define STB_IMAGE_IMPLEMENTATION
+﻿#include "stdafx.h"
 #include "CTexture.h"
+#include"CShader.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include"stb_image.h"
 
 CTexture::CTexture()
@@ -37,7 +40,6 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 	stbi_image_free(data);
 
 	//glActiveTexture(GL_TEXTURE0); //
-
 
 	return NOERROR;
 }

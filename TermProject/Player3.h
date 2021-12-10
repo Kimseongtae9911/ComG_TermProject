@@ -1,7 +1,7 @@
 #pragma once
 #include "CObj.h"
-
-
+//#include "CMesh.h"
+//#include "Player.h"
 class CMesh;
 class Player3 : public CObj
 {

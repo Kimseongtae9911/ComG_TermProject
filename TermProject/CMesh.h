@@ -1,5 +1,6 @@
-﻿#include "CTexture.h"
+﻿#pragma once
 
+class CTexture;
 class CMesh
 {
 public:

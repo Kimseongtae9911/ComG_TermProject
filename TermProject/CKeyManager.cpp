@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CKeyManager.h"
 
 IMPLEMENT_SINGLETON(CKeyManager)
@@ -52,11 +53,11 @@ bool CKeyManager::KeyDown(DWORD dwCurKey)
 
 	// m_dwKeyDown을 원복
 	// 전에 누른적 있고 현재 누르지 않았을 때
-	else if ((m_dwKeyDown & dwCurKey) && !(m_dwCurKey & dwCurKey))
-	{
-		m_dwKeyDown ^= dwCurKey;
-		return false;
-	}
+	//else if ((m_dwKeyDown & dwCurKey) && !(m_dwCurKey & dwCurKey))
+	//{
+	//	m_dwKeyDown ^= dwCurKey;
+	//	return false;
+	//}
 
 	return false;
 }

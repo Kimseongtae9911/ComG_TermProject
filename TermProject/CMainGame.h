@@ -1,7 +1,4 @@
 #pragma once
-#include "CKeyManager.h"
-#include"CFrameManager.h"
-
 
 class CMainGame
 {

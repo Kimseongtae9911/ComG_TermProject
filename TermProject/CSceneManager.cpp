@@ -1,8 +1,7 @@
+#include "stdafx.h"
 #include "CSceneManager.h"
 #include "CScene.h"
 #include "CStage1.h"
-
-
 
 IMPLEMENT_SINGLETON(CSceneManager)
 

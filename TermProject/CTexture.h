@@ -1,5 +1,4 @@
 #pragma once
-#include"CShader.h"
 
 class CTexture
 {
@@ -12,7 +11,6 @@ public:
 	const GLint Get_Height() { return m_iHeight; }
 	bool& Get_bAlpha() { return bAlpha; }
 
-
 public:
 	virtual HRESULT Initialize(string strTag, string strPath, bool bAlpha);
 	virtual GLvoid Render();
@@ -23,8 +21,6 @@ private:
 	GLint m_iHeight;
 	GLint m_iChannels;
 	bool bAlpha;
-
-
 
 private:
 	GLvoid Release();

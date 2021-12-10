@@ -18,39 +18,40 @@ Player3::~Player3()
 HRESULT Player3::Initialize()
 {
 	CObj::Initialize();
-	m_player = CMesh::Create("../Resource/test/test.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
+	m_player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	//m_player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	//m_player = CMesh::Create("../Resource/cube2.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-
+	
 	return NOERROR;
 }
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
+	cout << m_player->GetPos().x << endl;
+	cout << m_player->GetPos().y << endl;
+	cout << m_player->GetPos().z << endl;
 	if (!m_bView) { // 3DPlayer
-		if (m_pKeyMgr->KeyDown(KEY_LEFT) && !m_pKeyMgr->KeyDown(KEY_SPACE)) {
-			m_player->Move(glm::vec3(-5.0, 0.0, 0.0));
+		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
+			m_player->Move(glm::vec3(-0.1, 0.0, 0.0));
 		}
-		else if (m_pKeyMgr->KeyDown(KEY_RIGHT) && !m_pKeyMgr->KeyDown(KEY_SPACE)) {
-			m_player->Move(glm::vec3(5.0, 0.0, 0.0));
+		else if (m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
+			m_player->Move(glm::vec3(0.1, 0.0, 0.0));
 		}
-		else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyDown(KEY_LEFT) && !m_pKeyMgr->KeyDown(KEY_RIGHT)) {
-
+		else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
+			m_player->Move(glm::vec3(0.0, 0.0, -0.1));
+		}
+		else if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
+			m_player->Move(glm::vec3(0.0, 0.0, 0.1));
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
-
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
-
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
-
+			//interaction
 		}
 	}
-
+	
 	if (m_pKeyMgr->KeyDown(KEY_F)) {
 		m_bView = !m_bView;
 	}
+
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory
 		exit(0);

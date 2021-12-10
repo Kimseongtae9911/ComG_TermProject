@@ -2,7 +2,7 @@
 #include "CStage1.h"
 #include "CScene.h"
 #include "Player3.h"
-#include "Player.h"
+#include "Player2.h"
 #include "CObject.h"
 #include "CCamera.h"
 #include "CRenderManager.h"
@@ -20,9 +20,9 @@ CStage1::~CStage1()
 HRESULT CStage1::Initialize()
 {
 	CScene::Initialize();
-	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.f, 0.f, 30.f), glm::vec3(0.f, 0.0f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
+	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 0.f, 30.f), glm::vec3(0.f, 0.0f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
-	pObj = Player::Create();
+	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
 		return E_FAIL;
 	pObj = Player3::Create();

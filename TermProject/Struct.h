@@ -50,3 +50,13 @@ typedef struct tagSubMesh
 	vector<glm::vec4> color;
 	MATERIAL* material;
 }SUBMESH;
+
+typedef struct BoundingBox
+{
+	GLfloat left;
+	GLfloat right;
+	GLfloat top;
+	GLfloat down;
+	GLfloat front;
+	GLfloat back;
+}BB;

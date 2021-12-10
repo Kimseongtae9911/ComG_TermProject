@@ -15,7 +15,8 @@ public:
 	virtual GLvoid Render();
 
 private:
-	CMesh* m_player;
+	CMesh* m_Player;
+	BB m_Box;
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
@@ -23,5 +24,6 @@ private:
 
 public:
 	static Player3* Create();
+	BB Get_BB() { return m_Box; }
 };
 

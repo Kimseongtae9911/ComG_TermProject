@@ -16,13 +16,18 @@ public:
 	virtual GLvoid Render();
 
 private:
-	CMesh* m_player;
+	CMesh* m_Player;
+	BB m_Box;
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
-	//bool m_bView{ true };
+	bool m_bJump{ false };
+	int m_iJumpdir{ -1 };
+	GLfloat m_fJumpPos{ 0.f };
+	GLfloat m_fJumpStart{ 0.f };
 
 public:
 	static Player2* Create();
+	BB Get_BB() { return m_Box; }
 };
 

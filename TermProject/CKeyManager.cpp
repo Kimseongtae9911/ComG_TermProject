@@ -89,7 +89,7 @@ bool CKeyManager::KeyPressing(DWORD dwCurKey)
 {
 	if (m_dwCurKey & dwCurKey)
 	{
-		cout << "KeyDown true " << dwCurKey << endl;
+		//cout << "KeyDown true " << dwCurKey << endl;
 		return true;
 	}
 

@@ -51,7 +51,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 
 	if (!m_pGameMgr->Get_View())
 	{
-		m_pMonster->GetPos().y = 0.0f;
+		//m_pMonster->GetPos().y = 0.0f;
 		//if (LookPlayerAngle() >= iLookRotCount)
 		//{
 		//	++iLookRotCount;
@@ -66,9 +66,10 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		//	m_pMonster->GetRotate().y -= 5.5;
 
 		//}
-		if (LookPlayerAngle() >= m_pMonster->GetPos().y)
+		float f = LookPlayerAngle();
+		if (f >= m_pMonster->GetRotate().y)
 		{
-			if (LookPlayerAngle() - m_pMonster->GetPos().y <= m_pMonster->GetPos().y + 360 - LookPlayerAngle())
+			if (f - m_pMonster->GetRotate().y <= m_pMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
 			{
 				m_pMonster->GetRotate().y += 5.5;
 			}
@@ -79,7 +80,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		}
 		else
 		{
-			if (LookPlayerAngle() + 360 - m_pMonster->GetPos().y <= m_pMonster->GetPos().y - LookPlayerAngle())
+			if (f + 360 - m_pMonster->GetRotate().y <= m_pMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
 			{
 				m_pMonster->GetRotate().y += 5.5;
 			}
@@ -87,6 +88,14 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			{
 				m_pMonster->GetRotate().y -= 5.5;
 			}
+		}
+		if (m_pMonster->GetRotate().y >= 360)
+		{
+			m_pMonster->GetRotate().y -= 360;
+		}
+		else if (m_pMonster->GetRotate().y <= 0)
+		{
+			m_pMonster->GetRotate().y += 360;
 		}
 		//if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
 		//	m_pMonster->GetPos().x += 0.02;
@@ -125,28 +134,28 @@ float Monster::LookPlayerAngle()
 	{
 		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x) // 1
 		{
-			//cout << dAngle << endl;
-			return dAngle;
+			//cout << 180 - dAngle << endl;
+			return 180 - dAngle;
 		}
 			
 		else //   4
 		{
-			//cout << 360 + dAngle << endl;
-			return 360 + dAngle;
+			//cout << 180 - dAngle << endl;
+			return 180 - dAngle;
 		}
 	}
 	else
 	{
 		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x) //2
 		{
-			//cout << 180 + dAngle << endl;
-			return 180 + dAngle;
+			//cout << -dAngle << endl;
+			return -dAngle;
 		}
 			
 		else // 3
 		{
-			//cout << 180 + dAngle << endl;
-			return 180 + dAngle;
+			//cout << 360 - dAngle << endl;
+			return 360 - dAngle;
 		}
 			
 	}

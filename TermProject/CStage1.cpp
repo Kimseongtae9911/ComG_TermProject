@@ -83,6 +83,7 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 		//fRotCount += 90.f / 80.f;
 		fRotCount = 90.f;
 		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3 (fRotCount, 0, 0));
+		//dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Get_Rotate()->
 	}
 	else if (m_pGameMgr->Get_View())
 	{

@@ -24,6 +24,7 @@ HRESULT Player3::Initialize()
 	m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
 	m_Player->GetTrans() = glm::vec3(12.0, 0.0, -0.75);
 	
+	
 	return NOERROR;
 }
 

@@ -76,6 +76,12 @@
     <Filter Include="소스 파일\03 Manager\02 SceneManager">
       <UniqueIdentifier>{0219118f-eb52-400a-b8de-15e50d89cac8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01 Obj\01 Monster\00 FireMonster">
+      <UniqueIdentifier>{d425ad49-768e-46d1-bf99-292c8151e64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01 Obj\01 Monster\01 Boss">
+      <UniqueIdentifier>{cb73a01d-5e88-425a-a2f7-386094dbf98e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -114,9 +120,6 @@
     <ClCompile Include="CTexture.cpp">
       <Filter>소스 파일\04 Element\01 Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>소스 파일\01 Obj\01 Monster</Filter>
-    </ClCompile>
     <ClCompile Include="CFrameManager.cpp">
       <Filter>소스 파일\03 Manager\05 FrameManager</Filter>
     </ClCompile>
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Player2.cpp">
       <Filter>소스 파일\01 Obj\00 Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +194,6 @@
     <ClInclude Include="stb_image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>소스 파일\01 Obj\01 Monster</Filter>
-    </ClInclude>
     <ClInclude Include="CFrameManager.h">
       <Filter>소스 파일\03 Manager\05 FrameManager</Filter>
     </ClInclude>
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Player2.h">
       <Filter>소스 파일\01 Obj\00 Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

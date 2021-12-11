@@ -32,7 +32,7 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 	if (!bMovingCamera && m_pGameMgr->Get_View() == false) // 직각->원근
 	{
 		RotateForObj(glm::vec3(1.0f, 0, 0), 0.5f);
-		if (iCount >= 60)
+		if (iCount >= 80)
 		{
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
@@ -43,7 +43,7 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 	else if (bMovingCamera && m_pGameMgr->Get_View()) //원근 -> 직각
 	{
 		RotateForObj(glm::vec3(1.0f, 0, 0), -0.5f);
-		if (iCount >= 60)
+		if (iCount >= 80)
 		{
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;

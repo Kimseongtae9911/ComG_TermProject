@@ -20,6 +20,7 @@ HRESULT Player2::Initialize()
 {
 	CObj::Initialize();
 	m_Player = CMesh::Create("../Resource/Player2D/Player2D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
+	//m_Player = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, 0.0);
 	return NOERROR;

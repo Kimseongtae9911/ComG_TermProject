@@ -19,6 +19,9 @@ public:
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
+public:
+	GLvoid RotateX(float fAngle) { m_vec3Rotate.x -= fAngle; };
+
 private:
 	glm::vec3 m_vEye = glm::vec3(0.f, 1.f, 1.f);
 	glm::vec3 m_vAt = glm::vec3(0.f, 0.f, 0.f);

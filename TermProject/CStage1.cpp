@@ -63,7 +63,7 @@ HRESULT CStage1::Initialize()
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/Key/Key.obj", glm::vec3(0.0f + 5.0f, 6.5f + 5.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create(glm::vec3(-15 + 1.0f * 15, 1.0f * 1 - 0.5f, 0.0f));

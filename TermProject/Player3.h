@@ -15,6 +15,9 @@ public:
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
+public:
+	CMesh* Get_pMesh() { return m_Player; };
+
 private:
 	CMesh* m_Player;
 	BB m_Box;

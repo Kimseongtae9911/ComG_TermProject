@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Monster.h"
 #include "CMesh.h"
+#include "Player3.h"
 #include "CKeyManager.h"
 #include "CRenderManager.h"
 #include "CShader.h"
@@ -56,6 +57,13 @@ GLvoid Monster::Render()
 	m_pGameMgr->Render_Camera();
 	m_pMonster->Render();
 	return GLvoid();
+}
+
+float Monster::LookPlayerAngle()
+{
+	glm::vec3 vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
+
+	return 0.0f;
 }
 
 Monster* Monster::Create(glm::vec3 vPos)

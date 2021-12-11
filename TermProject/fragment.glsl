@@ -11,7 +11,7 @@ uniform vec3 viewPos;
 
 uniform vec3 lightColor = vec3(1.f); 
 uniform int light_on = 1;
-uniform float light_intensity = 0.3;
+uniform float light_intensity = 1.0;
 uniform sampler2D outTexture;
 
 void main()
@@ -26,7 +26,7 @@ void main()
 	if(light_on == 0) {diffuseLight = 0;}
 	vec3 diffuse = diffuseLight * lightColor;
 
-	float specularStrength = 1.0;
+	float specularStrength = 0.0;
 	int shininess = 128;
 	vec3 viewDir = normalize(viewPos - FragPos);
 	vec3 reflectDir = reflect(-lightDir, normalVector);

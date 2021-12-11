@@ -53,10 +53,10 @@ typedef struct tagSubMesh
 
 typedef struct BoundingBox
 {
-	GLfloat left;
-	GLfloat right;
-	GLfloat top;
-	GLfloat down;
-	GLfloat front;
-	GLfloat back;
+	GLfloat left; //x
+	GLfloat right; //x
+	GLfloat top; //y -->2D
+	GLfloat bottom; //y -->2D
+	GLfloat front; //z 
+	GLfloat back; //z
 }BB;

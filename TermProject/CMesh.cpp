@@ -323,16 +323,13 @@ glm::mat4 CMesh::Get_Matrix()
 	if (m_Parent) {
 		result = m_Parent->Get_Matrix() * result;
 	}
-
 	result = glm::rotate(result, glm::radians(m_vec3PRotate.x), glm::vec3(1.0, 0.0, 0.0));
 	result = glm::rotate(result, glm::radians(m_vec3PRotate.y), glm::vec3(0.0, 1.0, 0.0));
 	result = glm::rotate(result, glm::radians(m_vec3PRotate.z), glm::vec3(0.0, 0.0, 1.0));
 
 	result = glm::translate(result, m_vec3Translate);
 
-	result = glm::translate(result, -m_vec3Translate);
 	result = glm::rotate(result, glm::radians(m_vec3Rotate.x), glm::vec3(1.0, 0.0, 0.0));
-	result = glm::translate(result, m_vec3Translate);
 	result = glm::rotate(result, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));
 	result = glm::rotate(result, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
 	

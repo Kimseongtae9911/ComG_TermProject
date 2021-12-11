@@ -31,8 +31,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
 	{
 		++iRotateCount;
-		//m_pMonster->GetRotate().x += 90.f / 80.f;
-		m_pMonster->GetRotate().x += 0.7f;
+		m_pMonster->GetRotate().x += 90.f / 80.f;
 		if (iRotateCount >= 80)
 		{
 			iRotateCount = 0;
@@ -42,8 +41,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	else if (bMovingRotate && m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
-		//m_pMonster->GetRotate().x -= 90.f / 80.f;
-		m_pMonster->GetRotate().x -= 0.7f;
+		m_pMonster->GetRotate().x -= 90.f / 80.f;
 		if (iRotateCount >= 80)
 		{
 			iRotateCount = 0;
@@ -54,29 +52,38 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 
 	if (!m_pGameMgr->Get_View())
 	{
+		m_pMonster->GetPos().y = 0.0f;
 		if (LookPlayerAngle() != 0.f)
 		{
-			if (LookPlayerAngle() >= iLookRotCount)
+			if (LookPlayerAngle() / 5.5 >= iLookRotCount)
 			{
 				++iLookRotCount;
-				m_pMonster->GetRotate().y += 1.5;
+
+				m_pMonster->GetRotate().y += 5.5;
+
 			}
 			else
 			{
 				--iLookRotCount;
-				m_pMonster->GetRotate().y -= 1.5;
+				
+				m_pMonster->GetRotate().y -= 5.5;
+				
 			}
 		}
 		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
 			m_pMonster->GetPos().x += 0.02;
 		else
 			m_pMonster->GetPos().x -= 0.02;
-		if (vecPlayer3dPos.z - m_pMonster->GetPos().z >= 0)
+		if (vecPlayer3dPos.z - m_pMonster->GetPos().z >= 0) {
 			m_pMonster->GetPos().z += 0.02;
-		else
+		}
+		else {
 			m_pMonster->GetPos().z -= 0.02;
+		}
 	}
-
+	else {
+		m_pMonster->GetPos().y = m_pMonster->GetPos().z;
+	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

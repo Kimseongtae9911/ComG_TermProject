@@ -67,7 +67,7 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create(glm::vec3(-15 + 1.0f * 15, 1.0f * 1 - 0.5f, 0.0f));
+	pObj = Monster::Create(glm::vec3(-15 + 1.0f * 15, 0.1f, -0.25f));
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER, pObj)))
 		return E_FAIL;
 
@@ -80,28 +80,15 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 
 	if (!bMove && m_pGameMgr->Get_View() == false)
 	{
-		++iRotCount;
-		//m_pMonster->GetRotate().x += 90.f / 80.f;
-		fRotCount += 90.f / 80.f;
-		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3 (fRotCount,0,0));
-		//dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Get_Rotate();
-		if (fRotCount >= 90)
-		{
-			iRotCount = 0;
-			bMove = !bMove;
-		}
+		//fRotCount += 90.f / 80.f;
+		fRotCount = 90.f;
+		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3 (fRotCount, 0, 0));
 	}
-	else if (bMove && m_pGameMgr->Get_View())
+	else if (m_pGameMgr->Get_View())
 	{
 		++iRotCount;
-		//m_pMonster->GetRotate().x -= 90.f / 80.f;
 		fRotCount -= 90.f / 80.f;
-		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(fRotCount, 0, 0));
-		if (fRotCount <= 0)
-		{
-			iRotCount = 0;
-			bMove = !bMove;
-		}
+		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 	}
 	
 	return GLint();

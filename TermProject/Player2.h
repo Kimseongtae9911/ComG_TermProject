@@ -4,6 +4,7 @@
 //#include "CObject.h"
 
 class CMesh;
+class CCamera;
 class Player2 : public CObj
 {
 public:

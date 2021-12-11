@@ -52,6 +52,7 @@ private:
 	glm::mat4 Get_Perspective();
 
 public:
+	bool Get_Move() { return bMovingCamera; }
 	static CCamera* Create(glm::vec3 vEye, glm::vec3 vAt, glm::vec3 vUp);
 };
 

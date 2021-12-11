@@ -3,6 +3,7 @@
 //#include "CMesh.h"
 //#include "Player.h"
 class CMesh;
+class CCamera;
 class Player3 : public CObj
 {
 public:
@@ -20,7 +21,6 @@ private:
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
-	//bool m_bView{ false };
 
 public:
 	static Player3* Create();

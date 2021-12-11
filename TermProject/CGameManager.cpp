@@ -61,11 +61,10 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			{
 				BB OBJ_BB = (*iter_begin)->Get_BB();
 
-				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top) {
-
-				}
+				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top);
 				else {
 					cout << "Collide" << endl;
+					//Collide with Monster --> 
 				}
 				++iter_begin;
 			}
@@ -81,9 +80,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			{
 				BB OBJ_BB = (*iter_begin)->Get_BB();
 
-				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top) {
-
-				}
+				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top);
 				else {
 					cout << "Collide" << endl;
 				}

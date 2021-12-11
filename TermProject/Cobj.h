@@ -5,6 +5,7 @@ class CKeyManager;
 class CGameManager;
 class CSceneManager;
 class CShader;
+
 class CObj
 {
 public:
@@ -15,6 +16,7 @@ public:
 	virtual HRESULT Initialize();
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
+	virtual BB& Get_BB() { return m_Box; }
 
 protected:
 	CRenderManager* m_pRender = nullptr;
@@ -22,8 +24,10 @@ protected:
 	CGameManager* m_pGameMgr = nullptr;
 	CSceneManager* m_pSceneMgr = nullptr;
 	CShader* m_pShaderLoader = nullptr;
+	BB m_Box;
 
 protected:
+	
 	GLvoid Release();
 };
 

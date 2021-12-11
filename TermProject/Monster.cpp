@@ -22,6 +22,7 @@ HRESULT Monster::Initialize(glm::vec3 vPos)
 	m_pMonster->GetScale() = glm::vec3(0.03, 0.03, 0.03);
 	//m_pMonster->GetParent() = 
 	m_pMonster->GetPos() = vPos;
+	LookPlayerAngle();
 	return NOERROR;
 }
 
@@ -49,6 +50,33 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
+	LookPlayerAngle();
+
+	if (!m_pGameMgr->Get_View())
+	{
+		if (LookPlayerAngle() != 0.f)
+		{
+			if (LookPlayerAngle() >= iLookRotCount)
+			{
+				++iLookRotCount;
+				m_pMonster->GetRotate().y += 1.5;
+			}
+			else
+			{
+				--iLookRotCount;
+				m_pMonster->GetRotate().y -= 1.5;
+			}
+		}
+		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
+			m_pMonster->GetPos().x += 0.02;
+		else
+			m_pMonster->GetPos().x -= 0.02;
+		if (vecPlayer3dPos.z - m_pMonster->GetPos().z >= 0)
+			m_pMonster->GetPos().z += 0.02;
+		else
+			m_pMonster->GetPos().z -= 0.02;
+	}
+
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
@@ -63,9 +91,27 @@ GLvoid Monster::Render()
 
 float Monster::LookPlayerAngle()
 {
-	glm::vec3 vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
-
-	return 0.0f;
+	vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
+	//fRatio = abs(vecPlayer3dPos.x - m_pMonster->GetPos().x) / abs(vecPlayer3dPos.z - m_pMonster->GetPos().z);
+	cout << fRatio << endl;
+	double dAngle = atan((vecPlayer3dPos.x - m_pMonster->GetPos().x) / (vecPlayer3dPos.z - m_pMonster->GetPos().z)) * 180/ PI;
+	//cout << dAngle << endl;
+	if (m_pMonster->GetPos().z <= vecPlayer3dPos.z)
+	{
+		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x)
+			return dAngle;
+		else
+			return dAngle;
+	}
+	else
+	{
+		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x)
+			return 180 + dAngle;
+		else
+			return -180 + dAngle;
+	}
+	cout << dAngle << endl;
+	//return 0;
 }
 
 Monster* Monster::Create(glm::vec3 vPos)

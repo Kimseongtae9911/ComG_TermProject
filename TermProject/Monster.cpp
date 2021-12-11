@@ -100,20 +100,33 @@ float Monster::LookPlayerAngle()
 	//cout << dAngle << endl;
 	if (m_pMonster->GetPos().z <= vecPlayer3dPos.z)
 	{
-		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x)
+		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x) // 1
+		{
+			//cout << dAngle << endl;
 			return dAngle;
-		else
-			return dAngle;
+		}
+			
+		else //   4
+		{
+			//cout << 360 + dAngle << endl;
+			return 360 + dAngle;
+		}
 	}
 	else
 	{
-		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x)
+		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x) //2
+		{
+			//cout << 180 + dAngle << endl;
 			return 180 + dAngle;
-		else
-			return -180 + dAngle;
+		}
+			
+		else // 3
+		{
+			//cout << 180 + dAngle << endl;
+			return 180 + dAngle;
+		}
+			
 	}
-	cout << dAngle << endl;
-	//return 0;
 }
 
 Monster* Monster::Create(glm::vec3 vPos)

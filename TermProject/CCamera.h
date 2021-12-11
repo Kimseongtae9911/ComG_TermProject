@@ -24,6 +24,7 @@ private:
 	glm::vec3 m_vAt = glm::vec3(0.f, 0.f, 0.f);
 	glm::vec3 m_vUp = glm::vec3(0.f, 1.f, 0.f);
 	glm::vec3 m_vDir = glm::vec3(0.f, 0.f, 0.f);
+	glm::vec3 m_vLightPos = glm::vec3(10.0f, 6.5f, 0.0f);
 	glm::vec3 m_vLightDir = glm::vec3(0.f, 0.f, 0.f);
 	glm::vec3 m_vec3PRotate{ 0.0, 0.0, 0.0 };
 	glm::vec3 m_vec3Translate{ 0.0, 0.0, 0.0 };
@@ -51,6 +52,7 @@ private:
 	glm::mat4 Get_Perspective();
 
 public:
+	bool Get_Move() { return bMovingCamera; }
 	static CCamera* Create(glm::vec3 vEye, glm::vec3 vAt, glm::vec3 vUp);
 };
 

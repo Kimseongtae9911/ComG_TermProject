@@ -5,6 +5,7 @@
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
+#include "CCamera.h"
 
 Player2::Player2()
 {
@@ -21,7 +22,7 @@ HRESULT Player2::Initialize()
 	m_Player = CMesh::Create("../Resource/Player2D/Player2D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_Player = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
-	m_Player->Move(glm::vec3(-12.0, 0.0, 0.0));
+	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, 0.0);
 	return NOERROR;
 }
 
@@ -63,12 +64,6 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			}
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
-
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_LEFT)) {
-			cout << "xxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
-		}
-		else if (m_pKeyMgr->KeyCombined(KEY_SPACE, KEY_RIGHT)) {
 
 		}
 	}

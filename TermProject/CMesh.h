@@ -57,6 +57,7 @@ public:
 	glm::vec3& GetPos() { return m_vec3Translate; }
 	glm::vec3& GetScale() { return m_vec3Scale; }
 	glm::vec3& GetTrans() { return m_vec3Translate; }
+	glm::vec3& GetRotate() { return m_vec3Rotate; }
 	vector<SUBMESH*>& GetSMESH() { return m_vecSubMesh; }
 	GLvoid Move(glm::vec3 move) { m_vec3Translate += move; }
 	GLvoid Rotate(glm::vec3 vecAngle) { m_vec3PRotate += vecAngle; }

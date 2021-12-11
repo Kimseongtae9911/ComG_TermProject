@@ -14,6 +14,9 @@ public:
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
+public:
+	float LookPlayerAngle();
+
 private:
 	CMesh* m_pMonster;
 	GLfloat m_fAlpha{ 1.0f };

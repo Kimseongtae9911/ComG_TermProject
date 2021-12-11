@@ -50,35 +50,67 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	LookPlayerAngle();
 
 	if (!m_pGameMgr->Get_View())
-	{		
-		if (LookPlayerAngle() != 0.f)
+	{
+		//m_pMonster->GetPos().y = 0.0f;
+		//if (LookPlayerAngle() >= iLookRotCount)
+		//{
+		//	++iLookRotCount;
+
+		//	m_pMonster->GetRotate().y += 5.5;
+
+		//}
+		//else
+		//{
+		//	--iLookRotCount;
+
+		//	m_pMonster->GetRotate().y -= 5.5;
+
+		//}
+		float f = LookPlayerAngle();
+		if (f >= m_pMonster->GetRotate().y)
 		{
-			if (LookPlayerAngle() / 5.5 >= iLookRotCount)
+			if (f - m_pMonster->GetRotate().y <= m_pMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
 			{
-				++iLookRotCount;
-
 				m_pMonster->GetRotate().y += 5.5;
-
 			}
 			else
 			{
-				--iLookRotCount;
-				
 				m_pMonster->GetRotate().y -= 5.5;
-				
 			}
 		}
-		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
-			m_pMonster->GetPos().x += 0.02;
 		else
-			m_pMonster->GetPos().x -= 0.02;
-		if (vecPlayer3dPos.z - m_pMonster->GetPos().z >= 0) {
-			m_pMonster->GetPos().z += 0.02;
+		{
+			if (f + 360 - m_pMonster->GetRotate().y <= m_pMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
+			{
+				m_pMonster->GetRotate().y += 5.5;
+			}
+			else
+			{
+				m_pMonster->GetRotate().y -= 5.5;
+			}
 		}
-		else {
-			m_pMonster->GetPos().z -= 0.02;
+		if (m_pMonster->GetRotate().y >= 360)
+		{
+			m_pMonster->GetRotate().y -= 360;
+		}
+		else if (m_pMonster->GetRotate().y <= 0)
+		{
+			m_pMonster->GetRotate().y += 360;
+		}
+		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
+			m_pMonster->GetPos().x += 0.04;
+		else
+			m_pMonster->GetPos().x -= 0.04;
+		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
+		{
+			m_pMonster->GetPos().y += 0.04;
+		}
+		else 
+		{
+			m_pMonster->GetPos().y -= 0.04;
 		}
 	}
+
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
@@ -96,34 +128,34 @@ float Monster::LookPlayerAngle()
 	vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
 	//fRatio = abs(vecPlayer3dPos.x - m_pMonster->GetPos().x) / abs(vecPlayer3dPos.z - m_pMonster->GetPos().z);
 	//cout << fRatio << endl;
-	double dAngle = atan((vecPlayer3dPos.x - m_pMonster->GetPos().x) / (vecPlayer3dPos.z - m_pMonster->GetPos().z)) * 180/ PI;
+	double dAngle = atan((vecPlayer3dPos.x - m_pMonster->GetPos().x) / (vecPlayer3dPos.y - m_pMonster->GetPos().y)) * 180/ PI;
 	//cout << dAngle << endl;
-	if (m_pMonster->GetPos().z <= vecPlayer3dPos.z)
+	if (m_pMonster->GetPos().y <= vecPlayer3dPos.y)
 	{
 		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x) // 1
 		{
-			//cout << dAngle << endl;
-			return dAngle;
+			//cout << 180 - dAngle << endl;
+			return 180 - dAngle;
 		}
 			
 		else //   4
 		{
-			//cout << 360 + dAngle << endl;
-			return 360 + dAngle;
+			//cout << 180 - dAngle << endl;
+			return 180 - dAngle;
 		}
 	}
 	else
 	{
 		if (m_pMonster->GetPos().x <= vecPlayer3dPos.x) //2
 		{
-			//cout << 180 + dAngle << endl;
-			return 180 + dAngle;
+			//cout << -dAngle << endl;
+			return -dAngle;
 		}
 			
 		else // 3
 		{
-			//cout << 180 + dAngle << endl;
-			return 180 + dAngle;
+			//cout << 360 - dAngle << endl;
+			return 360 - dAngle;
 		}
 			
 	}

@@ -15,7 +15,7 @@ public:
 
 public:
 	CMesh* Get_Rotate() { return m_pObject; };
-	GLvoid Set_Rotate(glm::vec3 vec)/* { m_pObject->GetRotate() = vec; }*/;
+	GLvoid Set_Rotate(glm::vec3 vec) /*{ m_pObject->GetRotate() = vec; }*/;
 
 private:
 	CMesh* m_pObject;

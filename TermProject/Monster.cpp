@@ -29,7 +29,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
 	{
 		++iRotateCount;
-		m_pMonster->GetRotate().x += 90.f / 80.f;
+		//m_pMonster->GetRotate().x += 90.f / 80.f;
+		m_pMonster->GetRotate().x += 0.7f;
 		if (iRotateCount >= 80)
 		{
 			iRotateCount = 0;
@@ -39,7 +40,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	else if (bMovingRotate && m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
-		m_pMonster->GetRotate().x -= 90.f / 80.f;
+		//m_pMonster->GetRotate().x -= 90.f / 80.f;
+		m_pMonster->GetRotate().x -= 0.7f;
 		if (iRotateCount >= 80)
 		{
 			iRotateCount = 0;

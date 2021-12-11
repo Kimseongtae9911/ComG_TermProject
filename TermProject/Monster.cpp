@@ -97,18 +97,18 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		{
 			m_pMonster->GetRotate().y += 360;
 		}
-		//if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
-		//	m_pMonster->GetPos().x += 0.02;
-		//else
-		//	m_pMonster->GetPos().x -= 0.02;
-		//if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
-		//{
-		//	m_pMonster->GetPos().y += 0.02;
-		//}
-		//else 
-		//{
-		//	m_pMonster->GetPos().y -= 0.02;
-		//}
+		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
+			m_pMonster->GetPos().x += 0.04;
+		else
+			m_pMonster->GetPos().x -= 0.04;
+		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
+		{
+			m_pMonster->GetPos().y += 0.04;
+		}
+		else 
+		{
+			m_pMonster->GetPos().y -= 0.04;
+		}
 	}
 
 	m_pRender->Add_RenderObj(REDER_NONAL, this);

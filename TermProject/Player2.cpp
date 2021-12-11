@@ -38,16 +38,14 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 				Player2::m_bJump = true;
 				Player2::m_iJumpdir = 1;
 				Player2::m_fJumpStart = m_Player->GetPos().y;
-			}
-			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+			}			
 		}
-		if (m_pKeyMgr->KeyCombined(KEY_LEFT, KEY_SPACE)) {
+		else if (m_pKeyMgr->KeyCombined(KEY_LEFT, KEY_SPACE)) {
 			if (!Player2::m_bJump) {
 				Player2::m_bJump = true;
 				Player2::m_iJumpdir = 1;
 				Player2::m_fJumpStart = m_Player->GetPos().y;
-			}
-			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
+			}			
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));

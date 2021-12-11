@@ -37,12 +37,32 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 			}
 		}
 		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
-			m_Player->GetRotate() = glm::vec3(90.0f, -90.0f, 0.0f);
-			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
+			if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
+				m_Player->GetRotate() = glm::vec3(90.0f, -45.0f, 0.0f);
+				m_Player->Move(glm::vec3(-0.07, 0.0, 0.07));
+			}
+			else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
+				m_Player->GetRotate() = glm::vec3(90.0f, -135.0f, 0.0f);
+				m_Player->Move(glm::vec3(-0.07, 0.0, -0.07));
+			}
+			else {
+				m_Player->GetRotate() = glm::vec3(90.0f, -90.0f, 0.0f);
+				m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
+			}
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
-			m_Player->GetRotate() = glm::vec3(90.0f, 90.0f, 0.0f);
-			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+			if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
+				m_Player->GetRotate() = glm::vec3(90.0f, 45.0f, 0.0f);
+				m_Player->Move(glm::vec3(0.07, 0.0, 0.07));
+			}
+			else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
+				m_Player->GetRotate() = glm::vec3(90.0f, 135.0f, 0.0f);
+				m_Player->Move(glm::vec3(0.07, 0.0, -0.07));
+			}
+			else {
+				m_Player->GetRotate() = glm::vec3(90.0f, 90.0f, 0.0f);
+				m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+			}
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, 180.0f, 0.0f);

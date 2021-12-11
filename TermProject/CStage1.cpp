@@ -3,6 +3,7 @@
 #include "CScene.h"
 #include "Player3.h"
 #include "Player2.h"
+#include "Monster.h"
 #include "CObject.h"
 #include "CCamera.h"
 #include "CRenderManager.h"
@@ -50,7 +51,7 @@ HRESULT CStage1::Initialize()
 
 		}
 	}
-	// �ⱸ
+	// 
 	pObj = CObject::Create("../Resource/MapCube/Cube.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
@@ -59,6 +60,14 @@ HRESULT CStage1::Initialize()
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/Cube.obj", glm::vec3(-15 + 1.0f * 26, 1.0f * 10 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+		return E_FAIL;
+
+	pObj = CObject::Create("../Resource/Box/Box1.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 7 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+		return E_FAIL;
+
+	pObj = Monster::Create(glm::vec3(-15 + 1.0f * 15, 1.0f * 1 - 0.5f, 0.0f));
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER, pObj)))
 		return E_FAIL;
 
 	return NOERROR;

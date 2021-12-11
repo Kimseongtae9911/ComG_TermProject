@@ -341,6 +341,7 @@ glm::mat4 CMesh::Get_Matrix()
 	return result;
 }
 
+
 GLvoid CMesh::Release()
 {
 	m_vecVertices.clear();

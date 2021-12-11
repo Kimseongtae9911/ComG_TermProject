@@ -1,0 +1,8 @@
+newmtl KN_Cardboard
+Ka 0.5647059 0.5647059 0.5647059
+Kd 0.5647059 0.5647059 0.5647059
+d 1
+Tr 1
+map_Ka KN_Cardboard.png
+map_Kd KN_Cardboard.png
+map_d KN_Cardboard.png

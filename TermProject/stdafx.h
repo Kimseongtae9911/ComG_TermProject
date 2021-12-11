@@ -25,6 +25,7 @@ using namespace std;
 #define WINCX 1280
 #define WINCY 640
 #define MAX_VKEY 0xff
+#define PI 3.141592658979f
 
 template <typename T>
 void SafeDelete(T& ptr)
@@ -76,6 +77,8 @@ private:									\
 #define IMPLEMENT_SINGLETON(ClassName)		\
 ClassName* ClassName::m_pInstance = nullptr;
 
+
+static float ToRadian(float degree) { return degree * PI / 180.f; }
 
 // Include
 #include "Enum.h"

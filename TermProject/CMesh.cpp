@@ -330,10 +330,11 @@ glm::mat4 CMesh::Get_Matrix()
 
 	result = glm::translate(result, m_vec3Translate);
 
+	result = glm::translate(result, -m_vec3Translate);
 	result = glm::rotate(result, glm::radians(m_vec3Rotate.x), glm::vec3(1.0, 0.0, 0.0));
 	result = glm::rotate(result, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));
 	result = glm::rotate(result, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
-
+	result = glm::translate(result, m_vec3Translate);
 
 	result = glm::scale(result, m_vec3Scale);
 	//result = glm::mat4(1.0f);

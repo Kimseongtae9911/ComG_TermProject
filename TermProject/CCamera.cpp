@@ -37,8 +37,6 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
 			cout << "Ortho" << endl;
-			cout << m_vEye.x << ", " << m_vEye.y << ", " << m_vEye.z << endl;
-			cout << m_vAt.x << ", " << m_vAt.y << ", " << m_vAt.z << endl;
 		}
 		++iCount;
 	}
@@ -49,8 +47,6 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 		{
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
-			cout << m_vEye.x << ", " << m_vEye.y << ", " << m_vEye.z << endl;
-			cout << m_vAt.x << ", " << m_vAt.y << ", " << m_vAt.z << endl;
 		}
 		++iCount;
 	}
@@ -64,6 +60,9 @@ GLvoid CCamera::Render()
 	m_matView = lookAt(m_vEye, m_vAt, m_vUp);
 	int viewLoc = glGetUniformLocation(program, "viewTransform");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_matView));
+
+	int lightLoc = glGetUniformLocation(program, "lightPos");
+	glUniform3fv(lightLoc, 1, value_ptr(m_vLightPos));
 
 	if (m_pGameMgr->Get_View() == true && !bMovingCamera)
 	{

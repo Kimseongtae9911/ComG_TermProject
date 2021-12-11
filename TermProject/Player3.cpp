@@ -22,7 +22,7 @@ HRESULT Player3::Initialize()
 	m_Player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
-	m_Player->GetTrans() = glm::vec3(12.0, 0.0, -0.75);
+	m_Player->GetTrans() = glm::vec3(12.0, 1.0, -0.25);
 	
 	
 	return NOERROR;
@@ -40,11 +40,11 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
 			if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, -45.0f, 0.0f);
-				m_Player->Move(glm::vec3(-0.07, 0.0, 0.07));
+				m_Player->Move(glm::vec3(-0.07, -0.07, 0.0));
 			}
 			else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, -135.0f, 0.0f);
-				m_Player->Move(glm::vec3(-0.07, -0.07, 0.0));
+				m_Player->Move(glm::vec3(-0.07, 0.07, 0.0));
 			}
 			else {
 				m_Player->GetRotate() = glm::vec3(90.0f, -90.0f, 0.0f);
@@ -54,11 +54,11 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		else if (m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
 			if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, 45.0f, 0.0f);
-				m_Player->Move(glm::vec3(0.07, 0.0, 0.07));
+				m_Player->Move(glm::vec3(0.07, -0.07, 0.0));
 			}
 			else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, 135.0f, 0.0f);
-				m_Player->Move(glm::vec3(0.07, 0.0, -0.07));
+				m_Player->Move(glm::vec3(0.07, 0.07, 0.0));
 			}
 			else {
 				m_Player->GetRotate() = glm::vec3(90.0f, 90.0f, 0.0f);
@@ -67,11 +67,11 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, 180.0f, 0.0f);
-			m_Player->Move(glm::vec3(0.0, -0.1, 0.0));
+			m_Player->Move(glm::vec3(0.0, 0.1, 0.0));
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
-			m_Player->Move(glm::vec3(0.0, 0.1, 0.0));
+			m_Player->Move(glm::vec3(0.0, -0.1, 0.0));
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
 			//interaction

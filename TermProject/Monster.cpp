@@ -19,8 +19,7 @@ HRESULT Monster::Initialize(glm::vec3 vPos)
 {
 	CObj::Initialize();
 	m_pMonster = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	m_pMonster->GetScale() = glm::vec3(0.03, 0.03, 0.03);
-	//m_pMonster->GetParent() = 
+	m_pMonster->GetScale() = glm::vec3(0.03, 0.03, 0.03);	 
 	m_pMonster->GetPos() = vPos;
 	LookPlayerAngle();
 	return NOERROR;
@@ -51,8 +50,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	LookPlayerAngle();
 
 	if (!m_pGameMgr->Get_View())
-	{
-		m_pMonster->GetPos().y = 0.0f;
+	{		
 		if (LookPlayerAngle() != 0.f)
 		{
 			if (LookPlayerAngle() / 5.5 >= iLookRotCount)
@@ -80,9 +78,6 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else {
 			m_pMonster->GetPos().z -= 0.02;
 		}
-	}
-	else {
-		m_pMonster->GetPos().y = m_pMonster->GetPos().z;
 	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();

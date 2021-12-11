@@ -37,6 +37,8 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
 			cout << "Ortho" << endl;
+			cout << m_vEye.x << ", " << m_vEye.y << ", " << m_vEye.z << endl;
+			cout << m_vAt.x << ", " << m_vAt.y << ", " << m_vAt.z << endl;
 		}
 		++iCount;
 	}
@@ -47,6 +49,8 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 		{
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
+			cout << m_vEye.x << ", " << m_vEye.y << ", " << m_vEye.z << endl;
+			cout << m_vAt.x << ", " << m_vAt.y << ", " << m_vAt.z << endl;
 		}
 		++iCount;
 	}
@@ -84,7 +88,7 @@ glm::mat4 CCamera::Get_Ortho()
 	glm::mat4 proj = glm::mat4(1.0f);
 	proj = glm::ortho(-16.0f, 16.0f, -8.0f, 8.0f, 1.0f, m_fFar);
 	proj = glm::translate(proj, m_vec3Translate);
-	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
+	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));
 	return proj;
 }
 
@@ -93,32 +97,36 @@ glm::mat4 CCamera::Get_Perspective()
 	glm::mat4 proj = glm::perspective(glm::radians(m_fFovY), (float)WINCX / (float)WINCY, m_fNear, m_fFar);
 	proj = glm::translate(proj, m_vec3Translate);
 	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));
-	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.z), glm::vec3(0.0, 0.0, 1.0));
+	proj = glm::translate(proj, glm::vec3(-m_vEye));
+	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.x), glm::vec3(1.0, 0.0, 0.0));
+	proj = glm::translate(proj, glm::vec3(m_vEye));
 	return proj;
 }
 
 GLvoid CCamera::RotateForObj(glm::vec3 vAxis, float fAngle)
 {
-	glm::vec3 originAt = m_vAt;
-	glm::vec3 originEye = m_vEye;
+	//glm::vec3 originAt = m_vAt;
+	//glm::vec3 originEye = m_vEye;
 
-	glm::vec3 At = m_vAt;
-	glm::vec3 Eye = m_vEye;
+	//glm::vec3 At = m_vAt;
+	//glm::vec3 Eye = m_vEye;
 
-	glm::vec3 Dir = glm::vec3(0.f, 0.f, 0.f) - m_vAt;
-	Eye += Dir;
-	At += Dir;
+	//glm::vec3 Dir = glm::vec3(0.f, 0.f, 0.f) - m_vAt;
+	//Eye += Dir;
+	//At += Dir;
 
-	glm::vec4 temp = glm::vec4(Eye, 1.f);
-	glm::vec4 tmp = glm::vec4(At, 1.f);
-	glm::mat4 temp1 = rotate(glm::mat4(1.f), glm::radians(fAngle), vAxis);
-	temp = rotate(glm::mat4(1.f), glm::radians(fAngle), vAxis) * temp;
-	//tmp = rotate(mat4(1.f), radians(fAngle), vAxis) * tmp;
-	Eye = glm::vec3(temp);
-	//At = vec3(tmp);
+	//glm::vec4 temp = glm::vec4(Eye, 1.f);
+	//glm::vec4 tmp = glm::vec4(At, 1.f);
+	//glm::mat4 temp1 = rotate(glm::mat4(1.f), glm::radians(fAngle), vAxis);
+	//temp = rotate(glm::mat4(1.f), glm::radians(fAngle), vAxis) * temp;
+	////tmp = rotate(mat4(1.f), radians(fAngle), vAxis) * tmp;
+	//Eye = glm::vec3(temp);
+	////At = vec3(tmp);
 
-	m_vEye = Eye - Dir;
-	m_vAt = At - Dir;
+	//m_vEye = Eye - Dir;
+	//m_vAt = At - Dir;
+
+	m_vec3Rotate.x -= fAngle;
 
 	return GLvoid();
 }

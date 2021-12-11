@@ -17,6 +17,8 @@ public:
 private:
 	CMesh* m_pMonster;
 	GLfloat m_fAlpha{ 1.0f };
+	int iRotateCount = 0;
+	bool bMovingRotate = false;
 public:
 	static Monster* Create(glm::vec3 vPos);
 };

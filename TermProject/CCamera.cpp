@@ -33,24 +33,26 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 	{
 		RotateX(0.5f);
 		//RotateForObj(glm::vec3(1.0f, 0, 0), 0.5f);
+		++iCount;
 		if (iCount >= 80)
 		{
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
 			cout << "Ortho" << endl;
 		}
-		++iCount;
+		
 	}
 	else if (bMovingCamera && m_pGameMgr->Get_View()) //원근 -> 직각
 	{
 		RotateX(-0.5f);
 		//RotateForObj(glm::vec3(1.0f, 0, 0), -0.5f);
+		++iCount;
 		if (iCount >= 80)
 		{
 			bMovingCamera = !bMovingCamera;
 			iCount = 0;
 		}
-		++iCount;
+		
 	}
 	return GLint();
 }

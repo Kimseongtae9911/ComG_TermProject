@@ -25,7 +25,26 @@ HRESULT Monster::Initialize(glm::vec3 vPos)
 
 GLint Monster::Update(const GLfloat fTimeDelta)
 {
-
+	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
+	{
+		++iRotateCount;
+		m_pMonster->GetRotate().x += 90.f / 80.f;
+		if (iRotateCount >= 80)
+		{
+			iRotateCount = 0;
+			bMovingRotate = !bMovingRotate;
+		}
+	}
+	else if (bMovingRotate && m_pGameMgr->Get_View())
+	{
+		++iRotateCount;
+		m_pMonster->GetRotate().x -= 90.f / 80.f;
+		if (iRotateCount >= 80)
+		{
+			iRotateCount = 0;
+			bMovingRotate = !bMovingRotate;
+		}
+	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

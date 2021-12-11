@@ -29,7 +29,7 @@ HRESULT CTexture::Initialize(string strTag, string strPath, bool bAl)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	unsigned char* data = stbi_load(strPath.c_str(), &m_iWidth, &m_iHeight, &m_iChannels, 0);
-
+	stbi_set_flip_vertically_on_load(true);
 	if (data == nullptr)
 	{
 		cout << "ERROR : Failed to load texture" << endl;

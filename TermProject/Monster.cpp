@@ -93,7 +93,7 @@ float Monster::LookPlayerAngle()
 {
 	vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
 	//fRatio = abs(vecPlayer3dPos.x - m_pMonster->GetPos().x) / abs(vecPlayer3dPos.z - m_pMonster->GetPos().z);
-	cout << fRatio << endl;
+	//cout << fRatio << endl;
 	double dAngle = atan((vecPlayer3dPos.x - m_pMonster->GetPos().x) / (vecPlayer3dPos.z - m_pMonster->GetPos().z)) * 180/ PI;
 	//cout << dAngle << endl;
 	if (m_pMonster->GetPos().z <= vecPlayer3dPos.z)

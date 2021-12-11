@@ -62,7 +62,8 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 
-	pObj = CObject::Create("../Resource/Key/Key.obj", glm::vec3(0.0f + 5.0f, 6.5f + 5.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	//pObj = CObject::Create("../Resource/Key/Key.obj", glm::vec3(0.0f + 5.0f, 6.5f + 5.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(0.0f + 5.0f, 6.5f + 5.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
@@ -76,6 +77,33 @@ HRESULT CStage1::Initialize()
 GLint CStage1::Update(const GLfloat fTimeDelta)
 {
 	m_pGameMgr->Update(fTimeDelta);
+
+	if (!bMove && m_pGameMgr->Get_View() == false)
+	{
+		++iRotCount;
+		//m_pMonster->GetRotate().x += 90.f / 80.f;
+		fRotCount += 90.f / 80.f;
+		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3 (fRotCount,0,0));
+		//dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Get_Rotate();
+		if (fRotCount >= 90)
+		{
+			iRotCount = 0;
+			bMove = !bMove;
+		}
+	}
+	else if (bMove && m_pGameMgr->Get_View())
+	{
+		++iRotCount;
+		//m_pMonster->GetRotate().x -= 90.f / 80.f;
+		fRotCount -= 90.f / 80.f;
+		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(fRotCount, 0, 0));
+		if (fRotCount <= 0)
+		{
+			iRotCount = 0;
+			bMove = !bMove;
+		}
+	}
+	
 	return GLint();
 }
 

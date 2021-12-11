@@ -5,7 +5,6 @@ class CKeyManager;
 class CGameManager;
 class CSceneManager;
 class CShader;
-
 class CObj
 {
 public:

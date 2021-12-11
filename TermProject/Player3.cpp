@@ -76,6 +76,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
 			//interaction
 		}
+		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y, m_Player->GetPos().y - 1.0f };
 	}
 	else {
 		for (auto i : m_Player->GetSMESH()) {
@@ -83,6 +84,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 				i->color[j][3] = 0.1;
 			}
 		}
+		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y, m_Player->GetPos().y - 1.0f };
 	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory

@@ -49,6 +49,49 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		m_bView = !m_bView;
 	}
 
+	if (m_bView) {
+		//Player Monster, Player Obj, Monster Obj
+		CObj* player = m_ObjLst[OBJ_PLAYER1].front();
+		BB player_BB = player->Get_BB();
+		for (int i = OBJ_MONSTER; i < OBJ_UI; ++i) 
+		{
+			iter_begin = m_ObjLst[i].begin();
+			iter_end = m_ObjLst[i].end();
+			for (; iter_begin != iter_end;)
+			{
+				BB OBJ_BB = (*iter_begin)->Get_BB();
+
+				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top) {
+
+				}
+				else {
+					cout << "Collide" << endl;
+				}
+				++iter_begin;
+			}
+		}
+	}
+	else {
+		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
+		BB player_BB = player->Get_BB();
+		for (int i = OBJ_MONSTER; i < OBJ_UI; ++i) {
+			iter_begin = m_ObjLst[i].begin();
+			iter_end = m_ObjLst[i].end();
+			for (; iter_begin != iter_end;)
+			{
+				BB OBJ_BB = (*iter_begin)->Get_BB();
+
+				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top) {
+
+				}
+				else {
+					cout << "Collide" << endl;
+				}
+				++iter_begin;
+			}
+		}
+	}
+
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
 

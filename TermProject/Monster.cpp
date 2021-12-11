@@ -51,21 +51,6 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 
 	if (!m_pGameMgr->Get_View())
 	{
-		//m_pMonster->GetPos().y = 0.0f;
-		//if (LookPlayerAngle() >= iLookRotCount)
-		//{
-		//	++iLookRotCount;
-
-		//	m_pMonster->GetRotate().y += 5.5;
-
-		//}
-		//else
-		//{
-		//	--iLookRotCount;
-
-		//	m_pMonster->GetRotate().y -= 5.5;
-
-		//}
 		float f = LookPlayerAngle();
 		if (f >= m_pMonster->GetRotate().y)
 		{
@@ -110,7 +95,13 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			m_pMonster->GetPos().y -= 0.04;
 		}
 	}
-
+	
+	if (m_pGameMgr->Get_View()) {
+		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 1.0f, m_pMonster->GetPos().y};
+	}
+	else {
+		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y, m_pMonster->GetPos().y - 1.0f };
+	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

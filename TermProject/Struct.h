@@ -55,8 +55,6 @@ typedef struct BoundingBox
 {
 	GLfloat left; //x
 	GLfloat right; //x
-	GLfloat top; //y -->2D
-	GLfloat bottom; //y -->2D
-	GLfloat front; //z 
-	GLfloat back; //z
+	GLfloat top; //y
+	GLfloat bottom; //y
 }BB;

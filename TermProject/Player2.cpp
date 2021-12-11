@@ -35,17 +35,17 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			}
 		}
 		if (m_pKeyMgr->KeyCombined(KEY_RIGHT, KEY_SPACE)) {
-			if (!Player2::m_bJump) {
-				Player2::m_bJump = true;
-				Player2::m_iJumpdir = 1;
-				Player2::m_fJumpStart = m_Player->GetPos().y;
+			if (!m_bJump) {
+				m_bJump = true;
+				m_iJumpdir = 1;
+				m_fJumpStart = m_Player->GetPos().y;
 			}			
 		}
 		else if (m_pKeyMgr->KeyCombined(KEY_LEFT, KEY_SPACE)) {
-			if (!Player2::m_bJump) {
-				Player2::m_bJump = true;
-				Player2::m_iJumpdir = 1;
-				Player2::m_fJumpStart = m_Player->GetPos().y;
+			if (!m_bJump) {
+				m_bJump = true;
+				m_iJumpdir = 1;
+				m_fJumpStart = m_Player->GetPos().y;
 			}			
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
@@ -55,15 +55,18 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
-			if (!Player2::m_bJump) {
-				Player2::m_bJump = true;
-				Player2::m_iJumpdir = 1;
-				Player2::m_fJumpStart = m_Player->GetPos().y;
+			if (!m_bJump) {
+				m_bJump = true;
+				m_iJumpdir = 1;
+				m_fJumpStart = m_Player->GetPos().y;
 			}
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
 
 		}
+		//L, R, T, B
+		Player2::Get_BB() = {m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y};
+		
 	}
 	else {
 		for (auto i : m_Player->GetSMESH()) {

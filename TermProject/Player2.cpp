@@ -28,7 +28,7 @@ HRESULT Player2::Initialize()
 
 GLint Player2::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View()) { // 2DPlayer
+	if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move()) { // 2DPlayer
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
@@ -68,7 +68,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		Player2::Get_BB() = {m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y};
 		
 	}
-	else {
+	else if(m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 0.1;

@@ -45,9 +45,15 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				++iter_begin;
 		}
 	}
-	
-	if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
-		m_bView = !m_bView;
+	if (!Get_View() && Get_Camera()->Get_Move()) {
+		if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
+			m_bView = !m_bView;
+		}
+	}
+	else if (Get_View() && !Get_Camera()->Get_Move()) {
+		if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
+			m_bView = !m_bView;
+		}
 	}
 
 	//Player Collide
@@ -244,15 +250,6 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			BB OBJ_BB = (*iter_begin)->Get_BB();
 			if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
 			{
-				cout << "Mon_left - " << monster_BB.left << endl;
-				cout << "Mon_right - " << monster_BB.right << endl;
-				cout << "Mon_top - " << monster_BB.top << endl;
-				cout << "Mon_bottom - " << monster_BB.bottom << endl;
-
-				cout << "Box_left - " << OBJ_BB.left << endl;
-				cout << "Box_right - " << OBJ_BB.right << endl;
-				cout << "Box_top - " << OBJ_BB.top << endl;
-				cout << "Box_bottom - " << OBJ_BB.bottom << endl;
 				if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
 				{
 					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;

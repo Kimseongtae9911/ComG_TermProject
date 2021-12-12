@@ -67,6 +67,15 @@ GLvoid CCamera::Render()
 
 	int lightLoc = glGetUniformLocation(program, "lightPos");
 	glUniform3fv(lightLoc, 1, value_ptr(m_vLightPos));
+	
+	int lightColorLocation = glGetUniformLocation(program, "lightColor");
+	glUniform3f(lightColorLocation, m_vLightColor.x, m_vLightColor.y, m_vLightColor.z);
+
+	int lightOnLocation = glGetUniformLocation(program, "light_on");
+	glUniform1i(lightOnLocation, m_iLight);
+
+	int lightIntensityLocation = glGetUniformLocation(program, "light_intensity");
+	glUniform1f(lightIntensityLocation, m_fLintensity);
 
 	if (m_pGameMgr->Get_View() == true && !bMovingCamera)
 	{
@@ -81,13 +90,12 @@ GLvoid CCamera::Render()
 	int PosLoc = glGetUniformLocation(program, "viewPos");
 	glUniform3fv(PosLoc, 1, value_ptr(m_vEye));
 
-	//int DirLoc = glGetUniformLocation(program, "vLightDir");
-	//glUniform3fv(DirLoc, 1, value_ptr(glm::vec3(m_vLightDir)));
 	return GLvoid();
 }
 
 glm::mat4 CCamera::Get_Ortho()
 {
+	m_vLightPos = glm::vec3(30.0f, 50.0f, 10.0f);
 	glm::mat4 proj = glm::mat4(1.0f);
 	proj = glm::ortho(-16.0f, 16.0f, -8.0f, 8.0f, 1.0f, m_fFar);
 	proj = glm::translate(proj, m_vec3Translate);
@@ -97,6 +105,7 @@ glm::mat4 CCamera::Get_Ortho()
 
 glm::mat4 CCamera::Get_Perspective()
 {
+	m_vLightPos = { 30.0f, 6.5f, 0.0f };
 	glm::mat4 proj = glm::perspective(glm::radians(m_fFovY), (float)WINCX / (float)WINCY, m_fNear, m_fFar);
 	proj = glm::translate(proj, m_vec3Translate);
 	proj = glm::rotate(proj, glm::radians(m_vec3Rotate.y), glm::vec3(0.0, 1.0, 0.0));

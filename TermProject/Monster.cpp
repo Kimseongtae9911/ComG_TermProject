@@ -6,6 +6,7 @@
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
+#include "CCamera.h"
 
 Monster::Monster()
 {
@@ -50,7 +51,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	}
 	//LookPlayerAngle();
 
-	if (!m_pGameMgr->Get_View())
+	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		float f = LookPlayerAngle();
 		if (f >= m_pMonster->GetRotate().y)
@@ -87,18 +88,22 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		{
 			if (m_iType == 0) {
 				m_pMonster->GetPos().x += 0.04;
+				m_iDir = 1;
 			}
 			else {
 				m_pMonster->GetPos().x += 0.035;
+				m_iDir = 1;
 			}
 		}
 		else
 		{
 			if (m_iType == 0) {
 				m_pMonster->GetPos().x -= 0.04;
+				m_iDir = -1;
 			}
 			else {
 				m_pMonster->GetPos().x -= 0.035;
+				m_iDir = -1;
 			}
 		}
 		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
@@ -120,11 +125,10 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-	else
+	else if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		m_pMonster->GetRotate().y = 0;
 		m_pMonster->GetPos().x += 0.08 * m_iDir;
-		cout << "Dir - " << m_iDir << endl;
 
 		if (m_pMonster->GetPos().x + 0.5 >= 13)
 			m_iDir = -1;

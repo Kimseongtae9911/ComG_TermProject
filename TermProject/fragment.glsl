@@ -11,7 +11,7 @@ uniform vec3 viewPos;
 
 uniform vec3 lightColor = vec3(1.f); 
 uniform int light_on = 1;
-uniform float light_intensity = 0.8;
+uniform float light_intensity = 0.3;
 uniform sampler2D outTexture;
 
 void main()

@@ -45,9 +45,15 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				++iter_begin;
 		}
 	}
-	
-	if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
-		m_bView = !m_bView;
+	if (!Get_View() && Get_Camera()->Get_Move()) {
+		if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
+			m_bView = !m_bView;
+		}
+	}
+	else if (Get_View() && !Get_Camera()->Get_Move()) {
+		if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
+			m_bView = !m_bView;
+		}
 	}
 
 	//Player Collide

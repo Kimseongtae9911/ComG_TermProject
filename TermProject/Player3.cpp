@@ -30,11 +30,7 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
-	cout << "x - " << m_Player->GetPos().x << endl;
-	cout << "y - " << m_Player->GetPos().y << endl;
-	cout << "z - " << m_Player->GetPos().z << endl;
-	//bool temp = CCamera::Get_Move();
-	if (!m_pGameMgr->Get_View()) { // 3DPlayer
+	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move()) { // 3DPlayer
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
@@ -81,7 +77,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y, m_Player->GetPos().y - 1.0f };
 	}
-	else {
+	else if (m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 0.1;

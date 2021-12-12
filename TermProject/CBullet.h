@@ -3,12 +3,11 @@
 
 class CMesh;
 
-class CPortal : public CObj
+class CBullet : public CObj
 {
 public:
-	CPortal();
-	~CPortal();
-
+	CBullet();
+	~CBullet();
 public:
 	virtual HRESULT Initialize(glm::vec3 vPos);
 	virtual GLint Update(const GLfloat fTimeDelta);
@@ -16,16 +15,14 @@ public:
 
 
 private:
-	CMesh* m_pPortal;
-	int iRotateCount = 0;
-	int iLookRotCount = 0;
-	int iMovingCount = 0;
-	bool bMovingRotate = false;
+	CMesh* m_pBullet;
+	
 
 private:
 	GLvoid Release();
 
 public:
-	static CPortal* Create(glm::vec3 vPos);
+	static CBullet* Create(glm::vec3 vPos);
+
 };
 

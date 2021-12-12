@@ -251,6 +251,24 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 		++monster_iter_begin;
 	}
+
+	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end(); ++iter_bullet)
+	{
+		BB Bullet_BB = (*iter_bullet)->Get_BB();
+		for (list<CObj*>::iterator iter_map = m_ObjLst[OBJ_MAP].begin(); iter_map != m_ObjLst[OBJ_MAP].end(); ++iter_map)
+		{
+			BB Map_BB = (*iter_map)->Get_BB();
+			if (Bullet_BB.left > Map_BB.right || Bullet_BB.right < Map_BB.left || Bullet_BB.top < Map_BB.bottom || Bullet_BB.bottom > Map_BB.top);
+			else
+			{
+				SafeDelete((*iter_bullet));
+				iter_bullet = m_ObjLst[OBJ_BULLET].erase(iter_bullet);
+				break;
+			}
+		}
+	}
+
+
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
 

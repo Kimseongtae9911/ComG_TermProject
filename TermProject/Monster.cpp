@@ -23,7 +23,7 @@ HRESULT Monster::Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, in
 	m_pMonster->GetScale() = vScale;
 	m_pMonster->GetPos() = vPos;
 	m_iType = iType;
-	LookPlayerAngle();
+	//LookPlayerAngle();
 	return NOERROR;
 }
 
@@ -49,7 +49,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
-	LookPlayerAngle();
+	//LookPlayerAngle();
 
 	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{

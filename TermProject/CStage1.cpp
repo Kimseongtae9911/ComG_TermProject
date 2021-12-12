@@ -4,6 +4,7 @@
 #include "Player3.h"
 #include "Player2.h"
 #include "Monster.h"
+#include "CBossMonster.h"
 #include "CObject.h"
 #include "CCamera.h"
 #include "CPortal.h"
@@ -24,9 +25,7 @@ HRESULT CStage1::Initialize()
 	CScene::Initialize();
 	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 6.5f, 30.f), glm::vec3(0.f, 6.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
-	pObj = CPortal::Create("../Resource/UI/portal/portal.png", glm::vec3(100.f, 150.f, 0.f), glm::vec3(1.f));
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
-		return E_FAIL;
+
 
 	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
@@ -75,17 +74,28 @@ HRESULT CStage1::Initialize()
 	pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * 5, 1.0f * 5 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
+
+	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj))) // OBJ_MAP ?
+		return E_FAIL;
+
+
+
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(0.0f + 5.0f, 6.5f + 5.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	/*pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(0.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
+	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(0.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 10.0f, -0.25f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
-		return E_FAIL;*/
+		return E_FAIL;
+
+	pObj = CBossMonster::Create();
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+		return E_FAIL;
 }
 
 GLint CStage1::Update(const GLfloat fTimeDelta)

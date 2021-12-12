@@ -1,4 +1,4 @@
-#include"stdafx.h"
+﻿#include"stdafx.h"
 #include "CGameManager.h"
 #include "CKeyManager.h"
 #include "CMesh.h"
@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "Player2.h"
 #include "Player3.h"
+#include "CRenderManager.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -48,6 +49,10 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				++iter_begin;
 		}
 	}
+
+
+
+
 	if (!Get_View() && Get_Camera()->Get_Move()) {
 		if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
 			m_bView = !m_bView;
@@ -252,8 +257,8 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 		++monster_iter_begin;
 	}
-
-	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end(); ++iter_bullet)
+	// map and bullet
+	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end(); ++iter_bullet ) // ����
 	{
 		BB Bullet_BB = (*iter_bullet)->Get_BB();
 		for (list<CObj*>::iterator iter_map = m_ObjLst[OBJ_MAP].begin(); iter_map != m_ObjLst[OBJ_MAP].end(); ++iter_map)
@@ -262,10 +267,28 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			if (Bullet_BB.left > Map_BB.right || Bullet_BB.right < Map_BB.left || Bullet_BB.top < Map_BB.bottom || Bullet_BB.bottom > Map_BB.top);
 			else
 			{
-				//SafeDelete((*iter_bullet));
+ 				SafeDelete((*iter_bullet));
 				iter_bullet = m_ObjLst[OBJ_BULLET].erase(iter_bullet);
+				//--iter_bullet;
+				CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
 				break;
 			}
+		}
+	}
+
+	CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
+	BB player2D_BB = player2D->Get_BB();
+	CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
+	BB player3D_BB = player3D->Get_BB();
+	CObj* portal = m_ObjLst[OBJ_PORTAL].front();
+	BB portal_BB = portal->Get_BB();
+	if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top);
+	else
+	{
+		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
+		else
+		{
+			cout << "portal collide" << endl;
 		}
 	}
 

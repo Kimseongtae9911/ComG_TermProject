@@ -91,6 +91,9 @@
     <Filter Include="소스 파일\01 Obj\04 Bullet">
       <UniqueIdentifier>{1827c926-7ace-48c0-82f9-dafc460cbf92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01 Obj\05 BackImage">
+      <UniqueIdentifier>{49b8baff-530b-4665-862e-5ddfd008e725}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="CBullet.cpp">
       <Filter>소스 파일\01 Obj\04 Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackImage.cpp">
+      <Filter>소스 파일\01 Obj\05 BackImage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +257,9 @@
     <ClInclude Include="CBullet.h">
       <Filter>소스 파일\01 Obj\04 Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CBackImage.h">
+      <Filter>소스 파일\01 Obj\05 BackImage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl">
@@ -263,6 +272,12 @@
       <Filter>GLSLFile</Filter>
     </None>
     <None Include="Vertex_UI.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="Fragment_BackImage.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="Vertex_BackImage.glsl">
       <Filter>GLSLFile</Filter>
     </None>
   </ItemGroup>

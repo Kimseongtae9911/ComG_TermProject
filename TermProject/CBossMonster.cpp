@@ -27,7 +27,7 @@ HRESULT CBossMonster::Initialize()
 GLint CBossMonster::Update(const GLfloat fTimeDelta)
 {
 	fTime += fTimeDelta;
-	if (fTime >= 1)
+	if (fTime >= 5)
 	{
 		CObj* pObj = CBullet::Create(m_pBossMonster->GetPos() + glm::vec3(0,2.5f,0));
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))

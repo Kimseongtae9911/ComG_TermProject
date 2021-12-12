@@ -82,6 +82,12 @@
     <Filter Include="소스 파일\01 Obj\01 Monster\01 Boss">
       <UniqueIdentifier>{cb73a01d-5e88-425a-a2f7-386094dbf98e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\04 Element\02 Plane">
+      <UniqueIdentifier>{f4a1b862-5ddb-4b0c-831b-db1599c0a3c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01 Obj\03 Portal">
+      <UniqueIdentifier>{d7c01456-4b58-42c2-9a50-1c5cad3d380b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -143,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlane.cpp">
+      <Filter>소스 파일\04 Element\02 Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="CPortal.cpp">
+      <Filter>소스 파일\01 Obj\03 Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,12 +230,24 @@
     <ClInclude Include="Monster.h">
       <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
     </ClInclude>
+    <ClInclude Include="CPlane.h">
+      <Filter>소스 파일\04 Element\02 Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="CPortal.h">
+      <Filter>소스 파일\01 Obj\03 Portal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl">
       <Filter>GLSLFile</Filter>
     </None>
     <None Include="fragment.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="Fragement_UI.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="Vertex_UI.glsl">
       <Filter>GLSLFile</Filter>
     </None>
   </ItemGroup>

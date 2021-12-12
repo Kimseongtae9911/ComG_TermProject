@@ -27,8 +27,10 @@ private:
 	glm::vec3 m_vAt = glm::vec3(0.f, 0.f, 0.f);
 	glm::vec3 m_vUp = glm::vec3(0.f, 1.f, 0.f);
 	glm::vec3 m_vDir = glm::vec3(0.f, 0.f, 0.f);
-	glm::vec3 m_vLightPos = glm::vec3(10.0f, 6.5f, 20.0f);
-	glm::vec3 m_vLightDir = glm::vec3(0.f, 0.f, 0.f);
+	glm::vec3 m_vLightPos = glm::vec3(30.0f, 100.0f, 0.0f);
+	glm::vec3 m_vLightColor = glm::vec3(1.0f);
+	int m_iLight = 1;
+	float m_fLintensity = 0.5;
 	glm::vec3 m_vec3PRotate{ 0.0, 0.0, 0.0 };
 	glm::vec3 m_vec3Translate{ 0.0, 0.0, 0.0 };
 	glm::vec3 m_vec3Rotate{ 0.0, 0.0, 0.0 };

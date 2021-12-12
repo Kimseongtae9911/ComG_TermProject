@@ -30,6 +30,9 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
+	cout << "x - " << m_Player->GetPos().x << endl;
+	cout << "y - " << m_Player->GetPos().y << endl;
+	cout << "z - " << m_Player->GetPos().z << endl;
 	//bool temp = CCamera::Get_Move();
 	if (!m_pGameMgr->Get_View()) { // 3DPlayer
 		for (auto i : m_Player->GetSMESH()) {

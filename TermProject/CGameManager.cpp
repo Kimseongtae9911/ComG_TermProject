@@ -300,7 +300,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			if (Bullet_BB.left > Map_BB.right || Bullet_BB.right < Map_BB.left || Bullet_BB.top < Map_BB.bottom || Bullet_BB.bottom > Map_BB.top);
 			else
 			{
-				SafeDelete((*iter_bullet));
+				//SafeDelete((*iter_bullet));
 				iter_bullet = m_ObjLst[OBJ_BULLET].erase(iter_bullet);
 				break;
 			}

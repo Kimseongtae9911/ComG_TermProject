@@ -21,7 +21,7 @@ protected:
 	CKeyManager* m_pKeyMgr = nullptr;
 	CGameManager* m_pGameMgr = nullptr;
 	CShader* m_pShader = nullptr;
-	CSceneManager* m_pScenceMgr = nullptr;
+	CSceneManager* m_pSceneMgr = nullptr;
 	CFrameManager* m_pFrameMgr = nullptr;
 	CRenderManager* m_pRenderMgr = nullptr;
 

@@ -18,6 +18,9 @@ public:
 	HRESULT Clear_Obj(OBJID eID);
 
 public:
+	bool& Get_boolPortal() { return bPortalCollide; };
+
+public:
 	HRESULT Add_Camera(CCamera* pCamera);
 	GLvoid Render_Camera();
 	CCamera* Get_Camera() { return m_pCamera; };
@@ -25,6 +28,7 @@ public:
 	list<CObj*>& Get_Obj(OBJID ID) { return m_ObjLst[ID]; };
 	bool Collide(int num);
 	bool JumpCollide(int num);
+	bool bPortalCollide = false;
 
 private:
 	CCamera* m_pCamera = nullptr;

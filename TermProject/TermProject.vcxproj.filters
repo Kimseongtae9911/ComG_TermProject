@@ -67,9 +67,6 @@
     <Filter Include="소스 파일\00 MainGame">
       <UniqueIdentifier>{b0c786fd-fff0-4c26-bc19-4cb95e74b937}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02 Scene\Stage1">
-      <UniqueIdentifier>{55417be8-9d60-4e62-b04f-b68586091ce9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01 Obj\99 Camera">
       <UniqueIdentifier>{1debddf3-3a2f-4fdc-8e9f-22274e6e5649}</UniqueIdentifier>
     </Filter>
@@ -93,6 +90,12 @@
     </Filter>
     <Filter Include="소스 파일\01 Obj\05 BackImage">
       <UniqueIdentifier>{49b8baff-530b-4665-862e-5ddfd008e725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02 Scene\02 Stage1">
+      <UniqueIdentifier>{55417be8-9d60-4e62-b04f-b68586091ce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02 Scene\03 stage2">
+      <UniqueIdentifier>{29a37f74-d925-4795-9ab8-6fdfbc2edf1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +142,7 @@
       <Filter>소스 파일\00 MainGame</Filter>
     </ClCompile>
     <ClCompile Include="CStage1.cpp">
-      <Filter>소스 파일\02 Scene\Stage1</Filter>
+      <Filter>소스 파일\02 Scene\02 Stage1</Filter>
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>소스 파일\01 Obj\99 Camera</Filter>
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="CBackImage.cpp">
       <Filter>소스 파일\01 Obj\05 BackImage</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage2.cpp">
+      <Filter>소스 파일\02 Scene\03 stage2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +234,7 @@
       <Filter>소스 파일\00 MainGame</Filter>
     </ClInclude>
     <ClInclude Include="CStage1.h">
-      <Filter>소스 파일\02 Scene\Stage1</Filter>
+      <Filter>소스 파일\02 Scene\02 Stage1</Filter>
     </ClInclude>
     <ClInclude Include="CCamera.h">
       <Filter>소스 파일\01 Obj\99 Camera</Filter>
@@ -259,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="CBackImage.h">
       <Filter>소스 파일\01 Obj\05 BackImage</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage2.h">
+      <Filter>소스 파일\02 Scene\03 stage2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

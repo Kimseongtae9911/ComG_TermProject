@@ -28,8 +28,8 @@ HRESULT CScene::Initialize()
 	m_pShader = CShader::GetInstance();
 	if (!m_pShader) 
 		return E_FAIL;
-	m_pScenceMgr = CSceneManager::GetInstance();
-	if (!m_pScenceMgr) 
+	m_pSceneMgr = CSceneManager::GetInstance();
+	if (!m_pSceneMgr) 
 		return E_FAIL;
 	m_pFrameMgr = CFrameManager::GetInstance();
 	if (!m_pFrameMgr) 

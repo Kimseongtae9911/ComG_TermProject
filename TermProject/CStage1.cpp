@@ -11,6 +11,7 @@
 #include "CBackImage.h"
 #include "CRenderManager.h"
 #include "CGameManager.h"
+#include "CSceneManager.h"
 
 
 CStage1::CStage1()
@@ -19,6 +20,7 @@ CStage1::CStage1()
 
 CStage1::~CStage1()
 {
+	Release();
 }
 
 HRESULT CStage1::Initialize()
@@ -116,6 +118,7 @@ HRESULT CStage1::Initialize()
 	/*pObj = CBossMonster::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
 		return E_FAIL;*/
+	return NOERROR;
 }
 
 GLint CStage1::Update(const GLfloat fTimeDelta)
@@ -126,6 +129,12 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 			fRotCount -= 90.f / 80.f;
 				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
+	}
+	if (m_pGameMgr->Get_boolPortal())
+	{
+		m_pSceneMgr->SceneChange(SCENE_STAGE2);
+		m_pGameMgr->Get_boolPortal() = false;
+		return 0;
 	}
 
 	m_pGameMgr->Update(fTimeDelta);

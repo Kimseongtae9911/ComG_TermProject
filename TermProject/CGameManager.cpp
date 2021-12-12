@@ -276,21 +276,29 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
-	BB player2D_BB = player2D->Get_BB();
-	CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
-	BB player3D_BB = player3D->Get_BB();
-	CObj* portal = m_ObjLst[OBJ_PORTAL].front();
-	BB portal_BB = portal->Get_BB();
-	if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top);
-	else
+	//portal collide
+	if (!m_ObjLst[OBJ_PORTAL].empty())
 	{
-		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
+		CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
+		BB player2D_BB = player2D->Get_BB();
+		CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
+		BB player3D_BB = player3D->Get_BB();
+
+		CObj* portal = m_ObjLst[OBJ_PORTAL].front();
+		BB portal_BB = portal->Get_BB();
+		if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top);
 		else
 		{
-			cout << "portal collide" << endl;
+			if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
+			else
+			{
+				cout << "portal collide" << endl;
+
+				bPortalCollide = true;
+			}
 		}
 	}
+
 
 
 	if (m_pCamera)

@@ -30,13 +30,13 @@ GLint CBackImage::Update(const GLfloat fTimeDelta)
 
 GLvoid CBackImage::Render()
 {
+	glDisable(GL_DEPTH_TEST);
 	
-	glEnable(GL_DEPTH_TEST);
 	m_pShaderLoader->Use_Shader("Back");
 	m_pTexture->Render();
 	m_pPlane->Render();
-
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
+	
 
 	return GLvoid();
 }

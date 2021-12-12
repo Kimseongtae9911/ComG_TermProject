@@ -276,48 +276,51 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-
-	CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
-	BB player2D_BB = player2D->Get_BB();
-	CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
-	BB player3D_BB = player3D->Get_BB();
-	CObj* portal = m_ObjLst[OBJ_PORTAL].front();
-	BB portal_BB = portal->Get_BB();
-	if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top)
+	if (!m_ObjLst[OBJ_PORTAL].empty())
 	{
-		if (Get_View()) {
-			if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
-				if (m_ObjLst[OBJ_KEY].empty()) {
-					dynamic_cast<Player2*>(player2D)->Get_Portal() = true;
+		CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
+		BB player2D_BB = player2D->Get_BB();
+		CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
+		BB player3D_BB = player3D->Get_BB();
+		CObj* portal = m_ObjLst[OBJ_PORTAL].front();
+		BB portal_BB = portal->Get_BB();
+		if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top)
+		{
+			if (Get_View()) {
+				if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+					if (m_ObjLst[OBJ_KEY].empty()) {
+						dynamic_cast<Player2*>(player2D)->Get_Portal() = true;
+					}
 				}
 			}
 		}
-	}
-	else
-	{
-		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
 		else
 		{
-			if (!Get_View()) {
-				if (m_ObjLst[OBJ_KEY].empty()) {
-					dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
+			if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
+			else
+			{
+				if (!Get_View()) {
+					if (m_ObjLst[OBJ_KEY].empty()) {
+						dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
+					}
+				}
+			}
+		}
+		if (dynamic_cast<Player2*>(player2D)->Get_Portal() && dynamic_cast<Player3*>(player3D)->Get_Portal()) {
+			cout << "Next Stage" << endl;
+			bPortalCollide = true;
+		}
+
+
+		if (m_ObjLst[OBJ_KEY].empty()) {
+			for (auto i : dynamic_cast<CPortal*>(portal)->Get_pMesh()->GetSMESH()) {
+				for (int j = 0; j < i->color.size(); ++j) {
+					i->color[j][3] = 1.0;
 				}
 			}
 		}
 	}
-	if (dynamic_cast<Player2*>(player2D)->Get_Portal() && dynamic_cast<Player3*>(player3D)->Get_Portal()) {
-		cout << "Next Stage" << endl;
-		bPortalCollide = true;
-	}
 
-
-	if (m_ObjLst[OBJ_KEY].empty()) {
-		for (auto i : dynamic_cast<CPortal*>(portal)->Get_pMesh()->GetSMESH()) {
-			for (int j = 0; j < i->color.size(); ++j) {
-				i->color[j][3] = 1.0;
-			}
-		}
-	}
 
 
 	if (m_pCamera)

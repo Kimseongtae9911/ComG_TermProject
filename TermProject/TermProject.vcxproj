@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CBossMonster.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCube.cpp" />
     <ClCompile Include="CFrameManager.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Player3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CBossMonster.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCube.h" />
     <ClInclude Include="CFrameManager.h" />

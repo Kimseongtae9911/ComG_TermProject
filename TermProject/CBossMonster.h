@@ -25,6 +25,7 @@ private:
 	bool bMovingRotate = false;
 	glm::vec3 vecPlayer3dPos = glm::vec3(0.0f);
 	int m_iDir{ 1 };
+	float fTime = 0;
 
 public:
 	static CBossMonster* Create();

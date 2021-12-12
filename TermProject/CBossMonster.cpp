@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CBossMonster.h"
 #include "CMesh.h"
+#include"CBullet.h"
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
@@ -17,11 +18,23 @@ HRESULT CBossMonster::Initialize()
 {
 	CObj::Initialize();
 	m_pBossMonster = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, 1.0});
+	m_pBossMonster->GetPos() = glm::vec3(5.0f, 0, 0);
+	m_pBossMonster->GetScale() = glm::vec3(0.2f, 0.2f, 0.2f);
+	m_pBossMonster->GetRotate().y = -20.f;
 	return NOERROR;
 }
 
 GLint CBossMonster::Update(const GLfloat fTimeDelta)
 {
+	fTime += fTimeDelta;
+	if (fTime >= 1)
+	{
+		CObj* pObj = CBullet::Create(m_pBossMonster->GetPos() + glm::vec3(0,2.5f,0));
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))
+			return E_FAIL;
+		cout << "11" << endl;
+		fTime = 0;
+	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

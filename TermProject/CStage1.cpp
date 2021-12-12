@@ -4,6 +4,7 @@
 #include "Player3.h"
 #include "Player2.h"
 #include "Monster.h"
+#include "CBossMonster.h"
 #include "CObject.h"
 #include "CCamera.h"
 #include "CPortal.h"
@@ -80,6 +81,10 @@ HRESULT CStage1::Initialize()
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 10.0f, -0.25f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+		return E_FAIL;
+
+	pObj = CBossMonster::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
 		return E_FAIL;
 }

@@ -88,6 +88,9 @@
     <Filter Include="소스 파일\01 Obj\03 Portal">
       <UniqueIdentifier>{d7c01456-4b58-42c2-9a50-1c5cad3d380b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01 Obj\04 Bullet">
+      <UniqueIdentifier>{1827c926-7ace-48c0-82f9-dafc460cbf92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -158,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="CBossMonster.cpp">
       <Filter>소스 파일\01 Obj\01 Monster\01 Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet.cpp">
+      <Filter>소스 파일\01 Obj\04 Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="CBossMonster.h">
       <Filter>소스 파일\01 Obj\01 Monster\01 Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet.h">
+      <Filter>소스 파일\01 Obj\04 Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

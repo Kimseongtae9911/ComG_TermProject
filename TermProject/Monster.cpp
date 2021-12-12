@@ -84,19 +84,54 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			m_pMonster->GetRotate().y += 360;
 		}
 		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
-			m_pMonster->GetPos().x += 0.04;
+		{
+			if (m_iType == 0) {
+				m_pMonster->GetPos().x += 0.04;
+			}
+			else {
+				m_pMonster->GetPos().x += 0.035;
+			}
+		}
 		else
-			m_pMonster->GetPos().x -= 0.04;
+		{
+			if (m_iType == 0) {
+				m_pMonster->GetPos().x -= 0.04;
+			}
+			else {
+				m_pMonster->GetPos().x -= 0.035;
+			}
+		}
 		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
 		{
-			m_pMonster->GetPos().y += 0.04;
+			if (m_iType == 0) {
+				m_pMonster->GetPos().y += 0.04;
+			}
+			else {
+				m_pMonster->GetPos().y += 0.035;
+			}
 		}
 		else 
 		{
-			m_pMonster->GetPos().y -= 0.04;
+			if (m_iType == 0) {
+				m_pMonster->GetPos().y -= 0.04;
+			}
+			else {
+				m_pMonster->GetPos().y -= 0.035;
+			}
 		}
 	}
-	
+	else
+	{
+		m_pMonster->GetRotate().y = 0;
+		m_pMonster->GetPos().x += 0.08 * m_iDir;
+		cout << "Dir - " << m_iDir << endl;
+
+		if (m_pMonster->GetPos().x + 0.5 >= 13)
+			m_iDir = -1;
+		else if (m_pMonster->GetPos().x - 0.5 <= -14)
+			m_iDir = 1;
+		
+	}
 	if (m_pGameMgr->Get_View()) {
 		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 1.0f, m_pMonster->GetPos().y};
 	}

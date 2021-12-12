@@ -4,6 +4,7 @@
 #include "CObj.h"
 #include "CCamera.h"
 #include "CKeyManager.h"
+#include "Monster.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -49,11 +50,12 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		m_bView = !m_bView;
 	}
 
+	//Player Collide
 	if (m_bView) {
 		//Player Monster, Player Obj, Monster Obj
 		CObj* player = m_ObjLst[OBJ_PLAYER1].front();
 		BB player_BB = player->Get_BB();
-		for (int i = OBJ_MONSTER; i < OBJ_UI; ++i) 
+		for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i) 
 		{
 			iter_begin = m_ObjLst[i].begin();
 			iter_end = m_ObjLst[i].end();
@@ -63,8 +65,6 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 
 				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top);
 				else {
-					//cout << "Collide" << endl;
-					//Collide with Monster --> 
 					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
@@ -144,7 +144,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	else {
 		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
 		BB player_BB = player->Get_BB();
-		for (int i = OBJ_MONSTER; i < OBJ_UI; ++i) {
+		for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i) {
 			iter_begin = m_ObjLst[i].begin();
 			iter_end = m_ObjLst[i].end();
 			for (; iter_begin != iter_end;)
@@ -231,6 +231,68 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 
+	//Monster Map Collide
+	list<CObj*>::iterator monster_iter_begin = m_ObjLst[OBJ_MONSTER1].begin();
+	list<CObj*>::iterator monster_iter_end = m_ObjLst[OBJ_MONSTER1].end();
+	for (; monster_iter_begin != monster_iter_end;) {
+		BB monster_BB = (*monster_iter_begin)->Get_BB();
+
+		iter_begin = m_ObjLst[OBJ_BOX].begin();
+		iter_end = m_ObjLst[OBJ_BOX].end();
+		for (; iter_begin != iter_end;)
+		{
+			BB OBJ_BB = (*iter_begin)->Get_BB();
+			if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
+			{
+				cout << "Mon_left - " << monster_BB.left << endl;
+				cout << "Mon_right - " << monster_BB.right << endl;
+				cout << "Mon_top - " << monster_BB.top << endl;
+				cout << "Mon_bottom - " << monster_BB.bottom << endl;
+
+				cout << "Box_left - " << OBJ_BB.left << endl;
+				cout << "Box_right - " << OBJ_BB.right << endl;
+				cout << "Box_top - " << OBJ_BB.top << endl;
+				cout << "Box_bottom - " << OBJ_BB.bottom << endl;
+				if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+				}
+				else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+				}
+				else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+				}
+				else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+				}
+			}
+			else if (monster_BB.right >= OBJ_BB.left && monster_BB.left <= OBJ_BB.left)
+			{
+				if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+				}
+				else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+				}
+				else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+				}
+				else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+				{
+					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+				}
+			}
+			++iter_begin;
+		}
+		++monster_iter_begin;
+	}
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
 

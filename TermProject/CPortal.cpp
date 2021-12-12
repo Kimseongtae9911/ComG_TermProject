@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "CPortal.h"
-#include "CPlane.h"
-#include "CTexture.h"
+#include "CMesh.h"
 #include "CRenderManager.h"
 #include "CShader.h"
+#include "CGameManager.h"
 
 CPortal::CPortal()
 {
@@ -13,36 +13,48 @@ CPortal::~CPortal()
 {
 }
 
-HRESULT CPortal::Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale)
+HRESULT CPortal::Initialize(glm::vec3 vPos)
 {
 	CObj::Initialize();
-	pPlane = CPlane::Create();
-	pTexture = CTexture::Create("", strMesh);
-	pPlane->GetPos() = vPos;
-	pPlane->GetScale() = vScale * glm::vec3(pTexture->Get_Width() * 0.5f, pTexture->Get_Height() * 0.5f, 1.f);
+	m_pPortal = CMesh::Create("../Resource/Portal Door/Portal Door.obj", { 1.0, 1.0, 1.0, 1.0 });
+	m_pPortal->GetPos() = vPos;
+	m_pPortal->GetScale() = glm::vec3(0.15f, 0.15f, 0.15f);
+	//m_pPortal->GetScale().x = -90;
 
-	m_matProj = glm::ortho(0.f, (float)WINCX, 0.f, (float)WINCY, 0.f, 100.0f);					// 직교투영하는것임
-
-	m_matView = glm::mat4(1.f);
 	return NOERROR;
 }
 
 GLint CPortal::Update(const GLfloat fTimeDelta)
 {
-	m_pRender->Add_RenderObj(REDER_UI, this);
+	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
+	{
+		++iRotateCount;
+		m_pPortal->GetRotate().x += 90.f / 80.f;
+		if (iRotateCount >= 80)
+		{
+			iRotateCount = 0;
+			bMovingRotate = !bMovingRotate;
+		}
+	}
+	else if (bMovingRotate && m_pGameMgr->Get_View())
+	{
+		++iRotateCount;
+		m_pPortal->GetRotate().x -= 90.f / 80.f;
+		if (iRotateCount >= 80)
+		{
+			iRotateCount = 0;
+			bMovingRotate = !bMovingRotate;
+		}
+	}
+	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
 
 GLvoid CPortal::Render()
 {
-	GLuint program = m_pShaderLoader->Use_Shader("UI");
-	int viewLoc = glGetUniformLocation(program, "viewTransform");
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_matView));
-	int ProjLoc = glGetUniformLocation(program, "projectionTransform");
-	glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_matProj));
-
-	pPlane->Render();
-	pTexture->Render();
+	m_pShaderLoader->Use_Shader("Default");
+	m_pGameMgr->Render_Camera();
+	m_pPortal->Render();
 	return GLvoid();
 }
 
@@ -51,11 +63,11 @@ GLvoid CPortal::Release()
 	return GLvoid();
 }
 
-CPortal* CPortal::Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale)
+CPortal* CPortal::Create(glm::vec3 vPos)
 {
 	CPortal* pInstance = new CPortal;
 
-	if (FAILED(pInstance->Initialize(strMesh,vPos, vScale)))
+	if (FAILED(pInstance->Initialize(vPos)))
 	{
 		SafeDelete(pInstance);
 		return nullptr;

@@ -1,8 +1,7 @@
 #pragma once
 #include "CObj.h"
 
-class CPlane;
-class CTexture;
+class CMesh;
 
 class CPortal : public CObj
 {
@@ -11,23 +10,22 @@ public:
 	~CPortal();
 
 public:
-	virtual HRESULT Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale);
+	virtual HRESULT Initialize(glm::vec3 vPos);
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
 
 private:
-	glm::mat4 m_matView = glm::mat4(1.f);
-	glm::mat4 m_matProj = glm::mat4(1.f);
-
-private:
-	CPlane* pPlane;
-	CTexture* pTexture;
+	CMesh* m_pPortal;
+	int iRotateCount = 0;
+	int iLookRotCount = 0;
+	int iMovingCount = 0;
+	bool bMovingRotate = false;
 
 private:
 	GLvoid Release();
 
 public:
-	static CPortal* Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale);
+	static CPortal* Create(glm::vec3 vPos);
 };
 

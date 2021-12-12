@@ -67,11 +67,13 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create(glm::vec3(0.0f, 0.1f, -0.25f));
+	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(0.0f, 0.1f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER, pObj)))
 		return E_FAIL;
 
-	return NOERROR;
+	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 2.0f, -0.25f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER, pObj)))
+		return E_FAIL;
 }
 
 GLint CStage1::Update(const GLfloat fTimeDelta)

@@ -15,12 +15,13 @@ Monster::~Monster()
 {
 }
 
-HRESULT Monster::Initialize(glm::vec3 vPos)
+HRESULT Monster::Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType)
 {
 	CObj::Initialize();
-	m_pMonster = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	m_pMonster->GetScale() = glm::vec3(0.03, 0.03, 0.03);	 
+	m_pMonster = CMesh::Create(strMesh, { 1.0, 1.0, 1.0, m_fAlpha });
+	m_pMonster->GetScale() = vScale;
 	m_pMonster->GetPos() = vPos;
+	m_iType = iType;
 	LookPlayerAngle();
 	return NOERROR;
 }
@@ -152,10 +153,10 @@ float Monster::LookPlayerAngle()
 	}
 }
 
-Monster* Monster::Create(glm::vec3 vPos)
+Monster* Monster::Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType)
 {
 	Monster* pInstance = new Monster;
-	if (FAILED(pInstance->Initialize(vPos)))
+	if (FAILED(pInstance->Initialize(strMesh, vPos, vScale, iType)))
 		SafeDelete(pInstance);
 	return pInstance;
 }

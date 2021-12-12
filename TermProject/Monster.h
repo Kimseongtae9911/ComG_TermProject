@@ -10,7 +10,7 @@ public:
 	~Monster();
 
 public:
-	virtual HRESULT Initialize(glm::vec3 vPos);
+	virtual HRESULT Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType);
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
@@ -20,13 +20,16 @@ public:
 private:
 	CMesh* m_pMonster;
 	GLfloat m_fAlpha{ 1.0f };
+	int m_iType;
 	int iRotateCount = 0;
 	int iLookRotCount = 0;
 	int iMovingCount = 0;
 	bool bMovingRotate = false;
 	glm::vec3 vecPlayer3dPos = glm::vec3(0.0f);
 	float fRatio = 0;
+	
+
 public:
-	static Monster* Create(glm::vec3 vPos);
+	static Monster* Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType);
 };
 

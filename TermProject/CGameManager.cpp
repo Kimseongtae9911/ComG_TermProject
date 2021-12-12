@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "Player2.h"
 #include "Player3.h"
+#include "CPortal.h"
 #include "CRenderManager.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
@@ -292,6 +293,13 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 
+	if (m_ObjLst[OBJ_KEY].empty()) {
+		for (auto i : dynamic_cast<CPortal*>(portal)->Get_pMesh()->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 1.0;
+			}
+		}
+	}
 
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);

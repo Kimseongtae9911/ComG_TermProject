@@ -79,10 +79,6 @@ HRESULT CStage1::Initialize()
 
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * 3 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * 3, 1.0f * 3 - 1.0f };
-	cout << "Box left - " << pObj->Get_BB().left << endl;
-	cout << "Box right - " << pObj->Get_BB().right << endl;
-	cout << "Box bottom - " << pObj->Get_BB().bottom << endl;
-	cout << "Box top - " << pObj->Get_BB().top << endl;
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 5 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });

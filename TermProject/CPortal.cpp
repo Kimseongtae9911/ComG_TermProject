@@ -16,7 +16,7 @@ CPortal::~CPortal()
 HRESULT CPortal::Initialize(glm::vec3 vPos)
 {
 	CObj::Initialize();
-	m_pPortal = CMesh::Create("../Resource/Portal Door/Portal Door.obj", { 1.0, 1.0, 1.0, 1.0 });
+	m_pPortal = CMesh::Create("../Resource/Portal Door/Portal Door.obj", { 1.0, 1.0, 1.0, 0.3 });
 	m_pPortal->GetPos() = vPos;
 	m_pPortal->GetScale() = glm::vec3(0.15f, 0.15f, 0.15f);
 	//m_pPortal->GetScale().x = -90;

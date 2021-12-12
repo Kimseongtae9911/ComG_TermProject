@@ -48,6 +48,10 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				++iter_begin;
 		}
 	}
+
+
+
+
 	if (!Get_View() && Get_Camera()->Get_Move()) {
 		if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
 			m_bView = !m_bView;
@@ -252,7 +256,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 		++monster_iter_begin;
 	}
-
+	// map and bullet
 	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end(); ++iter_bullet ) // º¸·ù
 	{
 		BB Bullet_BB = (*iter_bullet)->Get_BB();
@@ -268,6 +272,22 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
 				break;
 			}
+		}
+	}
+
+	CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
+	BB player2D_BB = player2D->Get_BB();
+	CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
+	BB player3D_BB = player3D->Get_BB();
+	CObj* portal = m_ObjLst[OBJ_PORTAL].front();
+	BB portal_BB = portal->Get_BB();
+	if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top);
+	else
+	{
+		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
+		else
+		{
+			cout << "portal collide" << endl;
 		}
 	}
 

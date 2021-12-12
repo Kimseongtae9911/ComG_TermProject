@@ -20,6 +20,7 @@ HRESULT CPortal::Initialize(glm::vec3 vPos)
 	m_pPortal->GetPos() = vPos;
 	m_pPortal->GetScale() = glm::vec3(0.15f, 0.15f, 0.15f);
 	//m_pPortal->GetScale().x = -90;
+	CPortal::Get_BB() = { m_pPortal->GetPos().x - 5.0f * m_pPortal->GetScale().x, m_pPortal->GetPos().x + 5.0f * m_pPortal->GetScale().x,  m_pPortal->GetPos().y + 5.0f * m_pPortal->GetScale().y, m_pPortal->GetPos().y - 5.0f * m_pPortal->GetScale().y };
 
 	return NOERROR;
 }

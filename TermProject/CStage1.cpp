@@ -79,8 +79,8 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
 
-	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj))) // OBJ_MAP ?
+	pObj = CPortal::Create(/*glm::vec3(11.5f, 11.3f, 0.f)*/glm::vec3(5.5f, 1.0f, 0.f));
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj))) // OBJ_MAP ?
 		return E_FAIL;
 
 

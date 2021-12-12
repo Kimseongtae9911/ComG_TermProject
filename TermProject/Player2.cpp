@@ -22,7 +22,7 @@ HRESULT Player2::Initialize()
 	m_Player = CMesh::Create("../Resource/Player2D/Player2D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	//m_Player = CMesh::Create("../Resource/key1/Key.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
-	m_Player->GetTrans() = glm::vec3(-12.0, 0.5, -0.25);
+	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, -0.25);
 	return NOERROR;
 }
 
@@ -49,10 +49,16 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			}			
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
+			m_iMoveDir = LEFT;
+			if (!m_pGameMgr->Collide(m_iMoveDir)) {
+				m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
+			}
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+			m_iMoveDir = RIGHT;
+			if (!m_pGameMgr->Collide(m_iMoveDir)) {
+				m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+			}
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
 			if (!m_bJump) {
@@ -65,10 +71,9 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 
 		}
 		//L, R, T, B
-		Player2::Get_BB() = {m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y};
-		
+		Get_BB() = {m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.5f, m_Player->GetPos().y + 0.5f};
 	}
-	else if(m_pGameMgr->Get_View()){
+	else if(!m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 0.1;
@@ -79,27 +84,49 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		//need to Release Memory
 		exit(0);
 	}
-	if (Player2::m_bJump) {
+	if (m_bJump) {
 		if (Player2::m_iJumpdir == 1) {
-			m_Player->Move(glm::vec3(0.0, 0.2, 0.0));
+			if (m_pGameMgr->JumpCollide(m_iJumpdir)) {
+				m_iJumpdir = -1;
+			}
+			else {
+				m_Player->Move(glm::vec3(0.0, 0.2, 0.0));
 
-			Player2::m_fJumpPos += 0.1f;
+				m_fJumpPos += 0.1f;
+			}
 			if (m_fJumpPos >= 2.0f) {
-				Player2::m_iJumpdir = -1;
+				m_iJumpdir = -1;
 			}
 		}
 		else {
-			m_Player->Move(glm::vec3(0.0, -0.2, 0.0));
+			if (m_pGameMgr->JumpCollide(m_iJumpdir)) {
+				m_iJumpdir = 1;
+				m_bJump = false;
+			}
+			else {
+				m_Player->Move(glm::vec3(0.0, -0.2, 0.0));
 
-			Player2::m_fJumpPos -= 0.1f;
+				m_fJumpPos -= 0.1f;
+			}
 			if (m_fJumpPos <= 0.0f) {
-				Player2::m_iJumpdir = 1;
-				Player2::m_bJump = false;
-				m_Player->Move(glm::vec3(0.0, Player2::m_fJumpStart - m_Player->GetPos().y, 0.0));
+				m_iJumpdir = 1;
+				m_bJump = false;
+				m_Player->Move(glm::vec3(0.0, m_fJumpStart - m_Player->GetPos().y, 0.0));
 			}
 		}
 	}
-
+	if (!m_pGameMgr->JumpCollide(m_iJumpdir) && !m_bJump) {
+		if (m_Player->GetPos().y > 0.01) {
+			m_Player->GetPos().y -= 0.2f;
+			m_fJumpPos = 0.0f;
+			m_fJumpStart = 0.0f;
+		}
+		if (m_Player->GetPos().y < 0) {
+			m_Player->GetPos().y = 0;
+			m_fJumpPos = 0.0f;
+			m_fJumpStart = 0.0f;
+		}
+	}
 	m_pRender-> Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

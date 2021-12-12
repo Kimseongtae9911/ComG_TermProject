@@ -55,6 +55,16 @@ private:
 public:
 	glm::mat4 Get_Matrix();
 	glm::vec3& GetPos() { return m_vec3Translate; }
+	glm::vec3 GetPos2() { 
+		glm::vec3 result(1.0f);
+		glm::mat4 temp(1.0f);
+		glm::vec4 pos = { 0.0, 0.0, 0.0, 1.0 };
+
+		pos = Get_Matrix() * pos;
+
+		result = { pos.x, pos.y, pos.z };
+		return result;
+	}
 	glm::vec3& GetScale() { return m_vec3Scale; }
 	glm::vec3& GetTrans() { return m_vec3Translate; }
 	glm::vec3& GetRotate() { return m_vec3Rotate; }

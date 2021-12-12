@@ -5,6 +5,8 @@
 #include "CCamera.h"
 #include "CKeyManager.h"
 #include "Monster.h"
+#include "Player2.h"
+#include "Player3.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -57,185 +59,144 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	}
 
 	//Player Collide
-	if (m_bView) {
-		//Player Monster, Player Obj, Monster Obj
-		CObj* player = m_ObjLst[OBJ_PLAYER1].front();
-		BB player_BB = player->Get_BB();
-		for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i) 
-		{
-			iter_begin = m_ObjLst[i].begin();
-			iter_end = m_ObjLst[i].end();
-			for (; iter_begin != iter_end;)
-			{
-				BB OBJ_BB = (*iter_begin)->Get_BB();
+	//if (m_bView) {
+	//	//Player Monster, Player Obj, Monster Obj
+	//	CObj* player = m_ObjLst[OBJ_PLAYER1].front();
+	//	BB player_BB = player->Get_BB();
 
-				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top);
-				else {
-					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
-					{
-						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-						{
-							cout << "Top Collide" << endl;
-						}
-						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-						{
-							cout << "Top Collide" << endl;
-						}
-						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-						{
-							cout << "Top Collide" << endl;
-						}
-					}
+	//else {
+	//	CObj* player = m_ObjLst[OBJ_PLAYER2].front();
+	//	BB player_BB = player->Get_BB();
+	//	for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i) {
+	//		iter_begin = m_ObjLst[i].begin();
+	//		iter_end = m_ObjLst[i].end();
+	//		for (; iter_begin != iter_end;)
+	//		{
+	//			BB OBJ_BB = (*iter_begin)->Get_BB();
+	//			if (i == OBJ_BOX) {
+	//				cout << "BOX BB left - " << OBJ_BB.left << endl;
+	//				cout << "BOX BB right - " << OBJ_BB.right << endl;
+	//				cout << "BOX BB top - " << OBJ_BB.top << endl;
+	//				cout << "BOX BB bottom - " << OBJ_BB.bottom << endl;
+	//			}
 
-					else if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
-					{
-						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-						{
-							cout << "Bottom Collide" << endl;
-						}
-						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-						{
-							cout << "Bottom Collide" << endl;
-						}
-						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-						{
-							cout << "Bottom Collide" << endl;
-						}
-					}
+	//			if (OBJ_BB.right >= player_BB.left && OBJ_BB.left <= player_BB.left && OBJ_BB.right <= player_BB.right)
+	//			{
+	//				if (player_BB.top <= OBJ_BB.top && player_BB.top >= OBJ_BB.bottom) {
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				else if (player_BB.bottom <= OBJ_BB.top && player_BB.bottom >= OBJ_BB.bottom) {
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				else if(player_BB.bottom <= OBJ_BB.bottom && player_BB.top >= OBJ_BB.top) {
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				/*if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top && player_BB.top >= OBJ_BB.bottom)
+	//				{
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
+	//				{
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.top <= player_BB.top)
+	//				{
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+	//				{
+	//					cout << "left Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = LEFT;
+	//				}
+	//				else
+	//				{
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = 0;
+	//				}*/
+	//			}
 
-					else if (OBJ_BB.right >= player_BB.left && (OBJ_BB.left + OBJ_BB.right) / 2 <= player_BB.left)
-					{
-						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-					}
+	//			else if (OBJ_BB.left <= player_BB.right && (OBJ_BB.left + OBJ_BB.right) / 2 >= player_BB.right)
+	//			{
+	//				if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+	//				{
+	//					cout << "right Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = RIGHT;
+	//				}
+	//				else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
+	//				{
+	//					cout << "right Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = RIGHT;
+	//				}
+	//				else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+	//				{
+	//					cout << "right Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = RIGHT;
+	//				}
+	//				else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+	//				{
+	//					cout << "right Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = RIGHT;
+	//				}
+	//				else
+	//				{
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = 0;
+	//				}
+	//			}
+	//			else if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
+	//			{
+	//				if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+	//				{
+	//					cout << "Top Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = UP;
+	//				}
+	//				else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+	//				{
+	//					cout << "Top Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = UP;
+	//				}
+	//				else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+	//				{
+	//					cout << "Top Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = UP;
+	//				}
+	//				else
+	//				{
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = 0;
+	//				}
+	//			}
 
-					else if (OBJ_BB.left <= player_BB.right && (OBJ_BB.left + OBJ_BB.right) / 2 >= player_BB.right)
-					{
-						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-					}
-				}
-				++iter_begin;
-			}
-		}
-	}
-	else {
-		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
-		BB player_BB = player->Get_BB();
-		for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i) {
-			iter_begin = m_ObjLst[i].begin();
-			iter_end = m_ObjLst[i].end();
-			for (; iter_begin != iter_end;)
-			{
-				BB OBJ_BB = (*iter_begin)->Get_BB();
-
-				if (player_BB.left > OBJ_BB.right || player_BB.right < OBJ_BB.left || player_BB.top < OBJ_BB.bottom || player_BB.bottom > OBJ_BB.top);
-				else {
-					//cout << "Collide" << endl;
-					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
-					{
-						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-						{
-							cout << "Top Collide" << endl;
-						}
-						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-						{
-							cout << "Top Collide" << endl;
-						}
-						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-						{
-							cout << "Top Collide" << endl;
-						}
-					}
-
-					else if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
-					{
-						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-						{
-							cout << "Bottom Collide" << endl;
-						}
-						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-						{
-							cout << "Bottom Collide" << endl;
-						}
-						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-						{
-							cout << "Bottom Collide" << endl;
-						}
-					}
-
-					else if (OBJ_BB.right >= player_BB.left && (OBJ_BB.left + OBJ_BB.right) / 2 <= player_BB.left)
-					{
-						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
-						{
-							cout << "left Collide" << endl;
-						}
-					}
-
-					else if (OBJ_BB.left <= player_BB.right && (OBJ_BB.left + OBJ_BB.right) / 2 >= player_BB.right)
-					{
-						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
-						{
-							cout << "right Collide" << endl;
-						}
-					}
-				}
-				++iter_begin;
-			}
-		}
-	}
+	//			else if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
+	//			{
+	//				if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+	//				{
+	//					cout << "Bottom Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = DOWN;
+	//				}
+	//				else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+	//				{
+	//					cout << "Bottom Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = DOWN;
+	//				}
+	//				else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+	//				{
+	//					cout << "Bottom Collide" << endl;
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = DOWN;
+	//				}
+	//				else
+	//				{
+	//					dynamic_cast<Player3*>(player)->GetC_Dir() = 0;
+	//				}
+	//			}
+	//			
+	//			++iter_begin;
+	//		}
+	//	}
+	//}
 
 	//Monster Map Collide
 	list<CObj*>::iterator monster_iter_begin = m_ObjLst[OBJ_MONSTER1].begin();
@@ -294,6 +255,267 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		m_pCamera->Update(fTimeDelta);
 
 	return GLvoid();
+}
+
+bool CGameManager::Collide(int num)
+{
+	if (m_bView) {
+		CObj* player = m_ObjLst[OBJ_PLAYER1].front();
+		BB player_BB = player->Get_BB();
+		switch (num) {
+		case LEFT:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.right >= player_BB.left && (OBJ_BB.left + OBJ_BB.right) / 2 <= player_BB.left)
+					{
+						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+						{
+							return true;
+						}
+					}
+					++iter_begin;
+				}
+			}
+			break;
+		case RIGHT:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (player_BB.right >= OBJ_BB.left && player_BB.left <= OBJ_BB.left)
+					{
+						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+						{
+							return true;
+						}
+					}
+					++iter_begin;
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else {
+		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
+		BB player_BB = player->Get_BB();
+		switch (num) {
+		case LEFT:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.right >= player_BB.left && (OBJ_BB.left + OBJ_BB.right) / 2 <= player_BB.left)
+					{
+						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+						{
+							return true;
+						}
+					}
+					++iter_begin;
+				}
+			}
+			break;
+		case RIGHT:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.left <= player_BB.right && (OBJ_BB.left + OBJ_BB.right) / 2 >= player_BB.right)
+					{
+						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+						{
+							return true;
+						}
+						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+						{
+							return true;
+						}
+					}
+					++iter_begin;
+				}
+			}
+			break;
+		case UP:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
+					{
+						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+						{
+							return true;
+						}
+					}
+					++iter_begin;
+				}
+			}
+			break;
+		case DOWN:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
+					{
+						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+						{
+							return true;
+						}
+					}
+					++iter_begin;
+				}
+			}
+			break;
+		}
+	}
+	return false;
+}
+
+bool CGameManager::JumpCollide(int num) {
+	CObj* player = m_ObjLst[OBJ_PLAYER1].front();
+	BB player_BB = player->Get_BB();
+	if (dynamic_cast<Player2*>(player)->GetJump()) {
+		switch (num) {
+		case 1:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
+					{
+						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+						{
+							return true;
+						}
+					}
+					iter_begin++;
+				}
+			}
+			break;
+		case -1:
+			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			{
+				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
+					{
+						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+						{
+							return true;
+						}
+					}
+					iter_begin++;
+				}
+			}
+			break;
+		}
+	}
+	return false;
 }
 
 HRESULT CGameManager::Clear_ObjList()

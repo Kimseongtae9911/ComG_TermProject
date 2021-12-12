@@ -23,6 +23,8 @@ public:
 	CCamera* Get_Camera() { return m_pCamera; };
 	bool Get_View() { return m_bView; };
 	list<CObj*>& Get_Obj(OBJID ID) { return m_ObjLst[ID]; };
+	bool Collide(int num);
+	bool JumpCollide(int num);
 
 private:
 	CCamera* m_pCamera = nullptr;

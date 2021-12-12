@@ -65,6 +65,77 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				else {
 					//cout << "Collide" << endl;
 					//Collide with Monster --> 
+					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
+					{
+						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+						{
+							cout << "Top Collide" << endl;
+						}
+						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+						{
+							cout << "Top Collide" << endl;
+						}
+						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+						{
+							cout << "Top Collide" << endl;
+						}
+					}
+
+					else if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
+					{
+						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+						{
+							cout << "Bottom Collide" << endl;
+						}
+						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+						{
+							cout << "Bottom Collide" << endl;
+						}
+						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+						{
+							cout << "Bottom Collide" << endl;
+						}
+					}
+
+					else if (OBJ_BB.right >= player_BB.left && (OBJ_BB.left + OBJ_BB.right) / 2 <= player_BB.left)
+					{
+						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+						{
+							cout << "left Collide" << endl;
+						}
+						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
+						{
+							cout << "left Collide" << endl;
+						}
+						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+						{
+							cout << "left Collide" << endl;
+						}
+						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+						{
+							cout << "left Collide" << endl;
+						}
+					}
+
+					else if (OBJ_BB.left <= player_BB.right && (OBJ_BB.left + OBJ_BB.right) / 2 >= player_BB.right)
+					{
+						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
+						{
+							cout << "right Collide" << endl;
+						}
+						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
+						{
+							cout << "right Collide" << endl;
+						}
+						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
+						{
+							cout << "right Collide" << endl;
+						}
+						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
+						{
+							cout << "right Collide" << endl;
+						}
+					}
 				}
 				++iter_begin;
 			}

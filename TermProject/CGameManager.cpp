@@ -1,6 +1,7 @@
 #include"stdafx.h"
 #include "CGameManager.h"
 #include "CKeyManager.h"
+#include "CMesh.h"
 #include "CObj.h"
 #include "CCamera.h"
 #include "CKeyManager.h"
@@ -261,7 +262,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			if (Bullet_BB.left > Map_BB.right || Bullet_BB.right < Map_BB.left || Bullet_BB.top < Map_BB.bottom || Bullet_BB.bottom > Map_BB.top);
 			else
 			{
-				SafeDelete((*iter_bullet));
+				//SafeDelete((*iter_bullet));
 				iter_bullet = m_ObjLst[OBJ_BULLET].erase(iter_bullet);
 				break;
 			}
@@ -282,7 +283,7 @@ bool CGameManager::Collide(int num)
 		BB player_BB = player->Get_BB();
 		switch (num) {
 		case LEFT:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i <= OBJ_KEY; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -293,18 +294,34 @@ bool CGameManager::Collide(int num)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 					}
@@ -313,7 +330,7 @@ bool CGameManager::Collide(int num)
 			}
 			break;
 		case RIGHT:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i <= OBJ_KEY; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -324,18 +341,34 @@ bool CGameManager::Collide(int num)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 					}
@@ -352,7 +385,7 @@ bool CGameManager::Collide(int num)
 		BB player_BB = player->Get_BB();
 		switch (num) {
 		case LEFT:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i < OBJ_KEY; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -383,7 +416,7 @@ bool CGameManager::Collide(int num)
 			}
 			break;
 		case RIGHT:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i < OBJ_KEY; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -414,7 +447,7 @@ bool CGameManager::Collide(int num)
 			}
 			break;
 		case UP:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i < OBJ_KEY; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -441,7 +474,7 @@ bool CGameManager::Collide(int num)
 			}
 			break;
 		case DOWN:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i < OBJ_KEY; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -489,14 +522,26 @@ bool CGameManager::JumpCollide(int num) {
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
 							return true;
 						}
 					}
@@ -516,14 +561,33 @@ bool CGameManager::JumpCollide(int num) {
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
+							float dis = OBJ_BB.top - player_BB.bottom;
+							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
+
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
+							float dis = OBJ_BB.top - player_BB.bottom;
+							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
+							if (i == OBJ_KEY) {
+								iter_begin = m_ObjLst[i].erase(iter_begin);
+								return false;
+							}
+							float dis = OBJ_BB.top - player_BB.bottom;
+							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 							return true;
 						}
 					}
@@ -531,6 +595,52 @@ bool CGameManager::JumpCollide(int num) {
 				}
 			}
 			break;
+		}
+	}
+	else {
+		for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+		{
+			list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
+			list<CObj*>::iterator iter_end = m_ObjLst[i].end();
+			for (; iter_begin != iter_end;)
+			{
+				BB OBJ_BB = (*iter_begin)->Get_BB();
+				if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
+				{
+					if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
+					{
+						if (i == OBJ_KEY) {
+							iter_begin = m_ObjLst[i].erase(iter_begin);
+							return false;
+						}
+						float dis = OBJ_BB.top - player_BB.bottom;
+						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
+
+						return true;
+					}
+					else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
+					{
+						if (i == OBJ_KEY) {
+							iter_begin = m_ObjLst[i].erase(iter_begin);
+							return false;
+						}
+						float dis = OBJ_BB.top - player_BB.bottom;
+						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
+						return true;
+					}
+					else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
+					{
+						if (i == OBJ_KEY) {
+							iter_begin = m_ObjLst[i].erase(iter_begin);
+							return false;
+						}
+						float dis = OBJ_BB.top - player_BB.bottom;
+						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
+						return true;
+					}
+				}
+				iter_begin++;
+			}
 		}
 	}
 	return false;

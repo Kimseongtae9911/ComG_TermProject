@@ -18,6 +18,8 @@ public:
 	virtual int& GetC_Dir() { return m_iCollideDir; }
 	virtual int& GetM_Dir() { return m_iMoveDir; }
 	virtual bool& GetJump() { return m_bJump; }
+	CMesh* GetP() { return m_Player; }
+
 private:
 	CMesh* m_Player;
 

@@ -31,10 +31,6 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
-	cout << "Player BB left - " << Player3::Get_BB().left << endl;
-	cout << "Player BB right - " << Player3::Get_BB().right << endl;
-	cout << "Player BB top - " << Player3::Get_BB().top << endl;
-	cout << "Player BB bottom - " << Player3::Get_BB().bottom << endl;
 	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move()) { // 3DPlayer
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {

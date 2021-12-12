@@ -56,6 +56,8 @@ HRESULT CMainGame::Initialize_Shader()
 {
 	if (FAILED(CShader::GetInstance()->Add_Shader("Default", "vertex.glsl", "fragment.glsl")))
 		return E_FAIL;
+	if (FAILED(CShader::GetInstance()->Add_Shader("UI", "Vertex_UI.glsl", "Fragement_UI.glsl")))
+		return E_FAIL;
 	return NOERROR;
 }
 

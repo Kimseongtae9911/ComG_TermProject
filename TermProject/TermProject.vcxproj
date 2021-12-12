@@ -151,6 +151,8 @@
     <ClCompile Include="CObj.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="COV.cpp" />
+    <ClCompile Include="CPlane.cpp" />
+    <ClCompile Include="CPortal.cpp" />
     <ClCompile Include="CRenderManager.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
@@ -172,6 +174,8 @@
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CObj.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CPlane.h" />
+    <ClInclude Include="CPortal.h" />
     <ClInclude Include="CRenderManager.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
@@ -189,8 +193,10 @@
     <ClInclude Include="Struct.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Fragement_UI.glsl" />
     <None Include="fragment.glsl" />
     <None Include="vertex.glsl" />
+    <None Include="Vertex_UI.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

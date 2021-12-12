@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "CObject.h"
 #include "CCamera.h"
+#include "CPortal.h"
 #include "CRenderManager.h"
 #include "CGameManager.h"
 
@@ -23,6 +24,10 @@ HRESULT CStage1::Initialize()
 	CScene::Initialize();
 	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 6.5f, 30.f), glm::vec3(0.f, 6.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
+	pObj = CPortal::Create("../Resource/UI/portal/portal.png", glm::vec3(100.f, 150.f, 0.f), glm::vec3(1.f));
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+		return E_FAIL;
+
 	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
 		return E_FAIL;

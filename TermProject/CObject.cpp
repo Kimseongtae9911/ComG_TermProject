@@ -25,8 +25,8 @@ HRESULT CObject::Initialize(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 GLint CObject::Update(const GLfloat fTimeDelta)
 {
-	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	CObject::Get_BB() = {m_pObject->GetPos().x - 0.5f, m_pObject->GetPos().x + 0.5f, m_pObject->GetPos().y + 0.5f, m_pObject->GetPos().y - 0.5f};
+	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
 

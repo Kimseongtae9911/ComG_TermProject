@@ -19,6 +19,7 @@ public:
 	virtual int& GetM_Dir() { return m_iMoveDir; }
 	virtual bool& GetJump() { return m_bJump; }
 	CMesh* GetP() { return m_Player; }
+	bool& Get_Portal() { return m_bPortal; }
 
 private:
 	CMesh* m_Player;
@@ -31,6 +32,7 @@ private:
 	GLfloat m_fJumpStart{ 0.f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
 	int m_iMoveDir{ 0 };
+	bool m_bPortal{ false };
 
 public:
 	static Player2* Create();

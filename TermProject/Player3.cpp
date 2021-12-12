@@ -31,7 +31,7 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
-	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move()) { // 3DPlayer
+	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 3DPlayer
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
@@ -115,7 +115,9 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 			}
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_A)) {
-			//interaction
+			if (m_bIn_Portal) {
+				m_bPortal = true;
+			}
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f};
 	}

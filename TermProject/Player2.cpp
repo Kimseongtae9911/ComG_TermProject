@@ -76,7 +76,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 					m_Player->Move(glm::vec3(0.0, 0.2, 0.0));
 					m_fJumpPos += 0.1f;
 				}
-				if (m_fJumpPos >= 2.5f) {
+				if (m_fJumpPos >= 2.0f) {
 					m_iJumpdir = -1;
 				}
 			}

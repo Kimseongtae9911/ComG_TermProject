@@ -106,7 +106,7 @@ HRESULT CStage1::Initialize()
 
 
 	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj))) // OBJ_MAP ?
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj)))
 		return E_FAIL;
 
 
@@ -118,10 +118,6 @@ HRESULT CStage1::Initialize()
 
 	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(0.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
-		return E_FAIL;
-
-	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 10.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
 		return E_FAIL;
 
 	/*pObj = CBossMonster::Create();

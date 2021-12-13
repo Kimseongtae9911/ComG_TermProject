@@ -29,7 +29,7 @@ HRESULT CMainGame::Initialize()
 
 
 
-	CSceneManager::GetInstance()->SceneChange(SCENE_STAGE1);
+	CSceneManager::GetInstance()->SceneChange(SCENE_LOGO);
 
 	return NOERROR;
 }

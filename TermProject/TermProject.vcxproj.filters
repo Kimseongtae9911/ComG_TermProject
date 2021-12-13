@@ -94,7 +94,13 @@
     <Filter Include="소스 파일\02 Scene\02 Stage1">
       <UniqueIdentifier>{55417be8-9d60-4e62-b04f-b68586091ce9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02 Scene\03 stage2">
+    <Filter Include="소스 파일\01 Obj\06 Sprite">
+      <UniqueIdentifier>{1c8fa994-7d86-43ba-a09e-15bca24abdff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02 Scene\00 Logo">
+      <UniqueIdentifier>{6fce3d52-ba04-4438-add1-2de1c0d61af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02 Scene\03 Stage2">
       <UniqueIdentifier>{29a37f74-d925-4795-9ab8-6fdfbc2edf1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -175,7 +181,13 @@
       <Filter>소스 파일\01 Obj\05 BackImage</Filter>
     </ClCompile>
     <ClCompile Include="CStage2.cpp">
-      <Filter>소스 파일\02 Scene\03 stage2</Filter>
+      <Filter>소스 파일\02 Scene\03 Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="CSprite.cpp">
+      <Filter>소스 파일\01 Obj\06 Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="CLogo.cpp">
+      <Filter>소스 파일\02 Scene\00 Logo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,7 +279,13 @@
       <Filter>소스 파일\01 Obj\05 BackImage</Filter>
     </ClInclude>
     <ClInclude Include="CStage2.h">
-      <Filter>소스 파일\02 Scene\03 stage2</Filter>
+      <Filter>소스 파일\02 Scene\03 Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="CSprite.h">
+      <Filter>소스 파일\01 Obj\06 Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="CLogo.h">
+      <Filter>소스 파일\02 Scene\00 Logo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

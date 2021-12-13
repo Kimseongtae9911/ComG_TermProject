@@ -149,6 +149,7 @@
     <ClCompile Include="CFrameManager.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CObj.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSphere.cpp" />
+    <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CStage1.cpp" />
     <ClCompile Include="CStage2.cpp" />
     <ClCompile Include="CTexture.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="CFrameManager.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CLogo.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CObj.h" />
@@ -188,6 +191,7 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CSphere.h" />
+    <ClInclude Include="CSprite.h" />
     <ClInclude Include="CStage1.h" />
     <ClInclude Include="CStage2.h" />
     <ClInclude Include="CTexture.h" />

@@ -153,7 +153,6 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			if (Get_View()) {
 				if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
 					if (m_ObjLst[OBJ_KEY].empty()) {
-						cout << "portal Collide" << endl;
 						dynamic_cast<Player2*>(player2D)->Get_Portal() = true;
 					}
 				}
@@ -164,13 +163,11 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		{
 			if (!Get_View()) {
 				if (m_ObjLst[OBJ_KEY].empty()) {
-					cout << "portal Collide" << endl;
 					dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
 				}
 			}
 		}
 		if (dynamic_cast<Player2*>(player2D)->Get_Portal() && dynamic_cast<Player3*>(player3D)->Get_Portal()) {
-			cout << "Next Stage" << endl;
 			bPortalCollide = true;
 		}
 

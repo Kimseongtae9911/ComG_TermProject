@@ -904,7 +904,7 @@ bool CGameManager::JumpCollide(int num) {
 	if (dynamic_cast<Player2*>(player)->GetJump()) {
 		switch (num) {
 		case 1:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i < OBJ_SPIKE; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();

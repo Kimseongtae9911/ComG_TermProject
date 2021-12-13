@@ -101,10 +101,13 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
 		}
 		if (!m_pGameMgr->JumpCollide(m_iJumpdir) && !m_bJump) {
-			if (m_Player->GetPos().y > 0.01) {
+ 			if (m_Player->GetPos().y > 0.01) {
 				m_Player->GetPos().y -= 0.2f;
 				m_fJumpPos = 0.0f;
 				m_fJumpStart = 0.0f;
+			}
+			if (Collide_Spike()) {
+				cout << "Die" << endl;
 			}
 			if (m_Player->GetPos().y < 0) {
 				m_Player->GetPos().y = 0;

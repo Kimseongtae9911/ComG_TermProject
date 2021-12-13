@@ -21,7 +21,6 @@ HRESULT Player3::Initialize()
 {
 	CObj::Initialize();
 	m_Player = CMesh::Create("../Resource/Player3D/Player3D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
-	//m_Player = CMesh::Create("../Resource/Spike/spike.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
 	m_Player->GetTrans() = glm::vec3(12.0, 1.0, -0.25);
@@ -115,7 +114,6 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 				m_Player->Move(glm::vec3(0.0, -0.1, 0.0));
 			}
 		}
-		cout << "m_bCollideB - " << m_bCollideB << endl;
 
 		if (!m_bCollideB) {
 			if (m_pKeyMgr->KeyDown(KEY_A)) {

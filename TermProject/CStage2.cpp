@@ -91,12 +91,12 @@ HRESULT CStage2::Initialize()
 			return E_FAIL;
 	}
 
-	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-13.0f, 12.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-13.0f, 12.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
 	pObj->Get_BB() = { -13.5f, -12.5f, 12.5f, 11.5f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-3.0f, 1.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-3.0f, 1.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
 	pObj->Get_BB() = { -3.5f, -2.5f, 1.5f, 0.5f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;

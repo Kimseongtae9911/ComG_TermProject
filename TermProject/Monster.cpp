@@ -87,7 +87,9 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
 		{
 			if (m_iType == 0) {
-				m_pMonster->GetPos().x += 0.04;
+				if (!m_pGameMgr->MonCollide(RIGHT)) {
+					m_pMonster->GetPos().x += 0.04;
+				}
 				m_iDir = 1;
 			}
 			else {
@@ -98,7 +100,9 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else
 		{
 			if (m_iType == 0) {
-				m_pMonster->GetPos().x -= 0.04;
+				if (!m_pGameMgr->MonCollide(LEFT)) {
+					m_pMonster->GetPos().x -= 0.04;
+				}
 				m_iDir = -1;
 			}
 			else {
@@ -109,7 +113,9 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
 		{
 			if (m_iType == 0) {
-				m_pMonster->GetPos().y += 0.04;
+				if (!m_pGameMgr->MonCollide(UP)) {
+					m_pMonster->GetPos().y += 0.04;
+				}
 			}
 			else {
 				m_pMonster->GetPos().y += 0.035;
@@ -118,7 +124,9 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else 
 		{
 			if (m_iType == 0) {
-				m_pMonster->GetPos().y -= 0.04;
+				if (!m_pGameMgr->MonCollide(DOWN)) {
+					m_pMonster->GetPos().y -= 0.04;
+				}
 			}
 			else {
 				m_pMonster->GetPos().y -= 0.035;
@@ -128,19 +136,28 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	else if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		m_pMonster->GetRotate().y = 0;
-		m_pMonster->GetPos().x += 0.08 * m_iDir;
+		m_pMonster->GetPos().x += 0.06 * m_iDir;
 
 		if (m_pMonster->GetPos().x + 0.5 >= 13)
 			m_iDir = -1;
 		else if (m_pMonster->GetPos().x - 0.5 <= -14)
 			m_iDir = 1;
 		
+		if (m_iType == 0) {
+			if (!m_pGameMgr->MonCollide(DOWN)) {
+				m_pMonster->GetPos().y -= 0.2f;
+
+				if (m_pMonster->GetPos().y <= 0.0f) {
+					m_pMonster->GetPos().y = 0.0f;
+				}
+			}
+		}
 	}
 	if (m_pGameMgr->Get_View()) {
 		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 1.0f, m_pMonster->GetPos().y};
 	}
 	else {
-		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y, m_pMonster->GetPos().y - 1.0f };
+		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 0.5f, m_pMonster->GetPos().y - 0.5f };
 	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();

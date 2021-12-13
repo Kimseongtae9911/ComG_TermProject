@@ -27,9 +27,10 @@ public:
 	bool Get_View() { return m_bView; };
 	list<CObj*>& Get_Obj(OBJID ID) { return m_ObjLst[ID]; };
 	bool Collide(int num);
+	bool MonCollide(int num);
 	bool JumpCollide(int num);
 	bool bPortalCollide = false;
-
+	
 private:
 	CCamera* m_pCamera = nullptr;
 	list<CObj*> m_ObjLst[OBJ_END];

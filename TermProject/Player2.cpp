@@ -93,7 +93,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 				m_iJumpdir = -1;
 			}
 		}
-		else {
+		else {     
 			if (m_pGameMgr->JumpCollide(m_iJumpdir)) {
 				m_iJumpdir = 1;
 				m_fJumpPos = 0.0f;
@@ -125,7 +125,6 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		}
 		Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
 	}
-
 	m_pRender-> Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

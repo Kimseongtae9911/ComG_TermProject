@@ -23,6 +23,7 @@ private:
 	int iLookRotCount = 0;
 	int iMovingCount = 0;
 	bool bMovingRotate = false;
+	bool bMoveUpDown = false;
 	glm::vec3 vecPlayer3dPos = glm::vec3(0.0f);
 	int m_iDir{ 1 };
 	float fTime = 0;

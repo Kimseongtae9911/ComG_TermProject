@@ -103,6 +103,9 @@
     <Filter Include="소스 파일\02 Scene\03 Stage2">
       <UniqueIdentifier>{29a37f74-d925-4795-9ab8-6fdfbc2edf1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02 Scene\99 Loading">
+      <UniqueIdentifier>{540f6b7d-a85f-4572-aeaf-655f9984144a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">

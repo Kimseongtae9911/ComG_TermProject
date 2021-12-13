@@ -26,6 +26,22 @@ HRESULT CBossMonster::Initialize()
 
 GLint CBossMonster::Update(const GLfloat fTimeDelta)
 {
+	if (m_pGameMgr->Get_View())
+	{
+		if (!bMoveUpDown && m_pBossMonster->GetPos().y >= 5.f)
+		{
+			bMoveUpDown = !bMoveUpDown;
+		}
+		else if (bMoveUpDown && m_pBossMonster->GetPos().y <= 0.f)
+		{
+			bMoveUpDown = !bMoveUpDown;
+		}
+		if(!bMoveUpDown)
+			m_pBossMonster->GetPos().y += 0.05f;
+		else
+			m_pBossMonster->GetPos().y -= 0.05f;
+		
+	}
 	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
 	{
 		++iRotateCount;

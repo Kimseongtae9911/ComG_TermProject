@@ -10,6 +10,7 @@
 #include "CGameManager.h"
 #include "CCamera.h"
 
+
 CBossMonster::CBossMonster()
 {
 }
@@ -33,10 +34,145 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		float f = LookPlayerAngle();
-		if (f >= 0 && f <= 45)
+		if (f >= 0 && f <= 22.5)
 		{
-
+			if (f >= 0 && f <= 22.5 && m_pBossMonster->GetRotate().y != 360 && m_pBossMonster->GetRotate().y <= 45)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y < 0)
+					m_pBossMonster->GetRotate().y = 360;
+			}
 		}
+		else if (f >= 360 - 22.5 && f <= 360)
+		{
+			if (f >= 360 - 22.5 && f <= 360 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y >= 360 - 45)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y > 360)
+					m_pBossMonster->GetRotate().y = 0;
+			}
+		}
+		//if (f >= 360 - 22.5 && f <= 22.5)
+		//{
+		//	if (f >= 0 && f <= 22.5 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y <= 45)
+		//	{
+		//		m_pBossMonster->GetRotate().y -= 2.5;
+		//		if (m_pBossMonster->GetRotate().y < 0)
+		//			m_pBossMonster->GetRotate().y = 360;
+		//	}
+		//	else if (f >= 360 - 22.5 && f <= 360 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y >= 360 - 45)
+		//	{
+		//		m_pBossMonster->GetRotate().y += 2.5;
+		//		if (m_pBossMonster->GetRotate().y > 360)
+		//			m_pBossMonster->GetRotate().y = 0;
+		//	}
+		//}
+		else if (f >= 22.5 && f <= 67.5)
+		{
+			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 45)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y >= 45)
+					m_pBossMonster->GetRotate().y = 45;
+			}
+			else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 45)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y <= 45)
+					m_pBossMonster->GetRotate().y = 45;
+			}
+		}
+		else if (f >= 67.5 && f <= 112.5)
+		{
+			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 90)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y >= 90)
+					m_pBossMonster->GetRotate().y = 90;
+			}
+			else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 90)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y <= 90)
+					m_pBossMonster->GetRotate().y = 90;
+			}
+		}
+		else if (f >= 112.5 && f <= 157.5)
+		{
+			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 135)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y >= 135)
+					m_pBossMonster->GetRotate().y = 135;
+			}
+			else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 135)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y <= 135)
+					m_pBossMonster->GetRotate().y = 135;
+			}
+		}
+		else if (f >= 157.5 && f <= 202.5)
+		{
+			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 180)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y >= 180)
+					m_pBossMonster->GetRotate().y = 180;
+			}
+			else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 180)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y <= 180)
+					m_pBossMonster->GetRotate().y = 180;
+			}
+		}
+		else if (f >= 202.5 && f <= 247.5)
+		{
+			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 225)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y >= 225)
+					m_pBossMonster->GetRotate().y = 225;
+			}
+			else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 225)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y <= 225)
+					m_pBossMonster->GetRotate().y = 225;
+			}
+		}
+		else if (f >= 247.5 && f <= 292.5)
+		{
+			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 270)
+			{
+				m_pBossMonster->GetRotate().y += 2.5;
+				if (m_pBossMonster->GetRotate().y >= 270)
+					m_pBossMonster->GetRotate().y = 270;
+			}
+			else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 270)
+			{
+				m_pBossMonster->GetRotate().y -= 2.5;
+				if (m_pBossMonster->GetRotate().y <= 270)
+					m_pBossMonster->GetRotate().y = 270;
+			}
+		}
+		else if (f >= 292.5 && f <= 337.5)
+		{
+		if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 315)
+		{
+			m_pBossMonster->GetRotate().y += 2.5;
+			if (m_pBossMonster->GetRotate().y >= 315)
+				m_pBossMonster->GetRotate().y = 315;
+		}
+		else if (f <= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 315)
+		{
+			m_pBossMonster->GetRotate().y -= 2.5;
+			if (m_pBossMonster->GetRotate().y <= 315)
+				m_pBossMonster->GetRotate().y = 315;
+		}
+		}
+
 		//if (f >= m_pBossMonster->GetRotate().y)
 		//{
 		//	if (f - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
@@ -114,9 +250,25 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	}
 
 	
-	if (fTime >= 5 && m_pGameMgr->Get_View())
+	if (fTime >= 3 && m_pGameMgr->Get_View())
 	{
-		CObj* pObj = CBullet::Create(m_pBossMonster->GetPos() + glm::vec3(0,2.5f,0));
+		int Height = RandHeight();
+		float fHeight = 0;
+		switch (Height)
+		{
+		case 0:
+			fHeight = 4.5f;
+			break;
+		case 1:
+			fHeight = 8.f;
+			break;
+		case 2:
+			fHeight = 12.f;
+			break;
+		default:
+			break;
+		}
+		CObj* pObj = CBullet::Create(glm::vec3(m_pBossMonster->GetPos().x,fHeight,0));
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))
 			return E_FAIL;
 		cout << "11" << endl;
@@ -124,13 +276,23 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	}
 	else if (f3DTime >= 5 && !m_pGameMgr->Get_View())
 	{
-		CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
-		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
-			return E_FAIL;
+		//CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+		//if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+		//	return E_FAIL;
 		f3DTime = 0;
 	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
+}
+
+
+int CBossMonster::RandHeight()
+{
+	std::random_device rd;
+	std::default_random_engine dre(rd());
+	std::uniform_int_distribution<int> uid(0, 2);
+	int iRand = uid(dre);
+	return iRand;
 }
 
 float CBossMonster::LookPlayerAngle()

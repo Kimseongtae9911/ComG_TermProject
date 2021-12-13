@@ -116,13 +116,13 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(0.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
+	/*pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(0.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
-		return E_FAIL;
+		return E_FAIL;*/
 
-	//pObj = CBossMonster::Create();
-	//if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
-	//	return E_FAIL;
+	pObj = CBossMonster::Create();
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+		return E_FAIL;
 	return NOERROR;
 }
 

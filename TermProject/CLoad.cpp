@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CLoad.h"
 #include "CSprite.h"
+#include "CBackImage.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
 #include "CRenderManager.h"
@@ -18,6 +19,9 @@ CLoad::~CLoad()
 HRESULT CLoad::Initialize()
 {
 	CScene::Initialize();
+	CObj* pObj = CBackImage::Create("", "../Resource/UI/Back/backload.png");
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+		return E_FAIL;
 	m_pAni = new CObj * [16];
 	float x = 1200.f;
 	float y = 50.f;

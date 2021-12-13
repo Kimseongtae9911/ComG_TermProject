@@ -23,10 +23,10 @@ HRESULT CLogo::Initialize()
 	//m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 6.5f, 30.f), glm::vec3(0.f, 6.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
 
-	pObj = CBackImage::Create("", "../Resource/UI/Back/title4.png");
+	pObj = CBackImage::Create("", "../Resource/UI/Back/background.png");
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
 		return E_FAIL;
-	pObj = CSprite::Create(glm::vec3(640.f, 230.f, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/pressenter.png");
+	pObj = CSprite::Create(glm::vec3(1040.f, 100.f, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/pressenter.png");
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
 		return E_FAIL;
 	

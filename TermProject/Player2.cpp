@@ -6,6 +6,7 @@
 #include "CShader.h"
 #include "CGameManager.h"
 #include "CCamera.h"
+#include "CObject.h"
 
 Player2::Player2()
 {
@@ -126,6 +127,9 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 	
+	if (Collide_Spike()) {
+		cout << "Die" << endl;
+	}
 	m_pRender-> Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
@@ -138,11 +142,31 @@ GLvoid Player2::Render()
 	return GLvoid();
 }
 
-
 Player2* Player2::Create()
 {
 	Player2* pInstance = new Player2;
 	if (FAILED(pInstance->Initialize()))
 		SafeDelete(pInstance);
 	return pInstance;
+}
+
+bool Player2::Collide_Spike()
+{
+	list<CObj*>::iterator iter_begin;
+	list<CObj*>::iterator iter_end;
+	iter_begin = m_pGameMgr->Get_Obj(OBJ_SPIKE).begin();
+	iter_end = m_pGameMgr->Get_Obj(OBJ_SPIKE).end();
+
+	for (; iter_begin != iter_end;) {
+		glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+		BB OBJ_BB = {temp.x - 0.75, temp.x + 0.75, temp.y + 0.5, temp.y - 0.5};
+		BB player_BB = Player2::Get_BB();
+		if (OBJ_BB.left > player_BB.right || OBJ_BB.right < player_BB.left || OBJ_BB.top < player_BB.bottom || OBJ_BB.bottom > player_BB.top);
+		else {			
+			return true;
+		}
+
+		++iter_begin;
+	}
+	return false;
 }

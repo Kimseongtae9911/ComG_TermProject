@@ -138,7 +138,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		m_pMonster->GetRotate().y = 0;
 		m_pMonster->GetPos().x += 0.06 * m_iDir;
 
-		if (m_pMonster->GetPos().x + 0.5 >= 13)
+		if (m_pMonster->GetPos().x >= 13)
 			m_iDir = -1;
 		else if (m_pMonster->GetPos().x - 0.5 <= -14)
 			m_iDir = 1;

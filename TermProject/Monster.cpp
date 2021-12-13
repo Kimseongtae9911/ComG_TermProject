@@ -29,6 +29,9 @@ HRESULT Monster::Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, in
 
 GLint Monster::Update(const GLfloat fTimeDelta)
 {
+	if (m_bDie) {
+		m_pMonster->GetPos() = { -30, 0, 0 };
+	}
 	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
 	{
 		++iRotateCount;
@@ -147,6 +150,22 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			if (!Collide(DOWN)) {
 				m_pMonster->GetPos().y -= 0.2f;
 
+				list<CObj*>::iterator iter_begin;
+				list<CObj*>::iterator iter_end;
+				BB monster_BB = Monster::Get_BB();
+
+				iter_begin = m_pGameMgr->Get_Obj(OBJ_SPIKE).begin();
+				iter_end = m_pGameMgr->Get_Obj(OBJ_SPIKE).end();
+				for (; iter_begin != iter_end;)
+				{
+					BB OBJ_BB = (*iter_begin)->Get_BB();
+					if (OBJ_BB.left > monster_BB.right || OBJ_BB.right < monster_BB.left || OBJ_BB.top < monster_BB.bottom || OBJ_BB.bottom > monster_BB.top);
+					else {
+						m_bDie = true;
+						cout << "Monster Die" << endl;
+					}
+					++iter_begin;
+				}
 				if (m_pMonster->GetPos().y <= 0.6f) {
 					m_pMonster->GetPos().y = 0.6f;
 				}

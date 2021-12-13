@@ -6,6 +6,7 @@
 #include "CShader.h"
 #include "CGameManager.h"
 #include "CCamera.h"
+#include "CObject.h"
 
 Player3::Player3()
 {
@@ -114,9 +115,63 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 				m_Player->Move(glm::vec3(0.0, -0.1, 0.0));
 			}
 		}
-		else if (m_pKeyMgr->KeyDown(KEY_A)) {
-			if (m_bIn_Portal) {
-				m_bPortal = true;
+		if (!m_bCollideB) {
+			if (m_pKeyMgr->KeyDown(KEY_A)) {
+				if (m_bIn_Portal) {
+					m_bPortal = true;
+				}
+			}
+		}
+		else if (m_bHoldingB) {
+			if (m_pKeyMgr->KeyDown(KEY_A)) {
+				list<CObj*>::iterator iter_begin;
+				list<CObj*>::iterator iter_end;
+				iter_begin = m_pGameMgr->Get_Obj(OBJ_BOX).begin();
+				iter_end = m_pGameMgr->Get_Obj(OBJ_BOX).end();
+
+				for (; iter_begin != iter_end;) {
+					switch (m_iMoveDir) {
+					case LEFT:
+						m_bHoldingB = false;
+						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = m_Player->GetPos().x - 1.5f;
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
+							glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+						}
+						break;
+					case RIGHT:
+						m_bHoldingB = false;
+						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = m_Player->GetPos().x + 1.5f;
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
+							glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+						}
+						break;
+					case UP:
+						m_bHoldingB = false;
+						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = m_Player->GetPos().y + 1.5f;
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
+							glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+						}
+						break;
+					case DOWN:
+						m_bHoldingB = false;
+						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = m_Player->GetPos().y - 1.5f;
+							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
+							glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+						}
+						break;
+					default:
+						break;
+					}
+					++iter_begin;
+				}
 			}
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f};

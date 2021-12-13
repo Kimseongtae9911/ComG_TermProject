@@ -47,11 +47,6 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
-	
-	cout << "Left - " << CPortal::Get_BB().left << endl;
-	cout << "Right - " << CPortal::Get_BB().right << endl;
-	cout << "Top - " << CPortal::Get_BB().top << endl;
-	cout << "Bottom - " << CPortal::Get_BB().bottom << endl;
 
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();

@@ -66,6 +66,25 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 
+	if (!Get_View() && Get_Camera()->Get_Move()) {
+		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
+		if (dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+			iter_begin = m_ObjLst[OBJ_BOX].begin();
+			iter_end = m_ObjLst[OBJ_BOX].end();
+			for (; iter_begin != iter_end;) {
+				if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z <= 1.6f && dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z >= 1.4f) {
+					dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+					dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+					glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+					(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+					break;
+				}
+				++iter_begin;
+			}
+		}
+	}
+
+
 	//Monster Map Collide
 	for (int i = OBJ_MONSTER1; i <= OBJ_MONSTER2; ++i) {
 		list<CObj*>::iterator monster_iter_begin = m_ObjLst[i].begin();
@@ -153,7 +172,6 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			if (Get_View()) {
 				if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
 					if (m_ObjLst[OBJ_KEY].empty()) {
-						cout << "portal Collide" << endl;
 						dynamic_cast<Player2*>(player2D)->Get_Portal() = true;
 					}
 				}
@@ -164,13 +182,11 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		{
 			if (!Get_View()) {
 				if (m_ObjLst[OBJ_KEY].empty()) {
-					cout << "portal Collide" << endl;
 					dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
 				}
 			}
 		}
 		if (dynamic_cast<Player2*>(player2D)->Get_Portal() && dynamic_cast<Player3*>(player3D)->Get_Portal()) {
-			cout << "Next Stage" << endl;
 			bPortalCollide = true;
 		}
 
@@ -183,7 +199,6 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-
 
 
 	if (m_pCamera)
@@ -442,11 +457,25 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
+ 							dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
@@ -455,11 +484,25 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
+							dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
@@ -468,11 +511,25 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
+							dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
@@ -481,11 +538,25 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
+							dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 							return true;
 						}
 					}
@@ -509,9 +580,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -522,9 +606,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -535,9 +632,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -548,9 +658,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -576,9 +699,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -589,9 +725,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -602,9 +751,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -630,9 +792,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -643,9 +818,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;
@@ -656,9 +844,22 @@ bool CGameManager::Collide(int num)
 								return false;
 							}
 							if (i == OBJ_BOX) {
-								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
-								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
+								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
+									if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = 1.5f;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+										dynamic_cast<Player3*>(player)->Get_HoldingB() = true;
+									}
+									else {
+										dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
+										glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+										(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+									}
+								}
 								return false;
 							}
 							return true;

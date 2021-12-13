@@ -87,7 +87,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
 		{
 			if (m_iType == 0) {
-				if (!m_pGameMgr->MonCollide(RIGHT)) {
+				if (!Collide(RIGHT)) {
 					m_pMonster->GetPos().x += 0.03;
 				}
 				m_iDir = 1;
@@ -100,7 +100,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else
 		{
 			if (m_iType == 0) {
-				if (!m_pGameMgr->MonCollide(LEFT)) {
+				if (!Collide(LEFT)) {
 					m_pMonster->GetPos().x -= 0.03;
 				}
 				m_iDir = -1;
@@ -113,7 +113,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
 		{
 			if (m_iType == 0) {
-				if (!m_pGameMgr->MonCollide(UP)) {
+				if (!Collide(UP)) {
 					m_pMonster->GetPos().y += 0.03;
 				}
 			}
@@ -124,7 +124,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else 
 		{
 			if (m_iType == 0) {
-				if (!m_pGameMgr->MonCollide(DOWN)) {
+				if (!Collide(DOWN)) {
 					m_pMonster->GetPos().y -= 0.03;
 				}
 			}
@@ -144,7 +144,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			m_iDir = 1;
 		
 		if (m_iType == 0) {
-			if (!m_pGameMgr->MonCollide(DOWN)) {
+			if (!Collide(DOWN)) {
 				m_pMonster->GetPos().y -= 0.2f;
 
 				if (m_pMonster->GetPos().y <= 0.6f) {
@@ -207,6 +207,106 @@ float Monster::LookPlayerAngle()
 		}
 			
 	}
+}
+
+bool Monster::Collide(int num) {
+	list<CObj*>::iterator iter_begin;
+	list<CObj*>::iterator iter_end;
+
+	BB monster_BB = Monster::Get_BB();
+	for (int j = OBJ_MAP; j <= OBJ_BOX; ++j) {
+
+		iter_begin = m_pGameMgr->Get_Obj(OBJID(j)).begin();
+		iter_end = m_pGameMgr->Get_Obj(OBJID(j)).end();
+		for (; iter_begin != iter_end;)
+		{
+			BB OBJ_BB = (*iter_begin)->Get_BB();
+			switch (num) {
+			case LEFT:
+				if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
+				{
+					if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+					{
+						return true;
+					}
+					else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+					{
+						return true;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+					{
+						return true;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+					{
+						return true;
+					}
+
+				}
+				break;
+			case RIGHT:
+				if (monster_BB.right >= OBJ_BB.left && monster_BB.left <= OBJ_BB.left)
+				{
+					if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+					{
+						return true;
+					}
+					else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+					{
+						return true;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+					{
+						return true;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+					{
+						return true;
+					}
+				}
+				break;
+			case DOWN:
+				if (OBJ_BB.top >= monster_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= monster_BB.bottom)
+				{
+					if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
+					{
+						return true;
+					}
+					else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
+					{
+						return true;
+					}
+					else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
+					{
+						return true;
+					}
+				}
+				break;
+			case UP:
+				if (OBJ_BB.bottom <= monster_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= monster_BB.top)
+				{
+					if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
+					{
+						return true;
+					}
+					else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
+					{
+						return true;
+					}
+					else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
+					{
+						return true;
+					}
+				}
+				break;
+			default:
+				break;
+			}
+			++iter_begin;
+		}
+	}
+
+	return false;
 }
 
 Monster* Monster::Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType)

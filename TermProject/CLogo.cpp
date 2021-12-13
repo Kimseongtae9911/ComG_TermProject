@@ -3,6 +3,7 @@
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CBackImage.h"
+#include "CSprite.h"
 #include "CSceneManager.h"
 
 
@@ -21,6 +22,9 @@ HRESULT CLogo::Initialize()
 	CObj* pObj = nullptr;
 
 	pObj = CBackImage::Create("", "../Resource/UI/Back/title4.png");
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+		return E_FAIL;
+	pObj = CSprite::Create(glm::vec3(640.f, 230.f, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/pressenter.png");
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
 		return E_FAIL;
 	return NOERROR;

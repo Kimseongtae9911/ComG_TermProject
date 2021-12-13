@@ -130,6 +130,12 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 	}
+	if (m_pGameMgr->Get_boolPortal())
+	{
+		m_pSceneMgr->SceneChange(SCENE_STAGE3);
+		m_pGameMgr->Get_boolPortal() = false;
+		return 0;
+	}
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }

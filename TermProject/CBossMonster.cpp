@@ -33,36 +33,40 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		float f = LookPlayerAngle();
-		if (f >= m_pBossMonster->GetRotate().y)
+		if (f >= 0 && f <= 45)
 		{
-			if (f - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
-			{
-				m_pBossMonster->GetRotate().y += 3.5;
-			}
-			else
-			{
-				m_pBossMonster->GetRotate().y -= 3.5;
-			}
+
 		}
-		else
-		{
-			if (f + 360 - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
-			{
-				m_pBossMonster->GetRotate().y += 3.5;
-			}
-			else
-			{
-				m_pBossMonster->GetRotate().y -= 3.5;
-			}
-		}
-		if (m_pBossMonster->GetRotate().y >= 360)
-		{
-			m_pBossMonster->GetRotate().y -= 360;
-		}
-		else if (m_pBossMonster->GetRotate().y <= 0)
-		{
-			m_pBossMonster->GetRotate().y += 360;
-		}
+		//if (f >= m_pBossMonster->GetRotate().y)
+		//{
+		//	if (f - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
+		//	{
+		//		m_pBossMonster->GetRotate().y += 3.5;
+		//	}
+		//	else
+		//	{
+		//		m_pBossMonster->GetRotate().y -= 3.5;
+		//	}
+		//}
+		//else
+		//{
+		//	if (f + 360 - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
+		//	{
+		//		m_pBossMonster->GetRotate().y += 3.5;
+		//	}
+		//	else
+		//	{
+		//		m_pBossMonster->GetRotate().y -= 3.5;
+		//	}
+		//}
+		//if (m_pBossMonster->GetRotate().y >= 360)
+		//{
+		//	m_pBossMonster->GetRotate().y -= 360;
+		//}
+		//else if (m_pBossMonster->GetRotate().y <= 0)
+		//{
+		//	m_pBossMonster->GetRotate().y += 360;
+		//}
 	}
 	if (m_pGameMgr->Get_View())
 	{

@@ -11,6 +11,7 @@ CSprite::CSprite()
 
 CSprite::~CSprite()
 {
+	Release();
 }
 
 HRESULT CSprite::Initialize(glm::vec3 vPos, glm::vec3 vScale, string strTexTag, string strTexPath, bool bAlpha)
@@ -50,6 +51,8 @@ GLvoid CSprite::Render()
 
 GLvoid CSprite::Release()
 {
+	SafeDelete(m_pPlane);
+	SafeDelete(m_pTexture);
 	return GLvoid();
 }
 

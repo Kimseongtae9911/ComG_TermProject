@@ -77,15 +77,15 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 
-	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * 3 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * 3 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * 3, 1.0f * 3 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
-	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 5 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 5 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 5, 1.0f * 5 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
-	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 20, 1.0f * 7 - 0.5f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 20, 1.0f * 7 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 20 - 0.5f, -15 + 1.0f * 20 + 0.5f, 1.0f * 7, 1.0f * 7 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
@@ -107,7 +107,7 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 10.0f, -0.25f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 10.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
 		return E_FAIL;
 

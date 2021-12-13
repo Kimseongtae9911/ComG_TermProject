@@ -106,6 +106,9 @@
     <Filter Include="소스 파일\02 Scene\99 Loading">
       <UniqueIdentifier>{540f6b7d-a85f-4572-aeaf-655f9984144a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02 Scene\04 Stage3">
+      <UniqueIdentifier>{e50d849a-8a18-43e3-87bc-63229834a8f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="CLoad.cpp">
       <Filter>소스 파일\02 Scene\99 Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage3.cpp">
+      <Filter>소스 파일\02 Scene\04 Stage3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="CLoad.h">
       <Filter>소스 파일\02 Scene\99 Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage3.h">
+      <Filter>소스 파일\02 Scene\04 Stage3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

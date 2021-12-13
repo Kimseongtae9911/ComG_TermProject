@@ -64,7 +64,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	}
 
 	fTime += fTimeDelta;
-	if (fTime >= 5)
+	if (fTime >= 5 && m_pGameMgr->Get_View())
 	{
 		CObj* pObj = CBullet::Create(m_pBossMonster->GetPos() + glm::vec3(0,2.5f,0));
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))
@@ -72,6 +72,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		cout << "11" << endl;
 		fTime = 0;
 	}
+	else if()
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

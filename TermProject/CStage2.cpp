@@ -19,6 +19,7 @@ CStage2::CStage2()
 
 CStage2::~CStage2()
 {
+	Release();
 }
 
 HRESULT CStage2::Initialize()

@@ -1,5 +1,6 @@
 #pragma once
 #include "CScene.h"
+#include "CObj.h"
 
 class CLogo : public CScene
 {
@@ -14,8 +15,9 @@ public:
 
 
 private:
-
-
+	CObj** m_pAni;
+	int iAniCounter = 0;
+	float fTime = 0;
 private:
 	GLvoid Release();
 

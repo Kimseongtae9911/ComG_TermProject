@@ -6,6 +6,7 @@
 #include "CSprite.h"
 #include "CSceneManager.h"
 #include "CRenderManager.h"
+#include "CKeyManager.h"
 
 CLogo::CLogo()
 {
@@ -37,6 +38,21 @@ GLint CLogo::Update(const GLfloat fTimeDelta)
 	if (GetAsyncKeyState(VK_RETURN))
 	{
 		m_pSceneMgr->SceneChange(SCENE_LOAD);
+		return 0;
+	}
+	else if (m_pKeyMgr->KeyDown(KEY_2))
+	{
+		m_pSceneMgr->SceneChange(SCENE_STAGE2);
+		return 0;
+	}
+	else if (m_pKeyMgr->KeyDown(KEY_3))
+	{
+		m_pSceneMgr->SceneChange(SCENE_STAGE3);
+		return 0;
+	}
+	else if (m_pKeyMgr->KeyDown(KEY_4))
+	{
+		m_pSceneMgr->SceneChange(SCENE_STAGE4);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

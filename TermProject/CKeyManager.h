@@ -8,6 +8,9 @@ constexpr DWORD KEY_SPACE = 0x00000010;
 constexpr DWORD KEY_ESCAPE = 0x00000020;
 constexpr DWORD KEY_A = 0x00000040;
 constexpr DWORD KEY_F = 0x00000080;
+constexpr DWORD KEY_2 = 0x00000100;
+constexpr DWORD KEY_3 = 0x00000200;
+constexpr DWORD KEY_4 = 0x00000400;
 
 
 class CKeyManager

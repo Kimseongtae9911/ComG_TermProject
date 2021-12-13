@@ -40,6 +40,12 @@ void CKeyManager::UpdateKey()
 		m_dwCurKey |= KEY_A;
 	if (GetAsyncKeyState(0x46) & 0x8000)
 		m_dwCurKey |= KEY_F;
+	if (GetAsyncKeyState(0x32) & 0x8000)
+		m_dwCurKey |= KEY_2;
+	if (GetAsyncKeyState(0x33) & 0x8000)
+		m_dwCurKey |= KEY_3;
+	if (GetAsyncKeyState(0x34) & 0x8000)
+		m_dwCurKey |= KEY_4;
 
 
 }

@@ -4,6 +4,7 @@
 #include "CLogo.h"
 #include "CStage1.h"
 #include "CStage2.h"
+#include "CStage3.h"
 #include "CLoad.h"
 
 IMPLEMENT_SINGLETON(CSceneManager)
@@ -34,6 +35,12 @@ HRESULT CSceneManager::SceneChange(SCENE_ID eID)
 			break;
 		case SCENE_STAGE2:
 			m_pScene = CStage2::Create();
+			break;
+		case SCENE_STAGE3:
+			m_pScene = CStage3::Create();
+			break;
+		case SCENE_STAGE4:
+			//m_pScene = CStage2::Create();
 			break;
 		case SCENE_END:
 			//m_pScene = CScene_End::Create();

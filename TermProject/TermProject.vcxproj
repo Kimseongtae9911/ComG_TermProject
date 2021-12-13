@@ -149,6 +149,7 @@
     <ClCompile Include="CFrameManager.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CLoad.cpp" />
     <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMesh.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="CFrameManager.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CLoad.h" />
     <ClInclude Include="CLogo.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMesh.h" />

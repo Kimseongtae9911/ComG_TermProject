@@ -192,6 +192,9 @@
     <ClCompile Include="CLogo.cpp">
       <Filter>소스 파일\02 Scene\00 Logo</Filter>
     </ClCompile>
+    <ClCompile Include="CLoad.cpp">
+      <Filter>소스 파일\02 Scene\99 Loading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -289,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="CLogo.h">
       <Filter>소스 파일\02 Scene\00 Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoad.h">
+      <Filter>소스 파일\02 Scene\99 Loading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -178,3 +178,9 @@ bool Player2::Collide_Spike()
 	}
 	return false;
 }
+
+GLvoid Player2::Release()
+{
+	SafeDelete(m_Player);
+	return GLvoid();
+}

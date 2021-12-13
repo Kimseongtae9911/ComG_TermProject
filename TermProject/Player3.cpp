@@ -205,6 +205,12 @@ GLvoid Player3::Render()
 }
 
 
+GLvoid Player3::Release()
+{
+	SafeDelete(m_Player);
+	return GLvoid();
+}
+
 Player3* Player3::Create()
 {
 	Player3* pInstance = new Player3;

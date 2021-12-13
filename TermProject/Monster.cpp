@@ -14,6 +14,7 @@ Monster::Monster()
 
 Monster::~Monster()
 {
+	Release();
 }
 
 HRESULT Monster::Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType)
@@ -325,6 +326,12 @@ bool Monster::Collide(int num) {
 	}
 
 	return false;
+}
+
+GLvoid Monster::Release()
+{
+	SafeDelete(m_pMonster);
+	return GLvoid();
 }
 
 Monster* Monster::Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType)

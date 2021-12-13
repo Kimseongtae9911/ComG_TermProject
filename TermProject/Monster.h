@@ -21,6 +21,7 @@ public:
 
 private:
 	bool Collide(int num);
+	GLvoid Release();
 
 private:
 	CMesh* m_pMonster;
@@ -36,6 +37,7 @@ private:
 	int m_iCollideDir{ 0 };
 	int m_iDir_3D{ 0 };
 	bool m_bDie{ false };
+
 
 public:
 	static Monster* Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType);

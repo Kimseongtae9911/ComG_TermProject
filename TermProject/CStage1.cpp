@@ -22,7 +22,8 @@ CStage1::~CStage1()
 {
 	Release();
 	//m_pGameMgr->Delete_Camera();
-	m_pGameMgr->DestroyInstance();
+	//m_pGameMgr->DestroyInstance();
+	m_pGameMgr->init();
 }
 
 HRESULT CStage1::Initialize()

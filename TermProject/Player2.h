@@ -24,6 +24,7 @@ public:
 
 private:
 	bool Collide_Spike();
+	GLvoid Release();
 
 private:
 	CMesh* m_Player;

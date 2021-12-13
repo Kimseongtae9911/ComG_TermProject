@@ -25,6 +25,7 @@ public:
 	HRESULT Add_Camera(CCamera* pCamera);
 	HRESULT Delete_Camera();
 	GLvoid Render_Camera();
+	GLvoid init();
 	CCamera* Get_Camera() { return m_pCamera; };
 	bool Get_View() { return m_bView; };
 	list<CObj*>& Get_Obj(OBJID ID) { return m_ObjLst[ID]; };

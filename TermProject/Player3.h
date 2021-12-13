@@ -27,6 +27,7 @@ private:
 	CMesh* m_Player;
 
 private:
+	GLvoid Release();
 	GLfloat m_fAlpha{ 1.0f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
 	int m_iMoveDir{ 0 };

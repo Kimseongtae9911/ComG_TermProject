@@ -1180,3 +1180,11 @@ GLvoid CGameManager::Render_Camera()
 		m_pCamera->Render();
 	return GLvoid();
 }
+
+GLvoid CGameManager::init()
+{
+	bPortalCollide = false;
+	bMonsterPlayerCollide = false;
+	m_bView = true;
+	return GLvoid();
+}

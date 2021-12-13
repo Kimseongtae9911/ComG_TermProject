@@ -11,6 +11,7 @@ CObject::CObject()
 
 CObject::~CObject()
 {
+	Release();
 }
 
 HRESULT CObject::Initialize(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
@@ -42,6 +43,7 @@ GLvoid CObject::Set_Rotate(glm::vec3 vec)
 
 GLvoid CObject::Release()
 {
+	SafeDelete(m_pObject);
 	return GLvoid();
 }
 

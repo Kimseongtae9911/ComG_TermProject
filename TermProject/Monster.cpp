@@ -88,12 +88,12 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		{
 			if (m_iType == 0) {
 				if (!m_pGameMgr->MonCollide(RIGHT)) {
-					m_pMonster->GetPos().x += 0.04;
+					m_pMonster->GetPos().x += 0.03;
 				}
 				m_iDir = 1;
 			}
 			else {
-				m_pMonster->GetPos().x += 0.035;
+				m_pMonster->GetPos().x += 0.025;
 				m_iDir = 1;
 			}
 		}
@@ -101,12 +101,12 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		{
 			if (m_iType == 0) {
 				if (!m_pGameMgr->MonCollide(LEFT)) {
-					m_pMonster->GetPos().x -= 0.04;
+					m_pMonster->GetPos().x -= 0.03;
 				}
 				m_iDir = -1;
 			}
 			else {
-				m_pMonster->GetPos().x -= 0.035;
+				m_pMonster->GetPos().x -= 0.025;
 				m_iDir = -1;
 			}
 		}
@@ -114,22 +114,22 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		{
 			if (m_iType == 0) {
 				if (!m_pGameMgr->MonCollide(UP)) {
-					m_pMonster->GetPos().y += 0.04;
+					m_pMonster->GetPos().y += 0.03;
 				}
 			}
 			else {
-				m_pMonster->GetPos().y += 0.035;
+				m_pMonster->GetPos().y += 0.025;
 			}
 		}
 		else 
 		{
 			if (m_iType == 0) {
 				if (!m_pGameMgr->MonCollide(DOWN)) {
-					m_pMonster->GetPos().y -= 0.04;
+					m_pMonster->GetPos().y -= 0.03;
 				}
 			}
 			else {
-				m_pMonster->GetPos().y -= 0.035;
+				m_pMonster->GetPos().y -= 0.025;
 			}
 		}
 	}
@@ -147,8 +147,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			if (!m_pGameMgr->MonCollide(DOWN)) {
 				m_pMonster->GetPos().y -= 0.2f;
 
-				if (m_pMonster->GetPos().y <= 0.0f) {
-					m_pMonster->GetPos().y = 0.0f;
+				if (m_pMonster->GetPos().y <= 0.6f) {
+					m_pMonster->GetPos().y = 0.6f;
 				}
 			}
 		}

@@ -158,15 +158,15 @@ HRESULT CStage3::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_SPIKE, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(-13.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
+	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(-13.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(12.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
+	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(12.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(-2.5f, 11.0f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
+	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(-2.5f, 11.0f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 

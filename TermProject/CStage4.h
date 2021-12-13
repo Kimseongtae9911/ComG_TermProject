@@ -1,0 +1,26 @@
+#pragma once
+#include "CScene.h"
+class CStage4: public CScene
+{
+public:
+	CStage4();
+	~CStage4();
+
+public:
+	virtual HRESULT Initialize();
+	virtual GLint Update(const GLfloat fTimeDelta);
+	virtual GLvoid Render();
+
+
+private:
+	bool bMove = false;
+	int iRotCount = 0;
+	float fRotCount = 0;
+
+private:
+	GLvoid Release();
+
+public:
+	static CStage4* Create();
+};
+

@@ -2,6 +2,7 @@
 #include "CBossMonster.h"
 #include "CMesh.h"
 #include"CBullet.h"
+#include "Monster.h"
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
@@ -41,6 +42,12 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		else
 			m_pBossMonster->GetPos().y -= 0.05f;
 		
+
+		fTime += fTimeDelta;
+	}
+	else
+	{
+		f3DTime += fTimeDelta;
 	}
 	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
 	{
@@ -63,7 +70,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	fTime += fTimeDelta;
+	
 	if (fTime >= 5 && m_pGameMgr->Get_View())
 	{
 		CObj* pObj = CBullet::Create(m_pBossMonster->GetPos() + glm::vec3(0,2.5f,0));
@@ -72,7 +79,13 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		cout << "11" << endl;
 		fTime = 0;
 	}
-	else if()
+	else if (f3DTime >= 5 && !m_pGameMgr->Get_View())
+	{
+		CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+			return E_FAIL;
+		f3DTime = 0;
+	}
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

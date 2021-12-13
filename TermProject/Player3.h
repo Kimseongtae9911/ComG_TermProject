@@ -17,6 +17,8 @@ public:
 	virtual int& GetC_Dir() { return m_iCollideDir; }
 	bool& Get_Portal() { return m_bPortal; }
 	bool& Get_InPortal() { return m_bIn_Portal; }
+	bool& Get_HoldingB() { return m_bHoldingB; }
+	bool& Get_CollideB() { return m_bCollideB; }
 
 public:
 	CMesh* Get_pMesh() { return m_Player; };
@@ -30,6 +32,8 @@ private:
 	int m_iMoveDir{ 0 };
 	bool m_bPortal{ false };
 	bool m_bIn_Portal{ false };
+	bool m_bHoldingB{ false };
+	bool m_bCollideB{ false };
 
 public:
 	static Player3* Create();

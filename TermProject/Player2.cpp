@@ -114,13 +114,18 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			//Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
 		}
 		Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
+		m_pRender->Add_RenderObj(REDER_NONAL, this);
 	}
 	else if(!m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
-				i->color[j][3] = 0.1;
+				i->color[j][3] = 0.3;
 			}
 		}
+		m_pRender->Add_RenderObj(REDER_ALPHA, this);
+	}
+	else {
+		m_pRender->Add_RenderObj(REDER_NONAL, this);
 	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory
@@ -130,7 +135,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 	if (Collide_Spike()) {
 		cout << "Die" << endl;
 	}
-	m_pRender-> Add_RenderObj(REDER_NONAL, this);
+	
 	return GLint();
 }
 

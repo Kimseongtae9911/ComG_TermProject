@@ -36,21 +36,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 {
 	list<CObj*>::iterator iter_begin;
 	list<CObj*>::iterator iter_end;
-	for (int i = 0; i < OBJ_END; ++i)
-	{
-		iter_begin = m_ObjLst[i].begin();
-		iter_end = m_ObjLst[i].end();
-		for (; iter_begin != iter_end;)
-		{
-			if (OBJ_END == (*iter_begin)->Update(fTimeDelta))
-			{
-				SafeDelete(*iter_begin);
-				iter_begin = m_ObjLst[i].erase(iter_begin);
-			}
-			else
-				++iter_begin;
-		}
-	}
+
 
 	if (Get_Camera() != nullptr)
 	{
@@ -202,6 +188,22 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 					i->color[j][3] = 1.0;
 				}
 			}
+		}
+	}
+
+	for (int i = 0; i < OBJ_END; ++i)
+	{
+		iter_begin = m_ObjLst[i].begin();
+		iter_end = m_ObjLst[i].end();
+		for (; iter_begin != iter_end;)
+		{
+			if (OBJ_END == (*iter_begin)->Update(fTimeDelta))
+			{
+				SafeDelete(*iter_begin);
+				iter_begin = m_ObjLst[i].erase(iter_begin);
+			}
+			else
+				++iter_begin;
 		}
 	}
 

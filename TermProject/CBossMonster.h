@@ -1,5 +1,5 @@
 #pragma once
-#include"Cobj.h"
+#include"CObj.h"
 class CMesh;
 
 class CBossMonster : public CObj

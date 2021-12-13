@@ -1,11 +1,14 @@
 #include "stdafx.h"
 #include "CBossMonster.h"
-#include "CMesh.h"
 #include"CBullet.h"
+#include "CMesh.h"
+#include "Player3.h"
 #include "Monster.h"
+#include "CKeyManager.h"
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
+#include "CCamera.h"
 
 CBossMonster::CBossMonster()
 {
@@ -27,6 +30,40 @@ HRESULT CBossMonster::Initialize()
 
 GLint CBossMonster::Update(const GLfloat fTimeDelta)
 {
+	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
+	{
+		float f = LookPlayerAngle();
+		if (f >= m_pBossMonster->GetRotate().y)
+		{
+			if (f - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
+			{
+				m_pBossMonster->GetRotate().y += 3.5;
+			}
+			else
+			{
+				m_pBossMonster->GetRotate().y -= 3.5;
+			}
+		}
+		else
+		{
+			if (f + 360 - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
+			{
+				m_pBossMonster->GetRotate().y += 3.5;
+			}
+			else
+			{
+				m_pBossMonster->GetRotate().y -= 3.5;
+			}
+		}
+		if (m_pBossMonster->GetRotate().y >= 360)
+		{
+			m_pBossMonster->GetRotate().y -= 360;
+		}
+		else if (m_pBossMonster->GetRotate().y <= 0)
+		{
+			m_pBossMonster->GetRotate().y += 360;
+		}
+	}
 	if (m_pGameMgr->Get_View())
 	{
 		if (!bMoveUpDown && m_pBossMonster->GetPos().y >= 5.f)
@@ -55,6 +92,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		m_pBossMonster->GetRotate().x += 90.f / 80.f;
 		if (iRotateCount >= 80)
 		{
+			m_pBossMonster->GetRotate().y += 20.f;
 			iRotateCount = 0;
 			bMovingRotate = !bMovingRotate;
 		}
@@ -65,6 +103,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		m_pBossMonster->GetRotate().x -= 90.f / 80.f;
 		if (iRotateCount >= 80)
 		{
+			m_pBossMonster->GetRotate().y -= 20.f;
 			iRotateCount = 0;
 			bMovingRotate = !bMovingRotate;
 		}
@@ -90,6 +129,44 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	return GLint();
 }
 
+float CBossMonster::LookPlayerAngle()
+{
+	vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
+	//fRatio = abs(vecPlayer3dPos.x - m_pMonster->GetPos().x) / abs(vecPlayer3dPos.z - m_pMonster->GetPos().z);
+	//cout << fRatio << endl;
+	double dAngle = atan((vecPlayer3dPos.x - m_pBossMonster->GetPos().x) / (vecPlayer3dPos.y - m_pBossMonster->GetPos().y)) * 180 / PI;
+	//cout << dAngle << endl;
+	if (m_pBossMonster->GetPos().y <= vecPlayer3dPos.y)
+	{
+		if (m_pBossMonster->GetPos().x <= vecPlayer3dPos.x) // 1
+		{
+			//cout << 180 - dAngle << endl;
+			return 180 - dAngle;
+		}
+
+		else //   4
+		{
+			//cout << 180 - dAngle << endl;
+			return 180 - dAngle;
+		}
+	}
+	else
+	{
+		if (m_pBossMonster->GetPos().x <= vecPlayer3dPos.x) //2
+		{
+			//cout << -dAngle << endl;
+			return -dAngle;
+		}
+
+		else // 3
+		{
+			//cout << 360 - dAngle << endl;
+			return 360 - dAngle;
+		}
+
+	}
+}
+
 GLvoid CBossMonster::Render()
 {
 	m_pShaderLoader->Use_Shader("Default");
@@ -98,10 +175,6 @@ GLvoid CBossMonster::Render()
 	return GLvoid();
 }
 
-float CBossMonster::LookPlayerAngle()
-{
-	return 0.0f;
-}
 
 CBossMonster* CBossMonster::Create()
 {

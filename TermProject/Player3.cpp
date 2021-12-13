@@ -115,6 +115,8 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 				m_Player->Move(glm::vec3(0.0, -0.1, 0.0));
 			}
 		}
+		cout << "m_bCollideB - " << m_bCollideB << endl;
+
 		if (!m_bCollideB) {
 			if (m_pKeyMgr->KeyDown(KEY_A)) {
 				if (m_bIn_Portal) {
@@ -175,20 +177,24 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 			}
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f};
+		m_pRender->Add_RenderObj(REDER_NONAL, this);
 	}
 	else if (m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
-				i->color[j][3] = 0.1;
+				i->color[j][3] = 0.3;
 			}
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f };
+		m_pRender->Add_RenderObj(REDER_ALPHA, this);
+	}
+	else {
+		m_pRender->Add_RenderObj(REDER_NONAL, this);
 	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory
 		exit(0);
 	}
-	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }
 

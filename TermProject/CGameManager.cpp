@@ -98,7 +98,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 				for (; iter_begin != iter_end;)
 				{
 					BB OBJ_BB = (*iter_begin)->Get_BB();
-					if (!(OBJ_BB.bottom <= 0)) {
+					if (!(OBJ_BB.bottom <= -0.1)) {
 						if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
 						{
 							if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
@@ -459,6 +459,7 @@ bool CGameManager::Collide(int num)
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -486,6 +487,7 @@ bool CGameManager::Collide(int num)
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -513,6 +515,7 @@ bool CGameManager::Collide(int num)
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -540,6 +543,7 @@ bool CGameManager::Collide(int num)
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -582,6 +586,7 @@ bool CGameManager::Collide(int num)
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -608,6 +613,7 @@ bool CGameManager::Collide(int num)
 						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -634,6 +640,7 @@ bool CGameManager::Collide(int num)
 						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -660,6 +667,7 @@ bool CGameManager::Collide(int num)
 						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -701,6 +709,7 @@ bool CGameManager::Collide(int num)
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -727,6 +736,7 @@ bool CGameManager::Collide(int num)
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -753,6 +763,7 @@ bool CGameManager::Collide(int num)
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -794,6 +805,7 @@ bool CGameManager::Collide(int num)
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -820,6 +832,7 @@ bool CGameManager::Collide(int num)
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {
@@ -846,6 +859,7 @@ bool CGameManager::Collide(int num)
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
 								return false;
 							}
 							if (i == OBJ_BOX) {

@@ -14,6 +14,7 @@ public:
 
 public:
 	float LookPlayerAngle();
+	int RandHeight();
 	int& GetDir() { return m_iDir; }
 
 private:

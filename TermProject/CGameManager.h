@@ -30,6 +30,7 @@ public:
 	GLvoid MonCollide(int num);
 	bool JumpCollide(int num);
 	bool bPortalCollide = false;
+	bool bMonsterPlayerCollide = false;
 	
 private:
 	CCamera* m_pCamera = nullptr;

@@ -209,57 +209,117 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	//}
 
 	//Monster Map Collide
-	list<CObj*>::iterator monster_iter_begin = m_ObjLst[OBJ_MONSTER1].begin();
-	list<CObj*>::iterator monster_iter_end = m_ObjLst[OBJ_MONSTER1].end();
-	for (; monster_iter_begin != monster_iter_end;) {
-		BB monster_BB = (*monster_iter_begin)->Get_BB();
+	for (int i = OBJ_MONSTER1; i <= OBJ_MONSTER2; ++i) {
+		list<CObj*>::iterator monster_iter_begin = m_ObjLst[i].begin();
+		list<CObj*>::iterator monster_iter_end = m_ObjLst[i].end();
+		for (; monster_iter_begin != monster_iter_end;) {
+			BB monster_BB = (*monster_iter_begin)->Get_BB();
 
-		iter_begin = m_ObjLst[OBJ_BOX].begin();
-		iter_end = m_ObjLst[OBJ_BOX].end();
-		for (; iter_begin != iter_end;)
-		{
-			BB OBJ_BB = (*iter_begin)->Get_BB();
-			if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
+			iter_begin = m_ObjLst[OBJ_BOX].begin();
+			iter_end = m_ObjLst[OBJ_BOX].end();
+			for (; iter_begin != iter_end;)
 			{
-				if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+				BB OBJ_BB = (*iter_begin)->Get_BB();
+				if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
 				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+					if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
+					}
+					else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
+					}
+					else {
+						if (!m_bView) {
+							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
+						}
+					}
 				}
-				else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+				else if (monster_BB.right >= OBJ_BB.left && monster_BB.left <= OBJ_BB.left)
 				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+					if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
+					}
+					else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
+					}
+					else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
+					}
+					else {
+						if (!m_bView) {
+							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
+						}
+					}
 				}
-				else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+				else if (OBJ_BB.bottom <= monster_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= monster_BB.top)
 				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+					if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = UP;
+					}
+					else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = UP;
+					}
+					else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = UP;
+					}
+					else {
+						if (!m_bView) {
+							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
+						}
+					}
 				}
-				else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+				else if (OBJ_BB.top >= monster_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= monster_BB.bottom)
 				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = 1;
+					if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = DOWN;
+					}
+					else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = DOWN;
+					}
+					else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
+					{
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = DOWN;
+					}
+					else {
+						if (!m_bView) {
+							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
+						}
+					}
 				}
+				++iter_begin;
 			}
-			else if (monster_BB.right >= OBJ_BB.left && monster_BB.left <= OBJ_BB.left)
-			{
-				if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
-				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-				}
-				else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
-				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-				}
-				else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
-				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-				}
-				else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
-				{
-					dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-				}
-			}
-			++iter_begin;
+			++monster_iter_begin;
 		}
-		++monster_iter_begin;
 	}
 	// map and bullet
 	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end(); ++iter_bullet ) // ����

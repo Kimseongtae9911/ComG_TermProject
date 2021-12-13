@@ -21,6 +21,8 @@ CStage1::CStage1()
 CStage1::~CStage1()
 {
 	Release();
+	//m_pGameMgr->Delete_Camera();
+	m_pGameMgr->DestroyInstance();
 }
 
 HRESULT CStage1::Initialize()
@@ -118,7 +120,7 @@ HRESULT CStage1::Initialize()
 
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
-		return E_FAIL;*/
+		return E_FAIL;
 
 	//pObj = CBossMonster::Create();
 	//if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
@@ -137,11 +139,16 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 	}
 	if (m_pGameMgr->Get_boolPortal())
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE2);
 		m_pGameMgr->Get_boolPortal() = false;
+		m_pSceneMgr->SceneChange(SCENE_STAGE2);
 		return 0;
 	}
-
+	if (m_pGameMgr->Get_CollideMTP())
+	{
+		m_pGameMgr->Get_CollideMTP() = false;
+		m_pSceneMgr->SceneChange(SCENE_LOAD);
+		return 0;
+	}
 	m_pGameMgr->Update(fTimeDelta);
 	
 	return GLint();

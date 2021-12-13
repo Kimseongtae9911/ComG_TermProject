@@ -37,6 +37,21 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	list<CObj*>::iterator iter_begin;
 	list<CObj*>::iterator iter_end;
 
+	for (int i = 0; i < OBJ_END; ++i)
+	{
+		iter_begin = m_ObjLst[i].begin();
+		iter_end = m_ObjLst[i].end();
+		for (; iter_begin != iter_end;)
+		{
+			if (OBJ_END == (*iter_begin)->Update(fTimeDelta))
+			{
+				SafeDelete(*iter_begin);
+				iter_begin = m_ObjLst[i].erase(iter_begin);
+			}
+			else
+				++iter_begin;
+		}
+	}
 
 	if (Get_Camera() != nullptr)
 	{
@@ -52,6 +67,8 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 
+	if (Get_Camera() == nullptr)
+		cout << "df" << endl;
 	if (!Get_View() && Get_Camera()->Get_Move()) {
 		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
 		if (dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -139,7 +156,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			SafeDelete((*iter_bullet));
 			iter_bullet = m_ObjLst[OBJ_BULLET].erase(iter_bullet);
 			//--iter_bullet;
-			//CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
+			CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
 		}
 		break;
 	}
@@ -184,22 +201,58 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-
-	for (int i = 0; i < OBJ_END; ++i)
+	if (!m_ObjLst[OBJ_PLAYER1].empty())
 	{
-		iter_begin = m_ObjLst[i].begin();
-		iter_end = m_ObjLst[i].end();
-		for (; iter_begin != iter_end;)
+		CObj* player2D = m_ObjLst[OBJ_PLAYER1].front();
+		BB player2D_BB = player2D->Get_BB();
+		CObj* player3D = m_ObjLst[OBJ_PLAYER2].front();
+		BB player3D_BB = player3D->Get_BB();
+		for (int i = OBJ_MONSTER1; i <= OBJ_MONSTER2; ++i)
 		{
-			if (OBJ_END == (*iter_begin)->Update(fTimeDelta))
+			list<CObj*>::iterator monster_iter_begin = m_ObjLst[i].begin();
+			list<CObj*>::iterator monster_iter_end = m_ObjLst[i].end();
+			for (; monster_iter_begin != monster_iter_end;)
 			{
-				SafeDelete(*iter_begin);
-				iter_begin = m_ObjLst[i].erase(iter_begin);
+				BB monster_BB = (*monster_iter_begin)->Get_BB();
+				if (m_bView)
+				{
+					if (monster_BB.left > player2D_BB.right || monster_BB.right < player2D_BB.left || monster_BB.top < player2D_BB.bottom || monster_BB.bottom > player2D_BB.top);
+					else
+					{
+						bMonsterPlayerCollide = true;
+					}
+				}
+				else
+				{
+					if (monster_BB.left > player3D_BB.right || monster_BB.right < player3D_BB.left || monster_BB.top < player3D_BB.bottom || monster_BB.bottom > player3D_BB.top);
+					else
+					{
+						bMonsterPlayerCollide = true;
+					}
+				}
+				++monster_iter_begin;
 			}
-			else
-				++iter_begin;
 		}
+		/*for (list<CObj*>::iterator iter_M1 = m_ObjLst[OBJ_MONSTER1].begin(); iter_M1 != m_ObjLst[OBJ_MONSTER1].end(); ++iter_M1)
+		{
+			BB Monster1_BB = (*iter_M1)->Get_BB();
+			if (Monster1_BB.left > player2D_BB.right || Monster1_BB.right < player2D_BB.left || Monster1_BB.top < player2D_BB.bottom || Monster1_BB.bottom > player2D_BB.top);
+			else
+			{
+				bMonsterPlayerCollide = true;
+			}
+			if (Monster1_BB.left > player3D_BB.right || Monster1_BB.right < player3D_BB.left || Monster1_BB.top < player3D_BB.bottom || Monster1_BB.bottom > player3D_BB.top);
+			else
+			{
+				bMonsterPlayerCollide = true;
+			}
+		}*/
 	}
+	
+
+
+
+
 
 
 	if (m_pCamera)
@@ -1111,6 +1164,13 @@ HRESULT CGameManager::Add_Camera(CCamera* pCamera)
 		SafeDelete(m_pCamera);
 	m_pCamera = pCamera;
 
+	return NOERROR;
+}
+
+HRESULT CGameManager::Delete_Camera()
+{
+	if(m_pCamera)
+		SafeDelete(m_pCamera);
 	return NOERROR;
 }
 

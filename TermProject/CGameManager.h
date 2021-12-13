@@ -19,9 +19,11 @@ public:
 
 public:
 	bool& Get_boolPortal() { return bPortalCollide; };
+	bool& Get_CollideMTP() { return bMonsterPlayerCollide; };
 
 public:
 	HRESULT Add_Camera(CCamera* pCamera);
+	HRESULT Delete_Camera();
 	GLvoid Render_Camera();
 	CCamera* Get_Camera() { return m_pCamera; };
 	bool Get_View() { return m_bView; };

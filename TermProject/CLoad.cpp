@@ -55,7 +55,7 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 		if (iAniCounter > 15)
 			iAniCounter = 0;
 	}
-	if (fNextScene >= 5)
+	if (fNextScene >= 2.5)
 	{
 		fNextScene = 0;
 		m_pSceneMgr->SceneChange(SCENE_STAGE1);

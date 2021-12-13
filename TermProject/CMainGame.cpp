@@ -58,7 +58,7 @@ HRESULT CMainGame::Initialize_Shader()
 		return E_FAIL;
 	if (FAILED(CShader::GetInstance()->Add_Shader("UI", "Vertex_UI.glsl", "Fragement_UI.glsl")))
 		return E_FAIL;
-	if (FAILED(CShader::GetInstance()->Add_Shader("BACK", "Vertex_BackImage.glsl", "Fragment_BackImage.glsl")))
+	if (FAILED(CShader::GetInstance()->Add_Shader("Back", "Vertex_BackImage.glsl", "Fragment_BackImage.glsl")))
 		return E_FAIL;
 	return NOERROR;
 }

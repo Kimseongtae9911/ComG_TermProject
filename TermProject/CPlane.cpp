@@ -44,7 +44,8 @@ HRESULT CPlane::Initialize()
 
 GLvoid CPlane::Render()
 {
-	GLuint program = CShader::GetInstance()->Use_Shader("UI");
+	//GLuint program = CShader::GetInstance()->Use_Shader("UI");
+	GLuint program = CShader::GetInstance()->Get_CurrProgram();
 
 	GLuint iLocation = glGetUniformLocation(program, "modelTransform");
 	glUniformMatrix4fv(iLocation, 1, GL_FALSE, value_ptr(Get_Matrix()));

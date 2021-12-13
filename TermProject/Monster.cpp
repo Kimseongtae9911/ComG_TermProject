@@ -53,9 +53,6 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 
 	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
-		if (m_iType == 0) {
-			cout << m_iCollide << endl;
-		}
 		float f = LookPlayerAngle();
 		if (f >= m_pMonster->GetRotate().y)
 		{
@@ -90,11 +87,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		if (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0)
 		{
 			if (m_iType == 0) {
-				if (m_iCollide != RIGHT) {
+				if (!m_pGameMgr->MonCollide(RIGHT)) {
 					m_pMonster->GetPos().x += 0.04;
-				}
-				else if(m_iCollide != UP && m_iCollide != DOWN){
-					m_iCollide = 0;
 				}
 				m_iDir = 1;
 			}
@@ -106,11 +100,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else
 		{
 			if (m_iType == 0) {
-				if (m_iCollide != LEFT) {
+				if (!m_pGameMgr->MonCollide(LEFT)) {
 					m_pMonster->GetPos().x -= 0.04;
-				}
-				else if (m_iCollide != UP && m_iCollide != DOWN) {
-					m_iCollide = 0;
 				}
 				m_iDir = -1;
 			}
@@ -122,11 +113,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		if (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) 
 		{
 			if (m_iType == 0) {
-				if (m_iCollide != UP) {
+				if (!m_pGameMgr->MonCollide(UP)) {
 					m_pMonster->GetPos().y += 0.04;
-				}
-				else {
-					m_iCollide = 0;
 				}
 			}
 			else {
@@ -136,11 +124,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 		else 
 		{
 			if (m_iType == 0) {
-				if (m_iCollide != DOWN) {
+				if (!m_pGameMgr->MonCollide(DOWN)) {
 					m_pMonster->GetPos().y -= 0.04;
-				}
-				else {
-					m_iCollide = 0;
 				}
 			}
 			else {

@@ -225,95 +225,37 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 					if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
 					{
 						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
 					}
 					else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
 					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;						
 					}
 					else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
 					{
 						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
 					}
 					else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
 					{
 						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = LEFT;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = LEFT;
-					}
-					else {
-						if (!m_bView) {
-							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
-						}
 					}
 				}
 				else if (monster_BB.right >= OBJ_BB.left && monster_BB.left <= OBJ_BB.left)
 				{
 					if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
 					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
+						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;						
 					}
 					else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
 					{
 						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
 					}
 					else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
 					{
 						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
 					}
 					else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
 					{
 						dynamic_cast<Monster*>((*monster_iter_begin))->GetDir() = -1;
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = RIGHT;
-					}
-					else {
-						if (!m_bView) {
-							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
-						}
-					}
-				}
-				else if (OBJ_BB.bottom <= monster_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= monster_BB.top)
-				{
-					if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
-					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = UP;
-					}
-					else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
-					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = UP;
-					}
-					else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
-					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = UP;
-					}
-					else {
-						if (!m_bView) {
-							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
-						}
-					}
-				}
-				else if (OBJ_BB.top >= monster_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= monster_BB.bottom)
-				{
-					if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
-					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = DOWN;
-					}
-					else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
-					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = DOWN;
-					}
-					else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
-					{
-						dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = DOWN;
-					}
-					else {
-						if (!m_bView) {
-							dynamic_cast<Monster*>((*monster_iter_begin))->GetCollN() = 0;
-						}
 					}
 				}
 				++iter_begin;
@@ -390,6 +332,108 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		m_pCamera->Update(fTimeDelta);
 
 	return GLvoid();
+}
+
+bool CGameManager::MonCollide(int num) {
+	list<CObj*>::iterator iter_begin;
+	list<CObj*>::iterator iter_end;
+	for (int i = OBJ_MONSTER1; i <= OBJ_MONSTER2; ++i) {
+		list<CObj*>::iterator monster_iter_begin = m_ObjLst[i].begin();
+		list<CObj*>::iterator monster_iter_end = m_ObjLst[i].end();
+		for (; monster_iter_begin != monster_iter_end;) {
+			BB monster_BB = (*monster_iter_begin)->Get_BB();
+			iter_begin = m_ObjLst[OBJ_BOX].begin();
+			iter_end = m_ObjLst[OBJ_BOX].end();
+			for (; iter_begin != iter_end;)
+			{
+				BB OBJ_BB = (*iter_begin)->Get_BB();
+				switch (num) {
+				case LEFT:
+					if (monster_BB.left <= OBJ_BB.right && monster_BB.right >= OBJ_BB.right)
+					{
+						if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+						{
+							return true;
+						}
+						else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+						{
+							return true;
+						}
+
+					}
+					break;
+				case RIGHT:
+					if (monster_BB.right >= OBJ_BB.left && monster_BB.left <= OBJ_BB.left)
+					{
+						if (OBJ_BB.bottom <= monster_BB.top && monster_BB.top <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (OBJ_BB.bottom <= monster_BB.bottom && monster_BB.bottom <= OBJ_BB.top)
+						{
+							return true;
+						}
+						else if (monster_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= monster_BB.top)
+						{
+							return true;
+						}
+						else if (monster_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= monster_BB.top)
+						{
+							return true;
+						}
+					}
+					break;
+				case DOWN:
+					if (OBJ_BB.top >= monster_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= monster_BB.bottom)
+					{
+						if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
+						{
+							return true;
+						}
+					}
+					break;
+				case UP:
+					if (OBJ_BB.bottom <= monster_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= monster_BB.top)
+					{
+						if (OBJ_BB.left <= monster_BB.left && monster_BB.left <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left <= monster_BB.right && monster_BB.right <= OBJ_BB.right)
+						{
+							return true;
+						}
+						else if (OBJ_BB.left >= monster_BB.left && monster_BB.right >= OBJ_BB.right)
+						{
+							return true;
+						}
+					}
+					break;
+				default:
+					break;
+				}
+				++iter_begin;
+			}
+			++monster_iter_begin;
+		}
+	}
+	return false;
 }
 
 bool CGameManager::Collide(int num)

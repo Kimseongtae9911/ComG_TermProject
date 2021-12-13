@@ -13,6 +13,7 @@ CLogo::CLogo()
 
 CLogo::~CLogo()
 {
+	Release();
 }
 
 HRESULT CLogo::Initialize()

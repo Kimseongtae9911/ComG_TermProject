@@ -11,6 +11,7 @@ CBackImage::CBackImage()
 
 CBackImage::~CBackImage()
 {
+	Release();
 }
 
 HRESULT CBackImage::Initialize(string strTexTag, string strTexPath, bool bAlpha)
@@ -43,6 +44,8 @@ GLvoid CBackImage::Render()
 
 GLvoid CBackImage::Release()
 {
+	SafeDelete(m_pPlane);
+	SafeDelete(m_pTexture);
 	return GLvoid();
 }
 

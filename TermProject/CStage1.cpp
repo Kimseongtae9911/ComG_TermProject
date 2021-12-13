@@ -120,10 +120,10 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
-	pObj = CBossMonster::Create();
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
-		return E_FAIL;
-	return NOERROR;
+	//pObj = CBossMonster::Create();
+	//if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+	//	return E_FAIL;
+	//return NOERROR;
 }
 
 GLint CStage1::Update(const GLfloat fTimeDelta)

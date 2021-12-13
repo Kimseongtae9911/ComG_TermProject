@@ -78,15 +78,15 @@ HRESULT CStage1::Initialize()
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 1, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-	pObj->Get_BB() = { -15 + 1.0f * 1 - 0.5f, -15 + 1.0f * 28 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+	pObj->Get_BB() = { -15 + 1.0f * 1 - 0.5f, -15 + 1.0f * 1 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 2, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-	pObj->Get_BB() = { -15 + 1.0f * 2 - 0.5f, -15 + 1.0f * 27 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+	pObj->Get_BB() = { -15 + 1.0f * 2 - 0.5f, -15 + 1.0f * 2 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 3, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-	pObj->Get_BB() = { -15 + 1.0f * 3 - 0.5f, -15 + 1.0f * 26 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+	pObj->Get_BB() = { -15 + 1.0f * 3 - 0.5f, -15 + 1.0f * 3 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 
@@ -105,14 +105,14 @@ HRESULT CStage1::Initialize()
 
 
 
-	pObj = CPortal::Create(/*glm::vec3(11.5f, 11.3f, 0.f)*/glm::vec3(5.5f, 1.0f, 0.f));
+	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj))) // OBJ_MAP ?
 		return E_FAIL;
 
 
 
-	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(0.0f + 5.0f, 1.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
-	pObj->Get_BB() = {4.5f, 5.5f, 1.5f, 0.5f};
+	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-13.0f, 11.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj->Get_BB() = {-13.5f, -12.5f, 11.5f, 10.5f};
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 

@@ -17,10 +17,10 @@ HRESULT CPortal::Initialize(glm::vec3 vPos)
 {
 	CObj::Initialize();
 	m_pPortal = CMesh::Create("../Resource/Portal Door/Portal Door.obj", { 1.0, 1.0, 1.0, 0.3 });
-	m_pPortal->GetPos() = vPos;
 	m_pPortal->GetScale() = glm::vec3(0.15f, 0.15f, 0.15f);
+	m_pPortal->GetPos() = vPos;
 	//m_pPortal->GetScale().x = -90;
-	CPortal::Get_BB() = { m_pPortal->GetPos().x - 5.0f * m_pPortal->GetScale().x, m_pPortal->GetPos().x + 5.0f * m_pPortal->GetScale().x,  m_pPortal->GetPos().y + 5.0f * m_pPortal->GetScale().y, m_pPortal->GetPos().y - 5.0f * m_pPortal->GetScale().y };
+	CPortal::Get_BB() = { m_pPortal->GetPos().x - 1.0f, m_pPortal->GetPos().x  + 1.0f,  m_pPortal->GetPos().y + 1.0f, m_pPortal->GetPos().y - 1.0f};
 
 	return NOERROR;
 }
@@ -47,6 +47,12 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
+	
+	cout << "Left - " << CPortal::Get_BB().left << endl;
+	cout << "Right - " << CPortal::Get_BB().right << endl;
+	cout << "Top - " << CPortal::Get_BB().top << endl;
+	cout << "Bottom - " << CPortal::Get_BB().bottom << endl;
+
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

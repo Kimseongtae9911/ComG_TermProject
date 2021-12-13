@@ -141,7 +141,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 	// map and bullet
-	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end(); ++iter_bullet ) // ����
+	for (list<CObj*>::iterator iter_bullet = m_ObjLst[OBJ_BULLET].begin(); iter_bullet != m_ObjLst[OBJ_BULLET].end() && m_bView; ++iter_bullet ) // ����
 	{
 		BB Bullet_BB = (*iter_bullet)->Get_BB();
 		for (list<CObj*>::iterator iter_map = m_ObjLst[OBJ_MAP].begin(); iter_map != m_ObjLst[OBJ_MAP].end(); ++iter_map)
@@ -150,12 +150,13 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			if (Bullet_BB.left > Map_BB.right || Bullet_BB.right < Map_BB.left || Bullet_BB.top < Map_BB.bottom || Bullet_BB.bottom > Map_BB.top);
 			else
 			{
- 				SafeDelete((*iter_bullet));
+				SafeDelete((*iter_bullet));
 				iter_bullet = m_ObjLst[OBJ_BULLET].erase(iter_bullet);
 				//--iter_bullet;
 				CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
 				break;
 			}
+			
 		}
 	}
 	if (!m_ObjLst[OBJ_PORTAL].empty())

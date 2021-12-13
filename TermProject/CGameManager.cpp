@@ -3,6 +3,7 @@
 #include "CKeyManager.h"
 #include "CMesh.h"
 #include "CObj.h"
+#include "CObject.h"
 #include "CCamera.h"
 #include "CKeyManager.h"
 #include "Monster.h"
@@ -440,11 +441,23 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								return false;
+							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 								return false;
 							}
 							return true;
@@ -454,11 +467,23 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								return false;
+							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 								return false;
 							}
 							return true;
@@ -483,11 +508,23 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								return false;
+							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 								return false;
 							}
 							return true;
@@ -497,11 +534,23 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
 							if (i == OBJ_PORTAL) {
+								return false;
+							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 								return false;
 							}
 							return true;
@@ -526,6 +575,12 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
@@ -533,11 +588,23 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								return false;
+							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y += 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 								return false;
 							}
 							return true;
@@ -562,6 +629,12 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
@@ -569,11 +642,23 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+								return false;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
 							if (i == OBJ_PORTAL) {
+								return false;
+							}
+							if (i == OBJ_BOX) {
+								dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y -= 0.15;
+								glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
+								(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 								return false;
 							}
 							return true;

@@ -179,6 +179,12 @@ HRESULT CStage3::Initialize()
 
 GLint CStage3::Update(const GLfloat fTimeDelta)
 {
+	if (m_pGameMgr->Get_boolPortal())
+	{
+		m_pSceneMgr->SceneChange(SCENE_STAGE4);
+		m_pGameMgr->Get_boolPortal() = false;
+		return 0;
+	}
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }
@@ -203,6 +209,5 @@ CStage3* CStage3::Create()
 		SafeDelete(pInstance);
 		return nullptr;
 	}
-
 	return pInstance;
 }

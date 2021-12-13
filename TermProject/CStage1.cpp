@@ -77,6 +77,19 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
 		return E_FAIL;
 
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 1, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	pObj->Get_BB() = { -15 + 1.0f * 1 - 0.5f, -15 + 1.0f * 28 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 2, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	pObj->Get_BB() = { -15 + 1.0f * 2 - 0.5f, -15 + 1.0f * 27 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 3, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	pObj->Get_BB() = { -15 + 1.0f * 3 - 0.5f, -15 + 1.0f * 26 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+		return E_FAIL;
+
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * 3 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * 3, 1.0f * 3 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))

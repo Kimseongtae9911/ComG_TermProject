@@ -21,6 +21,10 @@ public:
 	CMesh* GetP() { return m_Player; }
 	bool& Get_Portal() { return m_bPortal; }
 
+
+private:
+	bool Collide_Spike();
+
 private:
 	CMesh* m_Player;
 

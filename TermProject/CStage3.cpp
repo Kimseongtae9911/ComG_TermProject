@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CStage3.h"
 #include "CScene.h"
+#include "CMesh.h"
 #include "Player3.h"
 #include "Player2.h"
 #include "Monster.h"
@@ -105,7 +106,7 @@ HRESULT CStage3::Initialize()
 	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
-	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 16.5, 1.0f * 10 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 17, 1.0f * 10 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 16.5 - 0.5f, -15 + 1.0f * 16.5 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
 		return E_FAIL;
@@ -131,6 +132,32 @@ HRESULT CStage3::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
 		return E_FAIL;
 
+	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(0.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj->Get_BB() = { -0.75f, 0.75f, 1.5f, 0.5f };
+	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_SPIKE, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(-1.5f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj->Get_BB() = { -2.25f, -0.75f, 1.5f, 0.5f };
+	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_SPIKE, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(1.5f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj->Get_BB() = { 0.75f, 2.25f, 1.5f, 0.5f };
+	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_SPIKE, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(3.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj->Get_BB() = { 2.25f, 3.75f, 1.5f, 0.5f };
+	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_SPIKE, pObj)))
+		return E_FAIL;
+	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(-3.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	pObj->Get_BB() = { -3.75f, -2.25f, 1.5f, 0.5f };
+	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_SPIKE, pObj)))
+		return E_FAIL;
+
 	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(-13.0f, 0.6f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
@@ -139,7 +166,7 @@ HRESULT CStage3::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(1.5f, 11.0f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
+	pObj = Monster::Create("../Resource/Monster/podoboo.obj", glm::vec3(-2.5f, 11.0f, -0.25f), glm::vec3(0.03, 0.03, 0.03), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 

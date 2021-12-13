@@ -24,6 +24,7 @@ HRESULT CBossMonster::Initialize()
 	CObj::Initialize();
 	m_pBossMonster = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, 1.0});
 	m_pBossMonster->GetPos() = glm::vec3(5.0f, 0, 0);
+	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pBossMonster->GetScale() = glm::vec3(0.2f, 0.2f, 0.2f);
 	m_pBossMonster->GetRotate().y = -20.f;
 	return NOERROR;
@@ -206,7 +207,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	}
 	if (m_pGameMgr->Get_View())
 	{
-		if (!bMoveUpDown && m_pBossMonster->GetPos().y >= 5.f)
+		if (!bMoveUpDown && m_pBossMonster->GetPos().y >= 4.45f)
 		{
 			bMoveUpDown = !bMoveUpDown;
 		}
@@ -214,8 +215,12 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		{
 			bMoveUpDown = !bMoveUpDown;
 		}
-		if(!bMoveUpDown)
-			m_pBossMonster->GetPos().y += 0.05f;
+		if (!bMoveUpDown)
+		{
+			if (m_pBossMonster->GetPos().y + 8.5 + 0.05 <= 13.0f) {
+				m_pBossMonster->GetPos().y += 0.05f;
+			}
+		}
 		else
 			m_pBossMonster->GetPos().y -= 0.05f;
 		
@@ -263,7 +268,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 			fHeight = 8.f;
 			break;
 		case 2:
-			fHeight = 12.f;
+			fHeight = 11.f;
 			break;
 		default:
 			break;
@@ -281,6 +286,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		//	return E_FAIL;
 		f3DTime = 0;
 	}
+	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pRender->Add_RenderObj(REDER_NONAL, this);
 	return GLint();
 }

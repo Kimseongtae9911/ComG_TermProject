@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CStage4.h"
 #include "CScene.h"
+#include "CMesh.h"
 #include "Player3.h"
 #include "Player2.h"
 #include "Monster.h"
@@ -57,6 +58,38 @@ HRESULT CStage4::Initialize()
 
 		}
 	}
+
+	for (int i = 3; i < 8; ++i) {
+		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 4 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 4, 1.0f * 4 - 1.0f };
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+			return E_FAIL;
+	}
+
+	for (int i = 6; i < 11; ++i) {
+		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 7 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 7, 1.0f * 7 - 1.0f };
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+			return E_FAIL;
+	}
+
+	for (int i = 3; i < 8; ++i) {
+		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+			return E_FAIL;
+	}
+
+	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-11.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
+	pObj->Get_BB() = { -11.5f, -10.5f, 11.5f, 10.5f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
+		return E_FAIL;
+
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f), { 0.0, 0.0, 1.0, 0.1 });
+	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 1, 1.0f * 1 - 1.0f };
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
+		return E_FAIL;
+
 	pObj = CBossMonster::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
 		return E_FAIL;
@@ -66,6 +99,40 @@ HRESULT CStage4::Initialize()
 
 GLint CStage4::Update(const GLfloat fTimeDelta)
 {
+	if (m_pGameMgr->Get_View())
+	{
+		if (!m_pGameMgr->Get_Obj(OBJ_KEY).empty()) {
+			fRotCount -= 90.f / 80.f;
+			list<CObj*>::iterator iter_begin = m_pGameMgr->Get_Obj(OBJ_KEY).begin();
+			list<CObj*>::iterator iter_end = m_pGameMgr->Get_Obj(OBJ_KEY).end();
+			for (; iter_begin != iter_end;) {
+				dynamic_cast<CObject*>((*iter_begin))->Set_Rotate(glm::vec3(0, fRotCount, 0));
+				++iter_begin;
+			}
+		}
+		if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y > 0.5) {
+			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y -= 0.1;
+			if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y < 0.5) {
+				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y = 0.5;
+			}
+		}
+		BB BOX_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_BB();
+		BB Boss_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_MONSTER2).front())->Get_BB();
+		if (Boss_BB.left > BOX_BB.right || Boss_BB.right < BOX_BB.left || Boss_BB.top < BOX_BB.bottom || Boss_BB.bottom > BOX_BB.top);
+		else {
+			cout << "보스몬스터 생명 감소" << endl;
+			cout << "초기화" << endl;
+		}
+	}
+	if (m_pGameMgr->Get_Obj(OBJ_KEY).empty()) {
+		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 1.0;
+			}
+		}
+	}
+
+
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }

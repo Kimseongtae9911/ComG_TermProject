@@ -162,7 +162,6 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 					if (OBJ_BB.left > monster_BB.right || OBJ_BB.right < monster_BB.left || OBJ_BB.top < monster_BB.bottom || OBJ_BB.bottom > monster_BB.top);
 					else {
 						m_bDie = true;
-						cout << "Monster Die" << endl;
 					}
 					++iter_begin;
 				}

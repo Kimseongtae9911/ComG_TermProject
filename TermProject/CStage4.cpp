@@ -30,6 +30,10 @@ HRESULT CStage4::Initialize()
 	CScene::Initialize();
 	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 6.5f, 30.f), glm::vec3(0.f, 6.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
+	pObj = CBackImage::Create("", "../Resource/UI/Back/backback.png");
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+		return E_FAIL;
+
 	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
 		return E_FAIL;
@@ -123,7 +127,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		BB Boss_BB = {1.0f, 9.0f, 8.5f, -0.5f };
 		if (Boss_BB.left > BOX_BB.right || Boss_BB.right < BOX_BB.left || Boss_BB.top < BOX_BB.bottom || Boss_BB.bottom > BOX_BB.top);
 		else {
-			cout << "�������� ���� ����" << endl;
+			cout << "�������� ���� ����" << endl; //?
 			cout << "�ʱ�ȭ" << endl;
 		}
 	}

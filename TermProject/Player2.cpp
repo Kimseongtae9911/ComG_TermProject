@@ -8,6 +8,7 @@
 #include "CSceneManager.h"
 #include "CCamera.h"
 #include "CObject.h"
+#include "CSoundManager.h"
 
 Player2::Player2()
 {
@@ -37,6 +38,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		}
 		if (m_pKeyMgr->KeyCombined(KEY_RIGHT, KEY_SPACE)) {
 			if (!m_bJump) {
+				m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
 				m_bJump = true;
 				m_iJumpdir = 1;
 				m_fJumpStart = m_Player->GetPos().y;
@@ -44,6 +46,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		}
 		else if (m_pKeyMgr->KeyCombined(KEY_LEFT, KEY_SPACE)) {
 			if (!m_bJump) {
+				m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
 				m_bJump = true;
 				m_iJumpdir = 1;
 				m_fJumpStart = m_Player->GetPos().y;
@@ -63,6 +66,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		}
 		else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
 			if (!m_bJump) {
+				m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
 				m_bJump = true;
 				m_iJumpdir = 1;
 				m_fJumpStart = m_Player->GetPos().y;

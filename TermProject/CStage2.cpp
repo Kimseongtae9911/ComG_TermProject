@@ -13,6 +13,7 @@
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
+#include "CSoundManager.h"
 
 CStage2::CStage2()
 {
@@ -119,6 +120,8 @@ HRESULT CStage2::Initialize()
 	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 9.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
 		return E_FAIL;
+	m_pSoundMgr->Stop_All();
+	m_pSoundMgr->Play_BGM(L"Back.mp3");
 
 	return NOERROR;
 }
@@ -141,12 +144,14 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 	{
 		m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_STAGE2);
 		m_pGameMgr->Get_boolPortal() = false;
+		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE2);
+		m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

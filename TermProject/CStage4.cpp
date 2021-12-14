@@ -14,6 +14,7 @@
 #include "CGameManager.h"
 #include "CSceneManager.h"
 #include "CKeyManager.h"
+#include "CSoundManager.h"
 
 CStage4::CStage4()
 {
@@ -99,6 +100,9 @@ HRESULT CStage4::Initialize()
 	pObj = CBossMonster::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOSS, pObj)))
 		return E_FAIL;
+
+	m_pSoundMgr->Stop_All();
+	m_pSoundMgr->Play_BGM(L"Back.mp3");
 
 	return NOERROR;
 }
@@ -188,12 +192,14 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 	{
 		m_pGameMgr->Get_boolPortal() = false;
 		m_pSceneMgr->SceneChange(SCENE_END, SCENE_STAGE4);
+		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE4);
+		m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		return 0;
 	}
 

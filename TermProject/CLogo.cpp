@@ -30,7 +30,7 @@ HRESULT CLogo::Initialize()
 	pObj = CSprite::Create(glm::vec3(1040.f, 100.f, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/pressenter.png");
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
 		return E_FAIL;
-	//m_pSoundMgr->Play_BGM(L"Super Mario Bross.mp3");
+	m_pSoundMgr->Play_BGM(L"Ending.mp3");
 
 	return NOERROR;
 }

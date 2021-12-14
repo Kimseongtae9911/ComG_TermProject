@@ -14,6 +14,7 @@
 #include "CGameManager.h"
 #include "CSceneManager.h"
 #include "CKeyManager.h"
+#include "CSoundManager.h"
 
 
 CStage3::CStage3()
@@ -181,6 +182,8 @@ HRESULT CStage3::Initialize()
 	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj)))
 		return E_FAIL;
+	m_pSoundMgr->Stop_All();
+	m_pSoundMgr->Play_BGM(L"Back.mp3");
 
 	return NOERROR;
 }
@@ -191,6 +194,7 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 	{
 		m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_STAGE3);
 		m_pGameMgr->Get_boolPortal() = false;
+		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die())
@@ -198,6 +202,7 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 		dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die() = false;
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE3);
+		m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		return 0;
 	}
 	if (m_pGameMgr->Get_View())

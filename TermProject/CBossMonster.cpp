@@ -273,17 +273,18 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		default:
 			break;
 		}
-		CObj* pObj = CBullet::Create(glm::vec3(m_pBossMonster->GetPos().x,fHeight,0));
-		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))
-			return E_FAIL;
-		cout << "11" << endl;
+		if (m_bBullet) {
+			CObj* pObj = CBullet::Create(glm::vec3(m_pBossMonster->GetPos().x, fHeight, 0));
+			if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))
+				return E_FAIL;
+		}
 		fTime = 0;
 	}
 	else if (f3DTime >= 5 && !m_pGameMgr->Get_View())
 	{
-		//CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
-		//if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
-		//	return E_FAIL;
+		CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+			return E_FAIL;
 		f3DTime = 0;
 	}
 	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };

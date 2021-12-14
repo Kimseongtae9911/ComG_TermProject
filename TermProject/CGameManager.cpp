@@ -394,6 +394,9 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
@@ -404,6 +407,9 @@ bool CGameManager::Collide(int num)
 							}
 							if (i == OBJ_PORTAL) {
 								return false;
+							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
 							}
 							return true;
 						}
@@ -416,6 +422,9 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
@@ -426,6 +435,9 @@ bool CGameManager::Collide(int num)
 							}
 							if (i == OBJ_PORTAL) {
 								return false;
+							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
 							}
 							return true;
 						}
@@ -453,6 +465,9 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
@@ -463,6 +478,9 @@ bool CGameManager::Collide(int num)
 							}
 							if (i == OBJ_PORTAL) {
 								return false;
+							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
 							}
 							return true;
 						}
@@ -475,6 +493,9 @@ bool CGameManager::Collide(int num)
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
@@ -485,6 +506,9 @@ bool CGameManager::Collide(int num)
 							}
 							if (i == OBJ_PORTAL) {
 								return false;
+							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
 							}
 							return true;
 						}
@@ -972,6 +996,9 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
@@ -983,6 +1010,9 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
@@ -993,6 +1023,9 @@ bool CGameManager::JumpCollide(int num) {
 							}
 							if (i == OBJ_PORTAL) {
 								return false;
+							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
 							}
 							return true;
 						}
@@ -1020,6 +1053,9 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 
@@ -1034,6 +1070,9 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
+							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 							return true;
@@ -1046,6 +1085,9 @@ bool CGameManager::JumpCollide(int num) {
 							}
 							if (i == OBJ_PORTAL) {
 								return false;
+							}
+							if (i == OBJ_BULLET) {
+								dynamic_cast<Player2*>(player)->Get_Die() = true;
 							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
@@ -1077,7 +1119,9 @@ bool CGameManager::JumpCollide(int num) {
 						if (i == OBJ_PORTAL) {
 							return false;
 						}
-
+						if (i == OBJ_BULLET) {
+							dynamic_cast<Player2*>(player)->Get_Die() = true;
+						}
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 
@@ -1092,6 +1136,9 @@ bool CGameManager::JumpCollide(int num) {
 						if (i == OBJ_PORTAL) {
 							return false;
 						}
+						if (i == OBJ_BULLET) {
+							dynamic_cast<Player2*>(player)->Get_Die() = true;
+						}
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 						return true;
@@ -1104,6 +1151,9 @@ bool CGameManager::JumpCollide(int num) {
 						}
 						if (i == OBJ_PORTAL) {
 							return false;
+						}
+						if (i == OBJ_BULLET) {
+							dynamic_cast<Player2*>(player)->Get_Die() = true;
 						}
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;

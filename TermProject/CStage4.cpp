@@ -141,23 +141,10 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 					CObj* pObj = CPortal::Create(glm::vec3(0.0f, 3.0f, 0.f));
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj)))
 						return E_FAIL;
-					if (!m_pGameMgr->Get_Obj(OBJ_BULLET).empty()) {
-						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_BULLET).end() && m_pGameMgr->Get_View(); ++iter_bullet) // ����
-						{
-							SafeDelete((*iter_bullet));
-							iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).erase(iter_bullet);
-							//--iter_bullet;
-							CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
-						}
-					}
-					for (list<CObj*>::iterator iter_boss = m_pGameMgr->Get_Obj(OBJ_BOSS).begin(); iter_boss != m_pGameMgr->Get_Obj(OBJ_BOSS).end() && m_pGameMgr->Get_View(); ++iter_boss) // ����
-					{
-						SafeDelete((*iter_boss));
-						iter_boss = m_pGameMgr->Get_Obj(OBJ_BOSS).erase(iter_boss);
-						//--iter_bullet;
-						CRenderManager::GetInstance()->Get_RenderObj(RENDER_BOSS).pop_front();
-						break;
-					}
+					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->Get_Pmesh()->GetPos() = { -50.0, 0.0, 0.0 };
+					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->GetBullet() = false;
+					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_HoldingB() = false;
+					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_CollideB() = true;
 				}
 				else {
 					CObj* pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-11.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
@@ -168,6 +155,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos() = { 12.0, 1.0, -0.25 };
 					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetRotate() = { 90.0f, 0.0f, 0.0f };
 					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_HoldingB() = false;
+					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_CollideB() = true;
 					dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
 					temp = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos();
 					dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y, temp.y - 1.0f };
@@ -176,10 +164,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 					if (!m_pGameMgr->Get_Obj(OBJ_BULLET).empty()) {
 						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_BULLET).end() && m_pGameMgr->Get_View(); ++iter_bullet) // ����
 						{
-							SafeDelete((*iter_bullet));
-							iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).erase(iter_bullet);
-							//--iter_bullet;
-							CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
+							dynamic_cast<CObject*>((*iter_bullet))->Get_Mesh()->GetPos().x += 14.0f;
 						}
 					}
 				}
@@ -209,7 +194,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		m_pSceneMgr->SceneChange(SCENE_END, SCENE_STAGE4);
 		return 0;
 	}
-	if (m_pGameMgr->Get_CollideMTP())
+	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE4);

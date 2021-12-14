@@ -7,7 +7,7 @@
 #include "CSceneManager.h"
 #include "CRenderManager.h"
 #include "CKeyManager.h"
-//#include "CSoundManager.h"
+#include "CSoundManager.h"
 
 CLogo::CLogo()
 {

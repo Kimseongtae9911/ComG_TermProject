@@ -14,7 +14,7 @@ CMesh::~CMesh()
 
 HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 {
-	if (path == "")
+	if (path == "")						
 		return E_FAIL;
 
 	if (FAILED(Load_Mesh(path)))
@@ -183,7 +183,10 @@ HRESULT CMesh::Load_Mesh(string path)
 		int res = fscanf_s(file, "%s", chLineHeader, 128);
 
 		if (res == EOF)
+		{
 			break;
+		}
+			
 
 		if (strcmp(chLineHeader, "#") == 0)
 			continue;
@@ -256,6 +259,7 @@ HRESULT CMesh::Load_Mesh(string path)
 		}
 	}
 
+	fclose(file);
 	if (pCurrPart != nullptr)
 		m_vecSubMesh.push_back(pCurrPart);
 
@@ -271,6 +275,11 @@ HRESULT CMesh::Load_Material(string strPath)
 		return E_FAIL;
 	}
 
+	if (nullptr == file)
+	{
+		cout << "file open failed // " << strPath << endl;
+		return E_FAIL;
+	}
 	MATERIAL* pCurrMat = nullptr;
 
 	while (true)
@@ -338,6 +347,7 @@ HRESULT CMesh::Load_Material(string strPath)
 				fscanf_s(file, "%f", &pCurrMat->d);
 		}
 	}
+	fclose(file);
 
 	return NOERROR;
 }

@@ -18,6 +18,7 @@ public:
 	int& GetDir() { return m_iDir; }
 	GLuint& GetLife() { return m_iLife; }
 	CMesh* Get_Pmesh() { return m_pBossMonster; }
+	bool& GetBullet() { return m_bBullet; }
 
 private:
 	CMesh* m_pBossMonster;
@@ -32,6 +33,7 @@ private:
 	float fTime = 0;
 	float f3DTime = 0;
 	GLuint m_iLife{ 3 };
+	bool m_bBullet{ true };
 
 public:
 	static CBossMonster* Create();

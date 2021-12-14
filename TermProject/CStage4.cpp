@@ -30,6 +30,10 @@ HRESULT CStage4::Initialize()
 	CScene::Initialize();
 	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 6.5f, 30.f), glm::vec3(0.f, 6.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
+	pObj = CBackImage::Create("", "../Resource/UI/Back/backback.png");
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+		return E_FAIL;
+
 	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
 		return E_FAIL;

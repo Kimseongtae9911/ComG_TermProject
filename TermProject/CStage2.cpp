@@ -21,6 +21,7 @@ CStage2::CStage2()
 CStage2::~CStage2()
 {
 	Release();
+	m_pGameMgr->init();
 }
 
 HRESULT CStage2::Initialize()
@@ -138,8 +139,14 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 	}
 	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_3))
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE3);
+		m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_STAGE2);
 		m_pGameMgr->Get_boolPortal() = false;
+		return 0;
+	}
+	if (m_pGameMgr->Get_CollideMTP())
+	{
+		m_pGameMgr->Get_CollideMTP() = false;
+		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE2);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

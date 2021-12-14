@@ -18,8 +18,12 @@ CSceneManager::~CSceneManager()
 {
 }
 
-HRESULT CSceneManager::SceneChange(SCENE_ID eID)
+HRESULT CSceneManager::SceneChange(SCENE_ID eID, SCENE_ID MyID)
 {
+	if (eID < MyID)
+	{
+		iScene = MyID;
+	}
 	m_eCurrScene = eID;
 
 	if (m_ePreScene != m_eCurrScene)

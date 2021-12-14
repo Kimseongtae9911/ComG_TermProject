@@ -20,6 +20,7 @@ CStage4::CStage4()
 
 CStage4::~CStage4()
 {
+	m_pGameMgr->init();
 	Release();
 }
 
@@ -133,6 +134,13 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		}
 	}
 
+
+	if (m_pGameMgr->Get_CollideMTP())
+	{
+		m_pGameMgr->Get_CollideMTP() = false;
+		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE4);
+		return 0;
+	}
 
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();

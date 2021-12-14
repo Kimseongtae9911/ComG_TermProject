@@ -11,9 +11,10 @@ private:
 
 public:
 	SCENE_ID& Get_NextScene() { return m_eNextScene; }
+	int& Get_SceneChangeCount() { return iScene; };
 
 public:
-	HRESULT SceneChange(SCENE_ID eID);
+	HRESULT SceneChange(SCENE_ID eID, SCENE_ID MyID);
 	HRESULT Change_NextScene();
 	HRESULT Change_LastScene();
 	HRESULT Change_GameOverScene();
@@ -22,6 +23,7 @@ public:
 
 private:
 	void Release();
+	int iScene = 2;
 
 private:
 	SCENE_ID m_ePreScene =SCENE_END;

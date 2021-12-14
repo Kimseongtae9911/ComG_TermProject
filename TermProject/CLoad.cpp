@@ -58,7 +58,24 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 	if (fNextScene >= 2.5)
 	{
 		fNextScene = 0;
-		m_pSceneMgr->SceneChange(SCENE_STAGE1);
+		switch (m_pSceneMgr->Get_SceneChangeCount())
+		{
+		case 2:
+			m_pSceneMgr->SceneChange(SCENE_STAGE1,SCENE_LOAD);
+			break;
+		case 3:
+			m_pSceneMgr->SceneChange(SCENE_STAGE2, SCENE_LOAD);
+			break;
+		case 4:
+			m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_LOAD);
+			break;
+		case 5:
+			m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_LOAD);
+			break;
+		default:
+			break;
+		}
+		
 		return 0;
 	}
 	CRenderManager::GetInstance()->Add_RenderObj(REDER_UI, m_pAni[iAniCounter]);

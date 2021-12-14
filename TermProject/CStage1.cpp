@@ -143,13 +143,13 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_2))
 	{
 		m_pGameMgr->Get_boolPortal() = false;
-		m_pSceneMgr->SceneChange(SCENE_STAGE2);
+		m_pSceneMgr->SceneChange(SCENE_STAGE2,SCENE_STAGE1);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
-		m_pSceneMgr->SceneChange(SCENE_LOAD);
+		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE1);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

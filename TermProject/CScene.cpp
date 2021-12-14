@@ -8,7 +8,7 @@
 #include "CGameManager.h"
 #include "CSceneManager.h"
 #include "CFrameManager.h"
-//#include "CSoundManager.h"
+#include "CSoundManager.h"
 
 CScene::CScene()
 {
@@ -38,9 +38,9 @@ HRESULT CScene::Initialize()
 	m_pRenderMgr = CRenderManager::GetInstance();
 	if (!m_pRenderMgr) 
 		return E_FAIL;
-	//m_pSoundMgr = CSoundManager::GetInstance();
-	//if (!m_pSoundMgr)
-	//	return E_FAIL;
+	m_pSoundMgr = CSoundManager::GetInstance();
+	if (!m_pSoundMgr)
+		return E_FAIL;
 
 	return NOERROR;
 }

@@ -13,6 +13,7 @@
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
+#include "CKeyManager.h"
 
 
 CStage3::CStage3()
@@ -181,7 +182,7 @@ HRESULT CStage3::Initialize()
 
 GLint CStage3::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_boolPortal())
+	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_4))
 	{
 		m_pSceneMgr->SceneChange(SCENE_STAGE4);
 		m_pGameMgr->Get_boolPortal() = false;

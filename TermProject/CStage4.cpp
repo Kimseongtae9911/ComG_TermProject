@@ -91,7 +91,7 @@ HRESULT CStage4::Initialize()
 		return E_FAIL;
 
 	pObj = CBossMonster::Create();
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOSS, pObj)))
 		return E_FAIL;
 
 	return NOERROR;
@@ -117,7 +117,8 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 			}
 		}
 		BB BOX_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_BB();
-		BB Boss_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_MONSTER2).front())->Get_BB();
+		//BB Boss_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_MONSTER2).front())->Get_BB();
+		BB Boss_BB = { 1.0f, 9.0f, 8.5f,-0.5f };
 		if (Boss_BB.left > BOX_BB.right || Boss_BB.right < BOX_BB.left || Boss_BB.top < BOX_BB.bottom || Boss_BB.bottom > BOX_BB.top);
 		else {
 			cout << "보스몬스터 생명 감소" << endl;

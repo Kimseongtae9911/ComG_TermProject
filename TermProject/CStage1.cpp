@@ -9,6 +9,7 @@
 #include "CCamera.h"
 #include "CPortal.h"
 #include "CBackImage.h"
+#include "CKeyManager.h"
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
@@ -66,6 +67,7 @@ HRESULT CStage1::Initialize()
 
 		}
 	}
+	//pObj = CObject::Create(pObj,"../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 28 - 0.5f, -15 + 1.0f * 28 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
@@ -138,7 +140,7 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 	}
-	if (m_pGameMgr->Get_boolPortal())
+	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_2))
 	{
 		m_pGameMgr->Get_boolPortal() = false;
 		m_pSceneMgr->SceneChange(SCENE_STAGE2);

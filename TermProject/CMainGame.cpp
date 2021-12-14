@@ -7,6 +7,7 @@
 #include "CSceneManager.h"
 #include "CKeyManager.h"
 #include"CFrameManager.h"
+//#include "CSoundManager.h"
 
 CMainGame::CMainGame()
 {
@@ -27,7 +28,8 @@ HRESULT CMainGame::Initialize()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
+	//CSoundManager::GetInstance()->Ready_SoundManager();
+	//CSoundManager::GetInstance()->Load_SoundFile("../Resource/sound/");
 
 	CSceneManager::GetInstance()->SceneChange(SCENE_LOGO);
 

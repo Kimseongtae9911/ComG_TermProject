@@ -9,6 +9,7 @@
 #include "CCamera.h"
 #include "CPortal.h"
 #include "CBackImage.h"
+#include "CKeyManager.h"
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
@@ -135,7 +136,7 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-	if (m_pGameMgr->Get_boolPortal())
+	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_3))
 	{
 		m_pSceneMgr->SceneChange(SCENE_STAGE3);
 		m_pGameMgr->Get_boolPortal() = false;

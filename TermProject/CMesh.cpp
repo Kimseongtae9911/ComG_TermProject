@@ -67,6 +67,58 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 	return NOERROR;
 }
 
+HRESULT CMesh::Initialize(CMesh* pMesh, glm::vec4 vCol, string path)
+{
+	if (path == "")
+		return E_FAIL;
+	m_vecSubMesh.assign(pMesh->m_vecSubMesh.begin(), pMesh->m_vecSubMesh.end());
+	m_vecMaterials.assign(pMesh->m_vecMaterials.begin(), pMesh->m_vecMaterials.end());
+	path.replace(path.end() - 3, path.end(), "");
+	int index = path.rfind('/');
+
+	for (auto pMesh : m_vecSubMesh)
+	{
+		glGenBuffers(4, pMesh->vbo);
+
+		// 인덱스에 해당하는 정점 할당
+		for (int i = 0; i < pMesh->indices[0].size(); ++i)
+		{
+			pMesh->vertex.push_back(m_vecVertices[pMesh->indices[0][i]]);
+			pMesh->texcoord.push_back(m_vecTexcoords[pMesh->indices[1][i]]);
+			pMesh->normal.push_back(m_vecNormals[pMesh->indices[2][i]]);
+		}
+
+		if (FAILED(SetVertexColor(pMesh->vertex, pMesh->color, vCol)))
+			return E_FAIL;
+
+		glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo[0]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * pMesh->vertex.size(), &pMesh->vertex.front(), GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo[1]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * pMesh->texcoord.size(), &pMesh->texcoord.front(), GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo[2]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * pMesh->normal.size(), &pMesh->normal.front(), GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, pMesh->vbo[3]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec4) * pMesh->color.size(), &pMesh->color.front(), GL_STATIC_DRAW);
+
+		pMesh->material = Get_Material(pMesh->matname);
+		if (pMesh->material)
+		{
+			MATERIAL* pMat = pMesh->material;
+			string strNewPath = path;
+			strNewPath = strNewPath.replace(strNewPath.end() - (strNewPath.size() - index - 1), strNewPath.end(), pMat->map_Kd);
+			pMat->texture = CTexture::Create("", strNewPath);
+		}
+	}
+
+
+
+
+	return NOERROR;
+}
+
 GLvoid CMesh::Render()
 {
 	GLuint program = CShader::GetInstance()->Use_Shader("Default"); //일단
@@ -356,6 +408,18 @@ CMesh* CMesh::Create(string path, glm::vec4 vCol)
 	CMesh* pInstance = new CMesh;
 
 	if (FAILED(pInstance->Initialize(path, vCol)))
+	{
+		SafeDelete(pInstance);
+		return nullptr;
+	}
+	return pInstance;
+}
+
+CMesh* CMesh::Create(CMesh* pMesh, glm::vec4 vCol, string path)
+{
+	CMesh* pInstance = new CMesh;
+
+	if (FAILED(pInstance->Initialize(pMesh,vCol, path)))
 	{
 		SafeDelete(pInstance);
 		return nullptr;

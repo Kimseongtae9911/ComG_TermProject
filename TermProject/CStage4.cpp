@@ -13,6 +13,7 @@
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
+#include "CKeyManager.h"
 
 CStage4::CStage4()
 {
@@ -134,7 +135,12 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-
+	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_5))
+	{
+		m_pGameMgr->Get_boolPortal() = false;
+		m_pSceneMgr->SceneChange(SCENE_END, SCENE_STAGE4);
+		return 0;
+	}
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;

@@ -57,6 +57,11 @@ GLint CLogo::Update(const GLfloat fTimeDelta)
 		m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_LOGO);
 		return 0;
 	}
+	else if (m_pKeyMgr->KeyDown(KEY_5))
+	{
+		m_pSceneMgr->SceneChange(SCENE_END, SCENE_LOGO);
+		return 0;
+	}
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }

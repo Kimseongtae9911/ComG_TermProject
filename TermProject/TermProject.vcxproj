@@ -150,6 +150,7 @@
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCube.cpp" />
+    <ClCompile Include="CEnding.cpp" />
     <ClCompile Include="CFrameManager.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCube.h" />
+    <ClInclude Include="CEnding.h" />
     <ClInclude Include="CFrameManager.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CKeyManager.h" />

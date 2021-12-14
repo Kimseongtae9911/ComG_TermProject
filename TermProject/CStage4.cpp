@@ -101,7 +101,7 @@ HRESULT CStage4::Initialize()
 
 GLint CStage4::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View())
+	if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
@@ -114,28 +114,83 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		}
 		if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y > 0.5) {
 			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y -= 0.1;
-			if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y < 0.5) {
-				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y = 0.5;
+			if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y < 0.0) {
+				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos().y = 0.0;
 			}
 		}
 		BB BOX_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_BB();
 		/*BB Boss_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_MONSTER2).front())->Get_BB();*/
 		BB Boss_BB = {1.0f, 9.0f, 8.5f, -0.5f };
-		cout << "Box Left - " << BOX_BB.left << endl;
-		cout << "Box Right - " << BOX_BB.right << endl;
-		cout << "Box UP - " << BOX_BB.top << endl;
-		cout << "Box DOWN - " << BOX_BB.bottom << endl;
+		glm::vec3 temp = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos();
+		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y, temp.y - 1.0f };
 
 		if (Boss_BB.left > BOX_BB.right || Boss_BB.right < BOX_BB.left || Boss_BB.top < BOX_BB.bottom || Boss_BB.bottom > BOX_BB.top);
 		else {
-			cout << "Boss Life--" << endl;
-			cout << "Init" << endl;
+
+			if (dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->GetLife() > 0) {
+				dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->GetLife() -= 1;
+				if (dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->GetLife() == 0) {
+					CObj* pObj = CPortal::Create(glm::vec3(0.0f, 3.0f, 0.f));
+					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj)))
+						return E_FAIL;
+					if (!m_pGameMgr->Get_Obj(OBJ_BULLET).empty()) {
+						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_BULLET).end() && m_pGameMgr->Get_View(); ++iter_bullet) // ����
+						{
+							SafeDelete((*iter_bullet));
+							iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).erase(iter_bullet);
+							//--iter_bullet;
+							CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
+						}
+					}
+					for (list<CObj*>::iterator iter_boss = m_pGameMgr->Get_Obj(OBJ_BOSS).begin(); iter_boss != m_pGameMgr->Get_Obj(OBJ_BOSS).end() && m_pGameMgr->Get_View(); ++iter_boss) // ����
+					{
+						SafeDelete((*iter_boss));
+						iter_boss = m_pGameMgr->Get_Obj(OBJ_BOSS).erase(iter_boss);
+						//--iter_bullet;
+						CRenderManager::GetInstance()->Get_RenderObj(RENDER_BOSS).pop_front();
+						break;
+					}
+				}
+				else {
+					CObj* pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-11.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
+					pObj->Get_BB() = { -11.5f, -10.5f, 11.5f, 10.5f };
+					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
+						return E_FAIL;
+					dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->GetP()->GetPos() = { -12.0, 0.0, -0.25 };
+					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos() = { 12.0, 1.0, -0.25 };
+					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetRotate() = { 90.0f, 0.0f, 0.0f };
+					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_HoldingB() = false;
+					dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
+					temp = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetPos();
+					dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y, temp.y - 1.0f };
+					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->Get_Pmesh()->GetPos() = { 5.0, 0.0, 0.0 };
+					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_BOSS).front())->Get_Pmesh()->GetRotate().y = -20.0f;
+					if (!m_pGameMgr->Get_Obj(OBJ_BULLET).empty()) {
+						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_BULLET).end() && m_pGameMgr->Get_View(); ++iter_bullet) // ����
+						{
+							SafeDelete((*iter_bullet));
+							iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).erase(iter_bullet);
+							//--iter_bullet;
+							CRenderManager::GetInstance()->Get_RenderObj(REDER_BULLET).pop_front();
+						}
+					}
+				}
+			}
+			
+			
 		}
 	}
 	if (m_pGameMgr->Get_Obj(OBJ_KEY).empty()) {
 		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetSMESH()) {
 			for (int j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
+			}
+		}
+	}
+	else {
+		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_BOX).front())->Get_Rotate()->GetSMESH()) {
+			for (int j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 0.1;
 			}
 		}
 	}

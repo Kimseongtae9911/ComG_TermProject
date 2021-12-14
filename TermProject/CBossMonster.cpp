@@ -287,7 +287,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		f3DTime = 0;
 	}
 	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
-	m_pRender->Add_RenderObj(REDER_NONAL, this);
+	m_pRender->Add_RenderObj(RENDER_BOSS, this);
 	return GLint();
 }
 

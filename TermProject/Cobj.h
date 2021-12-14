@@ -5,6 +5,7 @@ class CKeyManager;
 class CGameManager;
 class CSceneManager;
 class CShader;
+class CSoundManager;
 
 class CObj
 {
@@ -24,6 +25,7 @@ protected:
 	CGameManager* m_pGameMgr = nullptr;
 	CSceneManager* m_pSceneMgr = nullptr;
 	CShader* m_pShaderLoader = nullptr;
+	CSoundManager* m_pSoundMgr = nullptr;
 	BB m_Box;
 
 protected:

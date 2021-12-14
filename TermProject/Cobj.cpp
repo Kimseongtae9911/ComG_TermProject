@@ -7,6 +7,7 @@
 #include "CSceneManager.h"
 #include "CShader.h"
 #include "CFrameManager.h"
+#include "CSoundManager.h"
 
 CObj::CObj()
 {
@@ -23,7 +24,7 @@ HRESULT CObj::Initialize()
 	m_pSceneMgr = CSceneManager::GetInstance();
 	m_pKeyMgr = CKeyManager::GetInstance();
 	m_pShaderLoader = CShader::GetInstance();
-
+	m_pSoundMgr = CSoundManager::GetInstance();
 
 	return NOERROR;
 }

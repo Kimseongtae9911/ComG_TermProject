@@ -189,8 +189,9 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 		m_pGameMgr->Get_boolPortal() = false;
 		return 0;
 	}
-	if (m_pGameMgr->Get_CollideMTP())
+	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die())
 	{
+		dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die() = false;
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE3);
 		return 0;

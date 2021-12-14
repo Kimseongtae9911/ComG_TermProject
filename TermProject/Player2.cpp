@@ -5,6 +5,7 @@
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
+#include "CSceneManager.h"
 #include "CCamera.h"
 #include "CObject.h"
 
@@ -106,15 +107,12 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 				m_fJumpPos = 0.0f;
 				m_fJumpStart = 0.0f;
 			}
-			if (Collide_Spike()) {
-				cout << "Die" << endl;
-			}
+
 			if (m_Player->GetPos().y < 0) {
 				m_Player->GetPos().y = 0;
 				m_fJumpPos = 0.0f;
 				m_fJumpStart = 0.0f;
 			}
-			//Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
 		}
 		Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
 		m_pRender->Add_RenderObj(REDER_NONAL, this);
@@ -131,14 +129,12 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		m_pRender->Add_RenderObj(REDER_NONAL, this);
 	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
-		//need to Release Memory
 		exit(0);
 	}
-	
+
 	if (Collide_Spike()) {
-		cout << "Die" << endl;
+		m_iDie = true;
 	}
-	
 	return GLint();
 }
 

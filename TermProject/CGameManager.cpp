@@ -968,10 +968,6 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
-							if (i == OBJ_SPIKE) {
-								cout << "Die" << endl;
-								return false;
-							}
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
@@ -981,10 +977,6 @@ bool CGameManager::JumpCollide(int num) {
 								return false;
 							}
 							if (i == OBJ_PORTAL) {
-								return false;
-							}
-							if (i == OBJ_SPIKE) {
-								cout << "Die" << endl;
 								return false;
 							}
 							return true;
@@ -998,10 +990,6 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
-							if (i == OBJ_SPIKE) {
-								cout << "Die" << endl;
-								return false;
-							}
 							return true;
 						}
 					}
@@ -1010,7 +998,7 @@ bool CGameManager::JumpCollide(int num) {
 			}
 			break;
 		case -1:
-			for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+			for (int i = OBJ_MONSTER1; i < OBJ_SPIKE; ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -1028,10 +1016,6 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
-							if (i == OBJ_SPIKE) {
-								cout << "Die" << endl;
-								return false;
-							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 
@@ -1044,10 +1028,6 @@ bool CGameManager::JumpCollide(int num) {
 								return false;
 							}
 							if (i == OBJ_PORTAL) {
-								return false;
-							}
-							if (i == OBJ_SPIKE) {
-								cout << "Die" << endl;
 								return false;
 							}
 							float dis = OBJ_BB.top - player_BB.bottom;
@@ -1063,10 +1043,6 @@ bool CGameManager::JumpCollide(int num) {
 							if (i == OBJ_PORTAL) {
 								return false;
 							}
-							if (i == OBJ_SPIKE) {
-								cout << "Die" << endl;
-								return false;
-							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 							return true;
@@ -1079,7 +1055,7 @@ bool CGameManager::JumpCollide(int num) {
 		}
 	}
 	else {
-		for (int i = OBJ_MONSTER1; i < OBJ_UI; ++i)
+		for (int i = OBJ_MONSTER1; i < OBJ_SPIKE; ++i)
 		{
 			list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 			list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -1097,6 +1073,7 @@ bool CGameManager::JumpCollide(int num) {
 						if (i == OBJ_PORTAL) {
 							return false;
 						}
+
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 

@@ -4,6 +4,7 @@
 #include "CBackImage.h"
 #include "CGameManager.h"
 #include "CRenderManager.h"
+#include "CSoundManager.h"
 
 
 CEnding::CEnding()
@@ -24,6 +25,9 @@ HRESULT CEnding::Initialize()
 	pObj = CBackImage::Create("", "../Resource/UI/Back/Ending.png");
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
 		return E_FAIL;
+
+	m_pSoundMgr->Stop_All();
+	m_pSoundMgr->Play_BGM(L"Ending.mp3");
 	return NOERROR;
 }
 

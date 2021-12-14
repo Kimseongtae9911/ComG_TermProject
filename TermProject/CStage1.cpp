@@ -13,6 +13,7 @@
 #include "CRenderManager.h"
 #include "CGameManager.h"
 #include "CSceneManager.h"
+#include "CSoundManager.h"
 
 
 CStage1::CStage1()
@@ -124,10 +125,8 @@ HRESULT CStage1::Initialize()
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
 		return E_FAIL;
-
-	//pObj = CBossMonster::Create();
-	//if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
-	//	return E_FAIL;
+	m_pSoundMgr->Stop_All();
+	m_pSoundMgr->Play_BGM(L"Back.mp3");
 	return NOERROR;
 }
 
@@ -144,12 +143,14 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 	{
 		m_pGameMgr->Get_boolPortal() = false;
 		m_pSceneMgr->SceneChange(SCENE_STAGE2,SCENE_STAGE1);
+		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE1);
+		m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

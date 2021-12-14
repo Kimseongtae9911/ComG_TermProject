@@ -38,6 +38,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		}
 		if (m_pKeyMgr->KeyCombined(KEY_RIGHT, KEY_SPACE)) {
 			if (!m_bJump) {
+				//m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 				m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
 				m_bJump = true;
 				m_iJumpdir = 1;
@@ -170,7 +171,8 @@ bool Player2::Collide_Spike()
 		BB OBJ_BB = {temp.x - 0.75, temp.x + 0.75, temp.y + 0.5, temp.y - 0.5};
 		BB player_BB = Player2::Get_BB();
 		if (OBJ_BB.left > player_BB.right || OBJ_BB.right < player_BB.left || OBJ_BB.top < player_BB.bottom || OBJ_BB.bottom > player_BB.top);
-		else {			
+		else {
+			m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 			return true;
 		}
 

@@ -11,6 +11,7 @@
 #include "Player3.h"
 #include "CPortal.h"
 #include "CRenderManager.h"
+#include "CSoundManager.h"
 
 IMPLEMENT_SINGLETON(CGameManager)
 
@@ -188,6 +189,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 			}
 		}
 		if (dynamic_cast<Player2*>(player2D)->Get_Portal() && dynamic_cast<Player3*>(player3D)->Get_Portal()) {
+			CSoundManager::GetInstance()->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 			bPortalCollide = true;
 		}
 
@@ -219,6 +221,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 					else
 					{
 						bMonsterPlayerCollide = true;
+						CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 					}
 				}
 				else
@@ -227,6 +230,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 					else
 					{
 						bMonsterPlayerCollide = true;
+						CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 					}
 				}
 				++monster_iter_begin;

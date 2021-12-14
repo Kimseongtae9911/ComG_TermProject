@@ -207,14 +207,12 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 	{
 		m_pGameMgr->Get_boolPortal() = false;
 		m_pSceneMgr->SceneChange(SCENE_END, SCENE_STAGE4);
-		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE4);
-		m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		return 0;
 	}
 

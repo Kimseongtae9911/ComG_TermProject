@@ -194,7 +194,6 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 	{
 		m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_STAGE3);
 		m_pGameMgr->Get_boolPortal() = false;
-		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die())
@@ -202,7 +201,6 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 		dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die() = false;
 		m_pGameMgr->Get_CollideMTP() = false;
 		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE3);
-		m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		return 0;
 	}
 	if (m_pGameMgr->Get_View())

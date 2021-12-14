@@ -6,6 +6,7 @@ class CShader;
 class CSceneManager;
 class CFrameManager;
 class CRenderManager;
+//class CSoundManager;
 class CScene
 {
 public:
@@ -24,6 +25,7 @@ protected:
 	CSceneManager* m_pSceneMgr = nullptr;
 	CFrameManager* m_pFrameMgr = nullptr;
 	CRenderManager* m_pRenderMgr = nullptr;
+	//CSoundManager* m_pSoundMgr = nullptr;
 
 protected:
 	GLvoid Release();

@@ -162,6 +162,10 @@
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CShader.cpp" />
+    <ClCompile Include="CSoundManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CStage1.cpp" />
@@ -194,6 +198,10 @@
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CShader.h" />
+    <ClInclude Include="CSoundManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="CSphere.h" />
     <ClInclude Include="CSprite.h" />
     <ClInclude Include="CStage1.h" />
@@ -202,6 +210,10 @@
     <ClInclude Include="CStage4.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="fmod.h" />
+    <ClInclude Include="fmod.hpp" />
+    <ClInclude Include="fmod_dsp.h" />
+    <ClInclude Include="fmod_errors.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player2.h" />

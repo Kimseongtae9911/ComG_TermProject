@@ -9,6 +9,7 @@ public:
 
 public:
 	HRESULT Initialize(string path, glm::vec4 vCol);
+	HRESULT Initialize(CMesh* pMesh, glm::vec4 vCol, string path);
 	GLvoid Render();
 	
 public:
@@ -79,5 +80,6 @@ protected:
 
 public:
 	static CMesh* Create(string path, glm::vec4 vCol);
+	static CMesh* Create(CMesh* pMesh, glm::vec4 vCol, string path);
 
 };

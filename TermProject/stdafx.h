@@ -22,6 +22,13 @@ using namespace std;
 #include <gl/glm/ext.hpp>
 #include <gl/glm/gtc/matrix_transform.hpp>
 
+
+#include <io.h>
+#include "fmod.h"
+#include "fmod.hpp"
+#include "fmod_dsp.h"
+#include "fmod_errors.h"
+
 #define WINCX 1280
 #define WINCY 640
 #define MAX_VKEY 0xff

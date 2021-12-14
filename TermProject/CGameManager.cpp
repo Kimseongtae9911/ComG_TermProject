@@ -67,8 +67,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (Get_Camera() == nullptr)
-		cout << "df" << endl;
+
 	if (!Get_View() && Get_Camera()->Get_Move()) {
 		CObj* player = m_ObjLst[OBJ_PLAYER2].front();
 		if (dynamic_cast<Player3*>(player)->Get_HoldingB()) {

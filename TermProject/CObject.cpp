@@ -24,6 +24,11 @@ HRESULT CObject::Initialize(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 	return NOERROR;
 }
 
+HRESULT CObject::Initialize(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
+{
+	return E_NOTIMPL;
+}
+
 GLint CObject::Update(const GLfloat fTimeDelta)
 {
 	//CObject::Get_BB() = {m_pObject->GetPos().x - 0.5f, m_pObject->GetPos().x + 0.5f, m_pObject->GetPos().y + 0.5f, m_pObject->GetPos().y - 0.5f};
@@ -59,3 +64,4 @@ CObject* CObject::Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 	return pInstance;
 }
+

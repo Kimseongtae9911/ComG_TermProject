@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CStage4.h"
 #include "CScene.h"
 #include "CMesh.h"
@@ -121,8 +121,8 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		BB Boss_BB = {1.0f, 9.0f, 8.5f, -0.5f };
 		if (Boss_BB.left > BOX_BB.right || Boss_BB.right < BOX_BB.left || Boss_BB.top < BOX_BB.bottom || Boss_BB.bottom > BOX_BB.top);
 		else {
-			cout << "º¸½º¸ó½ºÅÍ »ý¸í °¨¼Ò" << endl;
-			cout << "ÃÊ±âÈ­" << endl;
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½" << endl;
+			cout << "ï¿½Ê±ï¿½È­" << endl;
 		}
 	}
 	if (m_pGameMgr->Get_Obj(OBJ_KEY).empty()) {

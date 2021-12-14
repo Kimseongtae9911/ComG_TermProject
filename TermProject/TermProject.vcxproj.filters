@@ -112,6 +112,9 @@
     <Filter Include="소스 파일\02 Scene\05 Stage4">
       <UniqueIdentifier>{de146586-5c3e-46bb-8553-4ddb8ea79e21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03 Manager\06 SoundManager">
+      <UniqueIdentifier>{0612303c-92db-4ac6-b538-dc6174394ad7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -206,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="CStage4.cpp">
       <Filter>소스 파일\02 Scene\05 Stage4</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundManager.cpp">
+      <Filter>소스 파일\03 Manager\06 SoundManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +319,21 @@
     </ClInclude>
     <ClInclude Include="CStage4.h">
       <Filter>소스 파일\02 Scene\05 Stage4</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundManager.h">
+      <Filter>소스 파일\03 Manager\06 SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_errors.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

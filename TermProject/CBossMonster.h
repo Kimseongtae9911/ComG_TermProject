@@ -16,6 +16,8 @@ public:
 	float LookPlayerAngle();
 	int RandHeight();
 	int& GetDir() { return m_iDir; }
+	GLuint& GetLife() { return m_iLife; }
+	CMesh* Get_Pmesh() { return m_pBossMonster; }
 
 private:
 	CMesh* m_pBossMonster;
@@ -29,6 +31,7 @@ private:
 	int m_iDir{ 1 };
 	float fTime = 0;
 	float f3DTime = 0;
+	GLuint m_iLife{ 3 };
 
 public:
 	static CBossMonster* Create();

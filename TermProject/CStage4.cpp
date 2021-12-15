@@ -15,6 +15,7 @@
 #include "CSceneManager.h"
 #include "CKeyManager.h"
 #include "CSoundManager.h"
+#include "CBullet.h"
 
 CStage4::CStage4()
 {
@@ -165,7 +166,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 					if (!m_pGameMgr->Get_Obj(OBJ_BULLET).empty()) {
 						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_BULLET).end() && m_pGameMgr->Get_View(); ++iter_bullet) // ����
 						{
-							dynamic_cast<CObject*>((*iter_bullet))->Get_Mesh()->GetPos().x += 14.0f;
+							dynamic_cast<CBullet*>((*iter_bullet))->Get_Mesh()->GetPos().x += 14.0f;
 						}
 					}
 				}

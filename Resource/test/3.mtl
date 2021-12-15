@@ -1,9 +1,0 @@
-# Created by Every File Explorer
-
-newmtl GamaguchiKunMat00
-Ka 1 1 1
-Kd 1 1 1
-Ks 0.2 0.2 0.2
-d 1
-map_Kd enemy_xx01_GamaguchiKun_dif.png
-

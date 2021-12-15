@@ -184,6 +184,7 @@ HRESULT CStage3::Initialize()
 		return E_FAIL;
 	m_pSoundMgr->Stop_All();
 	m_pSoundMgr->Play_BGM(L"Back.mp3");
+	m_pSoundMgr->Set_Volume(0.3, CSoundManager::BGM);
 
 	return NOERROR;
 }
@@ -192,8 +193,8 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 {
 	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_4))
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_STAGE3);
 		m_pGameMgr->Get_boolPortal() = false;
+		m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_STAGE3);	
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_PLAYER1).front())->Get_Die())

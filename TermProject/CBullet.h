@@ -13,6 +13,8 @@ public:
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
+public:
+	CMesh* Get_Mesh() { return m_pBullet; };
 
 private:
 	CMesh* m_pBullet;

@@ -122,6 +122,7 @@ HRESULT CStage2::Initialize()
 		return E_FAIL;
 	m_pSoundMgr->Stop_All();
 	m_pSoundMgr->Play_BGM(L"Back.mp3");
+	m_pSoundMgr->Set_Volume(0.3, CSoundManager::BGM);
 
 	return NOERROR;
 }
@@ -142,8 +143,8 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 	}
 	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_3))
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_STAGE2);
 		m_pGameMgr->Get_boolPortal() = false;
+		m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_STAGE2);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP())

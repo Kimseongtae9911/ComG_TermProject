@@ -19,7 +19,8 @@ public:
 	bool Play_Sound(const wstring& strSoundKey, CHANNELID eID);						
 	void Play_BGM(const wstring& strSoundKey);											
 	void Stop_Sound(CHANNELID eID);																	
-	void Stop_All();																									
+	void Stop_All();		
+	void Set_Volume(float volume, CHANNELID eID);
 
 public:
 	HRESULT	Load_SoundFile(const char* pFilePath);

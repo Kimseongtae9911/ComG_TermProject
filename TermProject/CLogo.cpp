@@ -31,6 +31,7 @@ HRESULT CLogo::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
 		return E_FAIL;
 	m_pSoundMgr->Play_BGM(L"Ending.mp3");
+	m_pSoundMgr->Set_Volume(0.3, CSoundManager::BGM);
 
 	return NOERROR;
 }

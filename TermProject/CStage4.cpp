@@ -103,6 +103,7 @@ HRESULT CStage4::Initialize()
 
 	m_pSoundMgr->Stop_All();
 	m_pSoundMgr->Play_BGM(L"Back.mp3");
+	m_pSoundMgr->Set_Volume(0.3, CSoundManager::BGM);
 
 	return NOERROR;
 }

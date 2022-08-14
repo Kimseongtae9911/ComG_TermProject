@@ -20,7 +20,7 @@ HRESULT CLoad::Initialize()
 {
 	CScene::Initialize();
 	CObj* pObj = CBackImage::Create("", "../Resource/UI/Back/backload.png");
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 	m_pAni = new CObj * [16];
 	float x = 1200.f;
@@ -61,16 +61,16 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 		switch (m_pSceneMgr->Get_SceneChangeCount())
 		{
 		case 2:
-			m_pSceneMgr->SceneChange(SCENE_STAGE1,SCENE_LOAD);
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE1, SCENE_ID::SCENE_LOAD);
 			break;
 		case 3:
-			m_pSceneMgr->SceneChange(SCENE_STAGE2, SCENE_LOAD);
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_LOAD);
 			break;
 		case 4:
-			m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_LOAD);
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_LOAD);
 			break;
 		case 5:
-			m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_LOAD);
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, SCENE_ID::SCENE_LOAD);
 			break;
 		default:
 			break;
@@ -78,7 +78,7 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 		
 		return 0;
 	}
-	CRenderManager::GetInstance()->Add_RenderObj(REDER_UI, m_pAni[iAniCounter]);
+	CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pAni[iAniCounter]);
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }

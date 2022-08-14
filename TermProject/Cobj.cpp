@@ -11,6 +11,7 @@
 
 CObj::CObj()
 {
+	m_Box = {};
 }
 
 CObj::~CObj()

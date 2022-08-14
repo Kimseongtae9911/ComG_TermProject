@@ -25,7 +25,7 @@ HRESULT CBackImage::Initialize(string strTexTag, string strTexPath, bool bAlpha)
 
 GLint CBackImage::Update(const GLfloat fTimeDelta)
 {
-	m_pRender->Add_RenderObj(REDER_BACK, this);
+	m_pRender->Add_RenderObj(RENDER_ID::REDER_BACK, this);
 	return GLint();
 }
 

@@ -29,7 +29,7 @@ HRESULT CMesh::Initialize(string path, glm::vec4 vCol)
 		glGenBuffers(4, pMesh->vbo);
 
 		// 인덱스에 해당하는 정점 할당
-		for (int i = 0; i < pMesh->indices[0].size(); ++i)
+		for (size_t i = 0; i < pMesh->indices[0].size(); ++i)
 		{
 			pMesh->vertex.push_back(m_vecVertices[pMesh->indices[0][i]]);
 			pMesh->texcoord.push_back(m_vecTexcoords[pMesh->indices[1][i]]);
@@ -81,7 +81,7 @@ HRESULT CMesh::Initialize(CMesh* pMesh, glm::vec4 vCol, string path)
 		glGenBuffers(4, pMesh->vbo);
 
 		// 인덱스에 해당하는 정점 할당
-		for (int i = 0; i < pMesh->indices[0].size(); ++i)
+		for (size_t i = 0; i < pMesh->indices[0].size(); ++i)
 		{
 			pMesh->vertex.push_back(m_vecVertices[pMesh->indices[0][i]]);
 			pMesh->texcoord.push_back(m_vecTexcoords[pMesh->indices[1][i]]);

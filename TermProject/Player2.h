@@ -15,9 +15,10 @@ public:
 	virtual HRESULT Initialize();
     virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
-	virtual int& GetC_Dir() { return m_iCollideDir; }
-	virtual int& GetM_Dir() { return m_iMoveDir; }
-	virtual bool& GetJump() { return m_bJump; }
+
+	int& GetC_Dir() { return m_iCollideDir; }
+	DIR& GetM_Dir() { return m_iMoveDir; }
+	bool& GetJump() { return m_bJump; }
 	CMesh* GetP() { return m_Player; }
 	bool& Get_Die() { return m_iDie; }
 	bool& Get_Portal() { return m_bPortal; }
@@ -28,7 +29,7 @@ private:
 	GLvoid Release();
 
 private:
-	CMesh* m_Player;
+	CMesh* m_Player = nullptr;
 
 private:
 	GLfloat m_fAlpha{ 1.0f };
@@ -37,7 +38,7 @@ private:
 	GLfloat m_fJumpPos{ 0.f };
 	GLfloat m_fJumpStart{ 0.f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
-	int m_iMoveDir{ 0 };
+	DIR m_iMoveDir{};
 	bool m_bPortal{ false };
 	bool m_iDie{ false };
 

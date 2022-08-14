@@ -30,7 +30,7 @@ private:
 	GLvoid Release();
 	GLfloat m_fAlpha{ 1.0f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
-	int m_iMoveDir{ 0 };
+	DIR m_iMoveDir{};
 	bool m_bPortal{ false };
 	bool m_bIn_Portal{ false };
 	bool m_bHoldingB{ false };

@@ -275,7 +275,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		}
 		if (m_bBullet) {
 			CObj* pObj = CBullet::Create(glm::vec3(m_pBossMonster->GetPos().x, fHeight, 0));
-			if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BULLET, pObj)))
+			if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BULLET, pObj)))
 				return E_FAIL;
 		}
 		fTime = 0;
@@ -283,12 +283,12 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	else if (f3DTime >= 5 && !m_pGameMgr->Get_View())
 	{
 		CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
-		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER2, pObj)))
+		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER2, pObj)))
 			return E_FAIL;
 		f3DTime = 0;
 	}
 	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
-	m_pRender->Add_RenderObj(RENDER_BOSS, this);
+	m_pRender->Add_RenderObj(RENDER_ID::RENDER_BOSS, this);
 	return GLint();
 }
 
@@ -304,23 +304,23 @@ int CBossMonster::RandHeight()
 
 float CBossMonster::LookPlayerAngle()
 {
-	vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
+	vecPlayer3dPos = dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_pMesh()->GetPos();
 	//fRatio = abs(vecPlayer3dPos.x - m_pMonster->GetPos().x) / abs(vecPlayer3dPos.z - m_pMonster->GetPos().z);
 	//cout << fRatio << endl;
-	double dAngle = atan((vecPlayer3dPos.x - m_pBossMonster->GetPos().x) / (vecPlayer3dPos.y - m_pBossMonster->GetPos().y)) * 180 / PI;
+	float dAngle = atan((vecPlayer3dPos.x - m_pBossMonster->GetPos().x) / (vecPlayer3dPos.y - m_pBossMonster->GetPos().y)) * 180 / PI;
 	//cout << dAngle << endl;
 	if (m_pBossMonster->GetPos().y <= vecPlayer3dPos.y)
 	{
 		if (m_pBossMonster->GetPos().x <= vecPlayer3dPos.x) // 1
 		{
 			//cout << 180 - dAngle << endl;
-			return 180 - dAngle;
+			return 180.f - dAngle;
 		}
 
 		else //   4
 		{
 			//cout << 180 - dAngle << endl;
-			return 180 - dAngle;
+			return 180.f - dAngle;
 		}
 	}
 	else
@@ -328,13 +328,13 @@ float CBossMonster::LookPlayerAngle()
 		if (m_pBossMonster->GetPos().x <= vecPlayer3dPos.x) //2
 		{
 			//cout << -dAngle << endl;
-			return -dAngle;
+			return static_cast<float>(-dAngle);
 		}
 
 		else // 3
 		{
 			//cout << 360 - dAngle << endl;
-			return 360 - dAngle;
+			return 360.f - dAngle;
 		}
 
 	}

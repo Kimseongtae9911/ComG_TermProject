@@ -20,13 +20,13 @@ public:
 	int& GetCollDir() { return m_iCollideDir; }
 
 private:
-	bool Collide(int num);
+	bool Collide(DIR dir);
 	GLvoid Release();
 
 private:
-	CMesh* m_pMonster;
+	CMesh* m_pMonster = nullptr;
 	GLfloat m_fAlpha{ 1.0f };
-	int m_iType;
+	int m_iType = 0;
 	int iRotateCount = 0;
 	int iLookRotCount = 0;
 	int iMovingCount = 0;

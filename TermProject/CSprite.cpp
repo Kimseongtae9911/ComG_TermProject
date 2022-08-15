@@ -31,7 +31,7 @@ HRESULT CSprite::Initialize(glm::vec3 vPos, glm::vec3 vScale, string strTexTag, 
 
 GLint CSprite::Update(const GLfloat fTimeDelta)
 {
-	m_pRender->Add_RenderObj(REDER_UI, this);
+	m_pRender->Add_RenderObj(RENDER_ID::REDER_UI, this);
 	return GLint();
 }
 

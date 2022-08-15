@@ -23,7 +23,7 @@ HRESULT CEnding::Initialize()
 	CObj* pObj = nullptr;
 
 	pObj = CBackImage::Create("", "../Resource/UI/Back/Ending.png");
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 
 	m_pSoundMgr->Stop_All();

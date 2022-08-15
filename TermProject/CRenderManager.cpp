@@ -15,7 +15,7 @@ CRenderManager::~CRenderManager()
 
 GLvoid CRenderManager::Render_Object()
 {
-	for (int i = 0; i < RENDER_END; ++i)
+	for (int i = 0; i < static_cast<int>(RENDER_ID::RENDER_END); ++i)
 	{
 		// Render 할것에 따라 GL_DEPTH_TEST
 		glEnable(GL_DEPTH_TEST);
@@ -37,12 +37,12 @@ HRESULT CRenderManager::Add_RenderObj(RENDER_ID eID, CObj* pObj)
 	if (!pObj)
 		return E_FAIL;
 
-	m_lstRenderObj[eID].emplace_back(pObj);
+	m_lstRenderObj[static_cast<int>(eID)].emplace_back(pObj);
 	return E_NOTIMPL;
 }
 
 GLvoid CRenderManager::Clear_Renderer()
 {
-	for (int i = 0; i < RENDER_END; ++i)
+	for (int i = 0; i < static_cast<int>(RENDER_ID::RENDER_END); ++i)
 		m_lstRenderObj[i].clear();
 }

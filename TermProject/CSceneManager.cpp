@@ -23,7 +23,7 @@ HRESULT CSceneManager::SceneChange(SCENE_ID eID, SCENE_ID MyID)
 {
 	if (eID < MyID)
 	{
-		iScene = MyID;
+		iScene = static_cast<int>(MyID);
 	}
 	m_eCurrScene = eID;
 
@@ -33,25 +33,25 @@ HRESULT CSceneManager::SceneChange(SCENE_ID eID, SCENE_ID MyID)
 
 		switch (m_eCurrScene)
 		{
-		case SCENE_LOGO:
+		case SCENE_ID::SCENE_LOGO:
 			m_pScene = CLogo::Create();
 			break;
-		case SCENE_STAGE1:
+		case SCENE_ID::SCENE_STAGE1:
 			m_pScene = CStage1::Create();
 			break;
-		case SCENE_STAGE2:
+		case SCENE_ID::SCENE_STAGE2:
 			m_pScene = CStage2::Create();
 			break;
-		case SCENE_STAGE3:
+		case SCENE_ID::SCENE_STAGE3:
 			m_pScene = CStage3::Create();
 			break;
-		case SCENE_STAGE4:
+		case SCENE_ID::SCENE_STAGE4:
 			m_pScene = CStage4::Create();
 			break;
-		case SCENE_END:
+		case SCENE_ID::SCENE_END:
 			m_pScene = CEnding::Create();
 			break;
-		case SCENE_LOAD:
+		case SCENE_ID::SCENE_LOAD:
 			m_pScene = CLoad::Create();
 			break;
 		default:
@@ -69,19 +69,19 @@ HRESULT CSceneManager::SceneChange(SCENE_ID eID, SCENE_ID MyID)
 
 HRESULT CSceneManager::Change_NextScene()
 {
-	m_eNextScene = SCENE_ID(m_ePreScene + 1);
+	m_eNextScene = SCENE_ID(static_cast<int>(m_ePreScene) + 1);
 	return NOERROR;
 }
 
 HRESULT CSceneManager::Change_LastScene()
 {
-	m_eNextScene = SCENE_ID(SCENE_END);
+	m_eNextScene = SCENE_ID::SCENE_END;
 	return NOERROR;
 }
 
 HRESULT CSceneManager::Change_GameOverScene()
 {
-	m_eNextScene = SCENE_ID(SCENE_GAMEOVER);
+	m_eNextScene = SCENE_ID::SCENE_GAMEOVER;
 	return NOERROR;
 }
 

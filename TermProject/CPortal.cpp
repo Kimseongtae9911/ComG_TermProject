@@ -48,7 +48,7 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	m_pRender->Add_RenderObj(REDER_NONAL, this);
+	m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	return GLint();
 }
 

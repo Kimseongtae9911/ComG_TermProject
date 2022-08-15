@@ -35,12 +35,12 @@ protected:
 	glm::vec3 m_vec3Scale{ 1.0, 1.0, 1.0 };
 
 private:
-	GLuint m_Vao;
+	GLuint m_Vao{};
 	GLuint m_Vbo[4];
 
 private:
-	GLuint m_iCnt;
-	GLuint m_iCnt2;
+	GLuint m_iCnt{};
+	GLuint m_iCnt2{};
 
 protected:
 	vector<glm::vec3> m_vecVertices;

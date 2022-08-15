@@ -26,9 +26,9 @@ private:
 	int iScene = 2;
 
 private:
-	SCENE_ID m_ePreScene =SCENE_END;
-	SCENE_ID m_eCurrScene = SCENE_END;
-	SCENE_ID m_eNextScene = SCENE_END;
+	SCENE_ID m_ePreScene =  SCENE_ID::SCENE_END;
+	SCENE_ID m_eCurrScene = SCENE_ID::SCENE_END;
+	SCENE_ID m_eNextScene = SCENE_ID::SCENE_END;
 	CScene* m_pScene = nullptr;
 };
 

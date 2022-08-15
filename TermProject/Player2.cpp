@@ -32,7 +32,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 {
 	if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 2DPlayer
 		for (auto i : m_Player->GetSMESH()) {
-			for (int j = 0; j < i->color.size(); ++j) {
+			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
 			}
 		}
@@ -54,13 +54,13 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			}			
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-			m_iMoveDir = LEFT;
+			m_iMoveDir = DIR::LEFT;
 			if (!m_pGameMgr->Collide(m_iMoveDir)) {
 				m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
 			}
 		}
 		else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-			m_iMoveDir = RIGHT;
+			m_iMoveDir = DIR::RIGHT;
 			if (!m_pGameMgr->Collide(m_iMoveDir)) {
 				m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
 			}
@@ -120,18 +120,18 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 			}
 		}
 		Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
-		m_pRender->Add_RenderObj(REDER_NONAL, this);
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	}
 	else if(!m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
-			for (int j = 0; j < i->color.size(); ++j) {
-				i->color[j][3] = 0.3;
+			for (size_t j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 0.3f;
 			}
 		}
-		m_pRender->Add_RenderObj(REDER_ALPHA, this);
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_ALPHA, this);
 	}
 	else {
-		m_pRender->Add_RenderObj(REDER_NONAL, this);
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		exit(0);
@@ -163,12 +163,12 @@ bool Player2::Collide_Spike()
 {
 	list<CObj*>::iterator iter_begin;
 	list<CObj*>::iterator iter_end;
-	iter_begin = m_pGameMgr->Get_Obj(OBJ_SPIKE).begin();
-	iter_end = m_pGameMgr->Get_Obj(OBJ_SPIKE).end();
+	iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE).begin();
+	iter_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE).end();
 
 	for (; iter_begin != iter_end;) {
 		glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-		BB OBJ_BB = {temp.x - 0.75, temp.x + 0.75, temp.y + 0.5, temp.y - 0.5};
+		BB OBJ_BB = {temp.x - 0.75f, temp.x + 0.75f, temp.y + 0.5f, temp.y - 0.5f};
 		BB player_BB = Player2::Get_BB();
 		if (OBJ_BB.left > player_BB.right || OBJ_BB.right < player_BB.left || OBJ_BB.top < player_BB.bottom || OBJ_BB.bottom > player_BB.top);
 		else {

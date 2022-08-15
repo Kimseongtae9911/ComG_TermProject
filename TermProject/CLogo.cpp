@@ -25,13 +25,13 @@ HRESULT CLogo::Initialize()
 	CObj* pObj = nullptr;
 
 	pObj = CBackImage::Create("", "../Resource/UI/Back/background.png");
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 	pObj = CSprite::Create(glm::vec3(1040.f, 100.f, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/pressenter.png");
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 	m_pSoundMgr->Play_BGM(L"Ending.mp3");
-	m_pSoundMgr->Set_Volume(0.3, CSoundManager::BGM);
+	m_pSoundMgr->Set_Volume(0.3f, CSoundManager::BGM);
 
 	return NOERROR;
 }
@@ -40,27 +40,27 @@ GLint CLogo::Update(const GLfloat fTimeDelta)
 {
 	if (GetAsyncKeyState(VK_RETURN))
 	{
-		m_pSceneMgr->SceneChange(SCENE_LOAD,SCENE_LOGO);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_LOGO);
 		return 0;
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_2))
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE2, SCENE_LOGO);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_LOGO);
 		return 0;
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_3))
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE3, SCENE_LOGO);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_LOGO);
 		return 0;
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_4))
 	{
-		m_pSceneMgr->SceneChange(SCENE_STAGE4, SCENE_LOGO);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, SCENE_ID::SCENE_LOGO);
 		return 0;
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_5))
 	{
-		m_pSceneMgr->SceneChange(SCENE_END, SCENE_LOGO);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_END, SCENE_ID::SCENE_LOGO);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

@@ -33,37 +33,37 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 {
 	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 3DPlayer
 		for (auto i : m_Player->GetSMESH()) {
-			for (int j = 0; j < i->color.size(); ++j) {
+			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
 			}
 		}
 		if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
 			if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, -45.0f, 0.0f);
-				m_iMoveDir = LEFT;
+				m_iMoveDir = DIR::LEFT;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(-0.07, 0.0, 0.0));
 				}
 				
-				m_iMoveDir = DOWN;
+				m_iMoveDir = DIR::DOWN;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.0, -0.07, 0.0));
 				}
 			}
 			else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, -135.0f, 0.0f);
-				m_iMoveDir = UP;
+				m_iMoveDir = DIR::UP;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.0, 0.07, 0.0));
 				}
-				m_iMoveDir = LEFT;
+				m_iMoveDir = DIR::LEFT;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(-0.07, 0.0, 0.0));
 				}
 			}
 			else {
 				m_Player->GetRotate() = glm::vec3(90.0f, -90.0f, 0.0f);
-				m_iMoveDir = LEFT;
+				m_iMoveDir = DIR::LEFT;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
 				}
@@ -72,29 +72,29 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		else if (m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
 			if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, 45.0f, 0.0f);
-				m_iMoveDir = RIGHT;
+				m_iMoveDir = DIR::RIGHT;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.07, 0.0, 0.0));
 				}
-				m_iMoveDir = DOWN;
+				m_iMoveDir = DIR::DOWN;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.0, -0.07, 0.0));
 				}
 			}
 			else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 				m_Player->GetRotate() = glm::vec3(90.0f, 135.0f, 0.0f);
-				m_iMoveDir = RIGHT;
+				m_iMoveDir = DIR::RIGHT;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.07, 0.0, 0.0));
 				}
-				m_iMoveDir = UP;
+				m_iMoveDir = DIR::UP;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.0, 0.07, 0.0));
 				}
 			}
 			else {
 				m_Player->GetRotate() = glm::vec3(90.0f, 90.0f, 0.0f);
-				m_iMoveDir = RIGHT;
+				m_iMoveDir = DIR::RIGHT;
 				if (!m_pGameMgr->Collide(m_iMoveDir)) {
 					m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
 				}
@@ -102,14 +102,14 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, 180.0f, 0.0f);
-			m_iMoveDir = UP;
+			m_iMoveDir = DIR::UP;
 			if (!m_pGameMgr->Collide(m_iMoveDir)) {
 				m_Player->Move(glm::vec3(0.0, 0.1, 0.0));
 			}
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
-			m_iMoveDir = DOWN;
+			m_iMoveDir = DIR::DOWN;
 			if (!m_pGameMgr->Collide(m_iMoveDir)) {
 				m_Player->Move(glm::vec3(0.0, -0.1, 0.0));
 			}
@@ -126,12 +126,12 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 			if (m_pKeyMgr->KeyDown(KEY_A)) {
 				list<CObj*>::iterator iter_begin;
 				list<CObj*>::iterator iter_end;
-				iter_begin = m_pGameMgr->Get_Obj(OBJ_BOX).begin();
-				iter_end = m_pGameMgr->Get_Obj(OBJ_BOX).end();
+				iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).begin();
+				iter_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).end();
 
 				for (; iter_begin != iter_end;) {
 					switch (m_iMoveDir) {
-					case LEFT:
+					case DIR::LEFT:
 						m_bHoldingB = false;
 						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
 							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = m_Player->GetPos().x - 1.5f;
@@ -140,7 +140,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 						}
 						break;
-					case RIGHT:
+					case DIR::RIGHT:
 						m_bHoldingB = false;
 						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
 							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = m_Player->GetPos().x + 1.5f;
@@ -149,7 +149,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 						}
 						break;
-					case UP:
+					case DIR::UP:
 						m_bHoldingB = false;
 						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
 							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = m_Player->GetPos().y + 1.5f;
@@ -158,7 +158,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 							(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
 						}
 						break;
-					case DOWN:
+					case DIR::DOWN:
 						m_bHoldingB = false;
 						if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
 							dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = m_Player->GetPos().y - 1.5f;
@@ -175,19 +175,19 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 			}
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f};
-		m_pRender->Add_RenderObj(REDER_NONAL, this);
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	}
 	else if (m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
-			for (int j = 0; j < i->color.size(); ++j) {
-				i->color[j][3] = 0.3;
+			for (size_t j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 0.3f;
 			}
 		}
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f };
-		m_pRender->Add_RenderObj(REDER_ALPHA, this);
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_ALPHA, this);
 	}
 	else {
-		m_pRender->Add_RenderObj(REDER_NONAL, this);
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	}
 	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		//need to Release Memory

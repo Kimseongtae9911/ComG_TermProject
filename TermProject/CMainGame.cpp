@@ -31,7 +31,7 @@ HRESULT CMainGame::Initialize()
 	CSoundManager::GetInstance()->Ready_SoundManager();
 	CSoundManager::GetInstance()->Load_SoundFile("../Resource/Sound/");
 
-	CSceneManager::GetInstance()->SceneChange(SCENE_LOGO, SCENE_LOGO);
+	CSceneManager::GetInstance()->SceneChange(SCENE_ID::SCENE_LOGO, SCENE_ID::SCENE_LOGO);
 
 	return NOERROR;
 }

@@ -35,14 +35,14 @@ HRESULT CStage1::Initialize()
 	CObj* pObj = nullptr;
 
 	pObj = CBackImage::Create("", "../Resource/UI/Back/backback.png");
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_UI, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 
 	pObj = Player2::Create();
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER1, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER1, pObj)))
 		return E_FAIL;
 	pObj = Player3::Create();
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PLAYER2, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER2, pObj)))
 		return E_FAIL;
 	for (int i = 0; i < 15; ++i)
 	{
@@ -52,7 +52,7 @@ HRESULT CStage1::Initialize()
 			{
 				pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 				pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
-				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 					return E_FAIL;
 			}
 			else
@@ -61,7 +61,7 @@ HRESULT CStage1::Initialize()
 				{
 					pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 					pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
-					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 						return E_FAIL;
 				}
 			}
@@ -72,62 +72,63 @@ HRESULT CStage1::Initialize()
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 28 - 0.5f, -15 + 1.0f * 28 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 27, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 27 - 0.5f, -15 + 1.0f * 27 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 26, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 26 - 0.5f, -15 + 1.0f * 26 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 1, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 1 - 0.5f, -15 + 1.0f * 1 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 2, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 2 - 0.5f, -15 + 1.0f * 2 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 3, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 3 - 0.5f, -15 + 1.0f * 3 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MAP, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * 3 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * 3, 1.0f * 3 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 5 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 5, 1.0f * 5 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 20, 1.0f * 7 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
 	pObj->Get_BB() = { -15 + 1.0f * 20 - 0.5f, -15 + 1.0f * 20 + 0.5f, 1.0f * 7, 1.0f * 7 - 1.0f };
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_BOX, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 
 
 
 	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_PORTAL, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PORTAL, pObj)))
 		return E_FAIL;
 
 
 
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-13.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
 	pObj->Get_BB() = {-13.5f, -12.5f, 11.5f, 10.5f};
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_KEY, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_MONSTER1, pObj)))
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
 		return E_FAIL;
+
 	m_pSoundMgr->Stop_All();
 	m_pSoundMgr->Play_BGM(L"Back.mp3");
-	m_pSoundMgr->Set_Volume(0.3, CSoundManager::BGM);
+	m_pSoundMgr->Set_Volume(0.3f, CSoundManager::BGM);
 	return NOERROR;
 }
 
@@ -135,21 +136,21 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 {
 	if (m_pGameMgr->Get_View())
 	{
-		if (!m_pGameMgr->Get_Obj(OBJ_KEY).empty()) {
+		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
-				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
+			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 	}
 	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_2))
 	{
 		m_pGameMgr->Get_boolPortal() = false;
-		m_pSceneMgr->SceneChange(SCENE_STAGE2,SCENE_STAGE1);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
 		return 0;
 	}
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
-		m_pSceneMgr->SceneChange(SCENE_LOAD, SCENE_STAGE1);
+		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE1);
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);

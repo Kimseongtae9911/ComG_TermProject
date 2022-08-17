@@ -27,9 +27,9 @@ protected:
 	CShader* m_pShaderLoader = nullptr;
 	CSoundManager* m_pSoundMgr = nullptr;
 	BB m_Box;
+	BoundingBox m_AABB {};
 
 protected:
-	
 	GLvoid Release();
 };
 

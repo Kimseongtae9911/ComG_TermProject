@@ -67,7 +67,9 @@ typedef struct BoundingBox
 
 	BoundingBox() {}
 	BoundingBox() noexcept : Center{ 0.f, 0.f, 0.f }, Extent{ 1.f, 1.f, 1.f } {}
-	constexpr BoundingBox(const glm::vec3& center, glm::vec3 extent) noexcept : Center{ center }, Extent{ extent } {}
+	constexpr BoundingBox(const glm::vec3& center, const glm::vec3 extent) noexcept : Center{ center }, Extent{ extent } {}
+	constexpr BoundingBox(const glm::vec3& min, const glm::vec3 max) noexcept : Center{ glm::vec3{(min.x + max.x) / 2.f, (min.y + max.y) / 2.f, (min.z + max.z) / 2.f} }
+		, Extent{ glm::vec3{(max.x - min.x) / 2.f, (max.y - min.y) / 2.f, (max.z - min.z) / 2.f}} {}
 
     BoundingBox(const BoundingBox&) = default;
     BoundingBox& operator=(const BoundingBox&) = default;
@@ -124,11 +126,96 @@ typedef struct BoundingBox
 		return !intersect;
 	}
 
-    //static void CreateFromPoints(BoundingBox& Out, size_t Count, _In_reads_bytes_(sizeof(XMFLOAT3) + Stride * (Count - 1)) const glm::vec3* pPoints, size_t Stride) noexcept
-    //{
-    //}
-	//static void CreateFromPoints(BoundingBox& Out, glm::vec3 Point1, glm::vec3 Point2) noexcept
-	//{
-	//}
+	vector<glm::vec3> GetCorners() 
+	{
+		vector<glm::vec3> corners;
+		corners.reserve(8);
+
+		glm::mat4 corner1 {
+			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner2{
+			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner3{
+			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner4{
+			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner5{
+			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner6{
+			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner7{
+			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+		glm::mat4 corner8{
+			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
+			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
+			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		};
+
+		glm::mat4 mattemp;
+		glm::vec3 vectemp;
+
+		mattemp = corner1 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner2 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner3 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner4 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner5 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner6 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner7 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		mattemp = corner8 * TransMatrix;
+		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
+		corners.push_back(vectemp);
+
+		return corners;
+	}
 
 }BoundingBox;

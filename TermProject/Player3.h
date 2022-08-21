@@ -14,7 +14,7 @@ public:
 	virtual HRESULT Initialize();
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
-	virtual int& GetC_Dir() { return m_iCollideDir; }
+	int& GetC_Dir() { return m_iCollideDir; }
 	bool& Get_Portal() { return m_bPortal; }
 	bool& Get_InPortal() { return m_bIn_Portal; }
 	bool& Get_HoldingB() { return m_bHoldingB; }

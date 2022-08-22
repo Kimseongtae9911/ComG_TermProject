@@ -41,9 +41,11 @@ HRESULT CStage1::Initialize()
 	pObj = Player2::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER1, pObj)))
 		return E_FAIL;
+
 	pObj = Player3::Create();
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER2, pObj)))
 		return E_FAIL;
+
 	for (int i = 0; i < 15; ++i)
 	{
 		for (int j = 0; j < 30; ++j)

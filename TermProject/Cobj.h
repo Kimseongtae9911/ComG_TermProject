@@ -16,8 +16,9 @@ public:
 public:
 	virtual HRESULT Initialize();
 	virtual GLint Update(const GLfloat fTimeDelta);
+	virtual GLvoid UpdateAABB(const glm::mat4& mat);
 	virtual GLvoid Render();
-	virtual BB& Get_BB() { return m_Box; }
+	BB& Get_BB() { return m_Box; }
 
 protected:
 	CRenderManager* m_pRender = nullptr;

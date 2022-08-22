@@ -71,6 +71,8 @@ public:
 	glm::vec3& GetRotate() { return m_vec3Rotate; }
 	glm::vec3& GetRotateP() { return m_vec3PRotate; }
 	vector<SUBMESH*>& GetSMESH() { return m_vecSubMesh; }
+	vector<glm::vec3> GetVertices() { return m_vecVertices; }
+
 	GLvoid Move(glm::vec3 move) { m_vec3Translate += move; }
 	GLvoid Rotate(glm::vec3 vecAngle) { m_vec3PRotate += vecAngle; }
 	//GLvoid Rotate(glm::vec3 Axis, float fAngle);

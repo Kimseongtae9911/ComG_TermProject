@@ -34,6 +34,13 @@ GLint CObj::Update(const GLfloat fTimeDelta)
 	return GLint();
 }
 
+GLvoid CObj::UpdateAABB(const glm::mat4& mat)
+{
+	m_AABB.Transform(mat);
+
+	return GLvoid();
+}
+
 GLvoid CObj::Render()
 {
 	return GLvoid();

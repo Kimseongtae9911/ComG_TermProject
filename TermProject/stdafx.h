@@ -13,6 +13,7 @@ using namespace std;
 #include <Windows.h>
 #include <math.h>
 #include <random>
+#include <algorithm>
 
 #include <gl/glew.h>
 #include <gl/freeglut.h>
@@ -21,7 +22,6 @@ using namespace std;
 #include <gl/glm/glm.hpp>
 #include <gl/glm/ext.hpp>
 #include <gl/glm/gtc/matrix_transform.hpp>
-
 
 #include <io.h>
 #include "fmod.h"

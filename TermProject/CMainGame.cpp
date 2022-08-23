@@ -62,6 +62,8 @@ HRESULT CMainGame::Initialize_Shader()
 		return E_FAIL;
 	if (FAILED(CShader::GetInstance()->Add_Shader("Back", "Vertex_BackImage.glsl", "Fragment_BackImage.glsl")))
 		return E_FAIL;
+	if (FAILED(CShader::GetInstance()->Add_Shader("BoundingBox", "Vertex_BoundingBox.glsl", "Fragement_BoundingBox.glsl")))
+		return E_FAIL;
 	return NOERROR;
 }
 

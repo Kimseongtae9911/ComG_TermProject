@@ -166,6 +166,8 @@ GLvoid Player2::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_Player->Render();
+	CObj::Render();
+
 	return GLvoid();
 }
 

@@ -364,5 +364,11 @@
     <None Include="Vertex_BackImage.glsl">
       <Filter>GLSLFile</Filter>
     </None>
+    <None Include="Vertex_BoundingBox.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
+    <None Include="Fragement_BoundingBox.glsl">
+      <Filter>GLSLFile</Filter>
+    </None>
   </ItemGroup>
 </Project>

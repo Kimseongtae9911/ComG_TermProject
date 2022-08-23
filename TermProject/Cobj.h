@@ -20,6 +20,10 @@ public:
 	virtual GLvoid Render();
 	BB& Get_BB() { return m_Box; }
 
+private:
+	GLuint m_iVao, m_iVbo[2];
+	vector<glm::vec3> m_vecAABBColor;
+
 protected:
 	CRenderManager* m_pRender = nullptr;
 	CKeyManager* m_pKeyMgr = nullptr;

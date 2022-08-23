@@ -232,8 +232,10 @@
     <None Include="Fragement_UI.glsl" />
     <None Include="fragment.glsl" />
     <None Include="Fragment_BackImage.glsl" />
+    <None Include="Fragement_BoundingBox.glsl" />
     <None Include="vertex.glsl" />
     <None Include="Vertex_BackImage.glsl" />
+    <None Include="Vertex_BoundingBox.glsl" />
     <None Include="Vertex_UI.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

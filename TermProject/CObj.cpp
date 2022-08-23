@@ -85,7 +85,7 @@ GLvoid CObj::Render()
 		glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	}
 
-	glLineWidth(2.0f);
+	glLineWidth(3.0f);
 
 	glDrawArrays(GL_LINE_LOOP, 0, 4);
 	glDrawArrays(GL_LINE_LOOP, 4, 4);

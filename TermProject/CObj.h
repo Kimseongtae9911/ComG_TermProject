@@ -19,6 +19,7 @@ public:
 	virtual GLvoid UpdateAABB(const glm::mat4& mat);
 	virtual GLvoid Render();
 	BB& Get_BB() { return m_Box; }
+	BoundingBox& Get_AABB() { return m_AABB; }
 
 private:
 	GLuint m_iVao, m_iVbo[2];

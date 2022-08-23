@@ -158,15 +158,6 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 
 	CObj::UpdateAABB(m_Player->Get_Matrix());
 
-	cout << "BB" << endl;
-	cout << "X : " << m_Box.left << " // " << m_Box.right << endl;
-	cout << "Y : " << m_Box.bottom << " // " << m_Box.top << endl << endl;
-
-	vector<glm::vec3> v = m_AABB.GetCorners();
-	cout << "AABB" << endl;
-	cout << "X : " << v.begin()->x << " // " << v.rbegin()->x << endl;
-	cout << "Y : " << v.begin()->y << " // " << v.rbegin()->y << endl << endl;
-
 	return GLint();
 }
 

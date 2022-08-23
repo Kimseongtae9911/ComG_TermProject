@@ -131,89 +131,22 @@ typedef struct BoundingBox
 		vector<glm::vec3> corners;
 		corners.reserve(8);
 
-		glm::mat4 corner1 {
-			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner2{
-			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner3{
-			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner4{
-			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y + Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner5{
-			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner6{
-			1.0f, 0.0f, 0.0f, Center.x - Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner7{
-			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z - Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		glm::mat4 corner8{
-			1.0f, 0.0f, 0.0f, Center.x + Extent.x,
-			0.0f, 1.0f, 0.0f, Center.y - Extent.y,
-			0.0f, 0.0f, 1.0f, Center.z + Extent.z,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
+		glm::vec4 corner[8];
 
-		glm::mat4 mattemp;
-		glm::vec3 vectemp;
+		corner[0] = { Center.x - Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+		corner[1] = { Center.x - Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[2] = { Center.x + Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[3] = { Center.x + Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+		corner[4] = { Center.x - Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+		corner[5] = { Center.x - Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[6] = { Center.x + Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[7] = { Center.x + Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
 
-		mattemp = corner1 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner2 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner3 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner4 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner5 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner6 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner7 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
-
-		mattemp = corner8 * TransMatrix;
-		vectemp = { mattemp[0][3], mattemp[1][3], mattemp[2][3] };
-		corners.push_back(vectemp);
+		for (int i = 0; i < 8; ++i) {
+			corner[i] = TransMatrix * corner[i];
+			glm::vec3 temp = { corner[i].x, corner[i].y, corner[i].z };
+			corners.push_back(temp);
+		}
 
 		return corners;
 	}

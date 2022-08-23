@@ -193,6 +193,8 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		//need to Release Memory
 		exit(0);
 	}
+
+	CObj::UpdateAABB(m_Player->Get_Matrix());
 	return GLint();
 }
 
@@ -201,6 +203,8 @@ GLvoid Player3::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_Player->Render();
+	CObj::Render();
+
 	return GLvoid();
 }
 

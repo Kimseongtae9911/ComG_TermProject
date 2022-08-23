@@ -178,6 +178,8 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	else {
 		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 0.5f, m_pMonster->GetPos().y - 0.5f };
 	}
+
+	CObj::UpdateAABB(m_pMonster->Get_Matrix());
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	return GLint();
 }
@@ -187,6 +189,8 @@ GLvoid Monster::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_pMonster->Render();
+	CObj::Render();
+
 	return GLvoid();
 }
 

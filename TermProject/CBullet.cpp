@@ -28,6 +28,7 @@ GLint CBullet::Update(const GLfloat fTimeDelta)
 {
 	m_pBullet->GetPos().x -= 0.05f;
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_BULLET, this);
+	CObj::UpdateAABB(m_pBullet->Get_Matrix());
 	CBullet::Get_BB() = { m_pBullet->GetPos().x - 9.5f * m_pBullet->GetScale().x, m_pBullet->GetPos().x + 9.5f * m_pBullet->GetScale().x, m_pBullet->GetPos().y + 9.2f * m_pBullet->GetScale().y, m_pBullet->GetPos().y - 9.2f * m_pBullet->GetScale().y };
 	return GLint();
 }
@@ -37,6 +38,9 @@ GLvoid CBullet::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_pBullet->Render();
+	
+	CObj::Render();
+
 	return GLvoid();
 }
 

@@ -289,6 +289,8 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	}
 	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pRender->Add_RenderObj(RENDER_ID::RENDER_BOSS, this);
+
+	CObj::UpdateAABB(m_pBossMonster->Get_Matrix());
 	return GLint();
 }
 
@@ -345,6 +347,8 @@ GLvoid CBossMonster::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_pBossMonster->Render();
+	CObj::Render();
+
 	return GLvoid();
 }
 

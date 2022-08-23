@@ -10,7 +10,9 @@ public:
 public:
 	glm::mat4 Get_View() { return m_matView; }
 	glm::mat4 Get_Proj() { return m_matProj; }
-
+	glm::mat4 Get_Ortho();
+	glm::mat4 Get_Perspective();
+	bool Get_MovingCam() { return bMovingCamera; }
 public:
 	GLvoid RotateForObj(glm::vec3 vAxis, float fAngle);
 
@@ -53,9 +55,7 @@ private:
 
 private:
 	GLvoid Release();
-	glm::mat4 Get_Ortho();
-	glm::mat4 Get_Perspective();
-
+	
 public:
 	bool Get_Move() { return bMovingCamera; }
 	static CCamera* Create(glm::vec3 vEye, glm::vec3 vAt, glm::vec3 vUp);

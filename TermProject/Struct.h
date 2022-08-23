@@ -79,6 +79,7 @@ typedef struct BoundingBox
     void Transform(const glm::mat4& Mat)
     {
 		TransMatrix = glm::mat4(1.0f);
+		TransMatrix = glm::translate(TransMatrix, glm::vec3(0.0f, 0.25f, 0.0f));
 		TransMatrix = TransMatrix * Mat;
     }
 
@@ -150,5 +151,56 @@ typedef struct BoundingBox
 
 		return corners;
 	}
+	vector<glm::vec3> GetCornersBox()
+	{
+		vector<glm::vec3> corners;
+		corners.reserve(28);
 
+		glm::vec4 corner[28];
+		int i = 0;
+
+		//Top
+		corner[i++] = { Center.x - Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+
+		//Bottom
+		corner[i++] = { Center.x - Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+
+		//Left
+		corner[i++] = { Center.x - Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+
+		//Right
+		corner[i++] = { Center.x + Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+
+		//Front
+		corner[i++] = { Center.x - Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y - Extent.y, Center.z + Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y + Extent.y, Center.z + Extent.z, 1.0f };
+
+		//Back
+		corner[i++] = { Center.x - Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y + Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x + Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+		corner[i++] = { Center.x - Extent.x, Center.y - Extent.y, Center.z - Extent.z, 1.0f };
+
+		for (int j = 0; j < 28; ++j) {
+			corner[j] = TransMatrix * corner[j];
+			glm::vec3 temp = { corner[j].x, corner[j].y, corner[j].z };
+			corners.push_back(temp);
+		}
+
+		return corners;
+	}
 }BoundingBox;

@@ -31,7 +31,7 @@ HRESULT CObject::Initialize(CObject* pObj, string strMesh, glm::vec3 vPos, glm::
 
 GLint CObject::Update(const GLfloat fTimeDelta)
 {
-	//CObject::Get_BB() = {m_pObject->GetPos().x - 0.5f, m_pObject->GetPos().x + 0.5f, m_pObject->GetPos().y + 0.5f, m_pObject->GetPos().y - 0.5f};
+	CObj::UpdateAABB(m_pObject->Get_Matrix());
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	return GLint();
 }
@@ -41,6 +41,9 @@ GLvoid CObject::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_pObject->Render();
+
+	CObj::Render();
+
 	return GLvoid();
 }
 GLvoid CObject::Set_Rotate(glm::vec3 vec)

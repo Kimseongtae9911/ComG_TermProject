@@ -48,6 +48,7 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 		}
 	}
 
+	CObj::UpdateAABB(m_pPortal->Get_Matrix());
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	return GLint();
 }
@@ -57,6 +58,9 @@ GLvoid CPortal::Render()
 	m_pShaderLoader->Use_Shader("Default");
 	m_pGameMgr->Render_Camera();
 	m_pPortal->Render();
+
+	CObj::Render();
+	
 	return GLvoid();
 }
 

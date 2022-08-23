@@ -46,8 +46,11 @@ GLvoid CObject::Render()
 
 	return GLvoid();
 }
+
 GLvoid CObject::Set_Rotate(glm::vec3 vec)
-{ m_pObject->GetRotate() = vec; }
+{ 
+	m_pObject->GetRotate() = vec; 
+}
 
 GLvoid CObject::Release()
 {

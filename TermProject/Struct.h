@@ -65,7 +65,7 @@ typedef struct BoundingBox
 	glm::vec3 Extent;
 	glm::mat4 TransMatrix{1.0f};
 
-	BoundingBox() noexcept : Center{ 0.f, 0.f, 0.f }, Extent{ 1.f, 1.f, 1.f } {}
+	BoundingBox() noexcept : Center{ 0.f, 0.f, 0.f }, Extent{ 0.5f, 0.5f, 0.5f } {}
 	constexpr BoundingBox(const glm::vec3& center, const glm::vec3 extent, const int type) noexcept : Center{ center }, Extent{ extent } {}
 	constexpr BoundingBox(const glm::vec3& min, const glm::vec3 max) noexcept : Center{ glm::vec3{(min.x + max.x) / 2.f, (min.y + max.y) / 2.f, (min.z + max.z) / 2.f} }
 		, Extent{ glm::vec3{(max.x - min.x) / 2.f, (max.y - min.y) / 2.f, (max.z - min.z) / 2.f}} {}
@@ -79,7 +79,7 @@ typedef struct BoundingBox
     void Transform(const glm::mat4& Mat)
     {
 		TransMatrix = glm::mat4(1.0f);
-		TransMatrix = glm::translate(TransMatrix, glm::vec3(0.0f, 0.25f, 0.0f));
+		//TransMatrix = glm::translate(TransMatrix, glm::vec3(0.0f, 0.25f, 0.0f));
 		TransMatrix = TransMatrix * Mat;
     }
 

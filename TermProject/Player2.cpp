@@ -26,20 +26,6 @@ HRESULT Player2::Initialize()
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, -0.25);
 
-	vector<glm::vec3> v = m_Player->GetVertices();
-
-	glm::vec3 min = glm::vec3{
-		(*min_element(v.begin(), v.end(), [](glm::vec3 v1, glm::vec3 v2) {return v1.x < v2.x; })).x,
-		(*min_element(v.begin(), v.end(), [](glm::vec3 v1, glm::vec3 v2) {return v1.y < v2.y; })).y,
-		(*min_element(v.begin(), v.end(), [](glm::vec3 v1, glm::vec3 v2) {return v1.z < v2.z; })).z
-	};
-	glm::vec3 max = glm::vec3{
-		(*max_element(v.begin(), v.end(), [](glm::vec3 v1, glm::vec3 v2) {return v1.x < v2.x; })).x,
-		(*max_element(v.begin(), v.end(), [](glm::vec3 v1, glm::vec3 v2) {return v1.y < v2.y; })).y,
-		(*max_element(v.begin(), v.end(), [](glm::vec3 v1, glm::vec3 v2) {return v1.z < v2.z; })).z
-	};
-	m_AABB = BoundingBox(min, max);
-
 	return NOERROR;
 }
 

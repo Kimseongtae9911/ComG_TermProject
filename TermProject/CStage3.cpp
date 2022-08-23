@@ -51,6 +51,7 @@ HRESULT CStage3::Initialize()
 			if (i == 0 || i == 14)
 			{
 				pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+				dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 				pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 					return E_FAIL;
@@ -60,6 +61,7 @@ HRESULT CStage3::Initialize()
 				if (j == 0 || j == 29)
 				{
 					pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+					dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 					pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 						return E_FAIL;
@@ -70,112 +72,135 @@ HRESULT CStage3::Initialize()
 	}
 	for (int i = 13; i > 9; --i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 11, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 		pObj->Get_BB() = { -15 + 1.0f * 11 - 0.5f, -15 + 1.0f * 11 + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 18, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 		pObj->Get_BB() = { -15 + 1.0f * 18 - 0.5f, -15 + 1.0f * 18 + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
 	for (int i = 1; i < 11; ++i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 6 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 6, 1.0f * 6 - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
 	for (int i = 28; i > 18; --i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 6 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 6, 1.0f * 6 - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
 	for (int i = 6; i > 3; --i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 		pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 19, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 		pObj->Get_BB() = { -15 + 1.0f * 19 - 0.5f, -15 + 1.0f * 19 + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 8, 1.0f * 1 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 8 - 0.5f, -15 + 1.0f * 8 + 0.5f, 1.0f * 1, 1.0f * 1 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 21, 1.0f * 1 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 21 - 0.5f, -15 + 1.0f * 21 + 0.5f, 1.0f * 1, 1.0f * 1 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 10 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 17, 1.0f * 10 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 16.5 - 0.5f, -15 + 1.0f * 16.5 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 13.5, 1.0f * 10 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 13.5 - 0.5f, -15 + 1.0f * 13.5 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 12, 1.0f * 10 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 12 - 0.5f, -15 + 1.0f * 12 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-14.0f, 0.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
 	pObj->Get_BB() = { -14.5f, -13.5f, 0.5f, -0.5f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(13.0f, 0.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
 	pObj->Get_BB() = { 12.5f, 13.5f, 0.5f, -0.5f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(0.0f, 12.0f, 0.0f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
 	pObj->Get_BB() = { -0.5f, 0.5f, 12.5f, 11.5f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(0.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
 	pObj->Get_BB() = { -0.75f, 0.75f, 1.5f, 0.5f };
 	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(-1.5f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
 	pObj->Get_BB() = { -2.25f, -0.75f, 1.5f, 0.5f };
 	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(1.5f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
 	pObj->Get_BB() = { 0.75f, 2.25f, 1.5f, 0.5f };
 	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(3.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
 	pObj->Get_BB() = { 2.25f, 3.75f, 1.5f, 0.5f };
 	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(-3.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
 	pObj->Get_BB() = { -3.75f, -2.25f, 1.5f, 0.5f };
 	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(-13.0f, 0.6f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
+	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(12.0f, 0.6f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
+	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(-2.5f, 11.0f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
+	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
@@ -191,12 +216,13 @@ HRESULT CStage3::Initialize()
 
 GLint CStage3::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_4))
+	if (m_pGameMgr->Get_DebugMode() && (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_4)))
 	{
 		m_pGameMgr->Get_boolPortal() = false;
 		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, SCENE_ID::SCENE_STAGE3);
 		return 0;
 	}
+
 	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Die())
 	{
 		dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Die() = false;
@@ -204,6 +230,8 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE3);
 		return 0;
 	}
+
+
 	if (m_pGameMgr->Get_View())
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
@@ -216,6 +244,7 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
+
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }

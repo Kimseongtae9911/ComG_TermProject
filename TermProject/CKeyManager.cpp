@@ -48,6 +48,8 @@ void CKeyManager::UpdateKey()
 		m_dwCurKey |= KEY_4;
 	if (GetAsyncKeyState(0x35) & 0x8000)
 		m_dwCurKey |= KEY_5;
+	if (GetAsyncKeyState(0x74) & 0x8000)
+		m_dwCurKey |= KEY_F5;
 
 
 }
@@ -58,7 +60,6 @@ bool CKeyManager::KeyDown(DWORD dwCurKey)
 	if (!(m_dwKeyDown & dwCurKey) && (m_dwCurKey & dwCurKey))
 	{
 		m_dwKeyDown |= dwCurKey;
-		cout << "Key Down true " << dwCurKey << endl;
 		return true;
 	}
 
@@ -96,10 +97,7 @@ bool CKeyManager::KeyUp(DWORD dwCurKey)
 bool CKeyManager::KeyPressing(DWORD dwCurKey)
 {
 	if (m_dwCurKey & dwCurKey)
-	{
-		//cout << "KeyDown true " << dwCurKey << endl;
 		return true;
-	}
 
 	return false;
 }

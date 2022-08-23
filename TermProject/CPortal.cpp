@@ -48,7 +48,7 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	CObj::UpdateAABB(m_pPortal->Get_Matrix());
+	CObj::UpdateAABB(m_pPortal->Get_Matrix(), glm::vec3(10.0f, 10.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	return GLint();
 }

@@ -28,7 +28,7 @@ GLint CBullet::Update(const GLfloat fTimeDelta)
 {
 	m_pBullet->GetPos().x -= 0.05f;
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_BULLET, this);
-	CObj::UpdateAABB(m_pBullet->Get_Matrix());
+	CObj::UpdateAABB(m_pBullet->Get_Matrix(), glm::vec3(30.0f, 30.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	CBullet::Get_BB() = { m_pBullet->GetPos().x - 9.5f * m_pBullet->GetScale().x, m_pBullet->GetPos().x + 9.5f * m_pBullet->GetScale().x, m_pBullet->GetPos().y + 9.2f * m_pBullet->GetScale().y, m_pBullet->GetPos().y - 9.2f * m_pBullet->GetScale().y };
 	return GLint();
 }

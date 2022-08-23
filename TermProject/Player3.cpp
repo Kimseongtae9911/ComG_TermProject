@@ -194,7 +194,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 
-	CObj::UpdateAABB(m_Player->Get_Matrix());
+	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.8f, 3.8f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -0.2f, 0.4f)); // 위로 갈때 0.2, 아래로 갈때 -0.2
 	return GLint();
 }
 

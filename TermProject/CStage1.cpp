@@ -54,6 +54,7 @@ HRESULT CStage1::Initialize()
 			if (i == 0 || i == 14)
 			{
 				pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+				dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 				pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 					return E_FAIL;
@@ -63,6 +64,7 @@ HRESULT CStage1::Initialize()
 				if (j == 0 || j == 29)
 				{
 					pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+					dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 					pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 						return E_FAIL;
@@ -106,40 +108,49 @@ HRESULT CStage1::Initialize()
 	//pObj = CObject::Create(pObj,"../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 28 - 0.5f, -15 + 1.0f * 28 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 27, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 27 - 0.5f, -15 + 1.0f * 27 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 26, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 26 - 0.5f, -15 + 1.0f * 26 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 1, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 1 - 0.5f, -15 + 1.0f * 1 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 2, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 2 - 0.5f, -15 + 1.0f * 2 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 3, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 	pObj->Get_BB() = { -15 + 1.0f * 3 - 0.5f, -15 + 1.0f * 3 + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 10, 1.0f * 3 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 10 - 0.5f, -15 + 1.0f * 10 + 0.5f, 1.0f * 3, 1.0f * 3 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 5 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 5, 1.0f * 5 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Cube/TestCube.obj", glm::vec3(-15 + 1.0f * 20, 1.0f * 7 - 0.5f, -0.25f), { 1.0, 1.0, 1.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_BOX);
 	pObj->Get_BB() = { -15 + 1.0f * 20 - 0.5f, -15 + 1.0f * 20 + 0.5f, 1.0f * 7, 1.0f * 7 - 1.0f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
@@ -153,11 +164,13 @@ HRESULT CStage1::Initialize()
 
 
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-13.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
 	pObj->Get_BB() = {-13.5f, -12.5f, 11.5f, 10.5f};
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 
 	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
+	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
 		return E_FAIL;
 
@@ -176,12 +189,33 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 	}
-	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_2))
+
+	if (m_pGameMgr->Get_DebugMode())
+	{
+		if (m_pKeyMgr->KeyDown(KEY_2)) {
+			m_pGameMgr->Get_boolPortal() = false;
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
+			return 0;
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_3)) {
+			m_pGameMgr->Get_boolPortal() = false;
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE1);
+			return 0;
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_4)) {
+			m_pGameMgr->Get_boolPortal() = false;
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, SCENE_ID::SCENE_STAGE1);
+			return 0;
+		}
+	}
+
+	if (m_pGameMgr->Get_boolPortal())
 	{
 		m_pGameMgr->Get_boolPortal() = false;
 		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
 		return 0;
 	}
+
 	if (m_pGameMgr->Get_CollideMTP())
 	{
 		m_pGameMgr->Get_CollideMTP() = false;
@@ -189,7 +223,7 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 		return 0;
 	}
 	m_pGameMgr->Update(fTimeDelta);
-	
+
 	return GLint();
 }
 

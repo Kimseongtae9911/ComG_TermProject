@@ -73,7 +73,10 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 				m_iJumpdir = 1;
 				m_fJumpStart = m_Player->GetPos().y;
 			}
-		}	
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_F5)) {
+			m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
+		}
 
 		if (m_bJump) {
 			if (Player2::m_iJumpdir == 1) {
@@ -142,7 +145,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		m_iDie = true;
 	}
 
-	CObj::UpdateAABB(m_Player->Get_Matrix());
+	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
 
 	return GLint();
 }

@@ -17,9 +17,11 @@ public:
 	virtual HRESULT Initialize();
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid UpdateAABB(const glm::mat4& mat);
+	virtual GLvoid UpdateAABB(const glm::mat4& mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation);
 	virtual GLvoid Render();
 	BB& Get_BB() { return m_Box; }
 	BoundingBox& Get_AABB() { return m_AABB; }
+	GLvoid Set_OBJID(OBJ_ID id) { m_idObj = id; }
 
 private:
 	GLuint m_iVao, m_iVbo[2];
@@ -34,6 +36,7 @@ protected:
 	CSoundManager* m_pSoundMgr = nullptr;
 	BB m_Box;
 	BoundingBox m_AABB {};
+	OBJ_ID m_idObj;
 
 protected:
 	GLvoid Release();

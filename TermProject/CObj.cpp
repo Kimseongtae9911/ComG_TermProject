@@ -52,51 +52,63 @@ GLint CObj::Update(const GLfloat fTimeDelta)
 
 GLvoid CObj::UpdateAABB(const glm::mat4& mat)
 {
-	m_AABB.Transform(mat);
+	if (m_pGameMgr->Get_DebugMode())
+		m_AABB.Transform(mat);
+
+	return GLvoid();
+}
+
+GLvoid CObj::UpdateAABB(const glm::mat4& mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation)
+{
+	if(m_pGameMgr->Get_DebugMode())
+		m_AABB.Transform(mat, Scale, Rotate, Translation);
 
 	return GLvoid();
 }
 
 GLvoid CObj::Render()
 {
-	GLuint program = CShader::GetInstance()->Use_Shader("BoundingBox");
-	
-	int viewLoc = glGetUniformLocation(program, "viewTransform");
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_View()));
-	
-	if (m_pGameMgr->Get_View() == true && !m_pGameMgr->Get_Camera()->Get_MovingCam())
-	{
-		int ProjLoc = glGetUniformLocation(program, "projectionTransform");// 직각
-		glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_Ortho()));
+	if (m_pGameMgr->Get_DebugMode()) {
+		GLuint program = CShader::GetInstance()->Use_Shader("BoundingBox");
+
+		int viewLoc = glGetUniformLocation(program, "viewTransform");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_View()));
+
+		if (m_pGameMgr->Get_View() == true && !m_pGameMgr->Get_Camera()->Get_MovingCam())
+		{
+			int ProjLoc = glGetUniformLocation(program, "projectionTransform");// 직각
+			glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_Ortho()));
+		}
+		else
+		{
+			int ProjLoc = glGetUniformLocation(program, "projectionTransform"); //원근
+			glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_Perspective()));
+		}
+
+		GLuint iLocation = glGetUniformLocation(program, "modelTransform");
+		glUniformMatrix4fv(iLocation, 1, GL_FALSE, value_ptr(m_AABB.TransMatrix));
+
+		for (int i = 0; i < 2; ++i)
+		{
+			glEnableVertexAttribArray(i);
+			glBindBuffer(GL_ARRAY_BUFFER, m_iVbo[i]);
+			glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+		}
+
+		glLineWidth(3.0f);
+
+		glDrawArrays(GL_LINE_LOOP, 0, 4);
+		glDrawArrays(GL_LINE_LOOP, 4, 4);
+		glDrawArrays(GL_LINE_LOOP, 8, 4);
+		glDrawArrays(GL_LINE_LOOP, 16, 4);
+		glDrawArrays(GL_LINE_LOOP, 20, 4);
+		glDrawArrays(GL_LINE_LOOP, 24, 4);
+
+
+		for (int i = 0; i < 2; ++i)
+			glDisableVertexAttribArray(i);
+
 	}
-	else
-	{
-		int ProjLoc = glGetUniformLocation(program, "projectionTransform"); //원근
-		glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_Perspective()));
-	}
-
-	GLuint iLocation = glGetUniformLocation(program, "modelTransform");
-	glUniformMatrix4fv(iLocation, 1, GL_FALSE, value_ptr(m_AABB.TransMatrix));
-
-	for (int i = 0; i < 2; ++i)
-	{
-		glEnableVertexAttribArray(i);
-		glBindBuffer(GL_ARRAY_BUFFER, m_iVbo[i]);
-		glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	}
-
-	glLineWidth(3.0f);
-
-	glDrawArrays(GL_LINE_LOOP, 0, 4);
-	glDrawArrays(GL_LINE_LOOP, 4, 4);
-	glDrawArrays(GL_LINE_LOOP, 8, 4);
-	glDrawArrays(GL_LINE_LOOP, 16, 4);
-	glDrawArrays(GL_LINE_LOOP, 20, 4);
-	glDrawArrays(GL_LINE_LOOP, 24, 4);
-
-
-	for (int i = 0; i < 2; ++i)
-		glDisableVertexAttribArray(i);
 
 	return GLvoid();
 }

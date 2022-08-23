@@ -38,7 +38,15 @@ HRESULT CObject::Initialize(CObject* pObj, string strMesh, glm::vec3 vPos, glm::
 
 GLint CObject::Update(const GLfloat fTimeDelta)
 {
-	CObj::UpdateAABB(m_pObject->Get_Matrix());
+	if (OBJ_ID::OBJ_BOX == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix());
+	else if (OBJ_ID::OBJ_MAP == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix(), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.25f, 0.0f));
+	else if (OBJ_ID::OBJ_KEY == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix(), glm::vec3(0.3f, 0.7f, 0.3f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.2f, 0.0f));
+	else if (OBJ_ID::OBJ_SPIKE == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix(), glm::vec3(70.0f, 35.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.35f, 0.0f));
+
 	m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	return GLint();
 }

@@ -76,14 +76,22 @@ typedef struct BoundingBox
     BoundingBox(BoundingBox&&) = default;
     BoundingBox& operator=(BoundingBox&&) = default;
 
-    void Transform(const glm::mat4& Mat)
+    void Transform(const glm::mat4& Mat) noexcept
     {
 		TransMatrix = glm::mat4(1.0f);
-		//TransMatrix = glm::translate(TransMatrix, glm::vec3(0.0f, 0.25f, 0.0f));
 		TransMatrix = TransMatrix * Mat;
     }
 
-	void Transform(float Scale, glm::vec3 Rotate, glm::vec3 Translation)
+	void Transform(const glm::mat4& Mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation) noexcept
+	{
+		TransMatrix = glm::mat4(1.0f);
+
+		TransMatrix = glm::translate(TransMatrix, Translation);
+
+		TransMatrix = TransMatrix * Mat * glm::scale(TransMatrix, Scale);
+	}
+
+	void Transform(float Scale, const glm::vec3& Rotate, const glm::vec3& Translation) noexcept
 	{
 		TransMatrix = glm::translate(TransMatrix, Translation);
 
@@ -94,7 +102,7 @@ typedef struct BoundingBox
 		TransMatrix = glm::scale(TransMatrix, glm::vec3(Scale, Scale, Scale));	
 	}
 
-	bool Contains(const glm::vec3& point) const
+	bool Contains(const glm::vec3& point) const noexcept
 	{
 		glm::vec3 Min = Center - Extent;
 		glm::vec3 Max = Center + Extent;

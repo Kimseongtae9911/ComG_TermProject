@@ -283,6 +283,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	else if (f3DTime >= 5 && !m_pGameMgr->Get_View())
 	{
 		CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+		pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER2);
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER2, pObj)))
 			return E_FAIL;
 		f3DTime = 0;
@@ -290,7 +291,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pRender->Add_RenderObj(RENDER_ID::RENDER_BOSS, this);
 
-	CObj::UpdateAABB(m_pBossMonster->Get_Matrix());
+	CObj::UpdateAABB(m_pBossMonster->Get_Matrix(), glm::vec3(30.5f, 35.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 3.5f, 0.0f));
 	return GLint();
 }
 

@@ -18,19 +18,21 @@ public:
 	HRESULT Clear_Obj(OBJ_ID eID);
 
 public:
-	bool& Get_boolPortal() { return bPortalCollide; };
-	bool& Get_CollideMTP() { return bMonsterPlayerCollide; };
-	bool Get_View() { return m_bView; };
-	list<CObj*>& Get_Obj(OBJ_ID ID) { return m_ObjLst[static_cast<int>(ID)]; };
+	bool& Get_boolPortal() { return bPortalCollide; }
+	bool& Get_CollideMTP() { return bMonsterPlayerCollide; }
+	bool Get_View() { return m_bView; }
+	list<CObj*>& Get_Obj(OBJ_ID ID) { return m_ObjLst[static_cast<int>(ID)]; }
 
 public:
 	HRESULT Add_Camera(CCamera* pCamera);
 	HRESULT Delete_Camera();
 	GLvoid Render_Camera();
 	GLvoid init();
-	CCamera* Get_Camera() { return m_pCamera; };
-	
-	
+	CCamera* Get_Camera() { return m_pCamera; }
+
+	GLvoid Set_DebugMode(bool mode) { m_bDebug = mode; }
+	bool Get_DebugMode() { return m_bDebug; }
+
 	bool Collide(DIR dir);		// using in Player.cpp
 	bool JumpCollide(int num);
 	bool bPortalCollide = false;
@@ -51,6 +53,6 @@ private:
 
 private:
 	bool m_bView = true;
-
+	bool m_bDebug = false;
 };
 

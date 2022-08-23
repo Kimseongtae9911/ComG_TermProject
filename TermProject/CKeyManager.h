@@ -12,6 +12,7 @@ constexpr DWORD KEY_2 = 0x00000100;
 constexpr DWORD KEY_3 = 0x00000200;
 constexpr DWORD KEY_4 = 0x00000400;
 constexpr DWORD KEY_5 = 0x00000800;
+constexpr DWORD KEY_F5 = 0x00001000;
 
 
 class CKeyManager

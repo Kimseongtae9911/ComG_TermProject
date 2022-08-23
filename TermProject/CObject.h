@@ -6,6 +6,7 @@ class CObject : public CObj
 {
 public:
 	CObject();
+	CObject(const CObject& other);
 	~CObject();
 
 public:
@@ -19,6 +20,8 @@ public:
 	GLvoid Set_Rotate(glm::vec3 vec) /*{ m_pObject->GetRotate() = vec; }*/;
 	CMesh* Get_Mesh() { return m_pObject; };
 
+	void Change_position(glm::vec3 vPos);
+
 private:
 	CMesh* m_pObject;
 
@@ -28,5 +31,6 @@ private:
 public:
 	static CObject* Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol);
 	static CObject* Create(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol);
+
 };
 

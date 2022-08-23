@@ -9,6 +9,13 @@ CObject::CObject()
 {
 }
 
+CObject::CObject(const CObject& other)
+{
+	m_pObject = new CMesh;
+	memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+	std::cout << "복사생성" << std::endl;
+}
+
 CObject::~CObject()
 {
 	Release();
@@ -58,6 +65,11 @@ GLvoid CObject::Release()
 	return GLvoid();
 }
 
+void CObject::Change_position(glm::vec3 vPos)
+{
+	m_pObject->GetPos() = vPos;
+}
+
 CObject* CObject::Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 {
 	CObject* pInstance = new CObject;
@@ -70,4 +82,12 @@ CObject* CObject::Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 	return pInstance;
 }
+
+CObject* CObject::Create(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
+{
+	CObject* pInstance(pObj);
+	pInstance->Change_position(vPos);
+	return pInstance;
+}
+
 

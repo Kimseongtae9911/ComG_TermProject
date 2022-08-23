@@ -33,6 +33,7 @@ HRESULT CStage1::Initialize()
 	CScene::Initialize();
 	m_pGameMgr->Add_Camera(CCamera::Create(glm::vec3(0.0f, 6.5f, 30.f), glm::vec3(0.f, 6.5f, 0.f), glm::vec3(0.f, 1.f, 0.f)));
 	CObj* pObj = nullptr;
+	CObj* BlockObj = nullptr;
 
 	pObj = CBackImage::Create("", "../Resource/UI/Back/backback.png");
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
@@ -70,6 +71,38 @@ HRESULT CStage1::Initialize()
 
 		}
 	}
+	
+	//for (int i = 0; i < 15; ++i)
+	//{
+	//	for (int j = 0; j < 30; ++j)
+	//	{
+	//		if (i == 0 || i == 14)
+	//		{
+	//			if (!BlockObj)
+	//			{
+	//				BlockObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	//			}
+	//			else
+	//			{
+	//				BlockObj = CObject::Create(dynamic_cast<CObject*>(BlockObj),"../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	//			}
+	//			BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
+	//			if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
+	//				return E_FAIL;
+	//		}
+	//		else
+	//		{
+	//			if (j == 0 || j == 29)
+	//			{
+	//				BlockObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	//				BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
+	//				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
+	//					return E_FAIL;
+	//			}
+	//		}
+
+	//	}
+	//}
 	//pObj = CObject::Create(pObj,"../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });

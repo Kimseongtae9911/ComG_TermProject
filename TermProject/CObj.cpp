@@ -52,8 +52,7 @@ GLint CObj::Update(const GLfloat fTimeDelta)
 
 GLvoid CObj::UpdateAABB(const glm::mat4& mat)
 {
-	if (m_pGameMgr->Get_DebugMode())
-		m_AABB.Transform(mat);
+	m_AABB.Transform(mat);
 
 	m_AABB.Update(m_AABB.GetCorners()[0], m_AABB.GetCorners()[7]);
 
@@ -62,10 +61,9 @@ GLvoid CObj::UpdateAABB(const glm::mat4& mat)
 
 GLvoid CObj::UpdateAABB(const glm::mat4& mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation)
 {
-	if(m_pGameMgr->Get_DebugMode())
-		m_AABB.Transform(mat, Scale, Rotate, Translation);
+	m_AABB.Transform(mat, Scale, Rotate, Translation);
 
-	m_AABB.Update(m_AABB.GetCorners()[0], m_AABB.GetCorners()[7]);
+	m_AABB.Update(m_AABB.GetCorners()[5], m_AABB.GetCorners()[3]);
 
 	return GLvoid();
 }

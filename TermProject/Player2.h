@@ -24,8 +24,10 @@ public:
 	bool& Get_Die() { return m_bDie; }
 
 private:
+	void CollideCheck();
 	bool Collide_Spike();
 	bool Collide_Monster();
+	void Collide_OBJ();
 	GLvoid Release();
 
 private:

@@ -143,10 +143,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 
-	if (Collide_Spike() || Collide_Monster()) {
-		CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
-		m_pGameMgr->Set_PlayerDie(true);
-	}
+	CollideCheck();
 
 	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
 
@@ -170,6 +167,16 @@ Player2* Player2::Create()
 	if (FAILED(pInstance->Initialize()))
 		SafeDelete(pInstance);
 	return pInstance;
+}
+
+void Player2::CollideCheck()
+{
+	if (Collide_Spike() || Collide_Monster()) {
+		CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
+		m_pGameMgr->Set_PlayerDie(true);
+	}
+
+	Collide_OBJ();
 }
 
 bool Player2::Collide_Spike()
@@ -199,6 +206,17 @@ bool Player2::Collide_Monster()
 	}
 
 	return false;
+}
+
+void Player2::Collide_OBJ()
+{
+	// Key Collide Check
+	for (const auto key : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) {
+		if (m_AABB.Intersects2D(dynamic_cast<CObject*>(key)->Get_AABB())) {
+			m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).erase(find(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin(), m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end(), key));
+			return;
+		}
+	}
 }
 
 GLvoid Player2::Release()

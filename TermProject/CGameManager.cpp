@@ -80,10 +80,6 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -94,10 +90,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -108,10 +100,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -122,10 +110,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -151,10 +135,6 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -165,10 +145,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -179,10 +155,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -193,10 +165,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -682,10 +650,6 @@ bool CGameManager::JumpCollide(int num) {
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -696,10 +660,6 @@ bool CGameManager::JumpCollide(int num) {
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -710,10 +670,6 @@ bool CGameManager::JumpCollide(int num) {
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -739,10 +695,6 @@ bool CGameManager::JumpCollide(int num) {
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -756,10 +708,6 @@ bool CGameManager::JumpCollide(int num) {
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -772,10 +720,6 @@ bool CGameManager::JumpCollide(int num) {
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-								iter_begin = m_ObjLst[i].erase(iter_begin);
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 								return false;
 							}
@@ -805,10 +749,6 @@ bool CGameManager::JumpCollide(int num) {
 				{
 					if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 					{
-						if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-							iter_begin = m_ObjLst[i].erase(iter_begin);
-							return false;
-						}
 						if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 							return false;
 						}
@@ -822,10 +762,6 @@ bool CGameManager::JumpCollide(int num) {
 					}
 					else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 					{
-						if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-							iter_begin = m_ObjLst[i].erase(iter_begin);
-							return false;
-						}
 						if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 							return false;
 						}
@@ -838,10 +774,6 @@ bool CGameManager::JumpCollide(int num) {
 					}
 					else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 					{
-						if (i == static_cast<int>(OBJ_ID::OBJ_KEY)) {
-							iter_begin = m_ObjLst[i].erase(iter_begin);
-							return false;
-						}
 						if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
 							return false;
 						}

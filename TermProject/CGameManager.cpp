@@ -54,7 +54,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	ChangeView();
 
 	CheckCollide();	// Collide Check
-	PortalInteract(); // Portal
+	//PortalInteract(); // Portal
 
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
@@ -954,42 +954,17 @@ GLvoid CGameManager::PortalInteract()
 {
 	if (!m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PORTAL)].empty())
 	{
-		CObj* player2D = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front();
-		BB player2D_BB = player2D->Get_BB();
 		CObj* player3D = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front();
 		BB player3D_BB = player3D->Get_BB();
 		CObj* portal = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PORTAL)].front();
 		BB portal_BB = portal->Get_BB();
-		if (portal_BB.left > player2D_BB.right || portal_BB.right < player2D_BB.left || portal_BB.top < player2D_BB.bottom || portal_BB.bottom > player2D_BB.top);
-		else
-		{
-			if (Get_View()) {
-				if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
-					if (m_ObjLst[static_cast<int>(OBJ_ID::OBJ_KEY)].empty()) {
-						dynamic_cast<Player2*>(player2D)->Get_Portal() = true;
-					}
-				}
-			}
-		}
+
 		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
 		else
 		{
 			if (!Get_View()) {
 				if (m_ObjLst[static_cast<int>(OBJ_ID::OBJ_KEY)].empty()) {
 					dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
-				}
-			}
-		}
-		if (dynamic_cast<Player2*>(player2D)->Get_Portal() && dynamic_cast<Player3*>(player3D)->Get_Portal()) {
-			CSoundManager::GetInstance()->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
-			bPortalCollide = true;
-		}
-
-
-		if (m_ObjLst[static_cast<int>(OBJ_ID::OBJ_KEY)].empty()) {
-			for (auto i : dynamic_cast<CPortal*>(portal)->Get_pMesh()->GetSMESH()) {
-				for (size_t j = 0; j < i->color.size(); ++j) {
-					i->color[j][3] = 1.0;
 				}
 			}
 		}

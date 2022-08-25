@@ -16,6 +16,8 @@ public:
 
 public:
 	CMesh* Get_pMesh() { return m_pPortal; };
+	bool Get_NextStage() { return m_bNextStage; }
+	void Set_NextStage(bool next) { m_bNextStage = next; }
 
 private:
 	CMesh* m_pPortal;
@@ -23,6 +25,7 @@ private:
 	int iLookRotCount = 0;
 	int iMovingCount = 0;
 	bool bMovingRotate = false;
+	bool m_bNextStage = false;
 
 private:
 	GLvoid Release();

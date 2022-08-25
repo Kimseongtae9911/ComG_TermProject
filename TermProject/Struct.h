@@ -130,10 +130,10 @@ typedef struct BoundingBox
 		bool intersect =
 			MaxA.x < MinB.x ||
 			MaxA.y < MinB.y ||
-			MaxA.z < MinB.z ||
+			//MaxA.z < MinB.z ||
 			MaxB.x < MinA.x ||
-			MaxB.y < MinA.y ||
-			MaxB.z < MinA.z;
+			MaxB.y < MinA.y;
+			//MaxB.z < MinA.z;
 
 		return !intersect;
 	}

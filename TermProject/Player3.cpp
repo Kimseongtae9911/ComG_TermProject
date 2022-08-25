@@ -1,12 +1,15 @@
 #include "stdafx.h"
 #include "Player3.h"
 #include "CMesh.h"
+#include "CShader.h"
 #include "CKeyManager.h"
 #include "CRenderManager.h"
-#include "CShader.h"
+#include "CSoundManager.h"
 #include "CGameManager.h"
 #include "CCamera.h"
 #include "CObject.h"
+#include "Monster.h"
+#include "CPortal.h"
 
 Player3::Player3()
 {
@@ -25,7 +28,8 @@ HRESULT Player3::Initialize()
 	m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
 	m_Player->GetTrans() = glm::vec3(12.0, 1.0, -0.25);
 	
-	
+	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
+
 	return NOERROR;
 }
 
@@ -194,6 +198,10 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 
+	CollideCheck();
+
+	glm::vec3 m = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1).front()->Get_AABB().TransCenter;
+
 	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.8f, 3.8f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -0.2f, 0.4f)); // 위로 갈때 0.2, 아래로 갈때 -0.2
 	return GLint();
 }
@@ -208,6 +216,58 @@ GLvoid Player3::Render()
 	return GLvoid();
 }
 
+
+void Player3::PortalInteract()
+{
+	if (Collide_OBJ()) {
+		if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+			m_bPortal = true;
+		}
+	}
+}
+
+void Player3::CollideCheck()
+{
+	if (Collide_Monster()) {
+		CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
+		m_pGameMgr->Set_PlayerDie(true);
+	}
+
+	PortalInteract();
+}
+
+bool Player3::Collide_Monster()
+{
+	// Collide Check with Whale(Ground) Monster
+	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1)) {
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
+			return true;
+		}
+	}
+
+	// Collide Check with Bee(Flying) Monster
+	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2)) {
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
+			return true;
+		}
+	}
+
+	// Collide Check with Spike
+	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
+		if (m_AABB.Intersects(spike->Get_AABB()))
+			return true;
+	}
+}
+
+bool Player3::Collide_OBJ()
+{
+	// Portal Collide Check
+	for (const auto portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
+		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
+			return true;
+		}
+	}
+}
 
 GLvoid Player3::Release()
 {

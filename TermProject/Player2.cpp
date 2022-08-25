@@ -10,6 +10,7 @@
 #include "CObject.h"
 #include "CSoundManager.h"
 #include "Monster.h"
+#include "CPortal.h"
 
 Player2::Player2()
 {
@@ -169,24 +170,23 @@ Player2* Player2::Create()
 	return pInstance;
 }
 
+void Player2::PortalInteract()
+{
+	if (Collide_OBJ()) {
+		if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+			m_bPortal = true;
+		}
+	}
+}
+
 void Player2::CollideCheck()
 {
-	if (Collide_Spike() || Collide_Monster()) {
+	if (Collide_Monster()) {
 		CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
 		m_pGameMgr->Set_PlayerDie(true);
 	}
 
-	Collide_OBJ();
-}
-
-bool Player2::Collide_Spike()
-{
-	// Collide Check with Spike
-	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
-		if (m_AABB.Intersects2D(spike->Get_AABB()))
-			return true;
-	}
-	return false;
+	PortalInteract();
 }
 
 bool Player2::Collide_Monster()
@@ -205,18 +205,33 @@ bool Player2::Collide_Monster()
 		}
 	}
 
+	// Collide Check with Spike
+	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
+		if (m_AABB.Intersects2D(spike->Get_AABB()))
+			return true;
+	}
+
 	return false;
 }
 
-void Player2::Collide_OBJ()
+bool Player2::Collide_OBJ()
 {
 	// Key Collide Check
 	for (const auto key : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) {
 		if (m_AABB.Intersects2D(dynamic_cast<CObject*>(key)->Get_AABB())) {
 			m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).erase(find(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin(), m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end(), key));
-			return;
+			return false;
 		}
 	}
+
+	// Portal Collide Check
+	for (const auto portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
+		if (m_AABB.Intersects2D(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 GLvoid Player2::Release()

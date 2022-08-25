@@ -216,9 +216,9 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 		return 0;
 	}
 
-	if (m_pGameMgr->Get_CollideMTP())
+	if (m_pGameMgr->Get_PlayerDie())
 	{
-		m_pGameMgr->Get_CollideMTP() = false;
+		m_pGameMgr->Set_PlayerDie(false);
 		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE1);
 		return 0;
 	}

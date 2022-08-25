@@ -223,10 +223,10 @@ GLint CStage3::Update(const GLfloat fTimeDelta)
 		return 0;
 	}
 
-	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Die())
+	if (m_pGameMgr->Get_PlayerDie() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Die())
 	{
 		dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Die() = false;
-		m_pGameMgr->Get_CollideMTP() = false;
+		m_pGameMgr->Set_PlayerDie(false);
 		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE3);
 		return 0;
 	}

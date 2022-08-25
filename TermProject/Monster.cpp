@@ -24,7 +24,12 @@ HRESULT Monster::Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, in
 	m_pMonster->GetScale() = vScale;
 	m_pMonster->GetPos() = vPos;
 	m_iType = iType;
-	//LookPlayerAngle();
+
+	if (OBJ_ID::OBJ_MONSTER1 == m_idObj)
+		CObj::UpdateAABB(m_pMonster->Get_Matrix(), glm::vec3(4.0f, 4.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	else if (OBJ_ID::OBJ_MONSTER2 == m_idObj)
+		CObj::UpdateAABB(m_pMonster->Get_Matrix(), glm::vec3(4000.0f, 4000.0f, 4000.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
 	return NOERROR;
 }
 

@@ -27,6 +27,7 @@ HRESULT Player2::Initialize()
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
 	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, -0.25);
 
+	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
 	return NOERROR;
 }
 
@@ -143,7 +144,8 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 	}
 
 	if (Collide_Spike() || Collide_Monster()) {
-		m_iDie = true;
+		CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
+		m_pGameMgr->Set_PlayerDie(true);
 	}
 
 	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
@@ -172,40 +174,27 @@ Player2* Player2::Create()
 
 bool Player2::Collide_Spike()
 {
-	list<CObj*>::iterator iter_begin;
-	list<CObj*>::iterator iter_end;
-	iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE).begin();
-	iter_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE).end();
-
-	for (; iter_begin != iter_end;) {
-		glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-		BB OBJ_BB = {temp.x - 0.75f, temp.x + 0.75f, temp.y + 0.5f, temp.y - 0.5f};
-		BB player_BB = Player2::Get_BB();
-		if (OBJ_BB.left > player_BB.right || OBJ_BB.right < player_BB.left || OBJ_BB.top < player_BB.bottom || OBJ_BB.bottom > player_BB.top);
-		else {
-			m_pSoundMgr->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
+	// Collide Check with Spike
+	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
+		if (m_AABB.Intersects2D(spike->Get_AABB()))
 			return true;
-		}
-
-		++iter_begin;
 	}
 	return false;
 }
 
 bool Player2::Collide_Monster()
 {
-	list<CObj*>::iterator monster1_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1).begin();
-	list<CObj*>::iterator monster1_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1).end();
+	// Collide Check with Whale(Ground) Monster
+	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1)) {
+		if (m_AABB.Intersects2D(dynamic_cast<Monster*>(m)->Get_AABB())) {
+			return true;
+		}
+	}
 
-	list<CObj*>::iterator monster2_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2).begin();
-	list<CObj*>::iterator monster2_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2).end();
-
-	for (; monster1_begin != monster1_end; ++monster1_begin) {
-		cout << "Player : " << m_AABB.TransCenter.x << ", " << m_AABB.TransCenter.y << ", " << m_AABB.TransCenter.z << endl;
-		cout << "Monster : " << dynamic_cast<Monster*>(*monster1_begin)->Get_AABB().TransCenter.x << ", " << dynamic_cast<Monster*>(*monster1_begin)->Get_AABB().TransCenter.y << ", "
-			<< dynamic_cast<Monster*>(*monster1_begin)->Get_AABB().TransCenter.z << endl << endl;
-		if (m_AABB.Intersects(dynamic_cast<Monster*>(*monster1_begin)->Get_AABB())) {
-			cout << "Collide" << endl;
+	// Collide Check with Bee(Flying) Monster
+	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2)) {
+		if (m_AABB.Intersects2D(dynamic_cast<Monster*>(m)->Get_AABB())) {
+			return true;
 		}
 	}
 

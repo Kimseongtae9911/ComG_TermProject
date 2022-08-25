@@ -127,12 +127,30 @@ typedef struct BoundingBox
 		glm::vec3 MinB = box.TransCenter - box.TransExtent;
 		glm::vec3 MaxB = box.TransCenter + box.TransExtent;
 
-		bool intersect = MinA.x < MinB.x ||
+		bool intersect =
+			MaxA.x < MinB.x ||
 			MaxA.y < MinB.y ||
 			MaxA.z < MinB.z ||
 			MaxB.x < MinA.x ||
 			MaxB.y < MinA.y ||
 			MaxB.z < MinA.z;
+
+		return !intersect;
+	}
+
+	bool Intersects2D(const BoundingBox& box) const noexcept
+	{
+		glm::vec3 MinA = TransCenter - TransExtent;
+		glm::vec3 MaxA = TransCenter + TransExtent;
+
+		glm::vec3 MinB = box.TransCenter - box.TransExtent;
+		glm::vec3 MaxB = box.TransCenter + box.TransExtent;
+
+		bool intersect =
+			MaxA.x < MinB.x ||
+			MaxA.y < MinB.y ||
+			MaxB.x < MinA.x ||
+			MaxB.y < MinA.y;
 
 		return !intersect;
 	}

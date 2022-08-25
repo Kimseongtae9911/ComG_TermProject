@@ -994,8 +994,6 @@ GLvoid CGameManager::MonPlayerCollide()
 {
 	if (!m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].empty())
 	{
-		CObj* player2D = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front();
-		BB player2D_BB = player2D->Get_BB();
 		CObj* player3D = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front();
 		BB player3D_BB = player3D->Get_BB();
 		for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_MONSTER2); ++i)
@@ -1006,15 +1004,6 @@ GLvoid CGameManager::MonPlayerCollide()
 			{
 				BB monster_BB = (*monster_iter_begin)->Get_BB();
 				if (m_bView)
-				{
-					if (monster_BB.left > player2D_BB.right || monster_BB.right < player2D_BB.left || monster_BB.top < player2D_BB.bottom || monster_BB.bottom > player2D_BB.top);
-					else
-					{
-						bMonsterPlayerCollide = true;
-						CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
-					}
-				}
-				else
 				{
 					if (monster_BB.left > player3D_BB.right || monster_BB.right < player3D_BB.left || monster_BB.top < player3D_BB.bottom || monster_BB.bottom > player3D_BB.top);
 					else

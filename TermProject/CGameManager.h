@@ -23,6 +23,9 @@ public:
 	bool Get_View() { return m_bView; }
 	list<CObj*>& Get_Obj(OBJ_ID ID) { return m_ObjLst[static_cast<int>(ID)]; }
 
+	bool Get_PlayerDie() { return m_bPlayerDie; }
+	void Set_PlayerDie(bool die) { m_bPlayerDie = die; }
+
 public:
 	HRESULT Add_Camera(CCamera* pCamera);
 	HRESULT Delete_Camera();
@@ -54,5 +57,6 @@ private:
 private:
 	bool m_bView = true;
 	bool m_bDebug = false;
+	bool m_bPlayerDie = false;
 };
 

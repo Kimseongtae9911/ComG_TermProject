@@ -26,6 +26,7 @@ public:
 
 private:
 	bool Collide_Spike();
+	bool Collide_Monster();
 	GLvoid Release();
 
 private:

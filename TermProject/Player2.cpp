@@ -9,6 +9,7 @@
 #include "CCamera.h"
 #include "CObject.h"
 #include "CSoundManager.h"
+#include "Monster.h"
 
 Player2::Player2()
 {
@@ -141,7 +142,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 
-	if (Collide_Spike()) {
+	if (Collide_Spike() || Collide_Monster()) {
 		m_iDie = true;
 	}
 
@@ -188,6 +189,26 @@ bool Player2::Collide_Spike()
 
 		++iter_begin;
 	}
+	return false;
+}
+
+bool Player2::Collide_Monster()
+{
+	list<CObj*>::iterator monster1_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1).begin();
+	list<CObj*>::iterator monster1_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1).end();
+
+	list<CObj*>::iterator monster2_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2).begin();
+	list<CObj*>::iterator monster2_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2).end();
+
+	for (; monster1_begin != monster1_end; ++monster1_begin) {
+		cout << "Player : " << m_AABB.TransCenter.x << ", " << m_AABB.TransCenter.y << ", " << m_AABB.TransCenter.z << endl;
+		cout << "Monster : " << dynamic_cast<Monster*>(*monster1_begin)->Get_AABB().TransCenter.x << ", " << dynamic_cast<Monster*>(*monster1_begin)->Get_AABB().TransCenter.y << ", "
+			<< dynamic_cast<Monster*>(*monster1_begin)->Get_AABB().TransCenter.z << endl << endl;
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(*monster1_begin)->Get_AABB())) {
+			cout << "Collide" << endl;
+		}
+	}
+
 	return false;
 }
 

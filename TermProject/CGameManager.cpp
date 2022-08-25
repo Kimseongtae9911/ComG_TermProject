@@ -907,7 +907,7 @@ GLvoid CGameManager::CheckCollide()
 {
 	MonMapCollide();
 	MonBulletCollide();
-	MonPlayerCollide();
+	//MonPlayerCollide();
 }
 
 GLvoid CGameManager::MonMapCollide()

@@ -63,6 +63,8 @@ typedef struct BoundingBox
 {
 	glm::vec3 Center;
 	glm::vec3 Extent;
+	glm::vec3 TransCenter{};
+	glm::vec3 TransExtent{};
 	glm::mat4 TransMatrix{1.0f};
 
 	BoundingBox() noexcept : Center{ 0.f, 0.f, 0.f }, Extent{ 0.5f, 0.5f, 0.5f } {}
@@ -104,8 +106,8 @@ typedef struct BoundingBox
 
 	bool Contains(const glm::vec3& point) const noexcept
 	{
-		glm::vec3 Min = Center - Extent;
-		glm::vec3 Max = Center + Extent;
+		glm::vec3 Min = TransCenter - TransExtent;
+		glm::vec3 Max = TransCenter + TransExtent;
 
 		bool out = point.x < Min.x ||
 			point.y < Min.y ||
@@ -119,11 +121,11 @@ typedef struct BoundingBox
 
 	bool Intersects(const BoundingBox& box) const noexcept
 	{
-		glm::vec3 MinA = Center - Extent;
-		glm::vec3 MaxA = Center + Extent;
+		glm::vec3 MinA = TransCenter - TransExtent;
+		glm::vec3 MaxA = TransCenter + TransExtent;
 
-		glm::vec3 MinB = box.Center - box.Extent;
-		glm::vec3 MaxB = box.Center + box.Extent;
+		glm::vec3 MinB = box.TransCenter - box.TransExtent;
+		glm::vec3 MaxB = box.TransCenter + box.TransExtent;
 
 		bool intersect = MinA.x < MinB.x ||
 			MaxA.y < MinB.y ||
@@ -210,5 +212,11 @@ typedef struct BoundingBox
 		}
 
 		return corners;
+	}
+
+	void Update(const glm::vec3& min, const glm::vec3& max)
+	{
+		TransCenter = { (max.x + min.x) / 2.f, (max.y + min.y) / 2.f , (max.z + min.z) / 2.f };
+		TransExtent = { (max.x - min.x) / 2.f, (max.y - min.y) / 2.f , (max.z - min.z) / 2.f };
 	}
 }BoundingBox;

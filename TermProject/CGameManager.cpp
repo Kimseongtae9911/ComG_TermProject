@@ -641,11 +641,27 @@ GLvoid CGameManager::CheckViewChange()
 		if (VIEW::VIEW_3D == m_View && Get_Camera()->Get_Move()) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
 				m_View = VIEW::VIEW_2D;
+
+				// Player alpha value
+				for (auto i : dynamic_cast<Player2*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front())->Get_Mesh()->GetSMESH())
+					for (size_t j = 0; j < i->color.size(); ++j)
+						i->color[j][3] = 1.0f;
+				for (auto i : dynamic_cast<Player3*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front())->Get_pMesh()->GetSMESH())
+					for (size_t j = 0; j < i->color.size(); ++j)
+						i->color[j][3] = 0.3f;
 			}
 		}
 		else if (VIEW::VIEW_2D == m_View && !Get_Camera()->Get_Move()) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
 				m_View = VIEW::VIEW_3D;
+				
+				// Player alpha value
+				for (auto i : dynamic_cast<Player2*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front())->Get_Mesh()->GetSMESH())
+					for (size_t j = 0; j < i->color.size(); ++j)
+						i->color[j][3] = 0.3f;
+				for (auto i : dynamic_cast<Player3*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front())->Get_pMesh()->GetSMESH())
+					for (size_t j = 0; j < i->color.size(); ++j)
+						i->color[j][3] = 1.0f;
 			}
 		}
 	}

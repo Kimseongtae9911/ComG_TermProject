@@ -32,6 +32,7 @@ private:
 	bool m_bCollideB{ false };
 
 private:
+	void KeyboardInput(const GLfloat fTimeDelta);
 	void PortalInteract();
 	void CollideCheck();
 	bool Collide_Monster();

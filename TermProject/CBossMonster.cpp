@@ -32,7 +32,7 @@ HRESULT CBossMonster::Initialize()
 
 GLint CBossMonster::Update(const GLfloat fTimeDelta)
 {
-	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
+	if (VIEW::VIEW_3D == m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		float f = LookPlayerAngle();
 		if (f >= 0 && f <= 22.5)
@@ -205,7 +205,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		//	m_pBossMonster->GetRotate().y += 360;
 		//}
 	}
-	if (m_pGameMgr->Get_View())
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		if (!bMoveUpDown && m_pBossMonster->GetPos().y >= 4.45f)
 		{
@@ -231,7 +231,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	{
 		f3DTime += fTimeDelta;
 	}
-	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
+	if (!bMovingRotate && VIEW::VIEW_3D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pBossMonster->GetRotate().x += 90.f / 80.f;
@@ -242,7 +242,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
-	else if (bMovingRotate && m_pGameMgr->Get_View())
+	else if (bMovingRotate && VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pBossMonster->GetRotate().x -= 90.f / 80.f;
@@ -255,7 +255,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 	}
 
 	
-	if (fTime >= 3 && m_pGameMgr->Get_View())
+	if (fTime >= 3 && VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		int Height = RandHeight();
 		float fHeight = 0;
@@ -280,7 +280,7 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 		}
 		fTime = 0;
 	}
-	else if (f3DTime >= 5 && !m_pGameMgr->Get_View())
+	else if (f3DTime >= 5 && VIEW::VIEW_3D == m_pGameMgr->Get_View())
 	{
 		CObj* pObj = Monster::Create("../Resource/Monster/bee.obj", m_pBossMonster->GetPos() + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
 		pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER2);

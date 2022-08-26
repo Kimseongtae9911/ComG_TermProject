@@ -141,7 +141,7 @@ HRESULT CStage2::Initialize()
 
 GLint CStage2::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View())
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;

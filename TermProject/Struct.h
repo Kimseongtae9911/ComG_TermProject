@@ -130,29 +130,22 @@ typedef struct BoundingBox
 		bool intersect =
 			MaxA.x < MinB.x ||
 			MaxA.y < MinB.y ||
-			//MaxA.z < MinB.z ||
 			MaxB.x < MinA.x ||
 			MaxB.y < MinA.y;
-			//MaxB.z < MinA.z;
 
 		return !intersect;
 	}
 
-	bool Intersects2D(const BoundingBox& box) const noexcept
+	bool IntersectsDis(const BoundingBox& box) const noexcept
 	{
-		glm::vec3 MinA = TransCenter - TransExtent;
-		glm::vec3 MaxA = TransCenter + TransExtent;
+		float dis = glm::distance(TransCenter, box.TransCenter);
 
-		glm::vec3 MinB = box.TransCenter - box.TransExtent;
-		glm::vec3 MaxB = box.TransCenter + box.TransExtent;
+		float max_extent1 = max(box.TransExtent.x, box.TransExtent.y);
+		float max_extent2 = max(TransExtent.x, TransExtent.y);
 
-		bool intersect =
-			MaxA.x < MinB.x ||
-			MaxA.y < MinB.y ||
-			MaxB.x < MinA.x ||
-			MaxB.y < MinA.y;
+		bool instersect = dis < (max_extent1 + max_extent2);
 
-		return !intersect;
+		return instersect;
 	}
 
 	vector<glm::vec3> GetCorners() 
@@ -235,6 +228,6 @@ typedef struct BoundingBox
 	void Update(const glm::vec3& min, const glm::vec3& max)
 	{
 		TransCenter = { (max.x + min.x) / 2.f, (max.y + min.y) / 2.f , (max.z + min.z) / 2.f };
-		TransExtent = { (max.x - min.x) / 2.f, (max.y - min.y) / 2.f , (max.z - min.z) / 2.f };
+		TransExtent = { abs(max.x - min.x) / 2.f, abs(max.y - min.y) / 2.f , abs(max.z - min.z) / 2.f };
 	}
 }BoundingBox;

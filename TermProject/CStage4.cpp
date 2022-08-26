@@ -118,7 +118,7 @@ HRESULT CStage4::Initialize()
 
 GLint CStage4::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
@@ -171,7 +171,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->Get_Pmesh()->GetPos() = { 5.0, 0.0, 0.0 };
 					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->Get_Pmesh()->GetRotate().y = -20.0f;
 					if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).empty()) {
-						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).end() && m_pGameMgr->Get_View(); ++iter_bullet) // ����
+						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).end() && VIEW::VIEW_2D == m_pGameMgr->Get_View(); ++iter_bullet) // ����
 						{
 							dynamic_cast<CBullet*>((*iter_bullet))->Get_Mesh()->GetPos().x += 14.0f;
 						}

@@ -34,7 +34,7 @@ HRESULT Player2::Initialize()
 
 GLint Player2::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 2DPlayer
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 2DPlayer
 		for (auto i : m_Player->GetSMESH()) {
 			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
@@ -129,7 +129,7 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 1.0f, m_Player->GetPos().y };
 		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	}
-	else if(!m_pGameMgr->Get_View()){
+	else if(VIEW::VIEW_3D == m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 0.3f;
@@ -193,21 +193,21 @@ bool Player2::Collide_Monster()
 {
 	// Collide Check with Whale(Ground) Monster
 	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1)) {
-		if (m_AABB.Intersects2D(dynamic_cast<Monster*>(m)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Collide Check with Bee(Flying) Monster
 	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2)) {
-		if (m_AABB.Intersects2D(dynamic_cast<Monster*>(m)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Collide Check with Spike
 	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
-		if (m_AABB.Intersects2D(spike->Get_AABB()))
+		if (m_AABB.Intersects(spike->Get_AABB()))
 			return true;
 	}
 
@@ -218,7 +218,7 @@ bool Player2::Collide_OBJ()
 {
 	// Key Collide Check
 	for (const auto key : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) {
-		if (m_AABB.Intersects2D(dynamic_cast<CObject*>(key)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<CObject*>(key)->Get_AABB())) {
 			m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).erase(find(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin(), m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end(), key));
 			return false;
 		}
@@ -226,7 +226,7 @@ bool Player2::Collide_OBJ()
 
 	// Portal Collide Check
 	for (const auto portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
-		if (m_AABB.Intersects2D(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
 			return true;
 		}
 	}

@@ -29,7 +29,7 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 {
 	// 키누르면 직각 원근 바꾸고 x축 회전
 	
-	if (!bMovingCamera && m_pGameMgr->Get_View() == false) // 직각->원근
+	if (!bMovingCamera && VIEW::VIEW_3D == m_pGameMgr->Get_View()) // 직각->원근
 	{
 		RotateX(0.5f);
 		//RotateForObj(glm::vec3(1.0f, 0, 0), 0.5f);
@@ -42,7 +42,7 @@ GLint CCamera::Update(const GLfloat fTimeDelta)
 		}
 		
 	}
-	else if (bMovingCamera && m_pGameMgr->Get_View()) //원근 -> 직각
+	else if (bMovingCamera && VIEW::VIEW_2D == m_pGameMgr->Get_View()) //원근 -> 직각
 	{
 		RotateX(-0.5f);
 		//RotateForObj(glm::vec3(1.0f, 0, 0), -0.5f);
@@ -77,7 +77,7 @@ GLvoid CCamera::Render()
 	int lightIntensityLocation = glGetUniformLocation(program, "light_intensity");
 	glUniform1f(lightIntensityLocation, m_fLintensity);
 
-	if (m_pGameMgr->Get_View() == true && !bMovingCamera)
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !bMovingCamera)
 	{
 		int ProjLoc = glGetUniformLocation(program, "projectionTransform");// 직각
 		glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(Get_Ortho()));

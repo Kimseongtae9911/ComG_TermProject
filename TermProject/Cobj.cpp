@@ -76,7 +76,7 @@ GLvoid CObj::Render()
 		int viewLoc = glGetUniformLocation(program, "viewTransform");
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_View()));
 
-		if (m_pGameMgr->Get_View() == true && !m_pGameMgr->Get_Camera()->Get_MovingCam())
+		if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_MovingCam())
 		{
 			int ProjLoc = glGetUniformLocation(program, "projectionTransform");// Á÷°¢
 			glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_Ortho()));

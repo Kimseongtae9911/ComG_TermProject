@@ -38,7 +38,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	if (m_bDie) {
 		m_pMonster->GetPos() = { -30, 0, 0 };
 	}
-	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
+	if (!bMovingRotate && VIEW::VIEW_3D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pMonster->GetRotate().x += 90.f / 80.f;
@@ -48,7 +48,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
-	else if (bMovingRotate && m_pGameMgr->Get_View())
+	else if (bMovingRotate && VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pMonster->GetRotate().x -= 90.f / 80.f;
@@ -60,7 +60,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 	}
 	//LookPlayerAngle();
 
-	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
+	if (VIEW::VIEW_3D == m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		float f = LookPlayerAngle();
 		if (f >= m_pMonster->GetRotate().y)
@@ -142,7 +142,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-	else if (m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
+	else if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
 	{
 		m_pMonster->GetRotate().y = 0;
 		m_pMonster->GetPos().x += 0.06f * m_iDir;
@@ -177,7 +177,7 @@ GLint Monster::Update(const GLfloat fTimeDelta)
 			}
 		}
 	}
-	if (m_pGameMgr->Get_View()) {
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View()) {
 		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 1.0f, m_pMonster->GetPos().y};
 	}
 	else {

@@ -64,7 +64,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 
 bool CGameManager::Collide(DIR dir)
 {
-	if (m_bView) {
+	if (VIEW::VIEW_2D == m_View) {
 		CObj* player = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front();
 		BB player_BB = player->Get_BB();
 		switch (dir) {
@@ -797,14 +797,14 @@ GLvoid CGameManager::CheckViewChange()
 	// Check Key Pressed
 	if (Get_Camera() != nullptr)
 	{
-		if (!Get_View() && Get_Camera()->Get_Move()) {
+		if (VIEW::VIEW_3D == m_View && Get_Camera()->Get_Move()) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
-				m_bView = !m_bView;
+				m_View = VIEW::VIEW_2D;
 			}
 		}
-		else if (Get_View() && !Get_Camera()->Get_Move()) {
+		else if (VIEW::VIEW_2D == m_View && !Get_Camera()->Get_Move()) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
-				m_bView = !m_bView;
+				m_View = VIEW::VIEW_3D;
 			}
 		}
 	}
@@ -816,7 +816,7 @@ GLvoid CGameManager::ChangeView()
 	list<CObj*>::iterator iter_end;
 
 	// Change View
-	if (!Get_View() && Get_Camera()->Get_Move()) {
+	if (m_View == VIEW::VIEW_3D && Get_Camera()->Get_Move()) {
 		CObj* player = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front();
 		if (dynamic_cast<Player3*>(player)->Get_HoldingB()) {
 			iter_begin = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BOX)].begin();
@@ -839,7 +839,6 @@ GLvoid CGameManager::CheckCollide()
 {
 	MonMapCollide();
 	MonBulletCollide();
-	//MonPlayerCollide();
 }
 
 GLvoid CGameManager::MonMapCollide()
@@ -909,7 +908,7 @@ GLvoid CGameManager::MonMapCollide()
 
 GLvoid CGameManager::MonBulletCollide()
 {
-	for (list<CObj*>::iterator iter_bullet = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].begin(); iter_bullet != m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].end() && m_bView; ++iter_bullet)
+	for (list<CObj*>::iterator iter_bullet = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].begin(); iter_bullet != m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].end() && VIEW::VIEW_2D == m_View; ++iter_bullet)
 	{
 		BB Bullet_BB = (*iter_bullet)->Get_BB();
 		if (Bullet_BB.left <= -14.f)
@@ -919,34 +918,6 @@ GLvoid CGameManager::MonBulletCollide()
 			CRenderManager::GetInstance()->Get_RenderObj(RENDER_ID::REDER_BULLET).pop_front();
 		}
 		break;
-	}
-}
-
-GLvoid CGameManager::MonPlayerCollide()
-{
-	if (!m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].empty())
-	{
-		CObj* player3D = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front();
-		BB player3D_BB = player3D->Get_BB();
-		for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_MONSTER2); ++i)
-		{
-			list<CObj*>::iterator monster_iter_begin = m_ObjLst[i].begin();
-			list<CObj*>::iterator monster_iter_end = m_ObjLst[i].end();
-			for (; monster_iter_begin != monster_iter_end;)
-			{
-				BB monster_BB = (*monster_iter_begin)->Get_BB();
-				if (m_bView)
-				{
-					if (monster_BB.left > player3D_BB.right || monster_BB.right < player3D_BB.left || monster_BB.top < player3D_BB.bottom || monster_BB.bottom > player3D_BB.top);
-					else
-					{
-						bMonsterPlayerCollide = true;
-						CSoundManager::GetInstance()->Play_Sound(L"playerDead.wav", CSoundManager::DEAD);
-					}
-				}
-				++monster_iter_begin;
-			}
-		}
 	}
 }
 
@@ -962,7 +933,7 @@ GLvoid CGameManager::PortalInteract()
 		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
 		else
 		{
-			if (!Get_View()) {
+			if (VIEW::VIEW_3D == m_View) {
 				if (m_ObjLst[static_cast<int>(OBJ_ID::OBJ_KEY)].empty()) {
 					dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
 				}
@@ -1018,6 +989,6 @@ GLvoid CGameManager::init()
 {
 	bPortalCollide = false;
 	bMonsterPlayerCollide = false;
-	m_bView = true;
+	m_View = VIEW::VIEW_2D;
 	return GLvoid();
 }

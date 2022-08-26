@@ -30,7 +30,7 @@ HRESULT CPortal::Initialize(glm::vec3 vPos)
 
 GLint CPortal::Update(const GLfloat fTimeDelta)
 {
-	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
+	if (!bMovingRotate && VIEW::VIEW_3D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pPortal->GetRotate().x += 90.f / 80.f;
@@ -40,7 +40,7 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
-	else if (bMovingRotate && m_pGameMgr->Get_View())
+	else if (bMovingRotate && VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pPortal->GetRotate().x -= 90.f / 80.f;

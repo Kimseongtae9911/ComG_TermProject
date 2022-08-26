@@ -35,7 +35,7 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
-	if (!m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 3DPlayer
+	if (VIEW::VIEW_3D == m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) { // 3DPlayer
 		for (auto i : m_Player->GetSMESH()) {
 			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
@@ -181,7 +181,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f};
 		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 	}
-	else if (m_pGameMgr->Get_View()){
+	else if (VIEW::VIEW_2D == m_pGameMgr->Get_View()){
 		for (auto i : m_Player->GetSMESH()) {
 			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 0.3f;
@@ -240,33 +240,37 @@ bool Player3::Collide_Monster()
 {
 	// Collide Check with Whale(Ground) Monster
 	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1)) {
-		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
+		if (m_AABB.IntersectsDis(dynamic_cast<Monster*>(m)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Collide Check with Bee(Flying) Monster
 	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2)) {
-		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
+		if (m_AABB.IntersectsDis(dynamic_cast<Monster*>(m)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Collide Check with Spike
 	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
-		if (m_AABB.Intersects(spike->Get_AABB()))
+		if (m_AABB.IntersectsDis(spike->Get_AABB()))
 			return true;
 	}
+
+	return false;
 }
 
 bool Player3::Collide_OBJ()
 {
 	// Portal Collide Check
 	for (const auto portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
-		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
+		if (m_AABB.IntersectsDis(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
 			return true;
 		}
 	}
+
+	return false;
 }
 
 GLvoid Player3::Release()

@@ -20,7 +20,7 @@ public:
 public:
 	bool& Get_boolPortal() { return bPortalCollide; }
 	bool& Get_CollideMTP() { return bMonsterPlayerCollide; }
-	bool Get_View() { return m_bView; }
+	VIEW Get_View() { return m_View; }
 	list<CObj*>& Get_Obj(OBJ_ID ID) { return m_ObjLst[static_cast<int>(ID)]; }
 
 	bool Get_PlayerDie() { return m_bPlayerDie; }
@@ -47,7 +47,6 @@ private:
 	GLvoid CheckCollide();		// Collide Check
 	GLvoid MonMapCollide();		// Monster - Map Collide Check
 	GLvoid MonBulletCollide();	// Monster - Bullet Collide Check
-	GLvoid MonPlayerCollide();	// Monster - Player Collide Check
 	GLvoid PortalInteract();	// Portal - Player Interact
 
 private:
@@ -55,7 +54,7 @@ private:
 	list<CObj*> m_ObjLst[static_cast<int>(OBJ_ID::OBJ_END)];
 
 private:
-	bool m_bView = true;
+	VIEW m_View = VIEW::VIEW_2D;
 	bool m_bDebug = false;
 	bool m_bPlayerDie = false;
 };

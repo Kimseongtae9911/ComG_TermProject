@@ -436,3 +436,38 @@ CMesh* CMesh::Create(CMesh* pMesh, glm::vec4 vCol, string path)
 	}
 	return pInstance;
 }
+
+CMesh& CMesh::operator=(const CMesh& other)
+{
+	if (this == &other)
+		return *this;
+	//if (m_pObject)
+	//	delete m_pObject;
+
+	m_Parent = new CMesh;
+	//*m_Parent = *other.m_Parent; //¼öÁ¤
+	//memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+	m_vec3PRotate = other.m_vec3PRotate;
+	m_vec3Translate = other.m_vec3Translate;
+	m_vec3Scale = other.m_vec3Scale;
+	m_vec3Rotate = other.m_vec3Rotate;
+	m_Vao = other.m_Vao;
+	for (int i = 0; i < 4; ++i)
+	{
+		m_Vbo[i] = m_Vbo[i];
+	}
+	m_iCnt = other.m_iCnt;
+	m_iCnt2 = other.m_iCnt2;
+
+	std::copy(other.m_vecVertices.begin(), other.m_vecVertices.end(), m_vecVertices.begin());
+	std::copy(other.m_vecTexcoords.begin(), other.m_vecTexcoords.end(), m_vecTexcoords.begin());
+	std::copy(other.m_vecNormals.begin(), other.m_vecNormals.end(), m_vecNormals.begin());
+	std::copy(other.m_vecColor.begin(), other.m_vecColor.end(), m_vecColor.begin());
+
+	strPath = other.strPath;
+
+	std::copy(other.m_vecSubMesh.begin(), other.m_vecSubMesh.end(), m_vecSubMesh.begin());
+	std::copy(other.m_vecMaterials.begin(), other.m_vecMaterials.end(), m_vecMaterials.begin());
+
+	return *this;
+}

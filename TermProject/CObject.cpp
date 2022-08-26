@@ -12,7 +12,8 @@ CObject::CObject()
 CObject::CObject(const CObject& other)
 {
 	m_pObject = new CMesh;
-	memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+	*m_pObject = *other.m_pObject;
+	//memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
 	std::cout << "복사생성" << std::endl;
 }
 
@@ -33,8 +34,15 @@ HRESULT CObject::Initialize(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 HRESULT CObject::Initialize(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 {
-	return E_NOTIMPL;
+	CObj::Initialize();
+
+	//m_pObject = pObj->m_pObject;
+	//m_pObject->GetPos() = vPos;
+
+	return NOERROR;
 }
+
+
 
 GLint CObject::Update(const GLfloat fTimeDelta)
 {
@@ -93,9 +101,23 @@ CObject* CObject::Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 CObject* CObject::Create(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 {
-	CObject* pInstance(pObj);
+	CObject* pInstance = new CObject;
+	//CObj::Initialize();
+	*pInstance = *pObj;
 	pInstance->Change_position(vPos);
 	return pInstance;
 }
 
+CObject& CObject::operator=(const CObject& other)
+{
+	if (this == &other)
+		return *this;
+	//if (m_pObject)
+	//	delete m_pObject;
 
+	m_pObject = new CMesh;
+	*m_pObject = *other.m_pObject;
+	//memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+
+	return *this;
+}

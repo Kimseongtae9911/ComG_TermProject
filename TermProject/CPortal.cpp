@@ -4,6 +4,7 @@
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
+#include "CSoundManager.h"
 #include "Player2.h"
 #include "Player3.h"
 
@@ -52,6 +53,7 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 	}
 
 	if (dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Portal() && dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_Portal()) {
+		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 		m_bNextStage = true;
 	}
 

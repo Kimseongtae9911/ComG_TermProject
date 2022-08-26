@@ -120,14 +120,11 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		}
 
 		if (!m_bCollideB) {
-			if (m_pKeyMgr->KeyDown(KEY_A)) {
-				if (m_bIn_Portal) {
-					m_bPortal = true;
-				}
-			}
+
 		}
 		else if (m_bHoldingB) {
 			if (m_pKeyMgr->KeyDown(KEY_A)) {
+				cout << "Box Down" << endl;
 				list<CObj*>::iterator iter_begin;
 				list<CObj*>::iterator iter_end;
 				iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).begin();
@@ -198,9 +195,8 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 
-	CollideCheck();
-
-	glm::vec3 m = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1).front()->Get_AABB().TransCenter;
+	if(VIEW::VIEW_3D == m_pGameMgr->Get_View())
+		CollideCheck();
 
 	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.8f, 3.8f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -0.2f, 0.4f)); // 위로 갈때 0.2, 아래로 갈때 -0.2
 	return GLint();
@@ -222,6 +218,9 @@ void Player3::PortalInteract()
 	if (Collide_OBJ()) {
 		if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
 			m_bPortal = true;
+			//if (!m_bCollideB) {
+			//	m_bPortal = true;
+			//}
 		}
 	}
 }
@@ -240,21 +239,21 @@ bool Player3::Collide_Monster()
 {
 	// Collide Check with Whale(Ground) Monster
 	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER1)) {
-		if (m_AABB.IntersectsDis(dynamic_cast<Monster*>(m)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Collide Check with Bee(Flying) Monster
 	for (const auto& m : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MONSTER2)) {
-		if (m_AABB.IntersectsDis(dynamic_cast<Monster*>(m)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<Monster*>(m)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Collide Check with Spike
 	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
-		if (m_AABB.IntersectsDis(spike->Get_AABB()))
+		if (m_AABB.Intersects(spike->Get_AABB()))
 			return true;
 	}
 
@@ -265,7 +264,7 @@ bool Player3::Collide_OBJ()
 {
 	// Portal Collide Check
 	for (const auto portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
-		if (m_AABB.IntersectsDis(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
+		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
 			return true;
 		}
 	}

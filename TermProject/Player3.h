@@ -19,7 +19,6 @@ public:
 	CMesh* Get_pMesh() { return m_Player; };
 	int& GetC_Dir() { return m_iCollideDir; }
 	bool& Get_Portal() { return m_bPortal; }
-	bool& Get_InPortal() { return m_bIn_Portal; }
 	bool& Get_HoldingB() { return m_bHoldingB; }
 	bool& Get_CollideB() { return m_bCollideB; }
 
@@ -29,7 +28,6 @@ private:
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
 	DIR m_iMoveDir{};
 	bool m_bPortal{ false };
-	bool m_bIn_Portal{ false };
 	bool m_bHoldingB{ false };
 	bool m_bCollideB{ false };
 

@@ -46,8 +46,7 @@ private:
 	GLvoid ChangeView();
 	GLvoid CheckCollide();		// Collide Check
 	GLvoid MonMapCollide();		// Monster - Map Collide Check
-	GLvoid MonBulletCollide();	// Monster - Bullet Collide Check
-	GLvoid PortalInteract();	// Portal - Player Interact
+	GLvoid MonBulletCollide();	// Monster - Bullet Collide Check	
 
 private:
 	CCamera* m_pCamera = nullptr;

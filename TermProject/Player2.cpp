@@ -144,7 +144,8 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 		exit(0);
 	}
 
-	CollideCheck();
+	if(VIEW::VIEW_2D == m_pGameMgr->Get_View())
+		CollideCheck();
 
 	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
 

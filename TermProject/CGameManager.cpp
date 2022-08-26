@@ -54,7 +54,6 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	ChangeView();
 
 	CheckCollide();	// Collide Check
-	//PortalInteract(); // Portal
 
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
@@ -918,27 +917,6 @@ GLvoid CGameManager::MonBulletCollide()
 			CRenderManager::GetInstance()->Get_RenderObj(RENDER_ID::REDER_BULLET).pop_front();
 		}
 		break;
-	}
-}
-
-GLvoid CGameManager::PortalInteract()
-{
-	if (!m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PORTAL)].empty())
-	{
-		CObj* player3D = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front();
-		BB player3D_BB = player3D->Get_BB();
-		CObj* portal = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PORTAL)].front();
-		BB portal_BB = portal->Get_BB();
-
-		if (portal_BB.left > player3D_BB.right || portal_BB.right < player3D_BB.left || portal_BB.top < player3D_BB.bottom || portal_BB.bottom > player3D_BB.top);
-		else
-		{
-			if (VIEW::VIEW_3D == m_View) {
-				if (m_ObjLst[static_cast<int>(OBJ_ID::OBJ_KEY)].empty()) {
-					dynamic_cast<Player3*>(player3D)->Get_InPortal() = true;
-				}
-			}
-		}
 	}
 }
 

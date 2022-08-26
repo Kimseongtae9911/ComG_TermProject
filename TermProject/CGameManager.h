@@ -18,8 +18,6 @@ public:
 	HRESULT Clear_Obj(OBJ_ID eID);
 
 public:
-	bool& Get_boolPortal() { return bPortalCollide; }
-	bool& Get_CollideMTP() { return bMonsterPlayerCollide; }
 	VIEW Get_View() { return m_View; }
 	list<CObj*>& Get_Obj(OBJ_ID ID) { return m_ObjLst[static_cast<int>(ID)]; }
 
@@ -38,8 +36,6 @@ public:
 
 	bool Collide(DIR dir);		// using in Player.cpp
 	bool JumpCollide(int num);
-	bool bPortalCollide = false;
-	bool bMonsterPlayerCollide = false;
 
 private:
 	GLvoid CheckViewChange();

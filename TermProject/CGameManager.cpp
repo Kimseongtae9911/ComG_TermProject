@@ -68,7 +68,7 @@ bool CGameManager::Collide(DIR dir)
 		BB player_BB = player->Get_BB();
 		switch (dir) {
 		case DIR::LEFT:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_KEY); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_BOX); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -79,42 +79,18 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 					}
@@ -123,7 +99,7 @@ bool CGameManager::Collide(DIR dir)
 			}
 			break;
 		case DIR::RIGHT:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_KEY); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_BOX); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -134,42 +110,18 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 					}
@@ -186,7 +138,7 @@ bool CGameManager::Collide(DIR dir)
 		BB player_BB = player->Get_BB();
 		switch (dir) {
 		case DIR::LEFT:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_KEY); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -197,10 +149,6 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -225,10 +173,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.bottom < player_BB.bottom && player_BB.bottom < OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -253,10 +197,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom < OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -281,10 +221,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom < OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -313,7 +249,7 @@ bool CGameManager::Collide(DIR dir)
 			}
 			break;
 		case DIR::RIGHT:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_KEY); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -324,10 +260,6 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.bottom <= player_BB.top && player_BB.top <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -351,10 +283,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.bottom <= player_BB.bottom && player_BB.bottom <= OBJ_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -378,10 +306,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom <= OBJ_BB.top && OBJ_BB.top <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -405,10 +329,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (player_BB.bottom <= OBJ_BB.bottom && OBJ_BB.bottom <= player_BB.top)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -436,7 +356,7 @@ bool CGameManager::Collide(DIR dir)
 			}
 			break;
 		case DIR::UP:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_KEY); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -447,10 +367,6 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -474,10 +390,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -501,10 +413,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -532,7 +440,7 @@ bool CGameManager::Collide(DIR dir)
 			}
 			break;
 		case DIR::DOWN:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_KEY); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -543,10 +451,6 @@ bool CGameManager::Collide(DIR dir)
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -570,10 +474,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -597,10 +497,6 @@ bool CGameManager::Collide(DIR dir)
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								dynamic_cast<Player3*>(player)->Get_CollideB() = false;
-								return false;
-							}
 							if (i == static_cast<int>(OBJ_ID::OBJ_BOX)) {
 								dynamic_cast<Player3*>(player)->Get_CollideB() = true;
 								if (!dynamic_cast<Player3*>(player)->Get_HoldingB()) {
@@ -638,7 +534,7 @@ bool CGameManager::JumpCollide(int num) {
 	if (dynamic_cast<Player2*>(player)->GetJump()) {
 		switch (num) {
 		case 1:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_SPIKE); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -649,32 +545,14 @@ bool CGameManager::JumpCollide(int num) {
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							return true;
 						}
 					}
@@ -683,7 +561,7 @@ bool CGameManager::JumpCollide(int num) {
 			}
 			break;
 		case -1:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_SPIKE); ++i)
+			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 			{
 				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -694,12 +572,6 @@ bool CGameManager::JumpCollide(int num) {
 					{
 						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 
@@ -707,24 +579,12 @@ bool CGameManager::JumpCollide(int num) {
 						}
 						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 							return true;
 						}
 						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 						{
-							if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-								return false;
-							}
-							if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-								dynamic_cast<Player2*>(player)->Get_Die() = true;
-							}
 							float dis = OBJ_BB.top - player_BB.bottom;
 							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 							return true;
@@ -737,7 +597,7 @@ bool CGameManager::JumpCollide(int num) {
 		}
 	}
 	else {
-		for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_SPIKE); ++i)
+		for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
 		{
 			list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
 			list<CObj*>::iterator iter_end = m_ObjLst[i].end();
@@ -748,12 +608,6 @@ bool CGameManager::JumpCollide(int num) {
 				{
 					if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
 					{
-						if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-							return false;
-						}
-						if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-							dynamic_cast<Player2*>(player)->Get_Die() = true;
-						}
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 
@@ -761,24 +615,12 @@ bool CGameManager::JumpCollide(int num) {
 					}
 					else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
 					{
-						if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-							return false;
-						}
-						if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-							dynamic_cast<Player2*>(player)->Get_Die() = true;
-						}
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 						return true;
 					}
 					else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
 					{
-						if (i == static_cast<int>(OBJ_ID::OBJ_PORTAL)) {
-							return false;
-						}
-						if (i == static_cast<int>(OBJ_ID::OBJ_BULLET)) {
-							dynamic_cast<Player2*>(player)->Get_Die() = true;
-						}
 						float dis = OBJ_BB.top - player_BB.bottom;
 						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
 						return true;
@@ -965,8 +807,6 @@ GLvoid CGameManager::Render_Camera()
 
 GLvoid CGameManager::init()
 {
-	bPortalCollide = false;
-	bMonsterPlayerCollide = false;
 	m_View = VIEW::VIEW_2D;
 	return GLvoid();
 }

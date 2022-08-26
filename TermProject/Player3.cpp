@@ -10,6 +10,7 @@
 #include "CObject.h"
 #include "Monster.h"
 #include "CPortal.h"
+#include "CBullet.h"
 
 Player3::Player3()
 {
@@ -124,7 +125,6 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 		}
 		else if (m_bHoldingB) {
 			if (m_pKeyMgr->KeyDown(KEY_A)) {
-				cout << "Box Down" << endl;
 				list<CObj*>::iterator iter_begin;
 				list<CObj*>::iterator iter_end;
 				iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).begin();
@@ -184,7 +184,6 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 				i->color[j][3] = 0.3f;
 			}
 		}
-		Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f };
 		m_pRender->Add_RenderObj(RENDER_ID::REDER_ALPHA, this);
 	}
 	else {
@@ -218,9 +217,6 @@ void Player3::PortalInteract()
 	if (Collide_OBJ()) {
 		if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
 			m_bPortal = true;
-			//if (!m_bCollideB) {
-			//	m_bPortal = true;
-			//}
 		}
 	}
 }
@@ -255,6 +251,13 @@ bool Player3::Collide_Monster()
 	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
 		if (m_AABB.Intersects(spike->Get_AABB()))
 			return true;
+	}
+
+	//Bullet Collide Check
+	for (const auto bullet : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET)) {
+		if (m_AABB.Intersects(dynamic_cast<CBullet*>(bullet)->Get_AABB())) {
+			return true;
+		}
 	}
 
 	return false;

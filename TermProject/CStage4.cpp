@@ -197,18 +197,15 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_5))
-	{
-		m_pGameMgr->Get_boolPortal() = false;
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_END, SCENE_ID::SCENE_STAGE4);
+	// 클리어 조건 수정
+	if (CScene::SceneChange(SCENE_ID::SCENE_END, SCENE_ID::SCENE_STAGE4))
 		return 0;
-	}
-	if (m_pGameMgr->Get_CollideMTP() || dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Die())
-	{
-		m_pGameMgr->Get_CollideMTP() = false;
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE4);
+
+	if (CScene::PlayerDieScene(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE4))
 		return 0;
-	}
+
+	if (CScene::DebugSceneChange(SCENE_ID::SCENE_STAGE4))
+		return 0;
 
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();

@@ -19,6 +19,11 @@ public:
 	virtual GLvoid Render();
 
 protected:
+	bool SceneChange(SCENE_ID next, SCENE_ID cur);
+	bool PlayerDieScene(SCENE_ID next, SCENE_ID cur);
+	bool DebugSceneChange(SCENE_ID cur);
+
+protected:
 	CKeyManager* m_pKeyMgr = nullptr;
 	CGameManager* m_pGameMgr = nullptr;
 	CShader* m_pShader = nullptr;

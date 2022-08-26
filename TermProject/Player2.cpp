@@ -11,6 +11,7 @@
 #include "CSoundManager.h"
 #include "Monster.h"
 #include "CPortal.h"
+#include "CBullet.h"
 
 Player2::Player2()
 {
@@ -210,6 +211,13 @@ bool Player2::Collide_Monster()
 	for (const auto& spike : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_SPIKE)) {
 		if (m_AABB.Intersects(spike->Get_AABB()))
 			return true;
+	}
+
+	//Bullet Collide Check
+	for (const auto bullet : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET)) {
+		if (m_AABB.Intersects(dynamic_cast<CBullet*>(bullet)->Get_AABB())) {
+			return true;
+		}
 	}
 
 	return false;

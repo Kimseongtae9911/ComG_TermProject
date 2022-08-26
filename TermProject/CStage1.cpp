@@ -186,37 +186,15 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (m_pGameMgr->Get_DebugMode())
-	{
-		if (m_pKeyMgr->KeyDown(KEY_2)) {
-			m_pGameMgr->Get_boolPortal() = false;
-			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
-			return 0;
-		}
-		else if (m_pKeyMgr->KeyDown(KEY_3)) {
-			m_pGameMgr->Get_boolPortal() = false;
-			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE1);
-			return 0;
-		}
-		else if (m_pKeyMgr->KeyDown(KEY_4)) {
-			m_pGameMgr->Get_boolPortal() = false;
-			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, SCENE_ID::SCENE_STAGE1);
-			return 0;
-		}
-	}
-
-	if (dynamic_cast<CPortal*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL).front())->Get_NextStage())
-	{
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
+	if (CScene::SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1))
 		return 0;
-	}
 
-	if (m_pGameMgr->Get_PlayerDie())
-	{
-		m_pGameMgr->Set_PlayerDie(false);
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE1);
+	if (CScene::PlayerDieScene(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE1))
 		return 0;
-	}
+
+	if (CScene::DebugSceneChange(SCENE_ID::SCENE_STAGE1))
+		return 0;
+
 	m_pGameMgr->Update(fTimeDelta);
 
 	return GLint();

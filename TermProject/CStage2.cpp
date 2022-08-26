@@ -154,19 +154,14 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (m_pGameMgr->Get_DebugMode() && (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_3)))
-	{
-		m_pGameMgr->Get_boolPortal() = false;
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE2);
+	if (CScene::SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE2))
 		return 0;
-	}
 
-	if (m_pGameMgr->Get_PlayerDie())
-	{
-		m_pGameMgr->Set_PlayerDie(false);
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE2);
+	if (CScene::PlayerDieScene(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE2))
 		return 0;
-	}
+
+	if (CScene::DebugSceneChange(SCENE_ID::SCENE_STAGE2))
+		return 0;
 
 
 	m_pGameMgr->Update(fTimeDelta);

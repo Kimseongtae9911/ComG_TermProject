@@ -4,6 +4,9 @@
 #include "CRenderManager.h"
 #include "CShader.h"
 #include "CGameManager.h"
+#include "CSoundManager.h"
+#include "Player2.h"
+#include "Player3.h"
 
 CPortal::CPortal()
 {
@@ -19,15 +22,16 @@ HRESULT CPortal::Initialize(glm::vec3 vPos)
 	m_pPortal = CMesh::Create("../Resource/Portal Door/Portal Door.obj", { 1.0, 1.0, 1.0, 0.3 });
 	m_pPortal->GetScale() = glm::vec3(0.15f, 0.15f, 0.15f);
 	m_pPortal->GetPos() = vPos;
-	//m_pPortal->GetScale().x = -90;
+	
 	CPortal::Get_BB() = { m_pPortal->GetPos().x - 1.0f, m_pPortal->GetPos().x  + 1.0f,  m_pPortal->GetPos().y + 1.0f, m_pPortal->GetPos().y - 1.0f};
+	CObj::UpdateAABB(m_pPortal->Get_Matrix(), glm::vec3(10.0f, 10.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 	return NOERROR;
 }
 
 GLint CPortal::Update(const GLfloat fTimeDelta)
 {
-	if (!bMovingRotate && m_pGameMgr->Get_View() == false)
+	if (!bMovingRotate && VIEW::VIEW_3D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pPortal->GetRotate().x += 90.f / 80.f;
@@ -37,7 +41,7 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 			bMovingRotate = !bMovingRotate;
 		}
 	}
-	else if (bMovingRotate && m_pGameMgr->Get_View())
+	else if (bMovingRotate && VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		++iRotateCount;
 		m_pPortal->GetRotate().x -= 90.f / 80.f;
@@ -45,6 +49,20 @@ GLint CPortal::Update(const GLfloat fTimeDelta)
 		{
 			iRotateCount = 0;
 			bMovingRotate = !bMovingRotate;
+		}
+	}
+
+	if (dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Get_Portal() && dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_Portal()) {
+		m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
+		m_bNextStage = true;
+	}
+
+	// Portal alpha blending
+	if (m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
+		for (auto& i : m_pPortal->GetSMESH()) {
+			for (size_t j = 0; j < i->color.size(); ++j) {
+				i->color[j][3] = 1.0;
+			}
 		}
 	}
 

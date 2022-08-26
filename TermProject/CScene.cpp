@@ -9,6 +9,7 @@
 #include "CSceneManager.h"
 #include "CFrameManager.h"
 #include "CSoundManager.h"
+#include "CPortal.h"
 
 CScene::CScene()
 {
@@ -53,6 +54,58 @@ GLint CScene::Update(const GLfloat fTimeDelta)
 GLvoid CScene::Render()
 {
     return GLvoid();
+}
+
+bool CScene::SceneChange(SCENE_ID next, SCENE_ID cur)
+{
+	if (dynamic_cast<CPortal*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL).front())->Get_NextStage())
+	{
+		m_pSceneMgr->SceneChange(next, cur);
+		return true;
+	}
+
+	return false;
+}
+
+bool CScene::PlayerDieScene(SCENE_ID next, SCENE_ID cur)
+{
+	if (m_pGameMgr->Get_PlayerDie())
+	{
+		m_pGameMgr->Set_PlayerDie(false);
+		m_pSceneMgr->SceneChange(next, cur);
+		return true;
+	}
+
+	return false;
+}
+
+bool CScene::DebugSceneChange(SCENE_ID cur)
+{
+	if (m_pGameMgr->Get_DebugMode())
+	{
+		if (m_pKeyMgr->KeyDown(KEY_1)) {
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, cur);
+			return true;
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_2)) {
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, cur);
+			return true;
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_3)) {
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, cur);
+			return true;
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_4)) {
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, cur);
+			return true;
+		}
+		else if (m_pKeyMgr->KeyDown(KEY_5)) {
+			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_END, cur);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 GLvoid CScene::Release()

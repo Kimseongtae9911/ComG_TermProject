@@ -39,14 +39,6 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 
-	pObj = Player2::Create();
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER1, pObj)))
-		return E_FAIL;
-
-	pObj = Player3::Create();
-	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER2, pObj)))
-		return E_FAIL;
-
 	for (int i = 0; i < 15; ++i)
 	{
 		for (int j = 0; j < 30; ++j)
@@ -155,13 +147,9 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 
-
-
 	pObj = CPortal::Create(glm::vec3(11.5f, 11.3f, 0.f));
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PORTAL, pObj)))
 		return E_FAIL;
-
-
 
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-13.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
@@ -169,9 +157,17 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
+	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3));
 	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
+		return E_FAIL;
+
+	pObj = Player2::Create();
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER1, pObj)))
+		return E_FAIL;
+
+	pObj = Player3::Create();
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER2, pObj)))
 		return E_FAIL;
 
 	m_pSoundMgr->Stop_All();
@@ -182,7 +178,7 @@ HRESULT CStage1::Initialize()
 
 GLint CStage1::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View())
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
@@ -190,38 +186,15 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (m_pGameMgr->Get_DebugMode())
-	{
-		if (m_pKeyMgr->KeyDown(KEY_2)) {
-			m_pGameMgr->Get_boolPortal() = false;
-			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
-			return 0;
-		}
-		else if (m_pKeyMgr->KeyDown(KEY_3)) {
-			m_pGameMgr->Get_boolPortal() = false;
-			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE1);
-			return 0;
-		}
-		else if (m_pKeyMgr->KeyDown(KEY_4)) {
-			m_pGameMgr->Get_boolPortal() = false;
-			m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE4, SCENE_ID::SCENE_STAGE1);
-			return 0;
-		}
-	}
-
-	if (m_pGameMgr->Get_boolPortal())
-	{
-		m_pGameMgr->Get_boolPortal() = false;
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1);
+	if (CScene::SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1))
 		return 0;
-	}
 
-	if (m_pGameMgr->Get_PlayerDie())
-	{
-		m_pGameMgr->Set_PlayerDie(false);
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE1);
+	if (CScene::PlayerDieScene(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE1))
 		return 0;
-	}
+
+	if (CScene::DebugSceneChange(SCENE_ID::SCENE_STAGE1))
+		return 0;
+
 	m_pGameMgr->Update(fTimeDelta);
 
 	return GLint();

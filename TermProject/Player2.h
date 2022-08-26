@@ -16,6 +16,7 @@ public:
     virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
+	CMesh* Get_Mesh() { return m_Player; }
 	int& GetC_Dir() { return m_iCollideDir; }
 	DIR& GetM_Dir() { return m_iMoveDir; }
 	bool& GetJump() { return m_bJump; }
@@ -24,10 +25,12 @@ public:
 	bool& Get_Die() { return m_bDie; }
 
 private:
+	void KeyboardInput(const GLfloat fTimeDelta);
+	void JumpProcess(const GLfloat fTimeDelta);
+	void PortalInteract();
 	void CollideCheck();
-	bool Collide_Spike();
 	bool Collide_Monster();
-	void Collide_OBJ();
+	bool Collide_OBJ();
 	GLvoid Release();
 
 private:

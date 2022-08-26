@@ -123,12 +123,12 @@ HRESULT CStage2::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 1.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 1.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002));
 	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER2);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER2, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 9.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 9.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002));
 	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER2);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER2, pObj)))
 		return E_FAIL;
@@ -141,7 +141,7 @@ HRESULT CStage2::Initialize()
 
 GLint CStage2::Update(const GLfloat fTimeDelta)
 {
-	if (m_pGameMgr->Get_View())
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
@@ -154,19 +154,14 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (m_pGameMgr->Get_DebugMode() && (m_pGameMgr->Get_boolPortal() || m_pKeyMgr->KeyDown(KEY_3)))
-	{
-		m_pGameMgr->Get_boolPortal() = false;
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE2);
+	if (CScene::SceneChange(SCENE_ID::SCENE_STAGE3, SCENE_ID::SCENE_STAGE2))
 		return 0;
-	}
 
-	if (m_pGameMgr->Get_PlayerDie())
-	{
-		m_pGameMgr->Set_PlayerDie(false);
-		m_pSceneMgr->SceneChange(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE2);
+	if (CScene::PlayerDieScene(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE2))
 		return 0;
-	}
+
+	if (CScene::DebugSceneChange(SCENE_ID::SCENE_STAGE2))
+		return 0;
 
 
 	m_pGameMgr->Update(fTimeDelta);

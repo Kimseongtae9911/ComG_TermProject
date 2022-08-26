@@ -157,7 +157,7 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3), 0);
+	pObj = Monster::Create("../Resource/Boss/wailmer.obj", glm::vec3(0.0f, 1.5f, -0.25f), glm::vec3(0.3, 0.3, 0.3));
 	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER1);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER1, pObj)))
 		return E_FAIL;

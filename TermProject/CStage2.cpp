@@ -123,12 +123,12 @@ HRESULT CStage2::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 1.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 1.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002));
 	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER2);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER2, pObj)))
 		return E_FAIL;
 
-	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 9.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002), 1);
+	pObj = Monster::Create("../Resource/Monster/bee.obj", glm::vec3(0.0f, 9.0f, 0.5f), glm::vec3(0.0002, 0.0002, 0.0002));
 	pObj->Set_OBJID(OBJ_ID::OBJ_MONSTER2);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MONSTER2, pObj)))
 		return E_FAIL;

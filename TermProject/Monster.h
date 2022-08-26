@@ -10,7 +10,7 @@ public:
 	~Monster();
 
 public:
-	virtual HRESULT Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType);
+	virtual HRESULT Initialize(string strMesh, glm::vec3 vPos, glm::vec3 vScale);
 	virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
@@ -20,26 +20,36 @@ public:
 	int& GetCollDir() { return m_iCollideDir; }
 
 private:
-	bool Collide(DIR dir);
+	bool Collide();
+	void ViewChange(const GLfloat fTimeDelta);
+	void MonsterAI(const GLfloat fTimeDelta);
 	GLvoid Release();
 
 private:
 	CMesh* m_pMonster = nullptr;
 	GLfloat m_fAlpha{ 1.0f };
-	int m_iType = 0;
 	int iRotateCount = 0;
 	int iLookRotCount = 0;
 	int iMovingCount = 0;
 	bool bMovingRotate = false;
 	glm::vec3 vecPlayer3dPos = glm::vec3(0.0f);
+	glm::vec3 m_vec3PrevPos = glm::vec3(0.0f);
+	glm::vec3 m_vec3PrevAngle = glm::vec3(0.0f);
+
 	float fRatio = 0;
 	int m_iDir{ 1 };
+	int m_iDir2{ 1 };
 	int m_iCollideDir{ 0 };
 	int m_iDir_3D{ 0 };
 	bool m_bDie{ false };
 
 
 public:
-	static Monster* Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale, int iType);
+	static Monster* Create(string strMesh, glm::vec3 vPos, glm::vec3 vScale);
 };
 
+#define LEFT_WALL -14.0f
+#define RIGHT_WALL 13.0f
+
+#define WALEMON_SPD 0.03f
+#define BEEMON_SPD 0.025f

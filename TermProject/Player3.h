@@ -24,7 +24,7 @@ public:
 
 private:
 	CMesh* m_Player;
-	GLfloat m_fAlpha{ 1.0f };
+	GLfloat m_fAlpha{ 0.3f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
 	DIR m_iMoveDir{};
 	bool m_bPortal{ false };

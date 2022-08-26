@@ -55,7 +55,10 @@ private:
 
 public:
 	glm::mat4 Get_Matrix();
+
 	glm::vec3& GetPos() { return m_vec3Translate; }
+	void SetPos(glm::vec3 pos) { m_vec3Translate = pos; }
+
 	glm::vec3 GetPos2() { 
 		glm::vec3 result(1.0f);
 		glm::mat4 temp(1.0f);
@@ -68,7 +71,10 @@ public:
 	}
 	glm::vec3& GetScale() { return m_vec3Scale; }
 	glm::vec3& GetTrans() { return m_vec3Translate; }
+
 	glm::vec3& GetRotate() { return m_vec3Rotate; }
+	void SetRotate(const glm::vec3 rotate) { m_vec3Rotate = rotate; }
+
 	glm::vec3& GetRotateP() { return m_vec3PRotate; }
 	vector<SUBMESH*>& GetSMESH() { return m_vecSubMesh; }
 	vector<glm::vec3> GetVertices() { return m_vecVertices; }

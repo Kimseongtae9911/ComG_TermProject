@@ -32,5 +32,7 @@ public:
 	static CObject* Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol);
 	static CObject* Create(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol);
 
+	CObject& operator=(const CObject& other);
+
 };
 

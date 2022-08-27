@@ -12,7 +12,8 @@ CObject::CObject()
 CObject::CObject(const CObject& other)
 {
 	m_pObject = new CMesh;
-	memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+	*m_pObject = *other.m_pObject;
+	//memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
 	std::cout << "복사생성" << std::endl;
 }
 
@@ -42,8 +43,21 @@ HRESULT CObject::Initialize(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 HRESULT CObject::Initialize(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 {
-	return E_NOTIMPL;
+	CObj::Initialize();
+
+	if (OBJ_ID::OBJ_BOX == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix());
+	else if (OBJ_ID::OBJ_MAP == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix(), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.25f, 0.0f));
+	else if (OBJ_ID::OBJ_KEY == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix(), glm::vec3(0.3f, 0.7f, 0.3f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.2f, 0.0f));
+	else if (OBJ_ID::OBJ_SPIKE == m_idObj)
+		CObj::UpdateAABB(m_pObject->Get_Matrix(), glm::vec3(70.0f, 35.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.35f, 0.0f));
+
+	return NOERROR;
 }
+
+
 
 GLint CObject::Update(const GLfloat fTimeDelta)
 {
@@ -102,9 +116,28 @@ CObject* CObject::Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 
 CObject* CObject::Create(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 {
-	CObject* pInstance(pObj);
+	CObject* pInstance = new CObject;
+	if (FAILED(pInstance->Initialize(pObj, strMesh, vPos, vCol)))
+	{
+		SafeDelete(pInstance);
+		return nullptr;
+	}
+	*pInstance = *pObj;
 	pInstance->Change_position(vPos);
+
 	return pInstance;
 }
 
+CObject& CObject::operator=(const CObject& other)
+{
+	if (this == &other)
+		return *this;
+	//if (m_pObject)
+	//	delete m_pObject;
 
+	m_pObject = new CMesh;
+	*m_pObject = *other.m_pObject;
+	//memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+
+	return *this;
+}

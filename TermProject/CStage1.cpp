@@ -39,64 +39,73 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_UI, pObj)))
 		return E_FAIL;
 
-	for (int i = 0; i < 15; ++i)
-	{
-		for (int j = 0; j < 30; ++j)
-		{
-			if (i == 0 || i == 14)
-			{
-				pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-				dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-				pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
-				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
-					return E_FAIL;
-			}
-			else
-			{
-				if (j == 0 || j == 29)
-				{
-					pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-					dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-					pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
-					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
-						return E_FAIL;
-				}
-			}
-
-		}
-	}
-	
 	//for (int i = 0; i < 15; ++i)
 	//{
 	//	for (int j = 0; j < 30; ++j)
 	//	{
 	//		if (i == 0 || i == 14)
 	//		{
-	//			if (!BlockObj)
-	//			{
-	//				BlockObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-	//			}
-	//			else
-	//			{
-	//				BlockObj = CObject::Create(dynamic_cast<CObject*>(BlockObj),"../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-	//			}
-	//			BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
-	//			if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
+	//			pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	//			dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+	//			pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
+	//			if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 	//				return E_FAIL;
 	//		}
 	//		else
 	//		{
 	//			if (j == 0 || j == 29)
 	//			{
-	//				BlockObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
-	//				BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
-	//				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
+	//				pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	//				dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+	//				pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
+	//				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 	//					return E_FAIL;
 	//			}
 	//		}
 
 	//	}
 	//}
+	
+	for (int i = 0; i < 15; ++i)
+	{
+		for (int j = 0; j < 30; ++j)
+		{
+			if (i == 0 || i == 14)
+			{
+				if (!BlockObj)
+				{
+					BlockObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+				}
+				else
+				{
+					BlockObj = CObject::Create(dynamic_cast<CObject*>(BlockObj),"../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+				}
+				dynamic_cast<CObject*>(BlockObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+				BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
+				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
+					return E_FAIL;
+			}
+			else
+			{
+				if (j == 0 || j == 29)
+				{
+					if (!BlockObj)
+					{
+						BlockObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+					}
+					else
+					{
+						BlockObj = CObject::Create(dynamic_cast<CObject*>(BlockObj), "../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+					}
+					dynamic_cast<CObject*>(BlockObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+					BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
+					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
+						return E_FAIL;
+				}
+			}
+
+		}
+	}
 	//pObj = CObject::Create(pObj,"../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 28, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });

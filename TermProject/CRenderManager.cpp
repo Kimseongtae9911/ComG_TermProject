@@ -34,7 +34,7 @@ HRESULT CRenderManager::Add_RenderObj(RENDER_ID eID, CObj* pObj)
 		return E_FAIL;
 
 	m_lstRenderObj[static_cast<int>(eID)].emplace_back(pObj);
-	return E_NOTIMPL;
+ 	return E_NOTIMPL;
 }
 
 GLvoid CRenderManager::Clear_Renderer()

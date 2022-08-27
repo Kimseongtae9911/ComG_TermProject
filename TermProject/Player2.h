@@ -18,7 +18,7 @@ public:
 
 	CMesh* Get_Mesh() { return m_Player; }
 	int& GetC_Dir() { return m_iCollideDir; }
-	DIR& GetM_Dir() { return m_iMoveDir; }
+	DIR& GetM_Dir() { return m_dirMoveDir; }
 	bool& GetJump() { return m_bJump; }
 	CMesh* GetP() { return m_Player; }
 	bool& Get_Portal() { return m_bPortal; }
@@ -43,7 +43,8 @@ private:
 	GLfloat m_fJumpPos{ 0.f };
 	GLfloat m_fJumpStart{ 0.f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
-	DIR m_iMoveDir{};
+	DIR m_dirMoveDir{};
+	int m_iMoveDir{ };
 	bool m_bPortal{ false };
 	bool m_bDie = false;
 
@@ -51,3 +52,4 @@ public:
 	static Player2* Create();
 };
 
+#define SPEED_2D 0.1f

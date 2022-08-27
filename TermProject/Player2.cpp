@@ -78,7 +78,6 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 {
 	if (m_pKeyMgr->KeyCombined(KEY_RIGHT, KEY_SPACE)) {
 		if (!m_bJump) {
-			//m_pSoundMgr->Play_Sound(L"portal.wav", CSoundManager::PORTAL);
 			m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
 			m_bJump = true;
 			m_iJumpdir = 1;
@@ -94,15 +93,17 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 		}
 	}
 	else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-		m_iMoveDir = DIR::LEFT;
-		if (!m_pGameMgr->Collide(m_iMoveDir)) {
-			m_Player->Move(glm::vec3(-0.1, 0.0, 0.0));
+		m_dirMoveDir = DIR::LEFT;
+		m_iMoveDir = -1;
+		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
+			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
 		}
 	}
 	else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-		m_iMoveDir = DIR::RIGHT;
-		if (!m_pGameMgr->Collide(m_iMoveDir)) {
-			m_Player->Move(glm::vec3(0.1, 0.0, 0.0));
+		m_dirMoveDir = DIR::RIGHT;
+		m_iMoveDir = 1;
+		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
+			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
 		}
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
@@ -130,7 +131,7 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 				m_iJumpdir = -1;
 			}
 			else {
-				m_Player->Move(glm::vec3(0.0, 0.2, 0.0));
+				m_Player->Move(glm::vec3(0.0, 0.2f, 0.0));
 				m_fJumpPos += 0.1f;
 			}
 			if (m_fJumpPos >= 2.0f) {
@@ -145,7 +146,7 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 				m_bJump = false;
 			}
 			else {
-				m_Player->Move(glm::vec3(0.0, -0.2, 0.0));
+				m_Player->Move(glm::vec3(0.0, -0.2f, 0.0));
 				m_fJumpPos -= 0.1f;
 			}
 			if (m_fJumpPos < 0.0f) {
@@ -156,13 +157,13 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 		}
 	}
 	if (!m_pGameMgr->JumpCollide(m_iJumpdir) && !m_bJump) {
-		if (m_Player->GetPos().y > 0.01) {
+		if (m_Player->GetPos().y > 0.01f) {
 			m_Player->GetPos().y -= 0.2f;
 			m_fJumpPos = 0.0f;
 			m_fJumpStart = 0.0f;
 		}
 
-		if (m_Player->GetPos().y < 0) {
+		if (m_Player->GetPos().y < 0.f) {
 			m_Player->GetPos().y = 0;
 			m_fJumpPos = 0.0f;
 			m_fJumpStart = 0.0f;

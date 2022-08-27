@@ -444,9 +444,9 @@ CMesh& CMesh::operator=(const CMesh& other)
 	//if (m_pObject)
 	//	delete m_pObject;
 
-	m_Parent = new CMesh;
+	//m_Parent = new CMesh;
 	//*m_Parent = *other.m_Parent; //¼öÁ¤
-	//memcpy(m_pObject, other.m_pObject, sizeof(other.m_pObject));
+	//memcpy(m_Parent, other.m_Parent, sizeof(other.m_Parent));
 	m_vec3PRotate = other.m_vec3PRotate;
 	m_vec3Translate = other.m_vec3Translate;
 	m_vec3Scale = other.m_vec3Scale;
@@ -459,15 +459,15 @@ CMesh& CMesh::operator=(const CMesh& other)
 	m_iCnt = other.m_iCnt;
 	m_iCnt2 = other.m_iCnt2;
 
-	std::copy(other.m_vecVertices.begin(), other.m_vecVertices.end(), m_vecVertices.begin());
-	std::copy(other.m_vecTexcoords.begin(), other.m_vecTexcoords.end(), m_vecTexcoords.begin());
-	std::copy(other.m_vecNormals.begin(), other.m_vecNormals.end(), m_vecNormals.begin());
-	std::copy(other.m_vecColor.begin(), other.m_vecColor.end(), m_vecColor.begin());
+	m_vecVertices.assign(other.m_vecVertices.begin(), other.m_vecVertices.end());
+	m_vecTexcoords.assign(other.m_vecTexcoords.begin(), other.m_vecTexcoords.end());
+	m_vecNormals.assign(other.m_vecNormals.begin(), other.m_vecNormals.end());
+	m_vecColor.assign(other.m_vecColor.begin(), other.m_vecColor.end());
 
 	strPath = other.strPath;
 
-	std::copy(other.m_vecSubMesh.begin(), other.m_vecSubMesh.end(), m_vecSubMesh.begin());
-	std::copy(other.m_vecMaterials.begin(), other.m_vecMaterials.end(), m_vecMaterials.begin());
+	m_vecSubMesh.assign(other.m_vecSubMesh.begin(), other.m_vecSubMesh.end());
+	m_vecMaterials.assign(other.m_vecMaterials.begin(), other.m_vecMaterials.end());
 
 	return *this;
 }

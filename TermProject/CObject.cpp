@@ -45,8 +45,6 @@ HRESULT CObject::Initialize(CObject* pObj, string strMesh, glm::vec3 vPos, glm::
 {
 	CObj::Initialize();
 
-	//m_pObject = pObj->m_pObject;
-	//m_pObject->GetPos() = vPos;
 
 	return NOERROR;
 }
@@ -111,9 +109,14 @@ CObject* CObject::Create(string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 CObject* CObject::Create(CObject* pObj, string strMesh, glm::vec3 vPos, glm::vec4 vCol)
 {
 	CObject* pInstance = new CObject;
-	//CObj::Initialize();
+	if (FAILED(pInstance->Initialize(pObj, strMesh, vPos, vCol)))
+	{
+		SafeDelete(pInstance);
+		return nullptr;
+	}
 	*pInstance = *pObj;
 	pInstance->Change_position(vPos);
+
 	return pInstance;
 }
 

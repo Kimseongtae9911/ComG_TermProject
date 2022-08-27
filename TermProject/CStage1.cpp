@@ -80,6 +80,7 @@ HRESULT CStage1::Initialize()
 				{
 					BlockObj = CObject::Create(dynamic_cast<CObject*>(BlockObj),"../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 				}
+				dynamic_cast<CObject*>(BlockObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 				BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
 					return E_FAIL;
@@ -96,6 +97,7 @@ HRESULT CStage1::Initialize()
 					{
 						BlockObj = CObject::Create(dynamic_cast<CObject*>(BlockObj), "../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 					}
+					dynamic_cast<CObject*>(BlockObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
 					BlockObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, BlockObj)))
 						return E_FAIL;

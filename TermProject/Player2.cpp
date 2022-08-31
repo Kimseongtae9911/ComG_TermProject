@@ -114,6 +114,20 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 			m_fJumpStart = m_Player->GetPos().y;
 		}
 	}
+	else if (m_pKeyMgr->KeyPressing(KEY_LEFT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
+		m_dirMoveDir = DIR::LEFT;
+		m_iMoveDir = -1;
+		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
+			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
+		}
+	}
+	else if (m_pKeyMgr->KeyPressing(KEY_RIGHT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
+		m_dirMoveDir = DIR::RIGHT;
+		m_iMoveDir = 1;
+		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
+			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
+		}
+	}
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
 		m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
 	}

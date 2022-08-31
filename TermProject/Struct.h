@@ -121,7 +121,7 @@ typedef struct BoundingBox
 		return !out;
 	}
 
-	bool Intersects(const BoundingBox& box) const noexcept
+	bool Intersects(const BoundingBox& box) noexcept
 	{
 		glm::vec3 MinA = TransCenter - TransExtent;
 		glm::vec3 MaxA = TransCenter + TransExtent;
@@ -134,6 +134,25 @@ typedef struct BoundingBox
 			MaxA.y < MinB.y ||
 			MaxB.x < MinA.x ||
 			MaxB.y < MinA.y;
+
+		// If Collided Get Position from each object and find the collide direction
+		if (!intersect) {
+			glm::vec3 dis = box.TransCenter - TransCenter;
+			if (abs(dis.x) > abs(dis.y)) {
+				if (dis.x < 0)
+					CollideDir = DIR::LEFT;
+				else
+					CollideDir = DIR::RIGHT;
+			}
+			else {
+				if (dis.y < 0)
+					CollideDir = DIR::DOWN;
+				else
+					CollideDir = DIR::UP;
+			}
+		}
+		else
+			CollideDir = DIR::NONE;
 
 		return !intersect;
 	}

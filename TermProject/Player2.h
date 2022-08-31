@@ -1,7 +1,5 @@
 #pragma once
 #include "CObj.h"
-//#include "CMesh.h"
-//#include "CObject.h"
 
 class CMesh;
 class CCamera;
@@ -35,12 +33,12 @@ private:
 
 private:
 	CMesh* m_Player = nullptr;
+	CObj* m_pCollideObj = nullptr;
+	GLfloat m_fJumpSpeed{};
 
-private:
 	GLfloat m_fAlpha{ 1.0f };
 	bool m_bJump{ false };
 	int m_iJumpdir{ -1 };
-	GLfloat m_fJumpPos{ 0.f };
 	GLfloat m_fJumpStart{ 0.f };
 	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
 	DIR m_dirMoveDir{};
@@ -48,8 +46,13 @@ private:
 	bool m_bPortal{ false };
 	bool m_bDie = false;
 
+	GLfloat m_fJumpPos{ 0.f };
+	bool m_bOnAir{ false };
+
 public:
 	static Player2* Create();
 };
 
 #define SPEED_2D 0.1f
+#define JUMP_SPEED 12.0f
+#define GRAVITY JUMP_SPEED / 30.f

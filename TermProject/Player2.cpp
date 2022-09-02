@@ -30,17 +30,29 @@ HRESULT Player2::Initialize()
 	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, -0.25);
 	m_fJumpSpeed = JUMP_SPEED;
 
-	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
+	for (size_t i = 0; i < m_AABB.GetCornersBox().size(); ++i) {
+		m_vecMAABBColor.push_back(glm::vec3(0.f, 1.f, 0.f));
+	}
+
+	for (int i = 0; i < 4; ++i) {
+		glGenVertexArrays(1, &m_Vao[i]);
+		glGenBuffers(2, m_Vbo[i]);
+
+		glBindVertexArray(m_Vao[i]);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_Vbo[i][0]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * m_AABB_M[i].GetCornersBox().size(), &m_AABB_M[i].GetCornersBox().front(), GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_Vbo[i][1]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * m_vecMAABBColor.size(), &m_vecMAABBColor.front(), GL_STATIC_DRAW);
+	}
+
+	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(3.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
 	return NOERROR;
 }
 
 GLint Player2::Update(const GLfloat fTimeDelta)
 {
-	if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) {		
-		KeyboardInput(fTimeDelta);
-		JumpProcess(fTimeDelta);
-	}
-
 	if (VIEW::VIEW_2D == m_pGameMgr->Get_View()) {
 		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
 		CollideCheck();
@@ -48,8 +60,13 @@ GLint Player2::Update(const GLfloat fTimeDelta)
 	else if (VIEW::VIEW_3D == m_pGameMgr->Get_View()) {
 		m_pRender->Add_RenderObj(RENDER_ID::REDER_ALPHA, this);
 	}
+	if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) {		
+		KeyboardInput(fTimeDelta);
+		JumpProcess(fTimeDelta);
+	}
 
-	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
+	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(3.5f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.4f, 0.0f));
+	UpdateBB();
 
 	return GLint();
 }
@@ -61,6 +78,44 @@ GLvoid Player2::Render()
 	m_Player->Render();
 
 	CObj::Render();
+
+	if (m_pGameMgr->Get_DebugMode() && VIEW::VIEW_2D == m_pGameMgr->Get_View()) {
+		GLuint program = CShader::GetInstance()->Use_Shader("BoundingBox");
+
+		int viewLoc = glGetUniformLocation(program, "viewTransform");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_View()));
+
+		if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_MovingCam())
+		{
+			int ProjLoc = glGetUniformLocation(program, "projectionTransform");// 직각
+			glUniformMatrix4fv(ProjLoc, 1, GL_FALSE, value_ptr(m_pGameMgr->Get_Camera()->Get_Ortho()));
+		}
+
+		for (int j = 0; j < 4; ++j) {
+			GLuint iLocation = glGetUniformLocation(program, "modelTransform");
+			glUniformMatrix4fv(iLocation, 1, GL_FALSE, value_ptr(m_AABB_M[j].TransMatrix));
+
+			for (int i = 0; i < 2; ++i)
+			{
+				glEnableVertexAttribArray(i);
+				glBindBuffer(GL_ARRAY_BUFFER, m_Vbo[j][i]);
+				glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+			}
+
+			glLineWidth(3.0f);
+
+			glDrawArrays(GL_LINE_LOOP, 0, 4);
+			glDrawArrays(GL_LINE_LOOP, 4, 4);
+			glDrawArrays(GL_LINE_LOOP, 8, 4);
+			glDrawArrays(GL_LINE_LOOP, 16, 4);
+			glDrawArrays(GL_LINE_LOOP, 20, 4);
+			glDrawArrays(GL_LINE_LOOP, 24, 4);
+
+
+			for (int i = 0; i < 2; ++i)
+				glDisableVertexAttribArray(i);
+		}
+	}
 
 	return GLvoid();
 }
@@ -75,6 +130,7 @@ Player2* Player2::Create()
 
 void Player2::KeyboardInput(const GLfloat fTimeDelta)
 {
+	// Jump Input
 	if (m_pKeyMgr->KeyCombined(KEY_RIGHT, KEY_SPACE)) {
 		if (!m_bOnAir) {
 			m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
@@ -87,38 +143,38 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 			m_bOnAir = true;
 		}
 	}
-	else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-		m_dirMoveDir = DIR::LEFT;
-		m_iMoveDir = -1;
-		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
-			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
-		}
-	}
-	else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
-		m_dirMoveDir = DIR::RIGHT;
-		m_iMoveDir = 1;
-		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
-			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
-		}
-	}
 	else if (m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_LEFT) && !m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
 		if (!m_bOnAir) {
 			m_pSoundMgr->Play_Sound(L"jump.wav", CSoundManager::JUMP);
 			m_bOnAir = true;
 		}
+	} // Left, Right Input
+	else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
+		m_iMoveDir = -1;
+		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
+		if (m_pCollideObj && DIR::LEFT == m_dirCollideDir) {
+			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
+		}
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_LEFT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
-		m_dirMoveDir = DIR::LEFT;
 		m_iMoveDir = -1;
-		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
-			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
+		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
+		if (m_pCollideObj && DIR::LEFT == m_dirCollideDir) {
+			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
+		}
+	}
+	else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
+		m_iMoveDir = 1;
+		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
+		if (m_pCollideObj && DIR::RIGHT == m_dirCollideDir) {
+			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_RIGHT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
-		m_dirMoveDir = DIR::RIGHT;
 		m_iMoveDir = 1;
-		if (!m_pGameMgr->Collide(m_dirMoveDir)) {
-			m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D, 0.0, 0.0));
+		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
+		if (m_pCollideObj && DIR::RIGHT == m_dirCollideDir) {
+			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
@@ -140,11 +196,10 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 			m_fJumpSpeed -= GRAVITY;
 		}
 	}
-	if (m_bOnAir && m_AABB.CollideDir == DIR::DOWN) {
+	if (m_bOnAir && DIR::DOWN == m_dirCollideDir && m_fJumpSpeed < 0.f) {
 		m_bOnAir = false;
-		m_Player->Move(glm::vec3(0.0f, -m_fJumpSpeed * fTimeDelta + (dynamic_cast<CObject*>(m_pCollideObj)->Get_AABB().TransCenter.y + dynamic_cast<CObject*>(m_pCollideObj)->Get_AABB().TransExtent.y) - (m_AABB.TransCenter.y - m_AABB.TransExtent.y), 0.0f));
 		m_fJumpSpeed = JUMP_SPEED;
-		m_AABB.CollideDir = DIR::NONE;
+		m_Player->GetPos() = glm::vec3(m_Player->GetPos().x, m_pCollideObj->Get_AABB().TransCenter.y + m_pCollideObj->Get_AABB().TransExtent.y, m_Player->GetPos().z);
 	}
 }
 
@@ -202,7 +257,7 @@ bool Player2::Collide_Monster()
 bool Player2::Collide_OBJ()
 {
 	// Key Collide Check
-	for (const auto key : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) {
+	for (const auto& key : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) {
 		if (m_AABB.Intersects(dynamic_cast<CObject*>(key)->Get_AABB())) {
 			m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).erase(find(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin(), m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end(), key));
 			return false;
@@ -210,19 +265,48 @@ bool Player2::Collide_OBJ()
 	}
 
 	// Portal Collide Check
-	for (const auto portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
+	for (const auto& portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
 		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
 			return true;
 		}
 	}
 
 	// Map(wall) Collide Check
-	for (const auto wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+	for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+		if (m_AABB_M[1].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
+			m_dirCollideDir = DIR::UP;
+			m_pCollideObj = wall;
+			return false;
+		}
+		if (m_AABB_M[3].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
+			m_dirCollideDir = DIR::DOWN;
+			m_pCollideObj = wall;
+			return false;
+		}
 		if (m_AABB.Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
 			m_pCollideObj = wall;
-			return true;
+			return false;
 		}
 	}
+
+	// Box Collide Check
+	for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
+		if (m_AABB_M[1].Intersects(box->Get_AABB())) {
+			m_dirCollideDir = DIR::UP;
+			return false;
+		}
+		if (m_AABB_M[3].Intersects(box->Get_AABB())) {
+			m_dirCollideDir = DIR::DOWN;
+			return false;
+		}
+		if (m_AABB.Intersects(box->Get_AABB())) {
+			m_pCollideObj = box;
+			return false;
+		}
+	}
+
+	m_pCollideObj = nullptr;
+	m_dirCollideDir = DIR::NONE;
 
 	return false;
 }
@@ -230,5 +314,34 @@ bool Player2::Collide_OBJ()
 GLvoid Player2::Release()
 {
 	SafeDelete(m_Player);
+	return GLvoid();
+}
+
+GLvoid Player2::UpdateBB()
+{
+	glm::vec3 T;
+	for (int i = 0; i < 4; ++i) {
+		switch (i) {
+		case 0: // Left
+			T = glm::vec3(-0.4f, 0.0f, 0.0f) + glm::vec3(0.0f, 0.4f, 0.0f);
+			m_AABB_M[i].Transform(m_Player->Get_Matrix(), glm::vec3(1.0f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), T);
+			break;
+		case 1: // Top
+			T = glm::vec3(0.f, 0.4f, 0.0f) + glm::vec3(0.0f, 0.4f, 0.0f);
+			m_AABB_M[i].Transform(m_Player->Get_Matrix(), glm::vec3(3.5f, 1.0f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), T);
+			break;
+		case 2: // Right
+			T = glm::vec3(0.4f, 0.0f, 0.0f) + glm::vec3(0.0f, 0.4f, 0.0f);
+			m_AABB_M[i].Transform(m_Player->Get_Matrix(), glm::vec3(1.0f, 3.4f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), T);
+			break;
+		case 3: // Bottom
+			T = glm::vec3(0.0f, -0.4f, 0.0f) + glm::vec3(0.0f, 0.4f, 0.0f);
+			m_AABB_M[i].Transform(m_Player->Get_Matrix(), glm::vec3(3.5f, 1.0f, 2.5f), glm::vec3(0.0f, 0.0f, 0.0f), T);
+			break;
+		}
+		
+		m_AABB_M[i].Update(m_AABB_M[i].GetCorners()[5], m_AABB_M[i].GetCorners()[3]);
+	}
+
 	return GLvoid();
 }

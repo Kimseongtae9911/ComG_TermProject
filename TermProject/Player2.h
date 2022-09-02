@@ -15,8 +15,7 @@ public:
 	virtual GLvoid Render();
 
 	CMesh* Get_Mesh() { return m_Player; }
-	int& GetC_Dir() { return m_iCollideDir; }
-	DIR& GetM_Dir() { return m_dirMoveDir; }
+	//int& GetC_Dir() { return m_iCollideDir; }
 	bool& GetJump() { return m_bJump; }
 	CMesh* GetP() { return m_Player; }
 	bool& Get_Portal() { return m_bPortal; }
@@ -30,6 +29,7 @@ private:
 	bool Collide_Monster();
 	bool Collide_OBJ();
 	GLvoid Release();
+	GLvoid UpdateBB();
 
 private:
 	CMesh* m_Player = nullptr;
@@ -40,19 +40,19 @@ private:
 	bool m_bJump{ false };
 	int m_iJumpdir{ -1 };
 	GLfloat m_fJumpStart{ 0.f };
-	int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
-	DIR m_dirMoveDir{};
+	//int m_iCollideDir{ 0 }; // 1:Left, 2:Right, 3:Up, 4:Down
 	int m_iMoveDir{ };
 	bool m_bPortal{ false };
 	bool m_bDie = false;
 
 	GLfloat m_fJumpPos{ 0.f };
 	bool m_bOnAir{ false };
+	DIR m_dirCollideDir{ DIR::NONE };
 
 public:
 	static Player2* Create();
 };
 
-#define SPEED_2D 0.1f
-#define JUMP_SPEED 12.0f
+#define SPEED_2D 6.0f
+#define JUMP_SPEED 11.0f
 #define GRAVITY JUMP_SPEED / 30.f

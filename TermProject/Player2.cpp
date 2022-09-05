@@ -187,7 +187,7 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 
 void Player2::JumpProcess(const GLfloat fTimeDelta)
 {
-	if (m_bOnAir) {
+	if (m_bOnAir || m_bFalling) {
 		m_Player->Move(glm::vec3(0.0f, m_fJumpSpeed * fTimeDelta, 0.0f));
 		if (m_fJumpSpeed > 0.0f)
 			m_fJumpSpeed -= GRAVITY;
@@ -195,12 +195,11 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 			m_fJumpSpeed -= GRAVITY;
 		}
 	}
-	if (m_bOnAir && DIR::DOWN == m_dirCollideDir && m_fJumpSpeed < 0.f) {
+	if ((m_bOnAir && DIR::DOWN == m_dirCollideDir && m_fJumpSpeed < 0.f) || (m_bFalling && DIR::DOWN == m_dirCollideDir)) {
 		m_bOnAir = false;
+		m_bFalling = false;
 		m_fJumpSpeed = JUMP_SPEED;
-		if (m_pCollideObj)
-			cout << "Collide" << endl;
-		//m_Player->GetPos() = glm::vec3(m_Player->GetPos().x, m_pCollideObj->Get_AABB().TransCenter.y + m_pCollideObj->Get_AABB().TransExtent.y, m_Player->GetPos().z);
+		m_Player->GetPos() = glm::vec3(m_Player->GetPos().x, m_pCollideObj->Get_AABB().TransCenter.y + m_pCollideObj->Get_AABB().TransExtent.y, m_Player->GetPos().z);
 	}
 }
 
@@ -294,10 +293,12 @@ bool Player2::Collide_OBJ()
 	for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
 		if (m_AABB_M[1].Intersects(box->Get_AABB())) {
 			m_dirCollideDir = DIR::UP;
+			m_pCollideObj = box;
 			return false;
 		}
 		if (m_AABB_M[3].Intersects(box->Get_AABB())) {
 			m_dirCollideDir = DIR::DOWN;
+			m_pCollideObj = box;
 			return false;
 		}
 		if (m_AABB.Intersects(box->Get_AABB())) {
@@ -306,6 +307,10 @@ bool Player2::Collide_OBJ()
 		}
 	}
 
+	if (!m_bOnAir && !m_bFalling) {
+		m_bFalling = true;
+		m_fJumpSpeed = 0.0f;
+	}
 	m_pCollideObj = nullptr;
 	m_dirCollideDir = DIR::NONE;
 

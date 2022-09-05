@@ -47,6 +47,7 @@ private:
 
 	GLfloat m_fJumpPos{ 0.f };
 	bool m_bOnAir{ false };
+	bool m_bFalling{ false };
 	DIR m_dirCollideDir{ DIR::NONE };
 
 public:

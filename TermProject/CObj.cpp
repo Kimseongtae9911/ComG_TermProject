@@ -29,6 +29,7 @@ HRESULT CObj::Initialize()
 
 	for (size_t i = 0; i < m_AABB.GetCornersBox().size(); ++i) {
 		m_vecAABBColor.push_back(glm::vec3(1.f, 0.f, 0.f));
+		m_vecMAABBColor.push_back(glm::vec3(0.f, 1.f, 0.f));
 	}
 
 	glGenVertexArrays(1, &m_iVao);
@@ -41,6 +42,8 @@ HRESULT CObj::Initialize()
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_iVbo[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * m_vecAABBColor.size(), &m_vecAABBColor.front(), GL_STATIC_DRAW);
+
+	
 
 	return NOERROR;
 }
@@ -56,13 +59,13 @@ GLvoid CObj::UpdateAABB(const glm::mat4& mat)
 
 	m_AABB.Update(m_AABB.GetCorners()[0], m_AABB.GetCorners()[7]);
 
+
 	return GLvoid();
 }
 
 GLvoid CObj::UpdateAABB(const glm::mat4& mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation)
 {
 	m_AABB.Transform(mat, Scale, Rotate, Translation);
-
 	m_AABB.Update(m_AABB.GetCorners()[5], m_AABB.GetCorners()[3]);
 
 	return GLvoid();
@@ -109,7 +112,6 @@ GLvoid CObj::Render()
 
 		for (int i = 0; i < 2; ++i)
 			glDisableVertexAttribArray(i);
-
 	}
 
 	return GLvoid();

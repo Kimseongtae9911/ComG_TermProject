@@ -24,7 +24,6 @@ HRESULT CBossMonster::Initialize()
 	CObj::Initialize();
 	m_pBossMonster = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, 1.0});
 	m_pBossMonster->GetPos() = glm::vec3(5.0f, 0, 0);
-	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pBossMonster->GetScale() = glm::vec3(0.2f, 0.2f, 0.2f);
 	m_pBossMonster->GetRotate().y = -20.f;
 	return NOERROR;
@@ -288,7 +287,6 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 			return E_FAIL;
 		f3DTime = 0;
 	}
-	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pRender->Add_RenderObj(RENDER_ID::RENDER_BOSS, this);
 
 	CObj::UpdateAABB(m_pBossMonster->Get_Matrix(), glm::vec3(30.5f, 35.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 3.5f, 0.0f));

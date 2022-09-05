@@ -151,7 +151,7 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 
 	}
 	else if (m_bHoldingB) {
-		if (m_pKeyMgr->KeyDown(KEY_A)) {
+		/*if (m_pKeyMgr->KeyDown(KEY_A)) {
 			list<CObj*>::iterator iter_begin;
 			list<CObj*>::iterator iter_end;
 			iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).begin();
@@ -200,9 +200,8 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 				}
 				++iter_begin;
 			}
-		}
+		}*/
 	}
-	Player3::Get_BB() = { m_Player->GetPos().x - 0.5f, m_Player->GetPos().x + 0.5f, m_Player->GetPos().y + 0.5f, m_Player->GetPos().y - 0.5f };
 }
 
 void Player3::PortalInteract()

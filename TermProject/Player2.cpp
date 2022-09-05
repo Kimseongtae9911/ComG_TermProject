@@ -180,8 +180,7 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
 		m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
 	}
-
-	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
+	else if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		exit(0);
 	}
 }
@@ -199,7 +198,9 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 	if (m_bOnAir && DIR::DOWN == m_dirCollideDir && m_fJumpSpeed < 0.f) {
 		m_bOnAir = false;
 		m_fJumpSpeed = JUMP_SPEED;
-		m_Player->GetPos() = glm::vec3(m_Player->GetPos().x, m_pCollideObj->Get_AABB().TransCenter.y + m_pCollideObj->Get_AABB().TransExtent.y, m_Player->GetPos().z);
+		if (m_pCollideObj)
+			cout << "Collide" << endl;
+		//m_Player->GetPos() = glm::vec3(m_Player->GetPos().x, m_pCollideObj->Get_AABB().TransCenter.y + m_pCollideObj->Get_AABB().TransExtent.y, m_Player->GetPos().z);
 	}
 }
 

@@ -52,14 +52,6 @@ typedef struct tagSubMesh
 	MATERIAL* material;
 }SUBMESH;
 
-typedef struct BoundingBox2
-{
-	GLfloat left; //x
-	GLfloat right; //x
-	GLfloat top; //y
-	GLfloat bottom; //y
-}BB;
-
 typedef struct BoundingBox
 {
 	glm::vec3 Center;

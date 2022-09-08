@@ -86,6 +86,15 @@ typedef struct BoundingBox
 		TransMatrix = TransMatrix * Mat * glm::scale(TransMatrix, Scale);
 	}
 
+	void Transform2(const glm::mat4& Mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation) noexcept
+	{
+		TransMatrix = glm::mat4(1.0f);
+
+		TransMatrix = glm::translate(TransMatrix, Translation);
+
+		TransMatrix = Mat * TransMatrix * glm::scale(TransMatrix, Scale);
+	}
+
 	void Transform(float Scale, const glm::vec3& Rotate, const glm::vec3& Translation) noexcept
 	{
 		TransMatrix = glm::translate(TransMatrix, Translation);

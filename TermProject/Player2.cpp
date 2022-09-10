@@ -154,6 +154,7 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 		if (Collide_DIR(DIR::LEFT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_LEFT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
 		m_iMoveDir = -1;
@@ -161,6 +162,7 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 		if (Collide_DIR(DIR::LEFT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 		m_iMoveDir = 1;
@@ -168,6 +170,7 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 		if (Collide_DIR(DIR::RIGHT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_RIGHT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
 		m_iMoveDir = 1;
@@ -175,6 +178,7 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 		if (Collide_DIR(DIR::RIGHT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
 		m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
@@ -188,13 +192,10 @@ void Player2::JumpProcess(const GLfloat fTimeDelta)
 {
 	if (m_bOnAir || m_bFalling) {
 		m_Player->Move(glm::vec3(0.0f, m_fJumpSpeed * fTimeDelta, 0.0f));
-		if (m_fJumpSpeed > 0.0f)
-			m_fJumpSpeed -= GRAVITY;
-		else {
-			m_fJumpSpeed -= GRAVITY;
-		}
+		m_fJumpSpeed -= GRAVITY * fTimeDelta;
+		Collide_DIR(DIR::UP);
 	}
-	Collide_DIR(DIR::UP);
+	
 	if ((m_bOnAir && Collide_DIR(DIR::DOWN) && m_fJumpSpeed < 0.f) || (m_bFalling && Collide_DIR(DIR::DOWN))) {
 		m_bOnAir = false;
 		m_bFalling = false;

@@ -19,13 +19,15 @@ public:
 	
 public:
 	CMesh* Get_pMesh() { return m_Player; };
-	bool& Get_Portal() { return m_bPortal; }
-	bool& Get_HoldingB() { return m_bHoldingB; }
-	bool& Get_CollideB() { return m_bCollideB; }
+	bool Get_Portal() { return m_bPortal; }
+	bool Get_HoldingB() { return m_bHoldingB; }
+	bool Get_CollideB() { return m_bCollideB; }
+	CObj* GetHoldingBox() { return m_pHoldingBox; }
 
 private:
 	CMesh* m_Player;
 	CObj* m_pCollideObj = nullptr;
+	CObj* m_pHoldingBox = nullptr;
 	GLfloat m_fAlpha{ 0.3f };
 	bool m_bPortal{ false };
 	bool m_bHoldingB{ false };
@@ -33,9 +35,11 @@ private:
 
 private:
 	void KeyboardInput(const GLfloat fTimeDelta);
+	void Box_Move(const GLfloat fTimeDelta);
 	void CollideCheck();
 	bool Collide_Monster();
 	bool Collide_OBJ();
+	bool Check_BoxDown();
 
 private:
 	GLvoid Release();

@@ -53,8 +53,11 @@ HRESULT Player3::Initialize()
 
 GLint Player3::Update(const GLfloat fTimeDelta)
 {
-	if (VIEW::VIEW_3D == m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal)
+	if (VIEW::VIEW_3D == m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move() && !m_bPortal) {
 		KeyboardInput(fTimeDelta);
+		if (m_bHoldingB)
+			Box_Move(fTimeDelta);
+	}
 
 	if (VIEW::VIEW_3D == m_pGameMgr->Get_View()) {
 		m_pRender->Add_RenderObj(RENDER_ID::REDER_NONAL, this);
@@ -133,16 +136,12 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(-SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 
 			//Down
 			m_Player->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, -135.0f, 0.0f);
@@ -151,16 +150,12 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(-SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 
 			//Up
 			m_Player->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 		}
 		else {
 			m_Player->GetRotate() = glm::vec3(90.0f, -90.0f, 0.0f);
@@ -169,8 +164,6 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(SPEED_3D * fTimeDelta, 0.0, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(-SPEED_3D * fTimeDelta, 0.0, 0.0));
 		}
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_RIGHT)) {
@@ -181,16 +174,12 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(-SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 
 			//Down
 			m_Player->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 		}
 		else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, 135.0f, 0.0f);
@@ -199,16 +188,12 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(-SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 
 			//Up
 			m_Player->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 		}
 		else {
 			//Right
@@ -217,8 +202,6 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(-SPEED_3D * fTimeDelta, 0.0, 0.0));
 			}
-			if (m_bCollideB && !Collide_OBJ())
-				dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(SPEED_3D * fTimeDelta, 0.0, 0.0));
 		}
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_UP)) {
@@ -228,8 +211,6 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 		if (Collide_OBJ()) {
 			m_Player->Move(glm::vec3(0.0, -SPEED_3D * fTimeDelta, 0.0));
 		}
-		if (m_bCollideB && !Collide_OBJ())
-			dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(0.0, SPEED_3D * fTimeDelta, 0.0));
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 		m_Player->GetRotate() = glm::vec3(90.0f, 0.0f, 0.0f);
@@ -238,65 +219,36 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 		if (Collide_OBJ()) {
 			m_Player->Move(glm::vec3(0.0, SPEED_3D * fTimeDelta, 0.0));
 		}
-		if (m_bCollideB && !Collide_OBJ())
-			dynamic_cast<CObject*>(m_pCollideObj)->Get_Mesh()->Move(glm::vec3(0.0, -SPEED_3D * fTimeDelta, 0.0));
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
 		m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
 	}
 
-	if (m_bHoldingB) {
-		/*if (m_pKeyMgr->KeyDown(KEY_A)) {
-			list<CObj*>::iterator iter_begin;
-			list<CObj*>::iterator iter_end;
-			iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).begin();
-			iter_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).end();
-
-			for (; iter_begin != iter_end;) {
-				switch (m_iMoveDir) {
-				case DIR::LEFT:
-					m_bHoldingB = false;
-					if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = m_Player->GetPos().x - 1.5f;
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
-						glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-						(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
-					}
-					break;
-				case DIR::RIGHT:
-					m_bHoldingB = false;
-					if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = m_Player->GetPos().x + 1.5f;
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
-						glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-						(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
-					}
-					break;
-				case DIR::UP:
-					m_bHoldingB = false;
-					if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = m_Player->GetPos().y + 1.5f;
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
-						glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-						(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
-					}
-					break;
-				case DIR::DOWN:
-					m_bHoldingB = false;
-					if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z > 0.0) {
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = m_Player->GetPos().y - 1.5f;
-						dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z = -0.25;
-						glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-						(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
-					}
-					break;
-				default:
-					break;
-				}
-				++iter_begin;
-			}
-		}*/
+	if (m_bCollideB) {
+		if (m_pKeyMgr->KeyDown(KEY_A)) {
+			m_pHoldingBox = m_pCollideObj;
+			m_bCollideB = false;
+			m_bHoldingB = true;
+		}
 	}
+	else if (m_bHoldingB) {
+		if (Check_BoxDown() && m_pKeyMgr->KeyDown(KEY_A)) {
+			m_pHoldingBox = nullptr;
+			m_bHoldingB = false;
+		}
+	}
+}
+
+
+bool Player3::Check_BoxDown()
+{
+	return false;
+}
+
+void Player3::Box_Move(const GLfloat fTimeDelta)
+{
+	dynamic_cast<CObject*>(m_pHoldingBox)->Get_Mesh()->SetRotate(m_Player->GetRotate());
+	dynamic_cast<CObject*>(m_pHoldingBox)->Get_Mesh()->SetPos(glm::vec3(m_Player->GetPos().x, m_Player->GetPos().y, m_Player->GetPos().z + 1.5f));
 }
 
 void Player3::CollideCheck()
@@ -362,10 +314,12 @@ bool Player3::Collide_OBJ()
 	}
 	// box
 	for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
+		if (box == m_pHoldingBox)
+			continue;
 		if (m_AABB_M[0].Intersects(box->Get_AABB())) {
 			m_pCollideObj = box;
 			m_bCollideB = true;
-			return false;
+			return true;
 		}
 	}
 

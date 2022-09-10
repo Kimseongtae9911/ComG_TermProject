@@ -1,9 +1,9 @@
 #pragma once
 #include "CObj.h"
 
-#define SPEED_2D 6.0f
-#define JUMP_SPEED 11.0f
-#define GRAVITY JUMP_SPEED / 25.f
+#define SPEED_2D 5.0f
+#define JUMP_SPEED 13.0f
+#define GRAVITY 30.0f
 
 class CMesh;
 class CCamera;

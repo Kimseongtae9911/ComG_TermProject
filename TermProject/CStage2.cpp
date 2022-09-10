@@ -135,12 +135,8 @@ GLint CStage2::Update(const GLfloat fTimeDelta)
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
-			list<CObj*>::iterator iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin();
-			list<CObj*>::iterator iter_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end();
-			for (; iter_begin != iter_end;) {
-				dynamic_cast<CObject*>((*iter_begin))->Set_Rotate(glm::vec3(0, fRotCount, 0));
-				++iter_begin;
-			}
+			for (auto& iter_begin : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY))
+				dynamic_cast<CObject*>(iter_begin)->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 	}
 

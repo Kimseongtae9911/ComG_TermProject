@@ -537,6 +537,10 @@ GLvoid CGameManager::CheckViewChange()
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
 				m_View = VIEW::VIEW_2D;
 
+				// Rotate Holding Box
+				if (dynamic_cast<Player3*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front())->GetHoldingBox())
+					dynamic_cast<CObject*>(dynamic_cast<Player3*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front())->GetHoldingBox())->Set_Rotate(glm::vec3(90.0f, 180.0f, 0.0f));
+
 				// Player alpha value
 				for (auto i : dynamic_cast<Player2*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front())->Get_Mesh()->GetSMESH())
 					for (size_t j = 0; j < i->color.size(); ++j)
@@ -548,8 +552,8 @@ GLvoid CGameManager::CheckViewChange()
 		}
 		else if (VIEW::VIEW_2D == m_View && !Get_Camera()->Get_Move()) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
-				m_View = VIEW::VIEW_3D;
-				
+				m_View = VIEW::VIEW_3D;				
+
 				// Player alpha value
 				for (auto i : dynamic_cast<Player2*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front())->Get_Mesh()->GetSMESH())
 					for (size_t j = 0; j < i->color.size(); ++j)

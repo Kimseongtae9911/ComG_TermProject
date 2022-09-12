@@ -24,6 +24,9 @@ public:
 	bool Get_CollideB() { return m_bCollideB; }
 	CObj* GetHoldingBox() { return m_pHoldingBox; }
 
+	GLvoid SetHoldingB(bool bHoldingB) { m_bHoldingB = bHoldingB; }
+	GLvoid SetCollideB(bool bCollideB) { m_bCollideB = bCollideB; }
+
 private:
 	CMesh* m_Player;
 	CObj* m_pCollideObj = nullptr;

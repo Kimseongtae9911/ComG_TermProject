@@ -52,21 +52,6 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 					m_pBossMonster->GetRotate().y = 0;
 			}
 		}
-		//if (f >= 360 - 22.5 && f <= 22.5)
-		//{
-		//	if (f >= 0 && f <= 22.5 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y <= 45)
-		//	{
-		//		m_pBossMonster->GetRotate().y -= 2.5;
-		//		if (m_pBossMonster->GetRotate().y < 0)
-		//			m_pBossMonster->GetRotate().y = 360;
-		//	}
-		//	else if (f >= 360 - 22.5 && f <= 360 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y >= 360 - 45)
-		//	{
-		//		m_pBossMonster->GetRotate().y += 2.5;
-		//		if (m_pBossMonster->GetRotate().y > 360)
-		//			m_pBossMonster->GetRotate().y = 0;
-		//	}
-		//}
 		else if (f >= 22.5 && f <= 67.5)
 		{
 			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 45)
@@ -172,37 +157,6 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 				m_pBossMonster->GetRotate().y = 315;
 		}
 		}
-
-		//if (f >= m_pBossMonster->GetRotate().y)
-		//{
-		//	if (f - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
-		//	{
-		//		m_pBossMonster->GetRotate().y += 3.5;
-		//	}
-		//	else
-		//	{
-		//		m_pBossMonster->GetRotate().y -= 3.5;
-		//	}
-		//}
-		//else
-		//{
-		//	if (f + 360 - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
-		//	{
-		//		m_pBossMonster->GetRotate().y += 3.5;
-		//	}
-		//	else
-		//	{
-		//		m_pBossMonster->GetRotate().y -= 3.5;
-		//	}
-		//}
-		//if (m_pBossMonster->GetRotate().y >= 360)
-		//{
-		//	m_pBossMonster->GetRotate().y -= 360;
-		//}
-		//else if (m_pBossMonster->GetRotate().y <= 0)
-		//{
-		//	m_pBossMonster->GetRotate().y += 360;
-		//}
 	}
 	if (VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{

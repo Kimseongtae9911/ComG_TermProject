@@ -143,27 +143,27 @@ HRESULT CStage3::Initialize()
 
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(0.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
-	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	dynamic_cast<CObject*>(pObj)->Get_Mesh()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(-1.5f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
-	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	dynamic_cast<CObject*>(pObj)->Get_Mesh()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(1.5f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
-	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	dynamic_cast<CObject*>(pObj)->Get_Mesh()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(3.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
-	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	dynamic_cast<CObject*>(pObj)->Get_Mesh()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 	pObj = CObject::Create("../Resource/Spike/spike.obj", glm::vec3(-3.0f, 0.1f, -0.1f), { 1.0, 1.0, 1.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_SPIKE);
-	dynamic_cast<CObject*>(pObj)->Get_Rotate()->GetScale() = { 0.03f, 0.03f, 0.03f };
+	dynamic_cast<CObject*>(pObj)->Get_Mesh()->GetScale() = { 0.03f, 0.03f, 0.03f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_SPIKE, pObj)))
 		return E_FAIL;
 

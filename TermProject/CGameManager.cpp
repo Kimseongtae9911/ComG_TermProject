@@ -578,9 +578,9 @@ GLvoid CGameManager::ChangeView()
 			iter_begin = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BOX)].begin();
 			iter_end = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BOX)].end();
 			for (; iter_begin != iter_end;) {
-				if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z <= 1.6f && dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z >= 1.4f) {
-					dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
-					dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
+				if (dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().z <= 1.6f && dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().z >= 1.4f) {
+					dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+					dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
 					break;
 				}
 				++iter_begin;

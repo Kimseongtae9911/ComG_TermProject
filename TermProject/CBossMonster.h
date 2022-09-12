@@ -16,9 +16,12 @@ public:
 	float LookPlayerAngle();
 	int RandHeight();
 	int& GetDir() { return m_iDir; }
-	GLuint& GetLife() { return m_iLife; }
-	CMesh* Get_Pmesh() { return m_pBossMonster; }
-	bool& GetBullet() { return m_bBullet; }
+	GLuint GetLife() { return m_iLife; }
+	CMesh* Get_Mesh() { return m_pBossMonster; }
+	bool GetBullet() { return m_bBullet; }
+
+	GLvoid SetBullet(bool bBullet) { m_bBullet = bBullet; }
+	GLvoid SetLife(const int ilife) { m_iLife = ilife; }
 
 private:
 	CMesh* m_pBossMonster;

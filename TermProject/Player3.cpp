@@ -331,6 +331,7 @@ bool Player3::Collide_OBJ()
 		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
 				m_bPortal = true;
+				m_pSoundMgr->Play_Sound(L"portal_in.mp3", CSoundManager::PORTAL);
 				return false;
 			}
 		}

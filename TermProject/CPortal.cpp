@@ -23,7 +23,6 @@ HRESULT CPortal::Initialize(glm::vec3 vPos)
 	m_pPortal->GetScale() = glm::vec3(0.15f, 0.15f, 0.15f);
 	m_pPortal->GetPos() = vPos;
 	
-	CPortal::Get_BB() = { m_pPortal->GetPos().x - 1.0f, m_pPortal->GetPos().x  + 1.0f,  m_pPortal->GetPos().y + 1.0f, m_pPortal->GetPos().y - 1.0f};
 	CObj::UpdateAABB(m_pPortal->Get_Matrix(), glm::vec3(10.0f, 10.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 	return NOERROR;

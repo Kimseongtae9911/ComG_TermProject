@@ -1,5 +1,8 @@
 #pragma once
 #include "CScene.h"
+
+class CBossMonster;
+class CObj;
 class CStage4: public CScene
 {
 public:
@@ -13,11 +16,15 @@ public:
 
 
 private:
+	CObj* m_pBox = nullptr;
+	CBossMonster* m_pBoss = nullptr;	
+
 	bool bMove = false;
 	int iRotCount = 0;
 	float fRotCount = 0;
 
 private:
+	GLvoid Reset();
 	GLvoid Release();
 
 public:

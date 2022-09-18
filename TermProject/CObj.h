@@ -19,7 +19,6 @@ public:
 	virtual GLvoid UpdateAABB(const glm::mat4& mat);
 	virtual GLvoid UpdateAABB(const glm::mat4& mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation);
 	virtual GLvoid Render();
-	BB& Get_BB() { return m_Box; }
 	BoundingBox& Get_AABB() { return m_AABB; }
 	GLvoid Set_OBJID(OBJ_ID id) { m_idObj = id; }
 
@@ -35,7 +34,7 @@ protected:
 	CSceneManager* m_pSceneMgr = nullptr;
 	CShader* m_pShaderLoader = nullptr;
 	CSoundManager* m_pSoundMgr = nullptr;
-	BB m_Box;
+	BoundingBox m_AABB {};
 	OBJ_ID m_idObj;
 
 	vector<glm::vec3> m_vecMAABBColor;

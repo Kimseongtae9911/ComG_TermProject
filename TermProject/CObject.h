@@ -16,7 +16,6 @@ public:
 	virtual GLvoid Render();
 
 public:
-	CMesh* Get_Rotate() { return m_pObject; };
 	GLvoid Set_Rotate(glm::vec3 vec) /*{ m_pObject->GetRotate() = vec; }*/;
 	CMesh* Get_Mesh() { return m_pObject; };
 

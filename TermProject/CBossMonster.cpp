@@ -24,7 +24,6 @@ HRESULT CBossMonster::Initialize()
 	CObj::Initialize();
 	m_pBossMonster = CMesh::Create("../Resource/Monster/podoboo.obj", { 1.0, 1.0, 1.0, 1.0});
 	m_pBossMonster->GetPos() = glm::vec3(5.0f, 0, 0);
-	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pBossMonster->GetScale() = glm::vec3(0.2f, 0.2f, 0.2f);
 	m_pBossMonster->GetRotate().y = -20.f;
 	return NOERROR;
@@ -53,21 +52,6 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 					m_pBossMonster->GetRotate().y = 0;
 			}
 		}
-		//if (f >= 360 - 22.5 && f <= 22.5)
-		//{
-		//	if (f >= 0 && f <= 22.5 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y <= 45)
-		//	{
-		//		m_pBossMonster->GetRotate().y -= 2.5;
-		//		if (m_pBossMonster->GetRotate().y < 0)
-		//			m_pBossMonster->GetRotate().y = 360;
-		//	}
-		//	else if (f >= 360 - 22.5 && f <= 360 && m_pBossMonster->GetRotate().y != 0 && m_pBossMonster->GetRotate().y >= 360 - 45)
-		//	{
-		//		m_pBossMonster->GetRotate().y += 2.5;
-		//		if (m_pBossMonster->GetRotate().y > 360)
-		//			m_pBossMonster->GetRotate().y = 0;
-		//	}
-		//}
 		else if (f >= 22.5 && f <= 67.5)
 		{
 			if (f >= m_pBossMonster->GetRotate().y && m_pBossMonster->GetRotate().y != 45)
@@ -173,37 +157,6 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 				m_pBossMonster->GetRotate().y = 315;
 		}
 		}
-
-		//if (f >= m_pBossMonster->GetRotate().y)
-		//{
-		//	if (f - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y + 360 - f /*&& f >= m_pMonster->GetRotate().y*/)
-		//	{
-		//		m_pBossMonster->GetRotate().y += 3.5;
-		//	}
-		//	else
-		//	{
-		//		m_pBossMonster->GetRotate().y -= 3.5;
-		//	}
-		//}
-		//else
-		//{
-		//	if (f + 360 - m_pBossMonster->GetRotate().y <= m_pBossMonster->GetRotate().y - f/* && f <= m_pMonster->GetRotate().y*/)
-		//	{
-		//		m_pBossMonster->GetRotate().y += 3.5;
-		//	}
-		//	else
-		//	{
-		//		m_pBossMonster->GetRotate().y -= 3.5;
-		//	}
-		//}
-		//if (m_pBossMonster->GetRotate().y >= 360)
-		//{
-		//	m_pBossMonster->GetRotate().y -= 360;
-		//}
-		//else if (m_pBossMonster->GetRotate().y <= 0)
-		//{
-		//	m_pBossMonster->GetRotate().y += 360;
-		//}
 	}
 	if (VIEW::VIEW_2D == m_pGameMgr->Get_View())
 	{
@@ -288,7 +241,6 @@ GLint CBossMonster::Update(const GLfloat fTimeDelta)
 			return E_FAIL;
 		f3DTime = 0;
 	}
-	CBossMonster::Get_BB() = { m_pBossMonster->GetPos().x - 4.0f, m_pBossMonster->GetPos().x + 4.0f, m_pBossMonster->GetPos().y + 8.5f, m_pBossMonster->GetPos().y - 0.5f };
 	m_pRender->Add_RenderObj(RENDER_ID::RENDER_BOSS, this);
 
 	CObj::UpdateAABB(m_pBossMonster->Get_Matrix(), glm::vec3(30.5f, 35.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 3.5f, 0.0f));

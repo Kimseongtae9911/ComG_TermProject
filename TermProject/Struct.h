@@ -52,14 +52,6 @@ typedef struct tagSubMesh
 	MATERIAL* material;
 }SUBMESH;
 
-typedef struct BoundingBox2
-{
-	GLfloat left; //x
-	GLfloat right; //x
-	GLfloat top; //y
-	GLfloat bottom; //y
-}BB;
-
 typedef struct BoundingBox
 {
 	glm::vec3 Center;
@@ -92,6 +84,15 @@ typedef struct BoundingBox
 		TransMatrix = glm::translate(TransMatrix, Translation);
 
 		TransMatrix = TransMatrix * Mat * glm::scale(TransMatrix, Scale);
+	}
+
+	void Transform2(const glm::mat4& Mat, const glm::vec3& Scale, const glm::vec3& Rotate, const glm::vec3& Translation) noexcept
+	{
+		TransMatrix = glm::mat4(1.0f);
+
+		TransMatrix = glm::translate(TransMatrix, Translation);
+
+		TransMatrix = Mat * TransMatrix * glm::scale(TransMatrix, Scale);
 	}
 
 	void Transform(float Scale, const glm::vec3& Rotate, const glm::vec3& Translation) noexcept

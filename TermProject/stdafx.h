@@ -33,6 +33,7 @@ using namespace std;
 #define WINCY 640
 #define MAX_VKEY 0xff
 #define PI 3.141592658979f
+#define EPSILON	1.0e-6f
 
 template <typename T>
 void SafeDelete(T& ptr)
@@ -86,6 +87,9 @@ ClassName* ClassName::m_pInstance = nullptr;
 
 
 static float ToRadian(float degree) { return degree * PI / 180.f; }
+
+inline bool IsZero(float fValue) { return((fabsf(fValue) < EPSILON)); }
+inline bool IsEqual(float fA, float fB) { return(::IsZero(fA - fB)); }
 
 // Include
 #include "Enum.h"

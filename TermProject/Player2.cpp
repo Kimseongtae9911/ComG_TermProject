@@ -27,8 +27,7 @@ HRESULT Player2::Initialize()
 	CObj::Initialize();
 	m_Player = CMesh::Create("../Resource/Player2D/Player2D.obj", { 1.0, 1.0, 1.0, m_fAlpha });
 	m_Player->GetScale() = glm::vec3(0.3, 0.3, 0.3);
-	m_Player->GetTrans() = glm::vec3(-12.0, 0.0, -0.25);
-	m_fJumpSpeed = JUMP_SPEED;
+	m_Player->GetTrans() = glm::vec3(-12.0, 0.0f, -0.25);
 
 	for (size_t i = 0; i < m_AABB.GetCornersBox().size(); ++i) {
 		m_vecMAABBColor.push_back(glm::vec3(0.f, 1.f, 0.f));
@@ -152,63 +151,56 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 	else if ((m_pKeyMgr->KeyDown(KEY_LEFT) || m_pKeyMgr->KeyPressing(KEY_LEFT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 		m_iMoveDir = -1;
 		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
-		if (m_pCollideObj && DIR::LEFT == m_dirCollideDir) {
+		if (Collide_DIR(DIR::LEFT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_LEFT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
 		m_iMoveDir = -1;
 		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
-		if (m_pCollideObj && DIR::LEFT == m_dirCollideDir) {
+		if (Collide_DIR(DIR::LEFT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if ((m_pKeyMgr->KeyDown(KEY_RIGHT) || m_pKeyMgr->KeyPressing(KEY_RIGHT)) && (!m_pKeyMgr->KeyDown(KEY_SPACE) && !m_pKeyMgr->KeyPressing(KEY_SPACE))) {
 		m_iMoveDir = 1;
 		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
-		if (m_pCollideObj && DIR::RIGHT == m_dirCollideDir) {
+		if (Collide_DIR(DIR::RIGHT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if (m_pKeyMgr->KeyPressing(KEY_RIGHT) && m_pKeyMgr->KeyPressing(KEY_SPACE)) {
 		m_iMoveDir = 1;
 		m_Player->Move(glm::vec3(m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
-		if (m_pCollideObj && DIR::RIGHT == m_dirCollideDir) {
+		if (Collide_DIR(DIR::RIGHT)) {
 			m_Player->Move(glm::vec3(-m_iMoveDir * SPEED_2D * fTimeDelta, 0.0, 0.0));
 		}
+		Collide_DIR(DIR::DOWN);
 	}
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
 		m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
 	}
-
-	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
+	else if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
 		exit(0);
 	}
 }
 
 void Player2::JumpProcess(const GLfloat fTimeDelta)
 {
-	if (m_bOnAir) {
+	if (m_bOnAir || m_bFalling) {
 		m_Player->Move(glm::vec3(0.0f, m_fJumpSpeed * fTimeDelta, 0.0f));
-		if (m_fJumpSpeed > 0.0f)
-			m_fJumpSpeed -= GRAVITY;
-		else {
-			m_fJumpSpeed -= GRAVITY;
-		}
+		m_fJumpSpeed -= GRAVITY * fTimeDelta;
+		Collide_DIR(DIR::UP);
 	}
-	if (m_bOnAir && DIR::DOWN == m_dirCollideDir && m_fJumpSpeed < 0.f) {
+	
+	if ((m_bOnAir && Collide_DIR(DIR::DOWN) && m_fJumpSpeed < 0.f) || (m_bFalling && Collide_DIR(DIR::DOWN))) {
 		m_bOnAir = false;
+		m_bFalling = false;
 		m_fJumpSpeed = JUMP_SPEED;
 		m_Player->GetPos() = glm::vec3(m_Player->GetPos().x, m_pCollideObj->Get_AABB().TransCenter.y + m_pCollideObj->Get_AABB().TransExtent.y, m_Player->GetPos().z);
-	}
-}
-
-void Player2::PortalInteract()
-{
-	if (Collide_OBJ()) {
-		if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
-			m_bPortal = true;
-		}
 	}
 }
 
@@ -219,7 +211,7 @@ void Player2::CollideCheck()
 		m_pGameMgr->Set_PlayerDie(true);
 	}
 
-	PortalInteract();
+	Collide_OBJ();
 }
 
 bool Player2::Collide_Monster()
@@ -254,54 +246,111 @@ bool Player2::Collide_Monster()
 	return false;
 }
 
-bool Player2::Collide_OBJ()
+void Player2::Collide_OBJ()
 {
 	// Key Collide Check
 	for (const auto& key : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) {
 		if (m_AABB.Intersects(dynamic_cast<CObject*>(key)->Get_AABB())) {
 			m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).erase(find(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin(), m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end(), key));
-			return false;
+			return;
 		}
 	}
 
 	// Portal Collide Check
 	for (const auto& portal : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL)) {
 		if (m_AABB.Intersects(dynamic_cast<CPortal*>(portal)->Get_AABB())) {
-			return true;
+			if (CKeyManager::GetInstance()->KeyDown(KEY_A)) {
+				m_bPortal = true;
+				m_pSoundMgr->Play_Sound(L"portal_in.mp3", CSoundManager::PORTAL);
+				return;
+			}
 		}
 	}
 
-	// Map(wall) Collide Check
-	for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
-		if (m_AABB_M[1].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
-			m_dirCollideDir = DIR::UP;
-			m_pCollideObj = wall;
-			return false;
+	
+}
+
+bool Player2::Collide_DIR(const DIR dir)
+{
+	if (DIR::LEFT == dir) {
+		//wall
+		for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+			if (m_AABB_M[0].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
+				m_dirCollideDir = DIR::LEFT;
+				m_pCollideObj = wall;
+				return true;
+			}
 		}
-		if (m_AABB_M[3].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
-			m_dirCollideDir = DIR::DOWN;
-			m_pCollideObj = wall;
-			return false;
-		}
-		if (m_AABB.Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
-			m_pCollideObj = wall;
-			return false;
+		// box
+		for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
+			if (m_AABB_M[0].Intersects(box->Get_AABB())) {
+				m_dirCollideDir = DIR::LEFT;
+				m_pCollideObj = box;
+				return true;
+			}
 		}
 	}
+	else if (DIR::RIGHT == dir) {
+		//wall
+		for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+			if (m_AABB_M[2].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
+				m_dirCollideDir = DIR::RIGHT;
+				m_pCollideObj = wall;
+				return true;
+			}
+		}
+		// box
+		for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
+			if (m_AABB_M[2].Intersects(box->Get_AABB())) {
+				m_dirCollideDir = DIR::RIGHT;
+				m_pCollideObj = box;
+				return true;
+			}
+		}
+	}
+	else if (DIR::DOWN == dir) {
+		//wall
+		for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+			if (m_AABB_M[3].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
+				m_dirCollideDir = DIR::DOWN;
+				m_pCollideObj = wall;
+				return true;
+			}
+		}
+		// box
+		for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
+			if (m_AABB_M[3].Intersects(box->Get_AABB())) {
+				m_dirCollideDir = DIR::DOWN;
+				m_pCollideObj = box;
+				return true;
+			}
+		}
+		if (!m_bOnAir && !m_bFalling) {
+			m_bFalling = true;
+			m_fJumpSpeed = 0.0f;
+		}
 
-	// Box Collide Check
-	for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
-		if (m_AABB_M[1].Intersects(box->Get_AABB())) {
-			m_dirCollideDir = DIR::UP;
-			return false;
+	}
+	else if (DIR::UP == dir) {
+		//wall
+		for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+			if (m_AABB_M[1].Intersects(dynamic_cast<CObject*>(wall)->Get_AABB())) {
+				m_dirCollideDir = DIR::UP;
+				m_pCollideObj = wall;
+				if (m_fJumpSpeed > 0.f)
+					m_fJumpSpeed = 0.0f;
+				return true;
+			}
 		}
-		if (m_AABB_M[3].Intersects(box->Get_AABB())) {
-			m_dirCollideDir = DIR::DOWN;
-			return false;
-		}
-		if (m_AABB.Intersects(box->Get_AABB())) {
-			m_pCollideObj = box;
-			return false;
+		// box
+		for (const auto& box : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX)) {
+			if (m_AABB_M[1].Intersects(box->Get_AABB())) {
+				m_dirCollideDir = DIR::UP;
+				m_pCollideObj = box;
+				if (m_fJumpSpeed > 0.f)
+					m_fJumpSpeed = 0.0f;
+				return true;
+			}
 		}
 	}
 

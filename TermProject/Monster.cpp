@@ -216,13 +216,6 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 		}
 	}
 
-	if (VIEW::VIEW_2D == m_pGameMgr->Get_View()) {
-		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 1.0f, m_pMonster->GetPos().y };
-	}
-	else {
-		Monster::Get_BB() = { m_pMonster->GetPos().x - 0.5f, m_pMonster->GetPos().x + 0.5f, m_pMonster->GetPos().y + 0.5f, m_pMonster->GetPos().y - 0.5f };
-	}
-
 	if (OBJ_ID::OBJ_MONSTER1 == m_idObj)
 		CObj::UpdateAABB(m_pMonster->Get_Matrix(), glm::vec3(4.0f, 4.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	else if (OBJ_ID::OBJ_MONSTER2 == m_idObj)

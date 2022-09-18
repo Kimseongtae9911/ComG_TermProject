@@ -50,7 +50,6 @@ HRESULT CStage4::Initialize()
 			{
 				pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 				dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-				pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 				if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 					return E_FAIL;
 			}
@@ -60,7 +59,6 @@ HRESULT CStage4::Initialize()
 				{
 					pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * j, 1.0f * i - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 					dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-					pObj->Get_BB() = { -15 + 1.0f * j - 0.5f, -15 + 1.0f * j + 0.5f, 1.0f * i, 1.0f * i - 1.0f };
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 						return E_FAIL;
 				}
@@ -69,43 +67,55 @@ HRESULT CStage4::Initialize()
 		}
 	}
 
-	for (int i = 3; i < 8; ++i) {
+	for (int i = 4; i < 8; ++i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 4 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 4, 1.0f * 4 - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
+
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f, 1.0f * 2 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
+		return E_FAIL;
 
 	for (int i = 6; i < 11; ++i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 7 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 7, 1.0f * 7 - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
+
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 5, 1.0f * 6 - 1.0f, 0.0f), {0.6, 0.6, 0.6, 1.0});
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
+		return E_FAIL;
 
 	for (int i = 3; i < 8; ++i) {
 		pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * i, 1.0f * 10 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
 		dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
-		pObj->Get_BB() = { -15 + 1.0f * i - 0.5f, -15 + 1.0f * i + 0.5f, 1.0f * 10, 1.0f * 10 - 1.0f };
 		if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
 			return E_FAIL;
 	}
 
+	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 11, 1.0f * 9 - 1.0f, 0.0f), { 0.6, 0.6, 0.6, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_MAP, pObj)))
+		return E_FAIL;
+
 	pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-11.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
-	pObj->Get_BB() = { -11.5f, -10.5f, 11.5f, 10.5f };
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
 		return E_FAIL;
 
 	pObj = CObject::Create("../Resource/MapCube/cube3.obj", glm::vec3(-15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f), { 0.0, 0.0, 1.0, 0.1 });
 	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_MAP);	// OBJID for AABB
-	pObj->Get_BB() = { -15 + 1.0f * 15 - 0.5f, -15 + 1.0f * 15 + 0.5f, 1.0f * 1, 1.0f * 1 - 1.0f };
+	m_pBox = pObj;
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOX, pObj)))
 		return E_FAIL;
 
 	pObj = CBossMonster::Create();
+	m_pBoss = dynamic_cast<CBossMonster*>(pObj);
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_BOSS, pObj)))
 		return E_FAIL;
 
@@ -122,91 +132,67 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
-			list<CObj*>::iterator iter_begin = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).begin();
-			list<CObj*>::iterator iter_end = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).end();
-			for (; iter_begin != iter_end;) {
-				dynamic_cast<CObject*>((*iter_begin))->Set_Rotate(glm::vec3(0, fRotCount, 0));
-				++iter_begin;
+			for (auto& iter_begin : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) 
+				dynamic_cast<CObject*>((iter_begin))->Set_Rotate(glm::vec3(0, fRotCount, 0));
+		}
+
+		if (m_pBox) {
+			if (dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->GetPos().y > 0.5f) {
+				dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->GetPos().y -= 0.1f;
+				if (dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->GetPos().y < 0.0f) {
+					dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->GetPos().y = 0.0f;
+				}
 			}
 		}
-		if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos().y > 0.5f) {
-			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos().y -= 0.1f;
-			if (dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos().y < 0.0f) {
-				dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos().y = 0.0f;
-			}
-		}
-		BB BOX_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_BB();
-		/*BB Boss_BB = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_MONSTER2).front())->Get_BB();*/
-		BB Boss_BB = {1.0f, 9.0f, 8.5f, -0.5f };
-		glm::vec3 temp = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos();
-		dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y, temp.y - 1.0f };
-
-		if (Boss_BB.left > BOX_BB.right || Boss_BB.right < BOX_BB.left || Boss_BB.top < BOX_BB.bottom || Boss_BB.bottom > BOX_BB.top);
-		else {
-
-			if (dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->GetLife() > 0) {
-				dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->GetLife() -= 1;
-				if (dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->GetLife() == 0) {
+		// Box and Boss Collide Check
+		if (m_pBoss->Get_AABB().Intersects(m_pBox->Get_AABB())) {
+			if (m_pBoss->GetLife() > 0) {
+				m_pBoss->SetLife((m_pBoss->GetLife() - 1));
+				if (m_pBoss->GetLife() == 0) {
 					CObj* pObj = CPortal::Create(glm::vec3(0.0f, 3.0f, 0.f));
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PORTAL, pObj)))
 						return E_FAIL;
-					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->Get_Pmesh()->GetPos() = { -50.0, 0.0, 0.0 };
-					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->GetBullet() = false;
-					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_HoldingB() = false;
-					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_CollideB() = true;
-				}
-				else {
-					CObj* pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-11.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
-					pObj->Get_BB() = { -11.5f, -10.5f, 11.5f, 10.5f };
-					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
-						return E_FAIL;
-					dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->GetP()->GetPos() = { -12.0, 0.0, -0.25 };
-					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_pMesh()->GetPos() = { 12.0, 1.0, -0.25 };
-					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_pMesh()->GetRotate() = { 90.0f, 0.0f, 0.0f };
-					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_HoldingB() = false;
-					dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_CollideB() = true;
-					dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
-					temp = dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetPos();
-					dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y, temp.y - 1.0f };
-					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->Get_Pmesh()->GetPos() = { 5.0, 0.0, 0.0 };
-					dynamic_cast<CBossMonster*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOSS).front())->Get_Pmesh()->GetRotate().y = -20.0f;
-					if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).empty()) {
-						for (list<CObj*>::iterator iter_bullet = m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).begin(); iter_bullet != m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).end() && VIEW::VIEW_2D == m_pGameMgr->Get_View(); ++iter_bullet) // ����
-						{
-							dynamic_cast<CBullet*>((*iter_bullet))->Get_Mesh()->GetPos().x += 14.0f;
-						}
+					m_pBoss->Get_Mesh()->GetPos() = { -50.0, 0.0, 0.0 };
+					m_pBoss->SetBullet(false);
+					if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).empty()) {
+						dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetHoldingB(false);
+						dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetCollideB(true);
 					}
 				}
+				// Reset Stage
+				else
+					Reset();
 			}
-			
-			
 		}
 	}
+
+	// Box appears if keys are gone
 	if (m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
-		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetSMESH()) {
+		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Mesh()->GetSMESH()) {
 			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 1.0;
 			}
 		}
 	}
 	else {
-		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Rotate()->GetSMESH()) {
+		for (auto i : dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Mesh()->GetSMESH()) {
 			for (size_t j = 0; j < i->color.size(); ++j) {
 				i->color[j][3] = 0.1f;
 			}
 		}
 	}
 
-	// 클리어 조건 수정
-	if (CScene::SceneChange(SCENE_ID::SCENE_END, SCENE_ID::SCENE_STAGE4))
-		return 0;
+	if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PORTAL).empty()) {
+		if (CScene::SceneChange(SCENE_ID::SCENE_END, SCENE_ID::SCENE_STAGE4))
+			return 0;
+	}
 
 	if (CScene::PlayerDieScene(SCENE_ID::SCENE_LOAD, SCENE_ID::SCENE_STAGE4))
 		return 0;
 
 	if (CScene::DebugSceneChange(SCENE_ID::SCENE_STAGE4))
 		return 0;
-
+	
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }
@@ -214,6 +200,34 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 GLvoid CStage4::Render()
 {
 	m_pRenderMgr->Render_Object();
+	return GLvoid();
+}
+
+GLvoid CStage4::Reset()
+{
+	CObj* pObj = CObject::Create("../Resource/Key1/Key.obj", glm::vec3(-11.0f, 11.0f, 0.0f), { 1.0, 0.0, 0.0, 1.0 });
+	dynamic_cast<CObject*>(pObj)->Set_OBJID(OBJ_ID::OBJ_KEY);
+	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_KEY, pObj)))
+		return;
+
+	if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).empty()) {
+		dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->GetP()->GetPos() = { -12.0, 0.0, -0.25 };
+		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_pMesh()->GetPos() = { 12.0, 1.0, -0.25 };
+		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_pMesh()->GetRotate() = { 90.0f, 0.0f, 0.0f };
+		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetHoldingB(false);
+		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetCollideB(false);
+	}
+	dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Mesh()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
+	dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
+	m_pBoss->Get_Mesh()->GetPos() = { 5.0f, 0.0f, 0.0f };
+	m_pBoss->Get_Mesh()->GetRotate().y = -20.0f;
+	
+	// Bullet Reset
+	if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET).empty()) {
+		for (auto& bullet : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BULLET))
+			dynamic_cast<CBullet*>(bullet)->Get_Mesh()->GetPos().x += 14.0f;
+	}
+
 	return GLvoid();
 }
 

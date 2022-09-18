@@ -63,7 +63,7 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 
 bool CGameManager::Collide(DIR dir)
 {
-	if (VIEW::VIEW_2D == m_View) {
+	/*if (VIEW::VIEW_2D == m_View) {
 		CObj* player = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front();
 		BB player_BB = player->Get_BB();
 		switch (dir) {
@@ -524,112 +524,7 @@ bool CGameManager::Collide(DIR dir)
 			}
 			break;
 		}
-	}
-	return false;
-}
-
-bool CGameManager::JumpCollide(int num) {
-	CObj* player = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front();
-	BB player_BB = player->Get_BB();
-	if (dynamic_cast<Player2*>(player)->GetJump()) {
-		switch (num) {
-		case 1:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
-			{
-				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
-				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
-				for (; iter_begin != iter_end;)
-				{
-					BB OBJ_BB = (*iter_begin)->Get_BB();
-					if (OBJ_BB.bottom <= player_BB.top && (OBJ_BB.bottom + OBJ_BB.top) / 2 >= player_BB.top)
-					{
-						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-						{
-							return true;
-						}
-						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-						{
-							return true;
-						}
-						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-						{
-							return true;
-						}
-					}
-					iter_begin++;
-				}
-			}
-			break;
-		case -1:
-			for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
-			{
-				list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
-				list<CObj*>::iterator iter_end = m_ObjLst[i].end();
-				for (; iter_begin != iter_end;)
-				{
-					BB OBJ_BB = (*iter_begin)->Get_BB();
-					if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
-					{
-						if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-						{
-							float dis = OBJ_BB.top - player_BB.bottom;
-							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
-
-							return true;
-						}
-						else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-						{
-							float dis = OBJ_BB.top - player_BB.bottom;
-							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
-							return true;
-						}
-						else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-						{
-							float dis = OBJ_BB.top - player_BB.bottom;
-							dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
-							return true;
-						}
-					}
-					iter_begin++;
-				}
-			}
-			break;
-		}
-	}
-	else {
-		for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i < static_cast<int>(OBJ_ID::OBJ_BULLET); ++i)
-		{
-			list<CObj*>::iterator iter_begin = m_ObjLst[i].begin();
-			list<CObj*>::iterator iter_end = m_ObjLst[i].end();
-			for (; iter_begin != iter_end;)
-			{
-				BB OBJ_BB = (*iter_begin)->Get_BB();
-				if (OBJ_BB.top >= player_BB.bottom && (OBJ_BB.bottom + OBJ_BB.top) / 2 <= player_BB.bottom)
-				{
-					if (OBJ_BB.left <= player_BB.left && player_BB.left <= OBJ_BB.right)
-					{
-						float dis = OBJ_BB.top - player_BB.bottom;
-						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
-
-						return true;
-					}
-					else if (OBJ_BB.left <= player_BB.right && player_BB.right <= OBJ_BB.right)
-					{
-						float dis = OBJ_BB.top - player_BB.bottom;
-						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
-						return true;
-					}
-					else if (OBJ_BB.left >= player_BB.left && player_BB.right >= OBJ_BB.right)
-					{
-						float dis = OBJ_BB.top - player_BB.bottom;
-						dynamic_cast<Player2*>(player)->GetP()->GetPos().y += dis;
-						return true;
-					}
-				}
-				iter_begin++;
-			}
-		}
-	}
+	}*/
 	return false;
 }
 
@@ -642,6 +537,10 @@ GLvoid CGameManager::CheckViewChange()
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
 				m_View = VIEW::VIEW_2D;
 
+				// Rotate Holding Box
+				if (dynamic_cast<Player3*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front())->GetHoldingBox())
+					dynamic_cast<CObject*>(dynamic_cast<Player3*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER2)].front())->GetHoldingBox())->Set_Rotate(glm::vec3(90.0f, 180.0f, 0.0f));
+
 				// Player alpha value
 				for (auto i : dynamic_cast<Player2*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front())->Get_Mesh()->GetSMESH())
 					for (size_t j = 0; j < i->color.size(); ++j)
@@ -653,8 +552,8 @@ GLvoid CGameManager::CheckViewChange()
 		}
 		else if (VIEW::VIEW_2D == m_View && !Get_Camera()->Get_Move()) {
 			if (CKeyManager::GetInstance()->KeyDown(KEY_F)) {
-				m_View = VIEW::VIEW_3D;
-				
+				m_View = VIEW::VIEW_3D;				
+
 				// Player alpha value
 				for (auto i : dynamic_cast<Player2*>(m_ObjLst[static_cast<int>(OBJ_ID::OBJ_PLAYER1)].front())->Get_Mesh()->GetSMESH())
 					for (size_t j = 0; j < i->color.size(); ++j)
@@ -679,11 +578,9 @@ GLvoid CGameManager::ChangeView()
 			iter_begin = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BOX)].begin();
 			iter_end = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BOX)].end();
 			for (; iter_begin != iter_end;) {
-				if (dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z <= 1.6f && dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().z >= 1.4f) {
-					dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
-					dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
-					glm::vec3 temp = dynamic_cast<CObject*>((*iter_begin))->Get_Rotate()->GetPos();
-					(*iter_begin)->Get_BB() = { temp.x - 0.5f, temp.x + 0.5f, temp.y + 0.5f, temp.y - 0.5f };
+				if (dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().z <= 1.6f && dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().z >= 1.4f) {
+					dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().x = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().x;
+					dynamic_cast<CObject*>((*iter_begin))->Get_Mesh()->GetPos().y = dynamic_cast<Player3*>(player)->Get_pMesh()->GetPos().y;
 					break;
 				}
 				++iter_begin;
@@ -700,7 +597,7 @@ GLvoid CGameManager::CheckCollide()
 
 GLvoid CGameManager::MonMapCollide()
 {
-	list<CObj*>::iterator iter_begin;
+	/*list<CObj*>::iterator iter_begin;
 	list<CObj*>::iterator iter_end;
 
 	for (int i = static_cast<int>(OBJ_ID::OBJ_MONSTER1); i <= static_cast<int>(OBJ_ID::OBJ_MONSTER2); ++i) {
@@ -760,12 +657,12 @@ GLvoid CGameManager::MonMapCollide()
 			}
 			++monster_iter_begin;
 		}
-	}
+	}*/
 }
 
 GLvoid CGameManager::MonBulletCollide()
 {
-	for (list<CObj*>::iterator iter_bullet = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].begin(); iter_bullet != m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].end() && VIEW::VIEW_2D == m_View; ++iter_bullet)
+	/*for (list<CObj*>::iterator iter_bullet = m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].begin(); iter_bullet != m_ObjLst[static_cast<int>(OBJ_ID::OBJ_BULLET)].end() && VIEW::VIEW_2D == m_View; ++iter_bullet)
 	{
 		BB Bullet_BB = (*iter_bullet)->Get_BB();
 		if (Bullet_BB.left <= -14.f)
@@ -775,7 +672,7 @@ GLvoid CGameManager::MonBulletCollide()
 			CRenderManager::GetInstance()->Get_RenderObj(RENDER_ID::REDER_BULLET).pop_front();
 		}
 		break;
-	}
+	}*/
 }
 
 HRESULT CGameManager::Clear_ObjList()

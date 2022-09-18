@@ -99,6 +99,7 @@ bool Monster::Collide() {
 	return false;
 }
 
+
 void Monster::ViewChange(const GLfloat fTimeDelta)
 {
 	if (!bMovingRotate && VIEW::VIEW_3D == m_pGameMgr->Get_View())
@@ -127,6 +128,7 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 {
 	if (VIEW::VIEW_3D == m_pGameMgr->Get_View() && m_pGameMgr->Get_Camera()->Get_Move())
 	{
+		
 		//Monster Rotate
 		float f = LookPlayerAngle();
 		if (f >= m_pMonster->GetRotate().y)
@@ -168,14 +170,16 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 		}
 
 		//Monster Move
-		m_iDir = (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0) ? 1 : -1;
-		m_iDir2 = (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) ? 1 : -1;
+		m_iDir = (vecPlayer3dPos.x - m_pMonster->GetPos().x >= 0) ? 1 : -1; //x
+		m_iDir2 = (vecPlayer3dPos.y - m_pMonster->GetPos().y >= 0) ? 1 : -1; //y
 
-		if (Collide()) {
+		if (Collide())
+		{
 			m_pMonster->SetPos(m_vec3PrevPos);
 			m_pMonster->SetRotate(m_vec3PrevAngle);
 		}
-		else {
+		else
+		{
 			m_vec3PrevPos = m_pMonster->GetPos();
 			if (OBJ_ID::OBJ_MONSTER1 == m_idObj) {
 				m_pMonster->Move(glm::vec3(m_iDir * WALEMON_SPD, m_iDir2 * WALEMON_SPD, 0.0f));
@@ -184,6 +188,7 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 				m_pMonster->Move(glm::vec3(m_iDir * BEEMON_SPD, m_iDir2 * BEEMON_SPD, 0.0f));
 			}
 		}
+		
 	}
 	else if (VIEW::VIEW_2D == m_pGameMgr->Get_View() && !m_pGameMgr->Get_Camera()->Get_Move())
 	{

@@ -26,6 +26,7 @@ public:
 private:
 	GLuint m_iVao, m_iVbo[2];
 	vector<glm::vec3> m_vecAABBColor;
+	
 
 protected:
 	CRenderManager* m_pRender = nullptr;
@@ -35,8 +36,12 @@ protected:
 	CShader* m_pShaderLoader = nullptr;
 	CSoundManager* m_pSoundMgr = nullptr;
 	BB m_Box;
-	BoundingBox m_AABB {};
 	OBJ_ID m_idObj;
+
+	vector<glm::vec3> m_vecMAABBColor;
+	GLuint m_Vao[4], m_Vbo[4][2];
+	BoundingBox m_AABB_M[4]{};
+	BoundingBox m_AABB{};
 
 protected:
 	GLvoid Release();

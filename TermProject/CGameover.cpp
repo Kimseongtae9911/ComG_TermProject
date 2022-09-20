@@ -25,7 +25,7 @@ HRESULT CGameover::Initialize()
 		return E_FAIL;
 
 	m_pSoundMgr->Stop_All();
-	m_pSoundMgr->Play_BGM(L"Ending.mp3");
+	m_pSoundMgr->Play_BGM(L"GameOver.mp3");
 	return NOERROR;
 }
 

@@ -208,7 +208,7 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 	{
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
-			for (auto& iter_begin : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY)) 
+			for (auto& iter_begin : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY))
 				dynamic_cast<CObject*>((iter_begin))->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 
@@ -223,19 +223,25 @@ GLint CStage4::Update(const GLfloat fTimeDelta)
 		// Box and Boss Collide Check
 		if (m_pBoss->Get_AABB().Intersects(m_pBox->Get_AABB())) {
 			if (m_pBoss->GetLife() > 0) {
+				cout << m_pBoss->GetLife() << endl;
+				if (m_pBoss->GetLife() != 3) {
+					m_pSoundMgr->Stop_Sound(CSoundManager::ATTACK);
+					m_pSoundMgr->Play_Sound(L"BossHit.mp3", CSoundManager::ATTACK);
+				}
+
 				m_pBoss->SetLife((m_pBoss->GetLife() - 1));
 				if (m_pBoss->GetLife() == 0) {
 					CObj* pObj = CPortal::Create(glm::vec3(0.0f, 3.0f, 0.f));
 					if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PORTAL, pObj)))
 						return E_FAIL;
 					m_pBoss->Get_Mesh()->GetPos() = { -50.0, 0.0, 0.0 };
+					dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->SetPos(glm::vec3(50.0f, 0.0f, 0.0f));
 					m_pBoss->SetBullet(false);
 					if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).empty()) {
 						dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetHoldingB(false);
 						dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetCollideB(true);
 					}
 				}
-				// Reset Stage
 				else
 					Reset();
 			}
@@ -292,9 +298,11 @@ GLvoid CStage4::Reset()
 		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->Get_pMesh()->GetRotate() = { 90.0f, 0.0f, 0.0f };
 		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetHoldingB(false);
 		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->SetCollideB(false);
+		dynamic_cast<Player3*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER2).front())->ResetHoldingB();
 	}
 	dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_BOX).front())->Get_Mesh()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
 	dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->GetPos() = { -15 + 1.0f * 15, 1.0f * 1 - 0.5f, -0.25f };
+	dynamic_cast<CObject*>(m_pBox)->Get_Mesh()->SetRotate(glm::vec3(0.0f, 0.0f, 0.0f));
 	m_pBoss->Get_Mesh()->GetPos() = { 5.0f, 0.0f, 0.0f };
 	m_pBoss->Get_Mesh()->GetRotate().y = -20.0f;
 	

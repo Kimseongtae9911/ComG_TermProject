@@ -118,6 +118,9 @@
     <Filter Include="소스 파일\02 Scene\06 Ending">
       <UniqueIdentifier>{201e0796-7301-489b-a3bc-d06aeb351780}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02 Scene\07 Gameover">
+      <UniqueIdentifier>{1788dedb-2ddf-4224-9ac9-fa101d0fc4ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CObj.cpp">
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameover.cpp">
+      <Filter>소스 파일\02 Scene\07 Gameover</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="CEnding.h">
       <Filter>소스 파일\02 Scene\06 Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameover.h">
+      <Filter>소스 파일\02 Scene\07 Gameover</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@
 #include "CSoundManager.h"
 #include "CPortal.h"
 
+
 CScene::CScene()
 {
 }
@@ -42,6 +43,8 @@ HRESULT CScene::Initialize()
 	m_pSoundMgr = CSoundManager::GetInstance();
 	if (!m_pSoundMgr)
 		return E_FAIL;
+
+
 
 	return NOERROR;
 }

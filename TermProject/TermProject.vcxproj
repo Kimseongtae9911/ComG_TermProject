@@ -157,6 +157,7 @@
     <ClCompile Include="CEnding.cpp" />
     <ClCompile Include="CFrameManager.cpp" />
     <ClCompile Include="CGameManager.cpp" />
+    <ClCompile Include="CGameover.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CLoad.cpp" />
     <ClCompile Include="CLogo.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="CEnding.h" />
     <ClInclude Include="CFrameManager.h" />
     <ClInclude Include="CGameManager.h" />
+    <ClInclude Include="CGameover.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CLoad.h" />
     <ClInclude Include="CLogo.h" />

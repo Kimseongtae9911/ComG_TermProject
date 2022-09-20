@@ -8,6 +8,7 @@
 #include "CStage4.h"
 #include "CEnding.h"
 #include "CLoad.h"
+#include "CGameover.h"
 
 IMPLEMENT_SINGLETON(CSceneManager)
 
@@ -31,32 +32,38 @@ HRESULT CSceneManager::SceneChange(SCENE_ID eID, SCENE_ID MyID)
 	{
 		SafeDelete(m_pScene);
 
-		switch (m_eCurrScene)
+		if(iLife == 0)
+			m_pScene = CGameover::Create();
+		else
 		{
-		case SCENE_ID::SCENE_LOGO:
-			m_pScene = CLogo::Create();
-			break;
-		case SCENE_ID::SCENE_STAGE1:
-			m_pScene = CStage1::Create();
-			break;
-		case SCENE_ID::SCENE_STAGE2:
-			m_pScene = CStage2::Create();
-			break;
-		case SCENE_ID::SCENE_STAGE3:
-			m_pScene = CStage3::Create();
-			break;
-		case SCENE_ID::SCENE_STAGE4:
-			m_pScene = CStage4::Create();
-			break;
-		case SCENE_ID::SCENE_END:
-			m_pScene = CEnding::Create();
-			break;
-		case SCENE_ID::SCENE_LOAD:
-			m_pScene = CLoad::Create();
-			break;
-		default:
-			break;
+			switch (m_eCurrScene)
+			{
+			case SCENE_ID::SCENE_LOGO:
+				m_pScene = CLogo::Create();
+				break;
+			case SCENE_ID::SCENE_STAGE1:
+				m_pScene = CStage1::Create();
+				break;
+			case SCENE_ID::SCENE_STAGE2:
+				m_pScene = CStage2::Create();
+				break;
+			case SCENE_ID::SCENE_STAGE3:
+				m_pScene = CStage3::Create();
+				break;
+			case SCENE_ID::SCENE_STAGE4:
+				m_pScene = CStage4::Create();
+				break;
+			case SCENE_ID::SCENE_END:
+				m_pScene = CEnding::Create();
+				break;
+			case SCENE_ID::SCENE_LOAD:
+				m_pScene = CLoad::Create();
+				break;
+			default:
+				break;
+			}
 		}
+		
 
 		if (!m_pScene)
 			return E_FAIL;

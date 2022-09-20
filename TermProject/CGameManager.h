@@ -24,6 +24,9 @@ public:
 	bool Get_PlayerDie() { return m_bPlayerDie; }
 	void Set_PlayerDie(bool die) { m_bPlayerDie = die; }
 
+	bool Get_Pause() { return m_bPauseKey; }
+	void Set_Pause(bool pause) { m_bPauseKey = pause; }
+
 public:
 	HRESULT Add_Camera(CCamera* pCamera);
 	HRESULT Delete_Camera();
@@ -52,5 +55,6 @@ private:
 	VIEW m_View = VIEW::VIEW_2D;
 	bool m_bDebug = false;
 	bool m_bPlayerDie = false;
+	bool m_bPauseKey = false;
 };
 

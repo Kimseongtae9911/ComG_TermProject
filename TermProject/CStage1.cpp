@@ -14,7 +14,7 @@
 #include "CGameManager.h"
 #include "CSceneManager.h"
 #include "CSoundManager.h"
-
+#include "CSprite.h"
 
 CStage1::CStage1()
 {
@@ -167,6 +167,7 @@ HRESULT CStage1::Initialize()
 	if (FAILED(m_pGameMgr->Add_GameObj(OBJ_ID::OBJ_PLAYER2, pObj)))
 		return E_FAIL;
 
+
 	m_pSoundMgr->Stop_All();
 	m_pSoundMgr->Play_BGM(L"Back.mp3");
 	m_pSoundMgr->Set_Volume(0.3f, CSoundManager::BGM);
@@ -182,6 +183,7 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
 		}
 	}
+
 
 	if (CScene::SceneChange(SCENE_ID::SCENE_STAGE2, SCENE_ID::SCENE_STAGE1))
 		return 0;

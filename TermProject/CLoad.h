@@ -15,9 +15,15 @@ public:
 
 private:
 	CObj** m_pAni;
+	CObj* m_pLifeWord;
+	CObj* m_pLifePlayer1;
+	CObj* m_pLifePlayer2;
+	CObj* m_pLifePlayer3;
+	CObj* m_pBox;
 	int iAniCounter = 0;
 	float fTime = 0;
 	float fNextScene = 0;
+	int m_iLife = 3;
 
 private:
 	GLvoid Release();

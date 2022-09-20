@@ -8,8 +8,6 @@
 #include "CGameManager.h"
 #include "CCamera.h"
 
-#include "TileMap.h"
-#include "PathFinder.h"
 
 Monster::Monster()
 {

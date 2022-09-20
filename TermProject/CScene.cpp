@@ -72,7 +72,9 @@ bool CScene::PlayerDieScene(SCENE_ID next, SCENE_ID cur)
 	if (m_pGameMgr->Get_PlayerDie())
 	{
 		m_pGameMgr->Set_PlayerDie(false);
+		m_pSceneMgr->Set_Life(m_pSceneMgr->Get_Life() - 1);
 		m_pSceneMgr->SceneChange(next, cur);
+
 		return true;
 	}
 

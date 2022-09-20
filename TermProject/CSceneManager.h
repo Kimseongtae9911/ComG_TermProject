@@ -12,6 +12,8 @@ private:
 public:
 	SCENE_ID& Get_NextScene() { return m_eNextScene; }
 	int& Get_SceneChangeCount() { return iScene; };
+	int Get_Life() { return iLife; };
+	void Set_Life(int life) { iLife = life; };
 
 public:
 	HRESULT SceneChange(SCENE_ID eID, SCENE_ID MyID);
@@ -24,6 +26,7 @@ public:
 private:
 	void Release();
 	int iScene = 2;
+	int iLife = 3;
 
 private:
 	SCENE_ID m_ePreScene =  SCENE_ID::SCENE_END;

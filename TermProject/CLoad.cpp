@@ -41,6 +41,21 @@ HRESULT CLoad::Initialize()
 	m_pAni[13] = CSprite::Create(glm::vec3(x, y, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/loading13.png");
 	m_pAni[14] = CSprite::Create(glm::vec3(x, y, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/loading14.png");
 	m_pAni[15] = CSprite::Create(glm::vec3(x, y, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/loading15.png");
+
+	//m_pBox = new CObj;
+	//m_pBox = CSprite::Create(glm::vec3(600, 50, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/boxblank.png");
+
+	m_pLifeWord = new CObj;
+	m_pLifeWord = CSprite::Create(glm::vec3(100, 50, 0.f), glm::vec3(1.f), "", "../Resource/UI/Back/LifeWord.png");
+	
+	m_pLifePlayer1 = new CObj;
+	m_pLifePlayer1 = CSprite::Create(glm::vec3(250, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
+	m_pLifePlayer2 = new CObj;
+	m_pLifePlayer2 = CSprite::Create(glm::vec3(320, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
+	m_pLifePlayer3 = new CObj;
+	m_pLifePlayer3 = CSprite::Create(glm::vec3(390, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
+
+	m_iLife = m_pSceneMgr->Get_Life();
 	return NOERROR;
 }
 
@@ -55,7 +70,7 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 		if (iAniCounter > 15)
 			iAniCounter = 0;
 	}
-	if (fNextScene >= 2.5)
+	if (fNextScene >= 3.5)
 	{
 		fNextScene = 0;
 		switch (m_pSceneMgr->Get_SceneChangeCount())
@@ -79,6 +94,21 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 		return 0;
 	}
 	CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pAni[iAniCounter]);
+	CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifeWord);
+
+	switch (m_iLife)
+	{
+	case 3:
+		CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifePlayer3);
+	case 2:
+		CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifePlayer2);
+	case 1:
+		CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifePlayer1);
+		break;
+	default:
+		break;
+	}
+
 	m_pGameMgr->Update(fTimeDelta);
 	return GLint();
 }

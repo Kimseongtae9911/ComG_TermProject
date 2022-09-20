@@ -26,6 +26,7 @@ public:
 
 	GLvoid SetHoldingB(bool bHoldingB) { m_bHoldingB = bHoldingB; }
 	GLvoid SetCollideB(bool bCollideB) { m_bCollideB = bCollideB; }
+	GLvoid ResetHoldingB() { m_pHoldingBox = nullptr; }
 
 private:
 	CMesh* m_Player;

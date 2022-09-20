@@ -2,6 +2,9 @@
 #include"CObj.h"
 class CMesh;
 
+#define SPIN_SPEED 50.0f;
+#define BOSS_SPEED 3.0f;
+
 class CBossMonster : public CObj
 {
 public:
@@ -13,8 +16,7 @@ public:
 	virtual GLvoid Render();
 
 public:
-	float LookPlayerAngle();
-	GLvoid LookPlayer();
+	GLvoid LookPlayer(const GLfloat fTimeDelta);
 
 	GLvoid BossMove(const GLfloat fTimeDelta);
 	int RandHeight();
@@ -39,7 +41,7 @@ private:
 	int m_iDir{ 1 };
 	float fTime = 0;
 	float f3DTime = 0;
-	GLuint m_iLife{ 3 };
+	GLuint m_iLife{ 4 };
 	bool m_bBullet{ true };
 
 	float m_fRotate = 0.0f;

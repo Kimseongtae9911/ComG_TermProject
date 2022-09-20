@@ -14,7 +14,11 @@ public:
 
 public:
 	float LookPlayerAngle();
+	GLvoid LookPlayer();
+
+	GLvoid BossMove(const GLfloat fTimeDelta);
 	int RandHeight();
+
 	int& GetDir() { return m_iDir; }
 	GLuint GetLife() { return m_iLife; }
 	CMesh* Get_Mesh() { return m_pBossMonster; }
@@ -37,6 +41,8 @@ private:
 	float f3DTime = 0;
 	GLuint m_iLife{ 3 };
 	bool m_bBullet{ true };
+
+	float m_fRotate = 0.0f;
 
 public:
 	static CBossMonster* Create();

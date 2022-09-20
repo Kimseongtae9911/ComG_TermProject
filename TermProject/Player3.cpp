@@ -69,6 +69,7 @@ GLint Player3::Update(const GLfloat fTimeDelta)
 
 	CObj::UpdateAABB(m_Player->Get_Matrix(), glm::vec3(2.8f, 3.8f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -0.2f, 0.4f));
 	UpdateBB();
+
 	return GLint();
 }
 
@@ -137,7 +138,7 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-
+			
 			//Down
 			m_Player->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {
@@ -151,7 +152,7 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-
+			
 			//Up
 			m_Player->Move(glm::vec3(0.0, SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {
@@ -175,7 +176,6 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			if (Collide_OBJ()) {
 				m_Player->Move(glm::vec3(-SPEED_3D_DI * fTimeDelta, 0.0, 0.0));
 			}
-
 			//Down
 			m_Player->Move(glm::vec3(0.0, -SPEED_3D_DI * fTimeDelta, 0.0));
 			if (Collide_OBJ()) {

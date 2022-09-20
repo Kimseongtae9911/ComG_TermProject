@@ -197,6 +197,8 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 		m_pMonster->GetRotate().y = 0;
 		m_pMonster->Move(glm::vec3(0.06f * m_iDir, 0.0f, 0.0f));
 
+		ChangeDir();
+
 		if (m_pMonster->GetPos().x >= RIGHT_WALL)
 			m_iDir = -1;
 		else if (m_pMonster->GetPos().x - 0.5 <= LEFT_WALL)
@@ -211,8 +213,8 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 			if (!Collide()) {
 				m_pMonster->Move(glm::vec3(0.0f, -0.2f, 0.0f));
 								
-				if (m_pMonster->GetPos().y <= 0.6f) {
-					m_pMonster->GetPos().y = 0.6f;
+				if (m_pMonster->GetPos().y <= 0.7f) {
+					m_pMonster->GetPos().y = 0.7f;
 				}
 			}
 		}
@@ -222,6 +224,24 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 		CObj::UpdateAABB(m_pMonster->Get_Matrix(), glm::vec3(4.0f, 4.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	else if (OBJ_ID::OBJ_MONSTER2 == m_idObj)
 		CObj::UpdateAABB(m_pMonster->Get_Matrix(), glm::vec3(4000.0f, 4000.0f, 4000.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void Monster::ChangeDir()
+{
+	for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
+		if (m_AABB.TransCenter.x - m_AABB.TransExtent.x <= wall->Get_AABB().TransCenter.x + wall->Get_AABB().TransExtent.x &&
+			m_AABB.TransCenter.x + m_AABB.TransExtent.x > wall->Get_AABB().TransCenter.x + wall->Get_AABB().TransExtent.x)
+		{
+			m_iDir = 1;
+			return;
+		}
+		else if (m_AABB.TransCenter.x + m_AABB.TransExtent.x >= wall->Get_AABB().TransCenter.x - wall->Get_AABB().TransExtent.x &&
+			m_AABB.TransCenter.x - m_AABB.TransExtent.x < wall->Get_AABB().TransCenter.x - wall->Get_AABB().TransExtent.x)
+		{
+			m_iDir = -1;
+			return;
+		}
+	}
 }
 
 GLvoid Monster::Release()

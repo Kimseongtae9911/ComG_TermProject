@@ -18,11 +18,13 @@ public:
 	float LookPlayerAngle();
 	int& GetDir() { return m_iDir; }
 	int& GetCollDir() { return m_iCollideDir; }
+	CMesh* Get_Mesh() { return m_pMonster; }
 
 private:
 	bool Collide();
 	void ViewChange(const GLfloat fTimeDelta);
 	void MonsterAI(const GLfloat fTimeDelta);
+	void ChangeDir();
 	GLvoid Release();
 
 private:

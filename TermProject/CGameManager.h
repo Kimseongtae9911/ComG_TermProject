@@ -34,15 +34,9 @@ public:
 	GLvoid Set_DebugMode(bool mode) { m_bDebug = mode; }
 	bool Get_DebugMode() { return m_bDebug; }
 
-	bool Collide(DIR dir);		// using in Player.cpp
-	bool JumpCollide(int num);
-
 private:
 	GLvoid CheckViewChange();
 	GLvoid ChangeView();
-	GLvoid CheckCollide();		// Collide Check
-	GLvoid MonMapCollide();		// Monster - Map Collide Check
-	GLvoid MonBulletCollide();	// Monster - Bullet Collide Check	
 
 private:
 	CCamera* m_pCamera = nullptr;

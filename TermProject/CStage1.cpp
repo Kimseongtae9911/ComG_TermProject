@@ -181,6 +181,7 @@ GLint CStage1::Update(const GLfloat fTimeDelta)
 		if (!m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).empty()) {
 			fRotCount -= 90.f / 80.f;
 			dynamic_cast<CObject*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_KEY).front())->Set_Rotate(glm::vec3(0, fRotCount, 0));
+			dynamic_cast<Player2*>(m_pGameMgr->Get_Obj(OBJ_ID::OBJ_PLAYER1).front())->Collide_DIR(DIR::DOWN);
 		}
 	}
 

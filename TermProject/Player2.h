@@ -18,6 +18,8 @@ public:
     virtual GLint Update(const GLfloat fTimeDelta);
 	virtual GLvoid Render();
 
+	bool Collide_DIR(const DIR dir);
+
 	CMesh* Get_Mesh() { return m_Player; }	
 	CMesh* GetP() { return m_Player; }
 	bool& Get_Portal() { return m_bPortal; }
@@ -29,7 +31,6 @@ private:
 	void CollideCheck();
 	bool Collide_Monster();
 	void Collide_OBJ();
-	bool Collide_DIR(const DIR dir);
 	GLvoid Release();
 	GLvoid UpdateBB();
 

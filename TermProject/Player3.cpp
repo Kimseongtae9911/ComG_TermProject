@@ -241,6 +241,22 @@ void Player3::KeyboardInput(const GLfloat fTimeDelta)
 			else if (IsEqual(m_Player->GetRotate().y, 90.0f)) { //Right
 				trans.x += 1.4f;
 			}
+			else if (IsEqual(m_Player->GetRotate().y, 135.0f)) { //Right, Up
+				trans.x += 1.4f;
+				trans.y += 1.4f;
+			}
+			else if (IsEqual(m_Player->GetRotate().y, 45.0f)) { //Right, Down
+				trans.x += 1.4f;
+				trans.y -= 1.4f;
+			}
+			else if (IsEqual(m_Player->GetRotate().y, -45.0f)) { //Left, Down
+				trans.x -= 1.4f;
+				trans.y -= 1.4f;
+			}
+			else if (IsEqual(m_Player->GetRotate().y, -135.0f)) { //Left, Up
+				trans.x -= 1.4f;
+				trans.y += 1.4f;
+			}
 
 			dynamic_cast<CObject*>(m_pHoldingBox)->Set_Rotate(glm::vec3(0.0f, 0.0f, 0.0f));
 			dynamic_cast<CObject*>(m_pHoldingBox)->Get_Mesh()->SetPos(glm::vec3(m_Player->GetPos().x, m_Player->GetPos().y, 0.0f) + trans);

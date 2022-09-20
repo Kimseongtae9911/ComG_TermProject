@@ -41,7 +41,7 @@ private:
 	int m_iDir{ 1 };
 	float fTime = 0;
 	float f3DTime = 0;
-	GLuint m_iLife{ 4 };
+	GLuint m_iLife{ 3 };
 	bool m_bBullet{ true };
 
 	float m_fRotate = 0.0f;

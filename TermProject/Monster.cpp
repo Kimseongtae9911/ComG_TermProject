@@ -90,13 +90,14 @@ float Monster::LookPlayerAngle()
 
 bool Monster::Collide() {
 
-	for (int j = static_cast<int>(OBJ_ID::OBJ_MAP); j <= static_cast<int>(OBJ_ID::OBJ_BOX); ++j) {
-		for (const auto& obj : m_pGameMgr->Get_Obj(OBJ_ID(j))) {
-			if (m_AABB.Intersects(obj->Get_AABB()))
-				return true;
+	if (m_idObj == OBJ_ID::OBJ_MONSTER1) {
+		for (int j = static_cast<int>(OBJ_ID::OBJ_MAP); j <= static_cast<int>(OBJ_ID::OBJ_BOX); ++j) {
+			for (const auto& obj : m_pGameMgr->Get_Obj(OBJ_ID(j))) {
+				if (m_AABB.Intersects(obj->Get_AABB()))
+					return true;
+			}
 		}
 	}
-
 	return false;
 }
 

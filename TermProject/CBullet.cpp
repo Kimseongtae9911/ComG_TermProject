@@ -26,9 +26,12 @@ HRESULT CBullet::Initialize(glm::vec3 vPos)
 
 GLint CBullet::Update(const GLfloat fTimeDelta)
 {
-	m_pBullet->GetPos().x -= 0.05f;
-	m_pRender->Add_RenderObj(RENDER_ID::REDER_BULLET, this);
-	CObj::UpdateAABB(m_pBullet->Get_Matrix(), glm::vec3(30.0f, 30.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	if (m_pBullet->GetPos().x >= -20.0f) {
+		m_pBullet->GetPos().x -= 0.05f;
+		m_pRender->Add_RenderObj(RENDER_ID::REDER_BULLET, this);
+		CObj::UpdateAABB(m_pBullet->Get_Matrix(), glm::vec3(30.0f, 30.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
+	}
 	return GLint();
 }
 

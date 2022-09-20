@@ -177,9 +177,6 @@
     <ClCompile Include="Player2.cpp">
       <Filter>소스 파일\01 Obj\00 Player</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
-    </ClCompile>
     <ClCompile Include="CPlane.cpp">
       <Filter>소스 파일\04 Element\02 Plane</Filter>
     </ClCompile>
@@ -218,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="CEnding.cpp">
       <Filter>소스 파일\02 Scene\06 Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>소스 파일\01 Obj\01 Monster\00 FireMonster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

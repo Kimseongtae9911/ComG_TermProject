@@ -14,6 +14,9 @@ using namespace std;
 #include <math.h>
 #include <random>
 #include <algorithm>
+#include <deque>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <gl/glew.h>
 #include <gl/freeglut.h>
@@ -90,6 +93,24 @@ static float ToRadian(float degree) { return degree * PI / 180.f; }
 
 inline bool IsZero(float fValue) { return((fabsf(fValue) < EPSILON)); }
 inline bool IsEqual(float fA, float fB) { return(::IsZero(fA - fB)); }
+
+struct Vector2
+{
+	int x;
+	int y;
+
+	Vector2()
+	{
+		x = 0;
+		y = 0;
+	}
+
+	Vector2(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+};
 
 // Include
 #include "Enum.h"

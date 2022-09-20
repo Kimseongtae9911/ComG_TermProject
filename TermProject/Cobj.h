@@ -34,12 +34,13 @@ protected:
 	CSceneManager* m_pSceneMgr = nullptr;
 	CShader* m_pShaderLoader = nullptr;
 	CSoundManager* m_pSoundMgr = nullptr;
+	BoundingBox m_AABB {};
 	OBJ_ID m_idObj;
 
 	vector<glm::vec3> m_vecMAABBColor;
 	GLuint m_Vao[4], m_Vbo[4][2];
 	BoundingBox m_AABB_M[4]{};
-	BoundingBox m_AABB{};
+	//BoundingBox m_AABB{};
 
 protected:
 	GLvoid Release();

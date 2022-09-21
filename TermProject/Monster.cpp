@@ -245,6 +245,15 @@ void Monster::ChangeDir()
 			m_iDir = -1;
 			return;
 		}
+		else if (m_AABB.TransCenter.y + m_AABB.TransExtent.y >= wall->Get_AABB().TransCenter.y - wall->Get_AABB().TransExtent.y &&
+			m_AABB.TransCenter.y - m_AABB.TransExtent.y < wall->Get_AABB().TransCenter.y - wall->Get_AABB().TransExtent.y &&
+			m_AABB.TransCenter.x >= wall->Get_AABB().TransCenter.x - wall->Get_AABB().TransExtent.x &&
+			m_AABB.TransCenter.x < wall->Get_AABB().TransCenter.x + wall->Get_AABB().TransExtent.x) 
+		{
+			cout << "Collide Top" << endl;
+			m_pMonster->GetPos().y -= 1.0f;
+			return;
+		}
 	}
 }
 

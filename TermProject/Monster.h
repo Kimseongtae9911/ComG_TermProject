@@ -53,5 +53,5 @@ public:
 #define LEFT_WALL -14.0f
 #define RIGHT_WALL 13.0f
 
-#define WALEMON_SPD 2.0f
+#define WALEMON_SPD 1.5f
 #define BEEMON_SPD 0.025f

@@ -2,7 +2,7 @@
 #include "CObj.h"
 
 #define SPEED_2D 5.0f
-#define JUMP_SPEED 13.0f
+#define JUMP_SPEED 14.0f
 #define GRAVITY 30.0f
 
 class CMesh;

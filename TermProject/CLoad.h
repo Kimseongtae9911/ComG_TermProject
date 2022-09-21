@@ -19,6 +19,8 @@ private:
 	CObj* m_pLifePlayer1;
 	CObj* m_pLifePlayer2;
 	CObj* m_pLifePlayer3;
+	CObj* m_pLifePlayer4;
+	CObj* m_pLifePlayer5;
 	CObj* m_pBox;
 	int iAniCounter = 0;
 	float fTime = 0;

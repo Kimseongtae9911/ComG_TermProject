@@ -26,7 +26,7 @@ public:
 private:
 	void Release();
 	int iScene = 2;
-	int iLife = 3;
+	int iLife = 5;
 
 private:
 	SCENE_ID m_ePreScene =  SCENE_ID::SCENE_END;

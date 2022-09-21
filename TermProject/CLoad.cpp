@@ -54,6 +54,10 @@ HRESULT CLoad::Initialize()
 	m_pLifePlayer2 = CSprite::Create(glm::vec3(320, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
 	m_pLifePlayer3 = new CObj;
 	m_pLifePlayer3 = CSprite::Create(glm::vec3(390, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
+	m_pLifePlayer4 = new CObj;
+	m_pLifePlayer4 = CSprite::Create(glm::vec3(460, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
+	m_pLifePlayer5 = new CObj;
+	m_pLifePlayer5 = CSprite::Create(glm::vec3(530, 50, 0.f), glm::vec3(1.5f), "", "../Resource/UI/Back/LifePlayer.png");
 
 	m_iLife = m_pSceneMgr->Get_Life();
 	return NOERROR;
@@ -70,7 +74,7 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 		if (iAniCounter > 15)
 			iAniCounter = 0;
 	}
-	if (fNextScene >= 3.5)
+	if (fNextScene >= 5.0)
 	{
 		fNextScene = 0;
 		switch (m_pSceneMgr->Get_SceneChangeCount())
@@ -98,6 +102,10 @@ GLint CLoad::Update(const GLfloat fTimeDelta)
 
 	switch (m_iLife)
 	{
+	case 5:
+		CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifePlayer5);
+	case 4:
+		CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifePlayer4);
 	case 3:
 		CRenderManager::GetInstance()->Add_RenderObj(RENDER_ID::REDER_UI, m_pLifePlayer3);
 	case 2:

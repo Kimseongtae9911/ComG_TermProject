@@ -229,13 +229,13 @@ void Monster::MonsterAI(const GLfloat fTimeDelta)
 void Monster::ChangeDir()
 {
 	for (const auto& wall : m_pGameMgr->Get_Obj(OBJ_ID::OBJ_MAP)) {
-		if (m_AABB.TransCenter.x - m_AABB.TransExtent.x <= wall->Get_AABB().TransCenter.x + wall->Get_AABB().TransExtent.x &&
+		/*if (m_AABB.TransCenter.x - m_AABB.TransExtent.x <= wall->Get_AABB().TransCenter.x + wall->Get_AABB().TransExtent.x &&
 			m_AABB.TransCenter.x + m_AABB.TransExtent.x > wall->Get_AABB().TransCenter.x + wall->Get_AABB().TransExtent.x)
 		{
 			m_iDir = 1;
 			return;
-		}
-		else if (m_AABB.TransCenter.x + m_AABB.TransExtent.x >= wall->Get_AABB().TransCenter.x - wall->Get_AABB().TransExtent.x &&
+		}*/
+		if (m_AABB.TransCenter.x + m_AABB.TransExtent.x >= wall->Get_AABB().TransCenter.x - wall->Get_AABB().TransExtent.x &&
 			m_AABB.TransCenter.x - m_AABB.TransExtent.x < wall->Get_AABB().TransCenter.x - wall->Get_AABB().TransExtent.x)
 		{
 			m_iDir = -1;

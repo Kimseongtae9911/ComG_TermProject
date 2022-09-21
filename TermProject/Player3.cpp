@@ -125,11 +125,6 @@ GLvoid Player3::Render()
 
 void Player3::KeyboardInput(const GLfloat fTimeDelta)
 {
-	if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
-		//need to Release Memory
-		exit(0);
-	}
-
 	if (m_pKeyMgr->KeyPressing(KEY_LEFT)) {
 		if (m_pKeyMgr->KeyPressing(KEY_DOWN)) {
 			m_Player->GetRotate() = glm::vec3(90.0f, -45.0f, 0.0f);

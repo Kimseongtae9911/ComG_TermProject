@@ -53,6 +53,10 @@ GLvoid CGameManager::Update(const GLfloat fTimeDelta)
 	CheckViewChange();
 	ChangeView();
 
+	if (CKeyManager::GetInstance()->KeyDown(KEY_ESCAPE)) {
+		exit(0);
+	}
+
 	if (m_pCamera)
 		m_pCamera->Update(fTimeDelta);
 

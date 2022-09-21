@@ -183,9 +183,6 @@ void Player2::KeyboardInput(const GLfloat fTimeDelta)
 	else if (m_pKeyMgr->KeyDown(KEY_F5)) {
 		m_pGameMgr->Set_DebugMode(!m_pGameMgr->Get_DebugMode());
 	}
-	else if (m_pKeyMgr->KeyDown(KEY_ESCAPE)) {
-		exit(0);
-	}
 }
 
 void Player2::JumpProcess(const GLfloat fTimeDelta)
